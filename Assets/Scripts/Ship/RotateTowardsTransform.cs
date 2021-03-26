@@ -13,23 +13,14 @@ public class RotateTowardsTransform : MonoBehaviour
     [SerializeField]
     private Vector3 rotationSpeedScale = new Vector3(1,1,1);
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
         if (targetTransform)
         {
             Quaternion _rotation = GetRotationTowardsTransform(this.transform, targetTransform);
-            _rotation.x *= rotationSpeedScale.x;
-            _rotation.y *= rotationSpeedScale.y;
-            _rotation.z *= rotationSpeedScale.z;
 
-            this.transform.rotation = _rotation;
+            this.transform.rotation = _rotation.Multiply(rotationSpeedScale);
         }
     }
 

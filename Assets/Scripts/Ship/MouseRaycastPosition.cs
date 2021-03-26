@@ -25,7 +25,6 @@ public class MouseRaycastPosition : MonoBehaviour
 
             if (_mouseHitPosition != waypointOldPosition && _mouseHitPosition != Vector3.zero)
             {
-                print(_mouseHitPosition);
                 _mouseHitPosition.y = 0f;
 
                 waypoint.transform.position = _mouseHitPosition;
