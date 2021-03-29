@@ -5,24 +5,25 @@ using UnityEngine;
 public class BulletMovement : MonoBehaviour
 {
     [SerializeField]
-    private float Speed = 10;
+    private float speed = 10;
     [SerializeField]
+    // is the time of life until it dies
     private float lifeSpan = 3;
 
     void Start()
-    {
+    {   //Destroys the game object in the time of the lifeSpan
         Destroy(gameObject, lifeSpan);
     }
 
     // Update is called once per frame
     void Update()
-    {
-        transform.Translate(Vector3.up * Speed * Time.deltaTime);
+    {   // shoots the bullet forward
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
     }
 
     void OnTriggerEnter(Collider col)
-    {
+    {   //Destroy sthe bullet after collision
         Destroy(gameObject);
 
     }
