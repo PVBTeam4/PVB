@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+/// <summary>
+/// Extend the default Unity functions
+/// </summary>
 public static class ExtentionMethods
 {
 

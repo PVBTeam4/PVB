@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Controlls the player movement
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
@@ -10,13 +13,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float turningSpeed = 1;
 
-    Rigidbody rb;
+    Rigidbody rigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
         // Get the components we need
-        rb = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -36,7 +39,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="_directionScale">-1 is Left. 1 Is Right</param>
     private void RotatePlayer(float _turningSpeed, float _directionScale)
     {
-        float _turningSpeedDelta = _turningSpeed * Mathf.Abs(rb.velocity.magnitude);
+        float _turningSpeedDelta = _turningSpeed * Mathf.Abs(rigidbody.velocity.magnitude);
         float angle = (_turningSpeedDelta * _directionScale) * Time.deltaTime;
 
         transform.Rotate(0, angle, 0);
@@ -50,10 +53,10 @@ public class PlayerController : MonoBehaviour
     private void MovePlayerInDirection(float _thrust, float _thrustScale)
     {
         // Move the player in the direction it's facing
-        rb.AddRelativeForce((Vector3.forward * _thrust * Time.fixedDeltaTime) * _thrustScale);
+        rigidbody.AddRelativeForce((Vector3.forward * _thrust * Time.fixedDeltaTime) * _thrustScale);
 
         // Clamp (Dont let the value exeed) the velocity so it does not go faster
         Vector3 _maxVelocity = new Vector3(_thrust, _thrust, _thrust);
-        rb.velocity.Clamp(_maxVelocity.Multiply(-1), _maxVelocity);
+        rigidbody.velocity.Clamp(_maxVelocity.Multiply(-1), _maxVelocity);
     }
 }
