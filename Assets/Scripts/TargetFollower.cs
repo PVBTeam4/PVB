@@ -2,26 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Follows the given Target Transform via a Vector3.Lerp
+/// </summary>
 public class TargetFollower : MonoBehaviour 
 {
     [SerializeField]
+    // The speed to lerp towards the Target position
     private float followSpeed = 7;
 
     [SerializeField]
+    // Transform of the target
     private Transform targetTransform;
 
     void FixedUpdate()
 	{
         // Follow the target by lerping towards it
-        LerpToTarget(targetTransform, followSpeed);
+        LerpToTarget(transform, targetTransform, followSpeed);
     }
 
-    void LerpToTarget(Transform _targetTransform, float _followSpeed)
+    /// <summary>
+    /// Lerp the given Transform towards the given target Transform
+    /// </summary>
+    /// <param name="_transform">Transform that needs to change</param>
+    /// <param name="_targetTransform">Target Transform that </param>
+    /// <param name="_followSpeed">Speed of the lerp towards, target</param>
+    private void LerpToTarget(Transform _transform, Transform _targetTransform, float _followSpeed)
     {
         // Check if the targetTransform has been filled in
-        if (targetTransform)
+        if (_targetTransform)
         {
-            transform.position = Vector3.Lerp(transform.position, _targetTransform.position, _followSpeed * Time.deltaTime);
+            // Lerp the given Transform towards the given target Transform
+            _transform.position = Vector3.Lerp(_transform.position, _targetTransform.position, _followSpeed * Time.deltaTime);
         }
         else
         {
