@@ -8,25 +8,37 @@ using UnityEngine;
 public class RotateTowardsTarget : MonoBehaviour
 {
     [SerializeField]
-    private Transform targetTransform;// The Transform the GameObject will rotate towards
+    // The Transform the GameObject will rotate towards
+    private Transform targetTransform;
 
     [SerializeField]
-    private float rotationSpeed = 1f;// How fast the object shall rotate towards the target
+    // How fast the object shall rotate towards the target
+    private float rotationSpeed = 1f;
 
     [SerializeField]
-    private Vector3 rotationSpeedScale = new Vector3(1,1,1);// If you'll set an Axis to 0, it will not rotate that Axis
+    // If you'll set an Axis to 0, it will not rotate that Axis
+    private Vector3 rotationSpeedScale = new Vector3(1,1,1);
 
     // Update is called once per frame
     void Update()
     {
+        // Update the rotation of the Transform
+        RotateTowardsTargetTransform(this.transform, targetTransform);
+    }
+
+    /// <summary>
+    /// Rotates the given Transform towards the given Target Transform
+    /// </summary>
+    private void RotateTowardsTargetTransform(Transform _referenceTransform, Transform _targetTransform)
+    {
         // If the target exist, rotate towards it
-        if (targetTransform)
+        if (_targetTransform)
         {
             // Get the rotation towards the target
-            Quaternion _rotation = GetRotationTowardsTransform(this.transform, targetTransform, rotationSpeed);
+            Quaternion _rotation = GetSlerpedRotationTowardsTransform(_referenceTransform, _targetTransform, rotationSpeed);
 
             // Rotate this GameObject towards the target
-            this.transform.rotation = _rotation.Multiply(rotationSpeedScale);
+            _referenceTransform.rotation = _rotation.Multiply(rotationSpeedScale);
         }
     }
 
@@ -36,10 +48,10 @@ public class RotateTowardsTarget : MonoBehaviour
     /// <param name="_referenceTransform"></param>
     /// <param name="_target"></param>
     /// <returns>Quaternion</returns>
-    public Quaternion GetRotationTowardsTransform(Transform _referenceTransform, Transform _target, float _rotationSpeed)
+    public Quaternion GetSlerpedRotationTowardsTransform(Transform _referenceTransform, Transform _targetTransform, float _rotationSpeed)
     {
         // Get a normalized Vector3 of the two positions
-        Vector3 _direction = (_target.position - _referenceTransform.position).normalized;
+        Vector3 _direction = (_targetTransform.position - _referenceTransform.position).normalized;
 
         // Look towards the direction
         Quaternion _rotationToTarget = Quaternion.LookRotation(_direction);
