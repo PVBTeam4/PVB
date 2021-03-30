@@ -6,7 +6,7 @@ namespace Input.AbstractListeners
     /// Abstract class that contains receive methods for input.
     /// Will register & de-register the receive input methods.
     /// </summary>
-    public abstract class InputMonoBehaviour : MonoBehaviour
+    public abstract class ButtonInputMonoBehaviour : MonoBehaviour
     {
         /// <summary>
         /// Will register the receive input methods
