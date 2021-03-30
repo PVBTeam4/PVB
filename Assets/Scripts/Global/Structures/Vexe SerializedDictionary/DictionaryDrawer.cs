@@ -173,5 +173,8 @@ public abstract class DictionaryDrawer<TK, TV> : PropertyDrawer
     }
 }
 
-[CustomPropertyDrawer(typeof(SceneDictionary))]
-public class SceneDictionaryDrawer : DictionaryDrawer<ToolType, SceneAsset> { }
+namespace Global
+{
+    [CustomPropertyDrawer(typeof(SceneDictionary))]
+    public class SceneDictionaryDrawer : DictionaryDrawer<ToolType, SceneAsset> { }
+}
