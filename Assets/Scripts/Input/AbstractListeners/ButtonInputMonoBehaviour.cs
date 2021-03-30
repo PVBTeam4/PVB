@@ -13,7 +13,7 @@ namespace Input.AbstractListeners
         /// </summary>
         private void OnEnable()
         {
-            InputManager.InputAction += OnInputReceived;
+            InputManager.ButtonInputAction += OnInputReceived;
         }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Input.AbstractListeners
         /// </summary>
         private void OnDisable()
         {
-            InputManager.InputAction -= OnInputReceived;
+            InputManager.ButtonInputAction -= OnInputReceived;
         }
 
         /// <summary>

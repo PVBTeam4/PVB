@@ -14,7 +14,7 @@ namespace Input
         [SerializeField] private string verticalInputName;
     
         // Button input action
-        public static Action<ButtonInputType, float> InputAction;
+        public static Action<ButtonInputType, float> ButtonInputAction;
         // Mouse movement input action
         public static Action<Vector3> MouseMovementAction;
 
@@ -40,8 +40,8 @@ namespace Input
         /// </summary>
         private void HandleAxisInput()
         {
-            InputAction?.Invoke(ButtonInputType.HorizontalMovement, UnityEngine.Input.GetAxisRaw(horizontalInputName));
-            InputAction?.Invoke(ButtonInputType.VerticalMovement, UnityEngine.Input.GetAxisRaw(verticalInputName));
+            ButtonInputAction?.Invoke(ButtonInputType.HorizontalMovement, UnityEngine.Input.GetAxisRaw(horizontalInputName));
+            ButtonInputAction?.Invoke(ButtonInputType.VerticalMovement, UnityEngine.Input.GetAxisRaw(verticalInputName));
         }
 
         /// <summary>
@@ -50,8 +50,8 @@ namespace Input
         private void HandleMouseInput()
         {
             // Button input
-            InputAction?.Invoke(ButtonInputType.LeftMouse, UnityEngine.Input.GetMouseButton(0) ? 1f : 0f);
-            InputAction?.Invoke(ButtonInputType.RightMouse, UnityEngine.Input.GetMouseButton(1) ? 1f : 0f);
+            ButtonInputAction?.Invoke(ButtonInputType.LeftMouse, UnityEngine.Input.GetMouseButton(0) ? 1f : 0f);
+            ButtonInputAction?.Invoke(ButtonInputType.RightMouse, UnityEngine.Input.GetMouseButton(1) ? 1f : 0f);
             
             // Mouse movement
             MouseMovementAction?.Invoke(UnityEngine.Input.mousePosition);
