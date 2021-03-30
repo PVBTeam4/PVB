@@ -29,7 +29,7 @@ namespace Input
         /// <summary>
         /// Will handle the button & mouse movement input
         /// </summary>
-        void Update()
+        private void Update()
         {
             HandleAxisInput();
             HandleMouseInput();
