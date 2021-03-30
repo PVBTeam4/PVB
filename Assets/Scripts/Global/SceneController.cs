@@ -48,8 +48,9 @@ namespace Global
         /// <param name="sceneDictionary">The SerializableDictionary that holds the Scenes</param>
         public void SwitchSceneByToolType(ToolType toolType, SceneDictionary sceneDictionary)
         {
-            // Get the right Scene from the SceneDictionary
-            SceneAsset scene = sceneDictionary[toolType];
+            // Try and get the right Scene from the SceneDictionary
+            SceneAsset scene;
+            sceneDictionary.TryGetValue(toolType, out scene);
             
             // Check if the Scene exists
             if (scene)

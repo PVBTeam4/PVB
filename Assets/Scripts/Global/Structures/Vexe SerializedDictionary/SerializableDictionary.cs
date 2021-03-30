@@ -5,6 +5,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
+/// <summary>
+/// Enables the possibility to edit Dictionaries via the Unity Editor
+/// </summary>
+/// <author>
+/// Vexe: https://forum.unity.com/threads/finally-a-serializable-dictionary-for-unity-extracted-from-system-collections-generic.335797/
+/// </author>
+/// <typeparam name="TKey">ValueType of Key</typeparam>
+/// <typeparam name="TValue">ValueType of Value</typeparam>
 [Serializable, DebuggerDisplay("Count = {Count}")]
 public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
 {
@@ -20,17 +28,28 @@ public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
 
     readonly IEqualityComparer<TKey> _Comparer;
 
-    // Mainly for debugging purposes - to get the key-value pairs display
+    /// <summary>
+    /// Mainly for debugging purposes - to get the key-value pairs display
+    /// </summary>
     public Dictionary<TKey, TValue> AsDictionary
     {
         get { return new Dictionary<TKey, TValue>(this); }
     }
 
+    /// <summary>
+    /// Return the 
+    /// </summary>
     public int Count
     {
         get { return _Count - _FreeCount; }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="defaultValue"></param>
+    /// <returns></returns>
     public TValue this[TKey key, TValue defaultValue]
     {
         get
@@ -42,6 +61,11 @@ public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
         }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     public TValue this[TKey key]
     {
         get
@@ -55,21 +79,37 @@ public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
         set { Insert(key, value, false); }
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public SerializableDictionary()
         : this(0, null)
     {
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="capacity"></param>
     public SerializableDictionary(int capacity)
         : this(capacity, null)
     {
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="comparer"></param>
     public SerializableDictionary(IEqualityComparer<TKey> comparer)
         : this(0, comparer)
     {
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="capacity"></param>
+    /// <param name="comparer"></param>
     public SerializableDictionary(int capacity, IEqualityComparer<TKey> comparer)
     {
         if (capacity < 0)
@@ -80,11 +120,20 @@ public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
         _Comparer = (comparer ?? EqualityComparer<TKey>.Default);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dictionary"></param>
     public SerializableDictionary(IDictionary<TKey, TValue> dictionary)
         : this(dictionary, null)
     {
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="dictionary"></param>
+    /// <param name="comparer"></param>
     public SerializableDictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer)
         : this((dictionary != null) ? dictionary.Count : 0, comparer)
     {
@@ -95,6 +144,11 @@ public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
             Add(current.Key, current.Value);
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
     public bool ContainsValue(TValue value)
     {
         if (value == null)
@@ -117,11 +171,19 @@ public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
         return false;
     }
 
+    /// <summary>
+    /// Will try to find a value in the Directory via the given Key
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns>True if found & False if not</returns>
     public bool ContainsKey(TKey key)
     {
         return FindIndex(key) >= 0;
     }
 
+    /// <summary>
+    /// Empties the Dictionary
+    /// </summary>
     public void Clear()
     {
         if (_Count <= 0)
@@ -141,11 +203,21 @@ public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
         _Version++;
     }
 
+    /// <summary>
+    /// Adds a Key that holds a given value to the Dictionary
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
     public void Add(TKey key, TValue value)
     {
         Insert(key, value, true);
     }
 
+    /// <summary>
+    /// I Dont Know
+    /// </summary>
+    /// <param name="newSize"></param>
+    /// <param name="forceNewHashCodes"></param>
     private void Resize(int newSize, bool forceNewHashCodes)
     {
         int[] bucketsCopy = new int[newSize];
@@ -185,11 +257,19 @@ public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
         _Next = nextCopy;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     private void Resize()
     {
         Resize(PrimeHelper.ExpandPrime(_Count), false);
     }
 
+    /// <summary>
+    /// Removes an item (Key & Value pair) via the given Key
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns>True: Found and removed & False: Not found, there by not removed</returns>
     public bool Remove(TKey key)
     {
         if (key == null)
@@ -221,6 +301,12 @@ public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
         return false;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <param name="add"></param>
     private void Insert(TKey key, TValue value, bool add)
     {
         if (key == null)
@@ -276,6 +362,10 @@ public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
         //}
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="capacity"></param>
     private void Initialize(int capacity)
     {
         int prime = PrimeHelper.GetPrime(capacity);
@@ -292,6 +382,11 @@ public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
         _FreeList = -1;
     }
 
+    /// <summary>
+    /// Returns
+    /// </summary>
+    /// <param name="key"></param>
+    /// <returns></returns>
     private int FindIndex(TKey key)
     {
         if (key == null)
@@ -309,6 +404,12 @@ public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
         return -1;
     }
 
+    /// <summary>
+    /// Tries to get a Value via to given Key, putting it in the "out" variable
+    /// </summary>
+    /// <param name="key"></param>
+    /// <param name="value"></param>
+    /// <returns>False or the foud Value</returns>
     public bool TryGetValue(TKey key, out TValue value)
     {
         int index = FindIndex(key);
@@ -321,6 +422,9 @@ public class SerializableDictionary<TKey, TValue> : IDictionary<TKey, TValue>
         return false;
     }
 
+    /// <summary>
+    /// This is used to help with moduloing a value. Lowwering the probability of collision.
+    /// </summary>
     private static class PrimeHelper
     {
         public static readonly int[] Primes = new int[]

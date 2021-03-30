@@ -5,12 +5,26 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityObject = UnityEngine.Object;
 
-public abstract class DictionaryDrawer<TK, TV> : PropertyDrawer
+/// <summary>
+/// Used to draw the SerializableDictionary in the Unity Editor
+/// </summary>
+/// <author>
+/// Vexe: https://forum.unity.com/threads/finally-a-serializable-dictionary-for-unity-extracted-from-system-collections-generic.335797/
+/// </author>
+/// <typeparam name="TKey">ValueType of Key</typeparam>
+/// <typeparam name="TValue">ValueType of Value</typeparam>
+public abstract class DictionaryDrawer<TKey, TValue> : PropertyDrawer
 {
-    private SerializableDictionary<TK, TV> _Dictionary;
+    private SerializableDictionary<TKey, TValue> _Dictionary;
     private bool _Foldout;
     private const float kButtonWidth = 18f;
 
+    /// <summary>
+    /// Get the height in pixels of the property
+    /// </summary>
+    /// <param name="property"></param>
+    /// <param name="label"></param>
+    /// <returns></returns>
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
         CheckInitialize(property, label);
@@ -19,6 +33,12 @@ public abstract class DictionaryDrawer<TK, TV> : PropertyDrawer
         return 17f;
     }
 
+    /// <summary>
+    /// Draw the properties onto the Unity Editor
+    /// </summary>
+    /// <param name="position">Render it inside this Rect</param>
+    /// <param name="property"></param>
+    /// <param name="label">Render it on this Label</param>
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
         CheckInitialize(property, label);
@@ -62,7 +82,7 @@ public abstract class DictionaryDrawer<TK, TV> : PropertyDrawer
             keyRect.width /= 2;
             keyRect.width -= 4;
             EditorGUI.BeginChangeCheck();
-            var newKey = DoField(keyRect, typeof(TK), key);
+            var newKey = DoField(keyRect, typeof(TKey), key);
             if (EditorGUI.EndChangeCheck())
             {
                 try
@@ -81,7 +101,7 @@ public abstract class DictionaryDrawer<TK, TV> : PropertyDrawer
             valueRect.x = position.width / 2 + 15;
             valueRect.width = keyRect.width - kButtonWidth;
             EditorGUI.BeginChangeCheck();
-            value = DoField(valueRect, typeof(TV), value);
+            value = DoField(valueRect, typeof(TValue), value);
             if (EditorGUI.EndChangeCheck())
             {
                 _Dictionary[key] = value;
@@ -99,20 +119,29 @@ public abstract class DictionaryDrawer<TK, TV> : PropertyDrawer
         }
     }
 
-    private void RemoveItem(TK key)
+    /// <summary>
+    /// Removes an Item via the given Key
+    /// </summary>
+    /// <param name="key"></param>
+    private void RemoveItem(TKey key)
     {
         _Dictionary.Remove(key);
     }
 
+    /// <summary>
+    /// Checks to see if the SerializableDictionary is already initialized
+    /// </summary>
+    /// <param name="property"></param>
+    /// <param name="label"></param>
     private void CheckInitialize(SerializedProperty property, GUIContent label)
     {
         if (_Dictionary == null)
         {
             var target = property.serializedObject.targetObject;
-            _Dictionary = fieldInfo.GetValue(target) as SerializableDictionary<TK, TV>;
+            _Dictionary = fieldInfo.GetValue(target) as SerializableDictionary<TKey, TValue>;
             if (_Dictionary == null)
             {
-                _Dictionary = new SerializableDictionary<TK, TV>();
+                _Dictionary = new SerializableDictionary<TKey, TValue>();
                 fieldInfo.SetValue(target, _Dictionary);
             }
 
@@ -120,6 +149,9 @@ public abstract class DictionaryDrawer<TK, TV> : PropertyDrawer
         }
     }
 
+    /// <summary>
+    /// Extends the Dictionary to be used as SceneDictionary
+    /// </summary>
     private static readonly Dictionary<Type, Func<Rect, object, object>> _Fields =
         new Dictionary<Type, Func<Rect, object, object>>()
         {
@@ -133,6 +165,14 @@ public abstract class DictionaryDrawer<TK, TV> : PropertyDrawer
             { typeof(Rect), (rect, value) => EditorGUI.RectField(rect, (Rect)value) },
         };
 
+    /// <summary>
+    /// To draw a field in the Unity Editor
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="rect"></param>
+    /// <param name="type"></param>
+    /// <param name="value"></param>
+    /// <returns></returns>
     private static T DoField<T>(Rect rect, Type type, T value)
     {
         Func<Rect, object, object> field;
@@ -149,19 +189,25 @@ public abstract class DictionaryDrawer<TK, TV> : PropertyDrawer
         return value;
     }
 
+    /// <summary>
+    /// Empties the Dictionary
+    /// </summary>
     private void ClearDictionary()
     {
         _Dictionary.Clear();
     }
 
+    /// <summary>
+    /// Adds a Default value to the Dictionary
+    /// </summary>
     private void AddNewItem()
     {
-        TK key;
-        if (typeof(TK) == typeof(string))
-            key = (TK)(object)"";
-        else key = default(TK);
+        TKey key;
+        if (typeof(TKey) == typeof(string))
+            key = (TKey)(object)"";
+        else key = default(TKey);
 
-        var value = default(TV);
+        var value = default(TValue);
         try
         {
             _Dictionary.Add(key, value);
@@ -171,10 +217,4 @@ public abstract class DictionaryDrawer<TK, TV> : PropertyDrawer
             Debug.Log(e.Message);
         }
     }
-}
-
-namespace Global
-{
-    [CustomPropertyDrawer(typeof(SceneDictionary))]
-    public class SceneDictionaryDrawer : DictionaryDrawer<ToolType, SceneAsset> { }
 }
