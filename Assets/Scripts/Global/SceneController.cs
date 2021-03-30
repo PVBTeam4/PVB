@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 namespace Global
 {
+    /// <summary>
+    /// This Dictionary is used to link Scenes to the ToolType enum
+    /// </summary>
     [Serializable] public class SceneDictionary : SerializableDictionary<ToolType, SceneAsset> { }
 
     /// <summary>
