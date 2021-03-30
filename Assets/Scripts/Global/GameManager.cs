@@ -1,32 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+namespace Global
 {
-    // Private variable to hold this instance of the GameManager Class
-    private GameManager instance;
-
-    // Returns this instance of the GameManager Class
-    public GameManager Instance { get { return instance; } }
-
-    // Awake is called before Start
-    void Awake()
+    /// <summary>
+    /// Center point of our game.
+    /// This Manager will keep track of all other Managers.
+    /// </summary>
+    public class GameManager : MonoBehaviour
     {
-        // Set the instance to this GameManager Class
-        instance = this;
-    }
+        // Private variable to hold this instance of the GameManager Class
+        private GameManager _instance;
 
-    // Switches to the right Scene via the ToolType enum
-    public void EnterTaskMode(ToolType toolType)
-    {
-        //TODO Load the right scene
-    }
+        // Returns this instance of the GameManager Class
+        public GameManager Instance { get { return _instance; } }
 
-    // Switches back to the Overworld Scene
-    private void EnterOverWorld()
-    {
-        //TODO Load the right scene
+        /// <summary>
+        /// On GameObject enable
+        /// </summary>
+        private void OnEnable()
+        {
+            // Set the instance to this GameManager Class
+            _instance = this;
+        }
+
+        /// <summary>
+        /// Switches to the right Scene via the ToolType enum
+        /// </summary>
+        /// <param name="toolType">Type of tool</param>
+        public void EnterTaskMode(ToolType toolType)
+        {
+            //TODO Load the right scene
+        }
+
+        /// <summary>
+        /// Switches back to the OverWorld Scene
+        /// </summary>
+        private void EnterOverWorld()
+        {
+            //TODO Load the right scene
+        }
     }
 }
