@@ -54,7 +54,7 @@ public class CannonTool : Tool
     {}
 
     /// <summary>
-    /// Rotate the weapon based on the mouse position
+    /// Rotates the weapon based on the mouse position
     /// </summary>
     public override void MoveTarget(Vector3 location)
     {
