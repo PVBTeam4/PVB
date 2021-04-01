@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles the functionality of the cannon tool.
+/// Controlled by the ToolController.
+/// </summary>
 public class CannonTool : Tool
 {
     // Prefab of the bullet projectile
@@ -54,8 +58,9 @@ public class CannonTool : Tool
     {}
 
     /// <summary>
-    /// Rotates the weapon based on the mouse position
+    /// Rotate the weapon based on the mouse position
     /// </summary>
+    /// <param name="location">the mouse location</param>
     public override void MoveTarget(Vector3 location)
     {
         Vector3 mouseToWorld = Camera.main.ScreenToWorldPoint(location - new Vector3(0, 0, Camera.main.transform.position.z));
