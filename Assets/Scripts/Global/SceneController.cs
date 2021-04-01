@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 
 namespace Global
 {
-    
-
     /// <summary>
     /// This Dictionary Class (extended from SerializableDictionary) is used to link Scenes to the ToolType enum
     /// </summary>
@@ -29,6 +27,36 @@ namespace Global
 
         // Returns the instance of the SceneDictionary
         public SceneDictionary SceneDictionaryInstance { get => sceneDictionary; }
+
+        private void Awake()
+        {
+            // Assign all the Action Events
+            AssignAllActionEvents();
+        }
+
+        /// <summary>
+        /// Here we assign all the Action Events 
+        /// </summary>
+        private void AssignAllActionEvents()
+        {
+            // Add the SwitchSceneByToolType function to the GameManager.SwitchedSceneByToolType Action Event
+            GameManager.SwitchedSceneByToolType += SwitchSceneByToolType;
+
+            // Add the SwitchSceneToOverworld function to the GameManager.SwitchedSceneByToolType Action Event
+            GameManager.SwitchedSceneToOverworld += SwitchSceneToOverworld;
+        }
+
+        /// <summary>
+        /// Here we remove all the Action Events. This for cleanup reasons.
+        /// </summary>
+        private void RemoveAllActionEvents()
+        {
+            // Remove the SwitchSceneByToolType function to the GameManager.SwitchedSceneByToolType Action Event
+            GameManager.SwitchedSceneByToolType -= SwitchSceneByToolType;
+
+            // Remove the SwitchSceneToOverworld function to the GameManager.SwitchedSceneByToolType Action Event
+            GameManager.SwitchedSceneToOverworld -= SwitchSceneToOverworld;
+        }
 
         /// <summary>
         /// Switches to the given scene
@@ -68,12 +96,11 @@ namespace Global
         /// Switches to the Scene retreived from the SceneDictionary using the ToolType
         /// </summary>
         /// <param name="toolType">Type of Scene that needs to be loaded in</param>
-        /// <param name="sceneDictionary">The SerializableDictionary that holds the Scenes</param>
-        public void SwitchSceneByToolType(ToolType toolType, SceneDictionary sceneDictionary)
+        public void SwitchSceneByToolType(ToolType toolType)
         {
             // Try and get the right Scene from the SceneDictionary
             SceneAsset scene;
-            sceneDictionary.TryGetValue(toolType, out scene);
+            this.sceneDictionary.TryGetValue(toolType, out scene);
             
             // Check if the Scene exists
             if (scene)

@@ -5,6 +5,8 @@ namespace Global
     /// </summary>
     public enum ToolType
     {
+        // Default type, dont use it
+        NOONE,
         // Indicates Water Cannon tool
         WATER_CANNON,
         // Indicates Cannon tool

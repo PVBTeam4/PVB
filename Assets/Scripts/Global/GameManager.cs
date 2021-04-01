@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 namespace Global
 {
@@ -13,6 +14,12 @@ namespace Global
 
         // Returns this instance of the GameManager Class
         public GameManager Instance { get { return _instance; } }
+
+        // Fire this event when you want to switch to the Over World Scene
+        public static Action SwitchedSceneToOverworld;
+
+        // Fire this event when you want to switch to a Tool Scene
+        public static Action<ToolType> SwitchedSceneByToolType;
 
         /// <summary>
         /// On GameObject enable
@@ -29,7 +36,8 @@ namespace Global
         /// <param name="toolType">Type of tool</param>
         public void EnterTaskMode(ToolType toolType)
         {
-            //TODO Load the right scene
+            // Fire the Action Event
+            SwitchedSceneByToolType.Invoke(toolType);
         }
 
         /// <summary>
@@ -37,7 +45,8 @@ namespace Global
         /// </summary>
         private void EnterOverWorld()
         {
-            //TODO Load the right scene
+            // Fire the Action Event
+            SwitchedSceneToOverworld.Invoke();
         }
     }
 }
