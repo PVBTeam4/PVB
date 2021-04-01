@@ -19,13 +19,13 @@ namespace TaskSystem.Objectives
         /// </summary>
         private void OnEnable()
         {
-            SetCurrentHealth();
+            SetCurrentToMaxHealth();
         }
 
         /// <summary>
         /// Set current health, to max health
         /// </summary>
-        private void SetCurrentHealth()
+        private void SetCurrentToMaxHealth()
         {
             _currentHealth = maxHealth;
         }
