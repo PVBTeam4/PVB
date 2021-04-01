@@ -1,6 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/// <summary>
+/// this class allows you to rotate the weapon and create an instance of the prefab (BulletForShip)
+/// the weapon rotate towards the mouse positio
+/// the location of the prefab (BulletForShip) will be spawn at BulletSpawnLocation
+/// the prefab (BulletForShip) it will be add as chilld  to BulletParentTransform
+/// this script wil be added to the Player
+/// <summary>
 
 public class GunController : MonoBehaviour
 {
@@ -14,16 +21,16 @@ public class GunController : MonoBehaviour
     // is the parent of the bullet that will be created
     private Transform BulletParentTransform;
 
-    void Update()
+    private void Update()
     {
-        Rotate();
-        Shoot();
+        WeaponRotation();
+        ShootBullet();
     }
 
     /// <summary>
     /// Rotate the weapon towards mouse position
     /// </summary>
-    void Rotate()
+    private void WeaponRotation()
     {
         //The worldspace point created by converting the screen space point at the provided distance z from the camera plane
         Vector3 mouseToWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition - new Vector3(0, 0, Camera.main.transform.position.z));
@@ -41,7 +48,7 @@ public class GunController : MonoBehaviour
     /// it will be spawn at the location of BulletSpawnLocation
     /// it will be added to the BulletParentTransform as a child
     /// </summary>
-    void Shoot()
+    private void ShootBullet()
     {
         if ( Input.GetButtonDown("Fire1"))
         {

@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61872f75e9623a643b0b6ebe06e30ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: {fileID: 3045924654538999588}
+  healthImage: {fileID: 3045924654538999588}
 --- !u!1 &3045924653751824038
 GameObject:
   m_ObjectHideFlags: 0
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 3045924654538999589}
   - component: {fileID: 3045924654538999588}
   m_Layer: 0
-  m_Name: HP
+  m_Name: healthImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
