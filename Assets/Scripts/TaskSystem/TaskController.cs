@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using Global;
 using TaskSystem.Objectives;
 using UnityEngine;
-using Utils;
 using Object = UnityEngine.Object;
 
 namespace TaskSystem
@@ -16,23 +14,11 @@ namespace TaskSystem
         // Current active task
         private Task _activeTask;
 
-        // All tasks, by ToolType
-        private Dictionary<ToolType, Task> _tasks;
-
-        /// <summary>
-        /// Initialize tasks for every ToolType &
-        /// add these tasks to the Dictionary.
-        /// </summary>
-        public void InitializeTasksForEveryTool()
+        public TaskController(ToolType toolType)
         {
-            Dictionary<ToolType, Task> dictionary = new Dictionary<ToolType, Task>();
-            foreach (ToolType toolType in EnumUtil.GetValues<ToolType>())
-            {
-                dictionary[toolType] = CreateTaskForTool(toolType);
-            }
-            _tasks = dictionary;
+            _activeTask = CreateTaskForTool(toolType);
         }
-        
+
         /// <summary>
         /// Cancel the current Task
         /// </summary>
@@ -47,29 +33,6 @@ namespace TaskSystem
             _activeTask = null;
             Debug.Log("Active Task has been cancelled.");
         }
-
-        /// <summary>
-        /// Activate Task for a specific tool
-        /// </summary>
-        /// <param name="toolType">ToolType to activate Task</param>
-        public void ActivateTaskForTool(ToolType toolType)
-        {
-            if (_tasks == null || _tasks.Count == 0)
-            {
-                Debug.LogError("There are no tasks registered.");
-                return;
-            }
-            
-            if (_tasks.TryGetValue(toolType, out Task task))
-            {
-                _activeTask = task;
-            }
-            else
-            {
-                Debug.LogError("Couldn't find any task for tool: " + toolType);
-            }
-        }
-
 
         /// <summary>
         /// Get all Objectives in scene, by their ToolType
@@ -109,7 +72,6 @@ namespace TaskSystem
                 Debug.LogError("Other task got completed, instead of the active one!");
                 return;
             }
-            
             Debug.Log("Congrats, you completed the task!");
         }
     }

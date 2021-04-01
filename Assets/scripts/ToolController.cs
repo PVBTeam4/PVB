@@ -1,70 +1,74 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Data;
 using Global;
+using Input;
+using Input.AbstractListeners;
 using UnityEngine;
 
 /// <summary>
 /// Manages the tools/tasks on a higher level of abstraction
 /// </summary>
-public class ToolController
+public class ToolController : ButtonAndMouseMovementInputListener
 {
     //The tool that's currently being focused on
-    private Tool activeTool;
+    private readonly Tool _activeTool;
 
-    //Dictionary of tools that can be managed using their type as Keys
-    private Dictionary<ToolType, Tool> tools;
+    public ToolController(ToolType activeToolType)
+    {
+        _activeTool = GetToolByType(activeToolType);
+        RegisterInput();
+    }
+
+    public void DeConstruct()
+    {
+        DeRegisterInput();
+    }
 
     /// <summary>
-    /// OnInput event that when fired will initiate some action of the current tool of focus
+    /// OnInputReceived event that when fired will initiate some action of the current tool of focus
     /// </summary>
-    public void OnInput(InputType inputType){
-        switch (inputType)
+    protected override void OnInputReceived(ButtonInputType buttonInputType, float value)
+    {
+        switch (buttonInputType)
         {
-            case InputType.LEFT_MOUSE:
+            case ButtonInputType.LeftMouse:
                 UseToolLeftAction();
                 break;
-            case InputType.RIGHT_MOUSE:
+            case ButtonInputType.RightMouse:
                 UseToolRightAction();
                 break;
-            case InputType.MOUSE_MOVE:
-                UseToolMouseTarget();
-                break;
         }
-    }
-
-    /// <summary>
-    /// Carries out the action assigned to the left mouse button
-    /// </summary>
-    public void UseToolLeftAction(){
-        activeTool.UseLeftAction();
-    }
-
-    /// <summary>
-    /// Carries out the action assigned to the right mouse button
-    /// </summary>
-    public void UseToolRightAction(){
-        activeTool.UseRightAction();
     }
 
     /// <summary>
     /// Carries out the action assigned to the moving around of the mouse
     /// </summary>
-    public void UseToolMouseTarget(){
-        //activeTool.MoveTarget(/*mouse position*/);
+    protected override void OnMouseMovementReceived(Vector3 mousePosition)
+    {
+        if (_activeTool == null) return;
+        _activeTool.MoveTarget(mousePosition);
     }
 
     /// <summary>
-    /// Sets the currently active tool to one of a different type
+    /// Carries out the action assigned to the left mouse button
     /// </summary>
-    public void SetActiveTool(ToolType toolType){
-        Tool foundTool;
-        if(tools.TryGetValue(toolType, out foundTool))
+    private void UseToolLeftAction(){
+        _activeTool.UseLeftAction();
+    }
+
+    /// <summary>
+    /// Carries out the action assigned to the right mouse button
+    /// </summary>
+    private void UseToolRightAction(){
+        _activeTool.UseRightAction();
+    }
+
+    private Tool GetToolByType(ToolType toolType)
+    {
+        switch (toolType)
         {
-            activeTool = foundTool;
+            case ToolType.CANNON:
+                return Object.FindObjectOfType<CannonTool>();
         }
-        else
-        {
-            Debug.LogError("tool not registered");
-        }
+        throw new SyntaxErrorException("Tool could not be found!");
     }
 }

@@ -6,15 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TaskModeScene.unity
+    path: Assets/Scenes/Testing/TaskModeScene.unity
     guid: ab6488e1efd07b84b91f5c938f5d05a8
   - enabled: 1
-    path: Assets/Scenes/TaskScenes/ShootingScene.unity
+    path: Assets/Scenes/Tasks/ShootingScene.unity
     guid: e349a7efefb927642819fec113dcf19d
   - enabled: 1
-    path: Assets/Scenes/TaskScenes/ExtinguishingScene.unity
+    path: Assets/Scenes/Tasks/ExtinguishingScene.unity
     guid: 1ab795afb4976ce4480af55f0bffbf67
   - enabled: 1
-    path: Assets/Scenes/TaskScenes/CraneOperatingScene.unity
+    path: Assets/Scenes/Tasks/CraneOperatingScene.unity
     guid: 9664d8cea34270642bc248500c796e10
   m_configObjects: {}

@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,9 +19,11 @@ namespace Global
     /// </summary>
     public class SceneController : MonoBehaviour
     {
+        private static SceneController _instance;
+
         [SerializeField]
         // The main scene where the game plays
-        private SceneAsset overworldScene;
+        private SceneAsset overWorldScene;
 
         [SerializeField]
         // Used to link a Scene to their respective Type 
@@ -27,38 +31,24 @@ namespace Global
 
         // Returns the instance of the SceneDictionary
         public SceneDictionary SceneDictionaryInstance { get => sceneDictionary; }
+        
+        // Fire this event when you want to switch to the Over World Scene
+        public static Action OverWorldEnterAction;
+
+        // Fire this event when you want to switch to a Tool Scene
+        public static Action<ToolType> TaskModeEnterAction;
 
         /// <summary>
         /// This runs before the Start method
         /// </summary>
         private void Awake()
         {
-            // Assign all the Action Events
-            AssignAllActionEvents();
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
-        /// <summary>
-        /// Here we assign all the Action Events 
-        /// </summary>
-        private void AssignAllActionEvents()
+        private void OnEnable()
         {
-            // Add the SwitchSceneByToolType function to the GameManager.SwitchedSceneByToolType Action Event
-            GameManager.SwitchedSceneByToolType += SwitchSceneByToolType;
-
-            // Add the SwitchSceneToOverworld function to the GameManager.SwitchedSceneByToolType Action Event
-            GameManager.SwitchedSceneToOverworld += SwitchSceneToOverworld;
-        }
-
-        /// <summary>
-        /// Here we remove all the Action Events. This for cleanup reasons.
-        /// </summary>
-        private void RemoveAllActionEvents()
-        {
-            // Remove the SwitchSceneByToolType function to the GameManager.SwitchedSceneByToolType Action Event
-            GameManager.SwitchedSceneByToolType -= SwitchSceneByToolType;
-
-            // Remove the SwitchSceneToOverworld function to the GameManager.SwitchedSceneByToolType Action Event
-            GameManager.SwitchedSceneToOverworld -= SwitchSceneToOverworld;
+            _instance = this;
         }
 
         /// <summary>
@@ -79,41 +69,78 @@ namespace Global
         }
 
         /// <summary>
-        /// Loads the scene that is put on "overworldScene" 
+        /// Loads the scene that is put on "overWorldScene" 
         /// </summary>
-        public void SwitchSceneToOverworld()
+        public static void SwitchSceneToOverWorld()
         {
+            SceneController sceneController = _instance;
+            if (sceneController == null)
+            {
+                Debug.LogError("SceneController is not yet loaded.");
+                return;
+            }
             // Check if the Scene exists
-            if (overworldScene)
+            if (sceneController.overWorldScene)
             {
                 // Load the Scene using the Name of the SceneAsset
-                SceneManager.LoadScene(overworldScene.name);
+                SceneManager.LoadScene(sceneController.overWorldScene.name);
             }
-            else// Give an Error if the overworldScene is not found
+            else// Give an Error if the overWorldScene is not found
             {
-                Debug.LogError("Overworld Scene is not found");
+                Debug.LogError("OverWorld Scene is not found");
             }
         }
 
         /// <summary>
-        /// Switches to the Scene retreived from the SceneDictionary using the ToolType
+        /// Switches to the Scene retrieved from the SceneDictionary using the ToolType
         /// </summary>
         /// <param name="toolType">Type of Scene that needs to be loaded in</param>
-        public void SwitchSceneByToolType(ToolType toolType)
+        public static void SwitchSceneByToolType(ToolType toolType)
         {
-            // Try and get the right Scene from the SceneDictionary
-            SceneAsset scene;
-            this.sceneDictionary.TryGetValue(toolType, out scene);
-            
-            // Check if the Scene exists
-            if (scene)
+            SceneController sceneController = _instance;
+            if (sceneController == null)
             {
-                // Load the Scene using the Name of the SceneAsset
-                SceneManager.LoadScene(scene.name);
+                Debug.LogError("SceneController is not yet loaded.");
+                return;
             }
-            else// Give an Error if the ToolType does not have a Scene
+            
+            // Try and get the right Scene from the SceneDictionary
+            if (!sceneController.sceneDictionary.TryGetValue(toolType, out SceneAsset scene))
             {
-                Debug.LogError("Scene not found for ToolType: " + toolType.ToString());
+                // Give an Error if the ToolType does not have a Scene
+                Debug.LogError("Scene not found for ToolType: " + toolType);
+                return;
+            }
+            
+            // Load the Scene using the Name of the SceneAsset
+            SceneManager.LoadScene(scene.name);
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+        {
+            ToolType toolType = GetToolTypeByScene(scene);
+
+            if (toolType == ToolType.NOONE)
+            {
+                if (scene.name == overWorldScene.name)
+                {
+                    OverWorldEnterAction?.Invoke();
+                }
+                return;
+            }
+            
+            TaskModeEnterAction?.Invoke(toolType);
+        }
+
+        private ToolType GetToolTypeByScene(Scene scene)
+        {
+            try
+            {
+                return sceneDictionary.First(toolTypeScenePair => toolTypeScenePair.Value.name == scene.name).Key;
+            }
+            catch (InvalidOperationException)
+            {
+                return ToolType.NOONE;
             }
         }
     }

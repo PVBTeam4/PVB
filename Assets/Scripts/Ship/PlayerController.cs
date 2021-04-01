@@ -11,7 +11,7 @@ namespace Ship
         private float trust = 34000;
 
         [SerializeField]
-        private float turningSpeed = 1;
+        private float turningSpeed = 7;
 
         private Rigidbody _rigidbody;
 
