@@ -25,8 +25,8 @@ namespace TaskSystem
         /// </summary>
         public void InitializeTasksForEveryTool()
         {
-            var dictionary = new Dictionary<ToolType, Task>();
-            foreach (var toolType in EnumUtil.GetValues<ToolType>())
+            Dictionary<ToolType, Task> dictionary = new Dictionary<ToolType, Task>();
+            foreach (ToolType toolType in EnumUtil.GetValues<ToolType>())
             {
                 dictionary[toolType] = CreateTaskForTool(toolType);
             }
@@ -60,7 +60,7 @@ namespace TaskSystem
                 return;
             }
             
-            if (_tasks.TryGetValue(toolType, out var task))
+            if (_tasks.TryGetValue(toolType, out Task task))
             {
                 _activeTask = task;
             }
@@ -93,8 +93,8 @@ namespace TaskSystem
         /// <returns></returns>
         private Task CreateTaskForTool(ToolType toolType)
         {
-            var objectives = GetObjectivesInSceneByToolType(toolType);
-            var task = new Task(OnTaskCompletion, objectives);
+            Objective[] objectives = GetObjectivesInSceneByToolType(toolType);
+            Task task = new Task(OnTaskCompletion, objectives);
             return task;
         }
         
