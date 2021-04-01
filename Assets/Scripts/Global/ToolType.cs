@@ -1,7 +1,16 @@
-// These are the types of tools the player can use. These are linked to their respective scenes
-public enum ToolType
+namespace Global
 {
-    WATER_CANNON,
-    CANNON,
-    CRANE
+    /// <summary>
+    /// These are the types of tools the player can use. These are linked to their respective scenes
+    /// </summary>
+    public enum ToolType
+    {
+        // Indicates Water Cannon tool
+        WATER_CANNON,
+        // Indicates Cannon tool
+        CANNON,
+        // Indicates Crane tool
+        CRANE
+    }
 }
+
