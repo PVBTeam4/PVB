@@ -19,6 +19,7 @@ namespace Global
     /// </summary>
     public class SceneController : MonoBehaviour
     {
+        // Instance of this class
         private static SceneController _instance;
 
         [SerializeField]
@@ -46,6 +47,9 @@ namespace Global
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
+        /// <summary>
+        /// On GameObject Enabled
+        /// </summary>
         private void OnEnable()
         {
             _instance = this;
@@ -116,29 +120,44 @@ namespace Global
             SceneManager.LoadScene(scene.name);
         }
 
+        /// <summary>
+        /// This funtion will be run when the scene has been loaded
+        /// </summary>
+        /// <param name="scene"></param>
+        /// <param name="loadSceneMode"></param>
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
         {
+            // Get the ToolType of the given Scene
             ToolType toolType = GetToolTypeByScene(scene);
 
+            // Check if the OverWorld needs to be loaded
             if (toolType == ToolType.NOONE)
             {
                 if (scene.name == overWorldScene.name)
                 {
+                    // Fire the event that the player wants to enter the overworld
                     OverWorldEnterAction?.Invoke();
                 }
                 return;
             }
             
+            // Fire the event that a task-mode has been started
             TaskModeEnterAction?.Invoke(toolType);
         }
 
+        /// <summary>
+        /// Tries to return the ToolType of the given Scene
+        /// </summary>
+        /// <param name="scene"></param>
+        /// <returns></returns>
         private ToolType GetToolTypeByScene(Scene scene)
         {
+            // Try to compare the given Scene to the sceneDictionary what its ToolType is
             try
             {
                 return sceneDictionary.First(toolTypeScenePair => toolTypeScenePair.Value.name == scene.name).Key;
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException)// If not found. Just return the default value
             {
                 return ToolType.NOONE;
             }
