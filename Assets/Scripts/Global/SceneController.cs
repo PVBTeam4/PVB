@@ -28,6 +28,9 @@ namespace Global
         // Returns the instance of the SceneDictionary
         public SceneDictionary SceneDictionaryInstance { get => sceneDictionary; }
 
+        /// <summary>
+        /// This runs before the Start method
+        /// </summary>
         private void Awake()
         {
             // Assign all the Action Events
