@@ -42,7 +42,7 @@ public class Bullet : MonoBehaviour
     /// <summary>
     /// Destroys/removes the bullet based on a given amount of time
     /// </summary>
-    /// <param name="timeInSeconds"></param>
+    /// <param name="timeInSeconds">lifespan of the object in seconds</param>
     private void DestroyBullet(float timeInSeconds = 0)
     {
         Destroy(gameObject, timeInSeconds);
@@ -51,7 +51,7 @@ public class Bullet : MonoBehaviour
     /// <summary>
     /// Destroys the object on collision
     /// </summary>
-    /// <param name="col"></param>
+    /// <param name="col">the colliding object</param>
     void OnTriggerEnter(Collider col)
     {
         DestroyBullet();
