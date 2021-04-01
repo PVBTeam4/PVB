@@ -16,9 +16,13 @@ public class CannonTool : Tool
     [SerializeField]
     private Transform bulletParentTransform;
 
-    //Configuration options of the cannon
+    //Configuration options regarding the difficulty of handling the gun
     [SerializeField]
     private float rateOfFire, bulletAccuracy;
+
+    //Configuration options regarding the ammunition of the gun
+    [SerializeField]
+    private int currentAmmo, maxAmmo;
 
     /// <summary>
     /// Will utilize 'bulletAccuracy' and/or 'rateOfFire' to configure the spray of bullets using a radius.
