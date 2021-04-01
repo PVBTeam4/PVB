@@ -7,8 +7,10 @@ using UnityEngine.SceneManagement;
 
 namespace Global
 {
+    
+
     /// <summary>
-    /// This Dictionary is used to link Scenes to the ToolType enum
+    /// This Dictionary Class (extended from SerializableDictionary) is used to link Scenes to the ToolType enum
     /// </summary>
     [Serializable] public class SceneDictionary : SerializableDictionary<ToolType, SceneAsset> { }
 
@@ -17,6 +19,10 @@ namespace Global
     /// </summary>
     public class SceneController : MonoBehaviour
     {
+        [SerializeField]
+        // The main scene where the game plays
+        private SceneAsset overworldScene;
+
         [SerializeField]
         // Used to link a Scene to their respective Type 
         private SceneDictionary sceneDictionary;
@@ -38,6 +44,23 @@ namespace Global
             else// Give an Error if the ToolType does not have a Scene
             {
                 Debug.LogError("Scene not with name: " + sceneName);
+            }
+        }
+
+        /// <summary>
+        /// Loads the scene that is put on "overworldScene" 
+        /// </summary>
+        public void SwitchSceneToOverworld()
+        {
+            // Check if the Scene exists
+            if (overworldScene)
+            {
+                // Load the Scene using the Name of the SceneAsset
+                SceneManager.LoadScene(overworldScene.name);
+            }
+            else// Give an Error if the overworldScene is not found
+            {
+                Debug.LogError("Overworld Scene is not found");
             }
         }
 
