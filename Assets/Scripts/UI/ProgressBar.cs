@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI; // Required when Using UI elements.
 
 namespace UI
@@ -15,22 +14,11 @@ namespace UI
         [SerializeField]
         // is an image that shows the character's life
         private Image progressImage;
-
-        /// <summary>
-        ///if it interacts with an object that has trigger enabled, it will activate this function to decrease de life
-        /// after the life is zero it wil be destroyed
-        /// </summary>
-        private void OnTriggerEnter(Collider col)
+        
+        
+        public void UpdateProgressBar(float currentProgress, float maxProgress)
         {
-            //decrease HP for UI
-            progressImage.fillAmount -= 0.1f;
-
-            //if healthImage is lower or equal to zero destroy it self
-            if (progressImage.fillAmount <= 0)
-            {
-                //Destroy the gameObject after hp is 0
-                Destroy(gameObject);
-            }
+            progressImage.fillAmount = currentProgress / maxProgress;
         }
     }
 }

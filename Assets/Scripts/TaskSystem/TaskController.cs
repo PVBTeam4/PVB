@@ -57,7 +57,7 @@ namespace TaskSystem
         private Task CreateTaskForTool(ToolType toolType)
         {
             Objective[] objectives = GetObjectivesInSceneByToolType(toolType);
-            Task task = new Task(OnTaskCompletion, objectives);
+            Task task = new Task(toolType, OnTaskCompletion, objectives);
             return task;
         }
         
@@ -67,11 +67,15 @@ namespace TaskSystem
         /// <param name="completedTask">Task that is completed</param>
         private void OnTaskCompletion(Task completedTask)
         {
+            Debug.Log("Task completed");
             if (!completedTask.Equals(_activeTask))
             {
                 Debug.LogError("Other task got completed, instead of the active one!");
                 return;
             }
+            
+            // Switch back to overworld
+            SceneController.SwitchSceneToOverWorld();
             Debug.Log("Congrats, you completed the task!");
         }
     }

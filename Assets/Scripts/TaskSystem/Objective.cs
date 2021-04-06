@@ -25,7 +25,13 @@ namespace TaskSystem
         /// </summary>
         protected void CompleteObjective()
         {
-            _completeObjectiveAction?.Invoke(this);
+            if (_completeObjectiveAction == null)
+            {
+                Debug.LogError("Objective has not been initialized!");
+                return;
+            }
+            
+            _completeObjectiveAction.Invoke(this);
         }
     }
 }

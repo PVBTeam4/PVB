@@ -122,9 +122,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7116938461171060854}
   - component: {fileID: 6238650753211185389}
-  - component: {fileID: 3756231891514487281}
+  - component: {fileID: 5580833398838316943}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Gun_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -159,7 +159,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.98367697, y: 1.3652146, z: 2.1036525}
   m_Center: {x: -0.008161455, y: 0.18260741, z: 0.48971608}
---- !u!114 &3756231891514487281
+--- !u!114 &5580833398838316943
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,12 +168,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 5152693962637743977}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 716cba0eee0c70a4a8092c653dd132f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 22beaa598be3e9244859fac71d6d54db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 602874108392844005, guid: 56bbbfe9370c0b5498bec51509137700, type: 3}
-  BulletSpawnLocation: {fileID: 4102876777501138042}
-  BulletParentTransform: {fileID: 0}
+  bullet: {fileID: 602874108392844005, guid: 56bbbfe9370c0b5498bec51509137700, type: 3}
+  bulletSpawnLocation: {fileID: 4102876777501138042}
+  rateOfFire: 0
+  bulletAccuracy: 0
+  currentAmmo: 0
+  maxAmmo: 0
 --- !u!1 &8632176078442822903
 GameObject:
   m_ObjectHideFlags: 0
