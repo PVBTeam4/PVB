@@ -1,5 +1,7 @@
 using System;
 using System.Linq;
+using Global;
+using UnityEngine;
 
 namespace TaskSystem
 {
@@ -8,6 +10,9 @@ namespace TaskSystem
     /// </summary>
     public class Task
     {
+        // ToolType used to complete task
+        private readonly ToolType _toolType;
+        
         // Action that will let TaskController know, Task is completed
         private readonly Action<Task> _taskCompleteAction;
         
@@ -17,12 +22,16 @@ namespace TaskSystem
         /// <summary>
         /// Constructor of Task
         /// </summary>
+        /// <param name="toolType">ToolType used to complete Task</param>
         /// <param name="taskCompleteAction">Action for Task completion</param>
         /// <param name="activeObjectives">Array of active Objectives</param>
-        public Task(Action<Task> taskCompleteAction, Objective[] activeObjectives)
+        public Task(ToolType toolType, Action<Task> taskCompleteAction, Objective[] activeObjectives)
         {
+            _toolType = toolType;
             _taskCompleteAction = taskCompleteAction;
             _activeObjectives = activeObjectives;
+
+            InitializeObjectives();
         }
 
         /// <summary>
@@ -37,6 +46,8 @@ namespace TaskSystem
             // Remove objective from array
             _activeObjectives = _activeObjectives.Where(objective => !completedObjective.Equals(objective)).ToArray();
 
+            Debug.Log("Objective complete");
+            
             if (_activeObjectives.Length == 0)
             {
                 OnTaskCompletion();
@@ -50,6 +61,18 @@ namespace TaskSystem
         private void OnTaskCompletion()
         {
             _taskCompleteAction?.Invoke(this);
+        }
+
+        /// <summary>
+        /// Initializes all active objectives.
+        /// NEEDS TO BE CALLED ON TASK CREATION!
+        /// </summary>
+        private void InitializeObjectives()
+        {
+            foreach (Objective activeObjective in _activeObjectives)
+            {
+                activeObjective.InitializeObjective(OnObjectiveCompletion);
+            }
         }
     }
 }

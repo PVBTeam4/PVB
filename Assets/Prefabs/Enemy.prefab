@@ -113,6 +113,9 @@ GameObject:
   - component: {fileID: 3045924653465763380}
   - component: {fileID: 3045924653465763384}
   - component: {fileID: 3045924653465763383}
+  - component: {fileID: 9122268488744542243}
+  - component: {fileID: 3234662182629392354}
+  - component: {fileID: 8795885946138220994}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -144,7 +147,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3045924653465763382}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.1632313, y: 1.0753374, z: 3.224759}
@@ -177,7 +180,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61872f75e9623a643b0b6ebe06e30ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthImage: {fileID: 3045924654538999588}
+  progressImage: {fileID: 3045924654538999588}
+--- !u!114 &9122268488744542243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3045924653465763382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2520371fb0bd4449db152dbffb6d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3234662182629392354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3045924653465763382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 969df54d792f2e542a9140ec86702b39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  onDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3045924653465763383}
+        m_TargetAssemblyTypeName: UI.ProgressBar, Scripts
+        m_MethodName: UpdateProgressBar
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9122268488744542243}
+        m_TargetAssemblyTypeName: Global.DestroyObject, Scripts
+        m_MethodName: DestroyGameObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8795885946138220994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3045924653465763382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2520371fb0bd4449db152dbffb6d68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3045924653751824038
 GameObject:
   m_ObjectHideFlags: 0

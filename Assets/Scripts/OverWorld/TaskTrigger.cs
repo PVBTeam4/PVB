@@ -1,4 +1,3 @@
-using System;
 using Global;
 using UnityEngine;
 
@@ -33,6 +32,7 @@ public class TaskTrigger : MonoBehaviour
         if (other.gameObject.CompareTag(PlayerTag))
         {
             SceneController.SwitchSceneByToolType(toolType);
+            gameObject.SetActive(false);
         }
     }
 }

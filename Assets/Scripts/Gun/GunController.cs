@@ -17,9 +17,14 @@ namespace Gun
         [SerializeField]
         // spawn the bullet at this location
         private Transform bulletSpawnLocation;
-        [SerializeField]
+        
         // is the parent of the bullet that will be created
-        private Transform bulletParentTransform;
+        private GameObject _bulletParentObject;
+
+        private void Awake()
+        {
+            InitializeBulletHolder();
+        }
 
         private void Update()
         {
@@ -32,17 +37,18 @@ namespace Gun
         /// </summary>
         private void WeaponRotation()
         {
-            //The worldspace point created by converting the screen space point at the provided distance z from the camera plane
             Vector3 mouseToWorld = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition - new Vector3(0, 0, Camera.main.transform.position.z));
             //subtract the distance between the current gameObject and the camera to the initial mouse position:
+            Debug.DrawLine(transform.position , mouseToWorld, Color.red);
             Vector3 difference = mouseToWorld - transform.position;
             // caculate angleHorizon between z and x ass
-            float angleHorizon = Mathf.Atan2(difference.z, difference.x) * Mathf.Rad2Deg;
+            float angleHorizon = Mathf.Atan(difference.x / difference.z) * Mathf.Rad2Deg;
             // caculate angleVertical between z and y ass
-            float angleVertical = Mathf.Atan2(difference.z, difference.y) * Mathf.Rad2Deg;
+            float angleVertical = Mathf.Atan(difference.y / difference.z) * Mathf.Rad2Deg;
             //rotate the gameobject based on the angleHorizon and angleVertical
-            transform.rotation = Quaternion.Euler(angleVertical - 90, -angleHorizon + 90, 0f);
+            transform.rotation = Quaternion.Euler(-angleVertical , angleHorizon , 0f);
         }
+        
         /// <summary>
         /// pressing the left mouse button creates an object based on the prefab
         /// it will be spawn at the location of BulletSpawnLocation
@@ -52,8 +58,17 @@ namespace Gun
         {
             if (UnityEngine.Input.GetButtonDown("Fire1"))
             {
-                Instantiate(bullet, bulletSpawnLocation.position, transform.rotation).transform.parent = bulletParentTransform;
+                Instantiate(bullet, bulletSpawnLocation.position, transform.rotation).transform.parent = _bulletParentObject.transform;
             }
+        }
+
+        /// <summary>
+        /// Creates bullet holder, that holds all Instantiated bullets
+        /// </summary>
+        private void InitializeBulletHolder()
+        {
+            _bulletParentObject = Instantiate(new GameObject());
+            _bulletParentObject.name = "Bullet Holder";
         }
     }
 }

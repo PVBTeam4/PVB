@@ -1,3 +1,4 @@
+using TaskSystem.Objectives;
 using UnityEngine;
 
 namespace Gun
@@ -9,6 +10,8 @@ namespace Gun
     /// </summary>
     public class BulletMovement : MonoBehaviour
     {
+        public float damage;
+        
         [SerializeField]
         // the speed of the bullet
         private float speed = 10;
@@ -40,9 +43,10 @@ namespace Gun
         /// </summary>
         private void OnTriggerEnter(Collider col)
         {   
-            //Destroy sthe bullet after collision
+            //Destroy the bullet after collision
             Destroy(gameObject);
         }
+
         /// <summary>
         /// Destroys the game object in the time of the lifeSpan
         /// </summary>
