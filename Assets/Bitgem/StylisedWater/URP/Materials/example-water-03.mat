@@ -102,14 +102,14 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _WaveFrequency: 1
-    - _WaveScale: 0.1
+    - _WaveFrequency: 0.3
+    - _WaveScale: 0.2
     - _WaveSpeed: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - Color_7D9A58EC: {r: 0, g: 0.70526993, b: 0.8396226, a: 1}
-    - Color_F01C36BF: {r: 0.14117649, g: 0.40392157, b: 0.27167383, a: 1}
+    - Color_F01C36BF: {r: 0, g: 0.2264151, b: 0.17442383, a: 1}
     - Color_a4a63766f4ff421298561eff370bcf25: {r: 2.6390157, g: 0.13816832, b: 0.26575357, a: 0}
     - Vector2_0dc2ded5925e4c2a8ef01c41b8549f1f: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_37B21477: {r: 0.5, g: 0.5, b: 1, a: 1}
