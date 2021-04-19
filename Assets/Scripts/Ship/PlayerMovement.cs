@@ -5,7 +5,7 @@ namespace Ship
     /// <summary>
     /// Controlls the player movement
     /// </summary>
-    public class PlayerController : MonoBehaviour
+    public class PlayerMovement : MonoBehaviour
     {
         [SerializeField]
         private float trust = 34000;

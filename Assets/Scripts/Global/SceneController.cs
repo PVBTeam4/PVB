@@ -36,10 +36,6 @@ namespace Global
 
         // Fire this event when you want to switch to a Tool Scene
         [SerializeField] private UnityEvent<ToolType> TaskModeEnterAction;
-        
-        // Returns the instance of the SceneDictionary
-        public SceneDictionary SceneDictionaryInstance { get => sceneDictionary; }
-        
 
         /// <summary>
         /// This runs before the Start method

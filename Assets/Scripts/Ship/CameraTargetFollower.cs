@@ -5,7 +5,7 @@ namespace Ship
     /// <summary>
     /// Follows the given Target Transform via a Vector3.Lerp
     /// </summary>
-    public class TargetFollower : MonoBehaviour 
+    public class CameraTargetFollower : MonoBehaviour 
     {
         [SerializeField]
         // The speed to lerp towards the Target position
@@ -18,22 +18,19 @@ namespace Ship
         void FixedUpdate()
         {
             // Follow the target by lerping towards it
-            LerpToTarget(transform, targetTransform, followSpeed);
+            LerpToTarget();
         }
 
         /// <summary>
         /// Lerp the given Transform towards the given target Transform
         /// </summary>
-        /// <param name="_transform">Transform that needs to change</param>
-        /// <param name="_targetTransform">Target Transform that </param>
-        /// <param name="_followSpeed">Speed of the lerp towards, target</param>
-        private void LerpToTarget(Transform _transform, Transform _targetTransform, float _followSpeed)
+        private void LerpToTarget()
         {
             // Check if the targetTransform has been filled in
-            if (_targetTransform)
+            if (targetTransform)
             {
                 // Lerp the given Transform towards the given target Transform
-                _transform.position = Vector3.Lerp(_transform.position, _targetTransform.position, _followSpeed * Time.deltaTime);
+                transform.position = Vector3.Lerp(transform.position, targetTransform.position, followSpeed * Time.deltaTime);
             }
             else
             {
