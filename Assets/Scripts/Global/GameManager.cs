@@ -15,10 +15,10 @@ namespace Global
         public TaskController TaskController;
 
         // Private variable to hold this instance of the GameManager Class
-        private GameManager _instance;
+        private static GameManager _instance;
 
         // Returns this instance of the GameManager Class
-        public GameManager Instance { get { return _instance; } }
+        public static GameManager Instance { get { return _instance; } }
 
         /// <summary>
         /// On GameObject enable
