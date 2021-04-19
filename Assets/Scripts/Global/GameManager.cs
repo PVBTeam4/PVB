@@ -27,9 +27,6 @@ namespace Global
         {
             // Set the instance to this GameManager Class
             _instance = this;
-
-            SceneController.OverWorldEnterAction += OnEnterOverWorld;
-            SceneController.TaskModeEnterAction += OnEnterTaskMode;
         }
 
         /// <summary>
@@ -37,7 +34,7 @@ namespace Global
         /// This method will be run when the TaskModeEnterAction event in fired
         /// </summary>
         /// <param name="toolType"></param>
-        private void OnEnterTaskMode(ToolType toolType)
+        public void OnEnterTaskMode(ToolType toolType)
         {
             ToolController = new ToolController(toolType);
             TaskController = new TaskController(toolType);
@@ -47,7 +44,7 @@ namespace Global
         /// When the player is done with a task. Run this method, it will deactivate the controllers
         /// The method will be run when the OverWorldEnterAction event in fired
         /// </summary>
-        private void OnEnterOverWorld()
+        public void OnEnterOverWorld()
         {
             // Deactivate controllers
             if (ToolController != null)
