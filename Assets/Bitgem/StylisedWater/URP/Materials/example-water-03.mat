@@ -13,7 +13,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 5000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -69,10 +69,10 @@ Material:
     - Vector1_244B0600: 2
     - Vector1_34CF798A: 1.75
     - Vector1_36E8227: 0.65
-    - Vector1_3D886DA1: 0.406
+    - Vector1_3D886DA1: 0
     - Vector1_449f8e2657b841f18c4d8347f390ab21: 1.5
-    - Vector1_46E42935: 0.536
-    - Vector1_47683D42: 0.478
+    - Vector1_46E42935: 0.473
+    - Vector1_47683D42: 0.553
     - Vector1_7e980ef2953d4996954d76e7e132a352: 15
     - Vector1_A0EAD698: 1
     - Vector1_A6A0BC26: 0
@@ -103,13 +103,13 @@ Material:
     - _SrcBlend: 1
     - _Surface: 0
     - _WaveFrequency: 0.3
-    - _WaveScale: 0.2
+    - _WaveScale: 0.15
     - _WaveSpeed: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_7D9A58EC: {r: 0, g: 0.70526993, b: 0.8396226, a: 1}
-    - Color_F01C36BF: {r: 0, g: 0.2264151, b: 0.17442383, a: 1}
+    - Color_7D9A58EC: {r: 0.008143453, g: 0.48632023, b: 0.5754717, a: 1}
+    - Color_F01C36BF: {r: 0, g: 0.65882355, b: 0.5725911, a: 1}
     - Color_a4a63766f4ff421298561eff370bcf25: {r: 2.6390157, g: 0.13816832, b: 0.26575357, a: 0}
     - Vector2_0dc2ded5925e4c2a8ef01c41b8549f1f: {r: 0, g: 0, b: 0, a: 0}
     - Vector2_37B21477: {r: 0.5, g: 0.5, b: 1, a: 1}
