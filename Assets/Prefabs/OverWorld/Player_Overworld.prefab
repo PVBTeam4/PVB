@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36aa02d38bb10b548bc7b8879596b15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yOffSet: 6.88
   WaterVolumeHelper: {fileID: 0}
 --- !u!1001 &5059186263622547152
 PrefabInstance:
@@ -157,7 +158,7 @@ PrefabInstance:
     - target: {fileID: -6217122412724035240, guid: a4069d8127b21f04688ed1e0e0c76321, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 24753a27e3bfcb345a8fe821bbaab14b, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: -1689183816654340573, guid: a4069d8127b21f04688ed1e0e0c76321, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
