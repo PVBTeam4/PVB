@@ -12,6 +12,10 @@ namespace ToolSystem.Tools
         [SerializeField]
         private GameObject bullet;
 
+        [SerializeField]
+        //the bottom of the Gun 
+        private Transform Gunfloor;
+
         // Spawnlocation of the projectile
         [SerializeField]
         private Transform bulletSpawnLocation;
@@ -79,6 +83,7 @@ namespace ToolSystem.Tools
             float angleVertical = Mathf.Atan(difference.y / difference.z) * Mathf.Rad2Deg;
             //rotate the gameobject based on the angleHorizon and angleVertical
             transform.rotation = Quaternion.Euler(-angleVertical, angleHorizon, 0f);
+            Gunfloor.rotation = Quaternion.Euler(0f, angleHorizon, 0f);
         }
         
         /// <summary>

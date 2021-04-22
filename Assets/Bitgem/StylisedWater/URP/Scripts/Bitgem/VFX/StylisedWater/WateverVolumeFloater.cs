@@ -1,7 +1,5 @@
 ﻿#region Using statements
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 #endregion
@@ -11,6 +9,9 @@ namespace Bitgem.VFX.StylisedWater
     public class WateverVolumeFloater : MonoBehaviour
     {
         #region Public fields
+
+        // This value is used to change the Y offset of the floating object
+        [SerializeField] private float yOffSet;
 
         public WaterVolumeHelper WaterVolumeHelper = null;
 
@@ -26,7 +27,7 @@ namespace Bitgem.VFX.StylisedWater
                 return;
             }
 
-            transform.position = new Vector3(transform.position.x, instance.GetHeight(transform.position) ?? transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x, instance.GetHeight(transform.position) + yOffSet ?? transform.position.y, transform.position.z);
         }
 
         #endregion

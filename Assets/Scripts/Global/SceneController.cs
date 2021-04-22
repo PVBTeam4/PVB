@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace Global
@@ -30,14 +31,11 @@ namespace Global
         // Used to link a Scene to their respective Type 
         private SceneDictionary sceneDictionary;
 
-        // Returns the instance of the SceneDictionary
-        public SceneDictionary SceneDictionaryInstance { get => sceneDictionary; }
-        
         // Fire this event when you want to switch to the Over World Scene
-        public static Action OverWorldEnterAction;
+        [SerializeField] private UnityEvent OverWorldEnterAction;
 
         // Fire this event when you want to switch to a Tool Scene
-        public static Action<ToolType> TaskModeEnterAction;
+        [SerializeField] private UnityEvent<ToolType> TaskModeEnterAction;
 
         /// <summary>
         /// This runs before the Start method
