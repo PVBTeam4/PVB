@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
 using Global;
+using TaskSystem.Objectives;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace TaskSystem
 {
@@ -24,12 +26,11 @@ namespace TaskSystem
         /// </summary>
         /// <param name="toolType">ToolType used to complete Task</param>
         /// <param name="taskCompleteAction">Action for Task completion</param>
-        /// <param name="activeObjectives">Array of active Objectives</param>
-        public Task(ToolType toolType, Action<Task> taskCompleteAction, Objective[] activeObjectives)
+        public Task(ToolType toolType, Action<Task> taskCompleteAction)
         {
             _toolType = toolType;
             _taskCompleteAction = taskCompleteAction;
-            _activeObjectives = activeObjectives;
+            _activeObjectives = GetObjectivesInSceneByToolType(toolType);
 
             InitializeObjectives();
         }
@@ -73,6 +74,21 @@ namespace TaskSystem
             {
                 activeObjective.InitializeObjective(OnObjectiveCompletion);
             }
+        }
+        
+        /// <summary>
+        /// Get all Objectives in scene, by their ToolType
+        /// </summary>
+        /// <param name="toolType">ToolType to specify Objective</param>
+        /// <returns></returns>
+        private Objective[] GetObjectivesInSceneByToolType(ToolType toolType)
+        {
+            switch (toolType)
+            {
+                case ToolType.CANNON:
+                    return Object.FindObjectsOfType<KillObjective>();
+            }
+            return null;
         }
     }
 }

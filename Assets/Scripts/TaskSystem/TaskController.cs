@@ -1,7 +1,5 @@
 using Global;
-using TaskSystem.Objectives;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace TaskSystem
 {
@@ -35,29 +33,13 @@ namespace TaskSystem
         }
 
         /// <summary>
-        /// Get all Objectives in scene, by their ToolType
-        /// </summary>
-        /// <param name="toolType">ToolType to specify Objective</param>
-        /// <returns></returns>
-        private Objective[] GetObjectivesInSceneByToolType(ToolType toolType)
-        {
-            switch (toolType)
-            {
-                case ToolType.CANNON:
-                    return Object.FindObjectsOfType<KillObjective>();
-            }
-            return null;
-        }
-
-        /// <summary>
         /// Create Task for specific Tool
         /// </summary>
         /// <param name="toolType">ToolType to create Task</param>
         /// <returns></returns>
         private Task CreateTaskForTool(ToolType toolType)
         {
-            Objective[] objectives = GetObjectivesInSceneByToolType(toolType);
-            Task task = new Task(toolType, OnTaskCompletion, objectives);
+            Task task = new Task(toolType, OnTaskCompletion);
             return task;
         }
         
