@@ -14,8 +14,7 @@ namespace UI
         [SerializeField]
         // is an image that shows the character's life
         private Image progressImage;
-        
-        
+
         public void UpdateProgressBar(float currentProgress, float maxProgress)
         {
             progressImage.fillAmount = currentProgress / maxProgress;
