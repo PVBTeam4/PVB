@@ -19,13 +19,13 @@ namespace Tests.EditMode.ToolSystem
             // Check if InputManager's actions are not null. Input listener functions are registered
             Assert.IsNotNull(InputManager.ButtonInputAction);
             Assert.IsNotNull(InputManager.MouseMovementAction);
-            
+
             // Un-register input listener functions
             toolController.DeConstruct();
-            
+
             // Check if InputManager's actions are null. Input listener functions are not registered
-            Assert.IsNotNull(InputManager.ButtonInputAction);
-            Assert.IsNotNull(InputManager.MouseMovementAction);
+            Assert.IsNull(InputManager.ButtonInputAction);
+            Assert.IsNull(InputManager.MouseMovementAction);
         }
     }
 }
