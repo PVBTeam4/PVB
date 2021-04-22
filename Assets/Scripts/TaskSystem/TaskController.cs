@@ -1,5 +1,6 @@
 using Global;
 using UnityEngine;
+using System;
 
 namespace TaskSystem
 {
@@ -11,6 +12,10 @@ namespace TaskSystem
     {
         // Current active task
         private Task _activeTask;
+
+        // Action event that will be run when the Task is completed or failed
+        [SerializeField]
+        private Action<bool> TaskEndedAction;// True if completed, False if failed
 
         public TaskController(ToolType toolType)
         {
@@ -56,6 +61,9 @@ namespace TaskSystem
                 return;
             }
             
+            // Call the event that the player completed the Task
+            TaskEndedAction.Invoke(true);
+
             // Switch back to overworld
             SceneController.SwitchSceneToOverWorld();
             Debug.Log("Congrats, you completed the task!");
