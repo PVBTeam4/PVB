@@ -1,19 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 namespace Global
 {
-    /// <summary>
-    /// This Dictionary Class (extended from SerializableDictionary) is used to link Scenes to the ToolType enum
-    /// </summary>
-    [Serializable] public class SceneDictionary : SerializableDictionary<ToolType, SceneAsset> { }
+
 
     /// <summary>
     /// Holds functions to load scenes via the ToolType enum
