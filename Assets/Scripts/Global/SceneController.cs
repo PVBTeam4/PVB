@@ -24,12 +24,12 @@ namespace Global
         private static SceneController _instance;
 
         [SerializeField]
-        // The main scene where the game plays
-        private SceneAsset overWorldScene;
+        // Scene Dictionary for the overworld scenes
+        private SceneAsset[] OverworldSceneList = new SceneAsset[3];
 
         [SerializeField]
         // Used to link a Scene to their respective Type 
-        private SceneDictionary sceneDictionary;
+        private SceneDictionary TaskSceneDictionary;
 
         // Fire this event when you want to switch to the Over World Scene
         [SerializeField] private UnityEvent OverWorldEnterAction;
@@ -71,9 +71,9 @@ namespace Global
         }
 
         /// <summary>
-        /// Loads the scene that is put on "overWorldScene" 
+        /// Loads a scene from the overworldSceneDictionary based on the tooltype of the last Task
         /// </summary>
-        public static void SwitchSceneToOverWorld()
+        public static void SwitchSceneToOverWorld(ToolType toolType)
         {
             SceneController sceneController = _instance;
             if (sceneController == null)
@@ -81,16 +81,26 @@ namespace Global
                 Debug.LogError("SceneController is not yet loaded.");
                 return;
             }
-            // Check if the Scene exists
-            if (sceneController.overWorldScene)
+
+            int overworldIndex = (int)toolType + 1;
+
+            //Checks whether it has passed the last overworld
+            if (overworldIndex> 2)
             {
-                // Load the Scene using the Name of the SceneAsset
-                SceneManager.LoadScene(sceneController.overWorldScene.name);
+                Debug.Log("End of game");
+                return;
             }
-            else// Give an Error if the overWorldScene is not found
+
+            SceneAsset scene = sceneController.OverworldSceneList[overworldIndex];
+            if (!scene)
             {
-                Debug.LogError("OverWorld Scene is not found");
+                // Give an Error if the ToolType does not have a corresponding overworld scene
+                Debug.LogError("Overworld scene not found for ToolType: " + toolType);
+                return;
             }
+
+            // Load the Scene using the Name of the SceneAsset
+            SceneManager.LoadScene(scene.name);
         }
 
         /// <summary>
@@ -107,7 +117,7 @@ namespace Global
             }
             
             // Try and get the right Scene from the SceneDictionary
-            if (!sceneController.sceneDictionary.TryGetValue(toolType, out SceneAsset scene))
+            if (!sceneController.TaskSceneDictionary.TryGetValue(toolType, out SceneAsset scene))
             {
                 // Give an Error if the ToolType does not have a Scene
                 Debug.LogError("Scene not found for ToolType: " + toolType);
@@ -131,7 +141,7 @@ namespace Global
             // Check if the OverWorld needs to be loaded
             if (toolType == ToolType.NOONE)
             {
-                if (scene.name == overWorldScene.name)
+                if (OverworldSceneList[0])
                 {
                     // Fire the event that the player wants to enter the overworld
                     OverWorldEnterAction?.Invoke();
@@ -153,7 +163,7 @@ namespace Global
             // Try to compare the given Scene to the sceneDictionary what its ToolType is
             try
             {
-                return sceneDictionary.First(toolTypeScenePair => toolTypeScenePair.Value.name == scene.name).Key;
+                return TaskSceneDictionary.First(toolTypeScenePair => toolTypeScenePair.Value.name == scene.name).Key;
             }
             catch (InvalidOperationException)// If not found. Just return the default value
             {

@@ -55,10 +55,14 @@ namespace TaskSystem
                 Debug.LogError("Other task got completed, instead of the active one!");
                 return;
             }
-            
-            // Switch back to overworld
-            SceneController.SwitchSceneToOverWorld();
+
             Debug.Log("Congrats, you completed the task!");
+
+            //This is only temporarily set to the constant value of 'true'
+            bool taskSucceeded = true;
+
+            //If task completed, activate the results screen
+            GameManager.Instance.TaskResultScreen.ShowResultScreen(completedTask.GetToolType(), taskSucceeded);
         }
     }
 }
