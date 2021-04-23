@@ -8,26 +8,51 @@ namespace TaskSystem
 {
     public class ScreenActivator : MonoBehaviour
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        [SerializeField]
+        private bool ActivateOnWinState = true;
+
+        /// <summary>
+        /// 
+        /// </summary>
         private Action<bool> screenActivationAction;
+
+        private Canvas canvasComponent;
 
         void Awake()
         {
-            TaskController controller = GameObject.FindObjectOfType(typeof(TaskController));
+            // Get the Canvas component
+            canvasComponent = gameObject.GetComponent<Canvas>();
 
-            if (controller)
-            {
-                
-            }
+            // Subscribe the screen functions
+            TaskController.TaskEndedAction += EnableScreen;
+            TaskController.TaskEndedAction += DisableScreen;
         }
 
-        void EnableScreen()
+        /// <summary>
+        /// Enables the screen by enableing the Canvas component
+        /// </summary>
+        /// <param name="state"></param>
+        void EnableScreen(bool state)
         {
-            print("Enable SCREEN");
+            if (state != ActivateOnWinState)
+                return;
+
+            canvasComponent.enabled = true;
         }
 
-        void DisableScreen()
+        /// <summary>
+        /// Disables the screen by disableing the Canvas component
+        /// </summary>
+        /// <param name="state"></param>
+        void DisableScreen(bool state)
         {
-            print("Disable SCREEN");
+            if (state == ActivateOnWinState)
+                return;
+
+            canvasComponent.enabled = false;
         }
     }
 }

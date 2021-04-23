@@ -15,7 +15,7 @@ namespace TaskSystem
 
         // Action event that will be run when the Task is completed or failed
         [SerializeField]
-        private Action<bool> TaskEndedAction;// True if completed, False if failed
+        public static event Action<bool> TaskEndedAction;// True if completed, False if failed
 
         public TaskController(ToolType toolType)
         {
@@ -32,6 +32,9 @@ namespace TaskSystem
                 Debug.LogError("There is no active task, to cancel.");
                 return;
             }
+
+            // Call the event that the player lost the Task
+            //TaskEndedAction?.Invoke(false);
 
             _activeTask = null;
             Debug.Log("Active Task has been cancelled.");
@@ -60,9 +63,9 @@ namespace TaskSystem
                 Debug.LogError("Other task got completed, instead of the active one!");
                 return;
             }
-            
+
             // Call the event that the player completed the Task
-            TaskEndedAction.Invoke(true);
+            TaskEndedAction?.Invoke(true);
 
             // Switch back to overworld
             SceneController.SwitchSceneToOverWorld();

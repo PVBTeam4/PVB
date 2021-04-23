@@ -37,6 +37,8 @@ namespace Global
         // Fire this event when you want to switch to a Tool Scene
         [SerializeField] private UnityEvent<ToolType> TaskModeEnterAction;
 
+        [SerializeField] private static float sceneTransitionTime = 3f;
+
         /// <summary>
         /// This runs before the Start method
         /// </summary>
@@ -85,7 +87,8 @@ namespace Global
             if (sceneController.overWorldScene)
             {
                 // Load the Scene using the Name of the SceneAsset
-                SceneManager.LoadScene(sceneController.overWorldScene.name);
+                IEnumerator coroutine = sceneController.TimerToNextScene(sceneController.overWorldScene.name);
+                sceneController.StartCoroutine(coroutine);
             }
             else// Give an Error if the overWorldScene is not found
             {
@@ -113,9 +116,10 @@ namespace Global
                 Debug.LogError("Scene not found for ToolType: " + toolType);
                 return;
             }
-            
+
             // Load the Scene using the Name of the SceneAsset
-            SceneManager.LoadScene(scene.name);
+            IEnumerator coroutine = sceneController.TimerToNextScene(scene.name);
+            sceneController.StartCoroutine(coroutine);
         }
 
         /// <summary>
@@ -159,6 +163,27 @@ namespace Global
             {
                 return ToolType.NOONE;
             }
+        }
+
+        /// <summary>
+        /// Will load the next scene in after the given time
+        /// </summary>
+        /// <param name="nextSceneName">Secconds to wait</param>
+        /// <returns></returns>
+        private IEnumerator TimerToNextScene(SceneAsset nextSceneAsset)
+        {
+            // Check if the scene can be loaded
+            if (!Application.CanStreamedLevelBeLoaded(nextSceneAsset.name))
+            {
+                Debug.LogError("nextSceneAsset, does not exist. Cannot load next scene");
+                yield return null;
+            }
+
+            // Wait for the given amount of time
+            yield return new WaitForSeconds(sceneTransitionTime);
+
+            // Load the scene
+            SceneManager.LoadScene(nextSceneAsset.name);
         }
     }
 }
