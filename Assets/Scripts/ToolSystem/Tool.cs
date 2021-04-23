@@ -24,6 +24,6 @@ namespace ToolSystem
         /// <summary>
         /// Abstract method to describe what happens when the mouse is moved around
         /// </summary>
-        public abstract void MoveTarget(Vector3 location);
+        public abstract void MoveTarget(Vector3 mousePosition);
     }
 }

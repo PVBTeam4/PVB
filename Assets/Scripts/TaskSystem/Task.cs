@@ -19,7 +19,7 @@ namespace TaskSystem
         private readonly Action<Task> _taskCompleteAction;
         
         // Array of all active Objectives (not yet completed)
-        private Objective[] _activeObjectives;
+        public Objective[] ActiveObjectives { get; private set; }
 
         /// <summary>
         /// Constructor of Task
@@ -30,7 +30,7 @@ namespace TaskSystem
         {
             _toolType = toolType;
             _taskCompleteAction = taskCompleteAction;
-            _activeObjectives = GetObjectivesInSceneByToolType(toolType);
+            ActiveObjectives = GetObjectivesInSceneByToolType(toolType);
 
             InitializeObjectives();
         }
@@ -45,11 +45,11 @@ namespace TaskSystem
         public void OnObjectiveCompletion(Objective completedObjective)
         {
             // Remove objective from array
-            _activeObjectives = _activeObjectives.Where(objective => !completedObjective.Equals(objective)).ToArray();
+            ActiveObjectives = ActiveObjectives.Where(objective => !completedObjective.Equals(objective)).ToArray();
 
             Debug.Log("Objective complete");
             
-            if (_activeObjectives.Length == 0)
+            if (ActiveObjectives.Length == 0)
             {
                 OnTaskCompletion();
             }
@@ -70,7 +70,7 @@ namespace TaskSystem
         /// </summary>
         private void InitializeObjectives()
         {
-            foreach (Objective activeObjective in _activeObjectives)
+            foreach (Objective activeObjective in ActiveObjectives)
             {
                 activeObjective.InitializeObjective(OnObjectiveCompletion);
             }

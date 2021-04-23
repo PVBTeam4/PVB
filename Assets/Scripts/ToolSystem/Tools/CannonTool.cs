@@ -11,10 +11,9 @@ namespace ToolSystem.Tools
         // Prefab of the bullet projectile
         [SerializeField]
         private GameObject bullet;
-
-        [SerializeField]
+        
         //the bottom of the Gun 
-        private Transform Gunfloor;
+        private Transform gunFloor;
 
         // Spawnlocation of the projectile
         [SerializeField]
@@ -70,20 +69,42 @@ namespace ToolSystem.Tools
         /// <summary>
         /// Rotate the weapon based on the mouse position
         /// </summary>
-        /// <param name="location">the mouse location</param>
-        public override void MoveTarget(Vector3 location)
+        /// <param name="mousePosition">the mouse location</param>
+        public override void MoveTarget(Vector3 mousePosition)
         {
-            Vector3 mouseToWorld = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition - new Vector3(0, 0, Camera.main.transform.position.z));
+            MoveGun(mousePosition, Camera.main);
+        }
+
+        public void MoveGun(Vector3 mousePosition, Camera cameraForScreenPosition)
+        {
+            Vector2 angles = CalculateAngles(mousePosition, cameraForScreenPosition);
+            float angleHorizon = angles.x;
+            float angleVertical = angles.y;
+            
+            //rotate the gameobject based on the angleHorizon and angleVertical
+            transform.rotation = Quaternion.Euler(-angleVertical, angleHorizon, 0f);
+            gunFloor.rotation = Quaternion.Euler(0f, angleHorizon, 0f);
+        }
+
+        /// <summary>
+        /// Calculate angles to mouse position
+        /// </summary>
+        /// <param name="mousePositionOnScreen">Mouse position on screen</param>
+        /// <param name="cameraForScreenPosition">Camera for screen position</param>
+        /// <returns>horizontal (X) & vertical (Y) angles</returns>
+        private Vector2 CalculateAngles(Vector3 mousePositionOnScreen, Camera cameraForScreenPosition)
+        {
+            Vector3 mouseToWorld = cameraForScreenPosition.ScreenToWorldPoint(mousePositionOnScreen - new Vector3(0, 0, cameraForScreenPosition.transform.position.z));
             //subtract the distance between the current gameObject and the camera to the initial mouse position:
-            Debug.DrawLine(bulletSpawnLocation.position, mouseToWorld, Color.red);
-            Vector3 difference = mouseToWorld - bulletSpawnLocation.position;
+            Vector3 bulletSpawnPosition = bulletSpawnLocation.position;
+            Debug.DrawLine(bulletSpawnPosition, mouseToWorld, Color.red);
+            Vector3 difference = mouseToWorld - bulletSpawnPosition;
             // caculate angleHorizon between z and x ass
             float angleHorizon = Mathf.Atan(difference.x / difference.z) * Mathf.Rad2Deg;
             // caculate angleVertical between z and y ass
             float angleVertical = Mathf.Atan(difference.y / difference.z) * Mathf.Rad2Deg;
-            //rotate the gameobject based on the angleHorizon and angleVertical
-            transform.rotation = Quaternion.Euler(-angleVertical, angleHorizon, 0f);
-            Gunfloor.rotation = Quaternion.Euler(0f, angleHorizon, 0f);
+
+            return new Vector2(angleHorizon, angleVertical);
         }
         
         /// <summary>

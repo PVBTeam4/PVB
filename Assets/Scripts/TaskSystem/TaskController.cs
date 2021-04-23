@@ -10,11 +10,11 @@ namespace TaskSystem
     public class TaskController
     {
         // Current active task
-        private Task _activeTask;
+        public readonly Task ActiveTask;
 
         public TaskController(ToolType toolType)
         {
-            _activeTask = CreateTaskForTool(toolType);
+            ActiveTask = CreateTaskForTool(toolType);
         }
 
         /// <summary>
@@ -22,13 +22,12 @@ namespace TaskSystem
         /// </summary>
         public void CancelActiveTask()
         {
-            if (_activeTask == null)
+            if (ActiveTask == null)
             {
                 Debug.LogError("There is no active task, to cancel.");
                 return;
             }
-
-            _activeTask = null;
+            
             Debug.Log("Active Task has been cancelled.");
         }
 
@@ -50,7 +49,7 @@ namespace TaskSystem
         private void OnTaskCompletion(Task completedTask)
         {
             Debug.Log("Task completed");
-            if (!completedTask.Equals(_activeTask))
+            if (!completedTask.Equals(ActiveTask))
             {
                 Debug.LogError("Other task got completed, instead of the active one!");
                 return;
