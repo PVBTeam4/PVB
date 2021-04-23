@@ -87,8 +87,8 @@ namespace Global
             if (sceneController.overWorldScene)
             {
                 // Load the Scene using the Name of the SceneAsset
-                IEnumerator coroutine = sceneController.TimerToNextScene(sceneController.overWorldScene.name);
-                sceneController.StartCoroutine(coroutine);
+                //IEnumerator coroutine = sceneController.TimerToNextScene(sceneController.overWorldScene.name);
+                //sceneController.StartCoroutine(coroutine);
             }
             else// Give an Error if the overWorldScene is not found
             {
@@ -118,8 +118,8 @@ namespace Global
             }
 
             // Load the Scene using the Name of the SceneAsset
-            IEnumerator coroutine = sceneController.TimerToNextScene(scene.name);
-            sceneController.StartCoroutine(coroutine);
+            //IEnumerator coroutine = sceneController.TimerToNextScene(scene.name);
+            //sceneController.StartCoroutine(coroutine);
         }
 
         /// <summary>
