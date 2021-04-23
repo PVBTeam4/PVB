@@ -8,12 +8,16 @@ using UnityEngine.SceneManagement;
 namespace Global
 {
 
+    [Serializable]
+    public class SceneDictionary : SerializableDictionary<ToolType, SceneAsset> { }
 
     /// <summary>
     /// Holds functions to load scenes via the ToolType enum
     /// </summary>
     public class SceneController : MonoBehaviour
     {
+        
+
         // Instance of this class
         private static SceneController _instance;
 
