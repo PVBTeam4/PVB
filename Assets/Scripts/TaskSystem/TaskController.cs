@@ -56,13 +56,8 @@ namespace TaskSystem
                 return;
             }
 
-            Debug.Log("Congrats, you completed the task!");
-
-            //This is only temporarily set to the constant value of 'true'
-            bool taskSucceeded = true;
-
-            //If task completed, activate the results screen
-            GameManager.Instance.TaskResultScreen.ShowResultScreen(completedTask.GetToolType(), taskSucceeded);
+           //Switch back to overworld
+            SceneController.SwitchSceneToOverWorld(ToolType.CRANE); //still set to a constant for now
         }
     }
 }

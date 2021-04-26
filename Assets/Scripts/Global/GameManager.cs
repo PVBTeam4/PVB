@@ -13,7 +13,6 @@ namespace Global
         // These
         public ToolController ToolController;
         public TaskController TaskController;
-        public TaskResultScreen TaskResultScreen;
 
         // Private variable to hold this instance of the GameManager Class
         private static GameManager _instance;
