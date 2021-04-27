@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: 1981f713a94c29b47b5c81890685712e, type: 3}
+  - {fileID: 2100000, guid: 4739f590eee0d5447af290d02d18e2bc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 602874108392844005, guid: 56bbbfe9370c0b5498bec51509137700, type: 3}
+  Gunfloor: {fileID: 0}
   bulletSpawnLocation: {fileID: 7330663560881264404}
   rateOfFire: 0
   bulletAccuracy: 0
