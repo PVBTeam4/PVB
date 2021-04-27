@@ -10,7 +10,7 @@ public class Fade : MonoBehaviour
     private void Start()
     {
         SceneManager.sceneUnloaded += OnSceneUnloaded;
-        Debug.Log("Start: SceneLoaded1");
+        //Debug.Log("Start: SceneLoaded1");
     }
     // Update is called once per frame
     void Update()
@@ -29,7 +29,7 @@ public class Fade : MonoBehaviour
     }
     private void OnSceneUnloaded(Scene current)
     {
-        Debug.Log("OnSceneUnloaded: " + current);
+        //Debug.Log("OnSceneUnloaded: " + current);
         animator.SetTrigger("FadeIn");
 
 

@@ -37,7 +37,7 @@ namespace TaskSystem
             //TaskEndedAction?.Invoke(false);
 
             _activeTask = null;
-            Debug.Log("Active Task has been cancelled.");
+            //Debug.Log("Active Task has been cancelled.");
         }
 
         /// <summary>
@@ -55,9 +55,9 @@ namespace TaskSystem
         /// Will be called when Task is completed
         /// </summary>
         /// <param name="completedTask">Task that is completed</param>
-        private void OnTaskCompletion(Task completedTask)
+        private void OnTaskCompletion(Task completedTask, bool won)
         {
-            Debug.Log("Task completed");
+            //Debug.Log("Task completed");
             if (!completedTask.Equals(_activeTask))
             {
                 Debug.LogError("Other task got completed, instead of the active one!");
@@ -65,11 +65,11 @@ namespace TaskSystem
             }
 
             // Call the event that the player completed the Task
-            TaskEndedAction?.Invoke(true);
+            TaskEndedAction?.Invoke(won);
 
             // Switch back to overworld
             SceneController.SwitchSceneToOverWorld();
-            Debug.Log("Congrats, you completed the task!");
+            //Debug.Log("Congrats, you completed the task!");
         }
     }
 }

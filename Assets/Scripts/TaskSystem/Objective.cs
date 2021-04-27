@@ -9,13 +9,13 @@ namespace TaskSystem
     public abstract class Objective : MonoBehaviour
     {
         // Action that will let Task know, Objective is completed
-        private Action<Objective> _completeObjectiveAction;
+        private Action<Objective, bool> _completeObjectiveAction;
 
         /// <summary>
         /// Initializes Objective
         /// FIRST THING TO BE CALLED BY TASK
         /// </summary>
-        public void InitializeObjective(Action<Objective> completeObjectiveAction)
+        public void InitializeObjective(Action<Objective, bool> completeObjectiveAction)
         {
             _completeObjectiveAction = completeObjectiveAction;
         }
@@ -23,7 +23,7 @@ namespace TaskSystem
         /// <summary>
         /// Complete Objective
         /// </summary>
-        protected void CompleteObjective()
+        protected void CompleteObjective(bool won)
         {
             if (_completeObjectiveAction == null)
             {
@@ -31,7 +31,7 @@ namespace TaskSystem
                 return;
             }
             
-            _completeObjectiveAction.Invoke(this);
+            _completeObjectiveAction.Invoke(this, won);
         }
     }
 }

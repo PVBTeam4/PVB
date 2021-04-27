@@ -29,6 +29,8 @@ namespace TaskSystem
 
         void TaskEnded(bool state)
         {
+            print("Task ended");
+
             if (state)// Success
             {
                 EnableScreen(taskSuccessScreen);
@@ -44,7 +46,7 @@ namespace TaskSystem
         /// </summary>
         void EnableScreen(GameObject screenObject)
         {
-            if (screenObject != null)
+            if (screenObject == null)
                 return;
 
             screenObject.SetActive(true);
