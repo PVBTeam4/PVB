@@ -59,5 +59,13 @@ namespace Global
                 TaskController = null;
             }
         }
+
+        private void Update() {
+            Test();
+        }
+
+        public void Test() {
+            
+        }
     }
 }

@@ -60,7 +60,7 @@ namespace TaskSystem.Objectives
             if (_currentHealth == 0)
             {
                 onDeath?.Invoke();
-                CompleteObjective();
+                CompleteObjective(true);
             }
         }
 
