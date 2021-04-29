@@ -15,4 +15,3 @@ namespace Global
         WATER_CANNON
     }
 }
-
