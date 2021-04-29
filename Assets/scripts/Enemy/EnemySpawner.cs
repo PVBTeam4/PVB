@@ -15,7 +15,12 @@ public class EnemySpawner : MonoBehaviour
 
     //hold all Enemies
     private GameObject EnemyHolderObject;
-    private int currentSpawnIndex, previousSpawnIndex, count;
+    private int currentSpawnIndex, previousSpawnIndex, enemyCount;
+
+    [SerializeField]
+    private int MaxSpawn = 7;
+    [SerializeField]
+    private int SpawnTime = 7;
 
     private void Awake()
     {
@@ -32,7 +37,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         GetAllChildrenOfThisObject();
-        InvokeRepeating("SpawnEnemies", 1, 7);
+        InvokeRepeating("SpawnEnemies", 1, SpawnTime);
 
     }
 
@@ -44,7 +49,13 @@ public class EnemySpawner : MonoBehaviour
         var transforms = new HashSet<Transform>(GetComponentsInChildren<Transform>(true));
         transforms.Remove(transform);
         SpawnPoints = transforms.ToArray();
-        count = SpawnPoints.Length;
+
+    }
+
+    private void Update()
+    {   
+        if(enemyCount >= MaxSpawn)
+            CancelInvoke("SpawnEnemies");
 
     }
 
@@ -53,15 +64,14 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     private void SpawnEnemies()
     {
-        currentSpawnIndex = Random.Range(0, count);
-        print(currentSpawnIndex);
+        currentSpawnIndex = Random.Range(0, SpawnPoints.Length);
         if(currentSpawnIndex == previousSpawnIndex) 
         {
             SpawnEnemies();
             return;
         }
         previousSpawnIndex = currentSpawnIndex;
-
+        enemyCount++;
         Instantiate(EnemyPrefab, SpawnPoints[currentSpawnIndex].position, EnemyPrefab.transform.rotation).transform.parent = EnemyHolderObject.transform;
 
     }
