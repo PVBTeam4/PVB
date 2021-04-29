@@ -1,11 +1,8 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TaskSystem;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace TaskSystem
+namespace UI
 {
     public class TaskResultScreen : MonoBehaviour
     {
@@ -24,14 +21,12 @@ namespace TaskSystem
             DisableScreens();
 
             // 
-            SceneManager.sceneLoaded += DisableScreensBySceneLoaded;
+            // SceneManager.sceneLoaded += DisableScreensBySceneLoaded;
         }
 
-        void TaskEnded(bool state)
+        void TaskEnded(bool isTaskSuccess)
         {
-            print("Task ended");
-
-            if (state)// Success
+            if (isTaskSuccess)// Success
             {
                 EnableScreen(taskSuccessScreen);
             }

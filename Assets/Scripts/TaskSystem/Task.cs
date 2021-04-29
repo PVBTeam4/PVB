@@ -16,7 +16,7 @@ namespace TaskSystem
         private readonly ToolType _toolType;
         
         // Action that will let TaskController know, Task is completed
-        private readonly Action<Task, bool> _taskCompleteAction;
+        private readonly Action<Task> _taskCompleteAction;
         
         // Array of all active Objectives (not yet completed)
         private Objective[] _activeObjectives;
@@ -26,7 +26,7 @@ namespace TaskSystem
         /// </summary>
         /// <param name="toolType">ToolType used to complete Task</param>
         /// <param name="taskCompleteAction">Action for Task completion</param>
-        public Task(ToolType toolType, Action<Task, bool> taskCompleteAction)
+        public Task(ToolType toolType, Action<Task> taskCompleteAction)
         {
             _toolType = toolType;
             _taskCompleteAction = taskCompleteAction;
@@ -42,7 +42,7 @@ namespace TaskSystem
         /// Completing Task;
         /// </summary>
         /// <param name="completedObjective">Objective that is completed</param>
-        public void OnObjectiveCompletion(Objective completedObjective, bool won)
+        public void OnObjectiveCompletion(Objective completedObjective)
         {
             // Remove objective from array
             _activeObjectives = _activeObjectives.Where(objective => !completedObjective.Equals(objective)).ToArray();
@@ -51,7 +51,7 @@ namespace TaskSystem
             
             if (_activeObjectives.Length == 0)
             {
-                OnTaskCompletion(won);
+                OnTaskCompletion();
             }
         }
 
@@ -59,9 +59,9 @@ namespace TaskSystem
         /// Call TaskComplete action, to let TaskController know
         /// Task is completed.
         /// </summary>
-        private void OnTaskCompletion(bool won)
+        private void OnTaskCompletion()
         {
-            _taskCompleteAction?.Invoke(this, won);
+            _taskCompleteAction?.Invoke(this);
         }
 
         /// <summary>

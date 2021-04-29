@@ -17,8 +17,6 @@ namespace Global
     /// </summary>
     public class SceneController : MonoBehaviour
     {
-        
-
         // Instance of this class
         private static SceneController _instance;
 
@@ -36,7 +34,7 @@ namespace Global
         // Fire this event when you want to switch to a Tool Scene
         [SerializeField] private UnityEvent<ToolType> TaskModeEnterAction;
 
-        [SerializeField] private static float sceneTransitionTime = 3f;
+        [SerializeField] private float sceneTransitionTime = 1f;
 
         /// <summary>
         /// This runs before the Start method

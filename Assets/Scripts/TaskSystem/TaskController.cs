@@ -14,7 +14,6 @@ namespace TaskSystem
         private Task _activeTask;
 
         // Action event that will be run when the Task is completed or failed
-        [SerializeField]
         public static event Action<bool> TaskEndedAction;// True if completed, False if failed
 
         public TaskController(ToolType toolType)
@@ -23,21 +22,12 @@ namespace TaskSystem
         }
 
         /// <summary>
-        /// Cancel the current Task
+        /// Cancel the current Task.
+        /// Will send FAIL event
         /// </summary>
         public void CancelActiveTask()
         {
-            if (_activeTask == null)
-            {
-                Debug.LogError("There is no active task, to cancel.");
-                return;
-            }
-
-            // Call the event that the player lost the Task
-            //TaskEndedAction?.Invoke(false);
-
-            _activeTask = null;
-            //Debug.Log("Active Task has been cancelled.");
+            HandleTaskResult(false);
         }
 
         /// <summary>
@@ -55,21 +45,27 @@ namespace TaskSystem
         /// Will be called when Task is completed
         /// </summary>
         /// <param name="completedTask">Task that is completed</param>
-        private void OnTaskCompletion(Task completedTask, bool won)
+        private void OnTaskCompletion(Task completedTask)
         {
-            //Debug.Log("Task completed");
             if (!completedTask.Equals(_activeTask))
             {
                 Debug.LogError("Other task got completed, instead of the active one!");
                 return;
             }
+            
+            HandleTaskResult(true);
+        }
+
+        private void HandleTaskResult(bool isTaskCompleted)
+        {
+            // Reset active task
+            _activeTask = null;
 
             // Call the event that the player completed the Task
-            TaskEndedAction?.Invoke(won);
+            TaskEndedAction?.Invoke(isTaskCompleted);
 
-            // Switch back to overworld
+            // Switch back to overWorld
             SceneController.SwitchSceneToOverWorld();
-            //Debug.Log("Congrats, you completed the task!");
         }
     }
 }
