@@ -1,20 +1,13 @@
 using System;
 using System.Linq;
 using Global;
-using Global.SerializedDictionary;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 namespace SceneSystem
 {
-
-    /// <summary>
-    /// This Dictionary Class (extended from SerializableDictionary) is used to link Scenes to the ToolType enum
-    /// </summary>
-    [Serializable]
-    public class SceneDictionary : SerializableDictionary<ToolType, SceneAssetObject> { }
 
     /// <summary>
     /// Holds functions to load scenes via the ToolType enum
@@ -30,7 +23,7 @@ namespace SceneSystem
 
         [SerializeField]
         // Used to link a Scene to their respective Type 
-        private SceneDictionary sceneDictionary;
+        private SceneAssetObject[] taskSceneArray;
 
         // Fire this event when you want to switch to the Over World Scene
         [SerializeField] private UnityEvent OverWorldEnterAction;
@@ -106,9 +99,9 @@ namespace SceneSystem
                 Debug.LogError("SceneController is not yet loaded.");
                 return;
             }
-            
+
             // Try and get the right Scene from the SceneDictionary
-            if (!sceneController.sceneDictionary.TryGetValue(toolType, out SceneAssetObject scene))
+            if (!sceneController.TryGetSceneAssetByToolType(toolType, out SceneAssetObject scene))
             {
                 // Give an Error if the ToolType does not have a Scene
                 Debug.LogError("Scene not found for ToolType: " + toolType);
@@ -154,12 +147,19 @@ namespace SceneSystem
             // Try to compare the given Scene to the sceneDictionary what its ToolType is
             try
             {
-                return sceneDictionary.First(toolTypeScenePair => toolTypeScenePair.Value.SceneName == scene.name).Key;
+                return taskSceneArray.First(sceneAssetObject => sceneAssetObject.SceneName == scene.name).ToolType;
             }
             catch (InvalidOperationException)// If not found. Just return the default value
             {
                 return ToolType.NOONE;
             }
+        }
+
+        private bool TryGetSceneAssetByToolType(ToolType toolType, out SceneAssetObject sceneAssetObject)
+        {
+            sceneAssetObject = taskSceneArray.FirstOrDefault(scene => scene.ToolType == toolType);
+            Debug.Log(sceneAssetObject);
+            return sceneAssetObject != null;
         }
     }
 }

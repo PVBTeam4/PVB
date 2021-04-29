@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ShootingScene
   m_EditorClassIdentifier: 
   SceneName: ShootingScene
+  ToolType: 2

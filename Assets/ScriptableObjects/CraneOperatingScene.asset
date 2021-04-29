@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: CraneOperatingScene
   m_EditorClassIdentifier: 
   SceneName: CraneOperatingScene
+  ToolType: 3

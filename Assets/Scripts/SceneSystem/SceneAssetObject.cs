@@ -1,3 +1,4 @@
+using Global;
 using UnityEngine;
 
 namespace SceneSystem
@@ -6,5 +7,6 @@ namespace SceneSystem
     public class SceneAssetObject : ScriptableObject
     {
         public string SceneName;
+        public ToolType ToolType;
     }
 }

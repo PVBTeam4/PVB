@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: ExtinguishingScene
   m_EditorClassIdentifier: 
   SceneName: ExtinguishingScene
+  ToolType: 1
