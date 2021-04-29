@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b16d1754757ff1469daa16f380240a5, type: 3}
   m_Name: ExtinguishingScene
   m_EditorClassIdentifier: 
-  SceneName: ExtinguishingScene
-  ToolType: 1
+  sceneName: ExtinguishingScene
+  toolType: 1
