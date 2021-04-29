@@ -19,14 +19,6 @@ namespace Input
         public static Action<Vector3> MouseMovementAction;
 
         /// <summary>
-        /// Will make the InputManager's gameObject un-destroyable on load
-        /// </summary>
-        private void OnEnable()
-        {
-            DontDestroyOnLoad(gameObject);
-        }
-
-        /// <summary>
         /// Will handle the button & mouse movement input
         /// </summary>
         private void Update()

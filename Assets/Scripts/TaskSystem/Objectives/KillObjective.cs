@@ -53,14 +53,14 @@ namespace TaskSystem.Objectives
             _currentHealth -= damage;
             // Max currentHealth to 0, so we don't have negative health
             _currentHealth = Mathf.Max(_currentHealth, 0);
-            
+
             onDamage?.Invoke(_currentHealth, maxHealth);
             
             // Complete objective, if health is zero
             if (_currentHealth == 0)
             {
                 onDeath?.Invoke();
-                CompleteObjective();
+                CompleteObjective(true);
             }
         }
 
