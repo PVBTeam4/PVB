@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Testing/TaskModeScene.unity
-    guid: ab6488e1efd07b84b91f5c938f5d05a8
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Tasks/ShootingScene.unity
     guid: e349a7efefb927642819fec113dcf19d
@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tasks/CraneOperatingScene.unity
     guid: 9664d8cea34270642bc248500c796e10
+  - enabled: 1
+    path: Assets/Scenes/OverWorld/Overworld2.unity
+    guid: 02b0db78e088e544694fecbee2205d84
+  - enabled: 1
+    path: Assets/Scenes/OverWorld/Overworld3.unity
+    guid: 4e04f5701b205a04ab3004cf8c5fd759
   m_configObjects: {}

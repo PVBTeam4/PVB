@@ -71,8 +71,9 @@ namespace Global
         }
 
         /// <summary>
-        /// Loads a scene from the overworldSceneDictionary based on the tooltype of the last Task
+        /// Loads a new overworld scene based on the tooltype of the last task
         /// </summary>
+        /// <param name="toolType"></param>
         public static void SwitchSceneToOverWorld(ToolType toolType)
         {
             SceneController sceneController = _instance;
@@ -82,19 +83,19 @@ namespace Global
                 return;
             }
 
-            int overworldIndex = (int)toolType + 1;
+            int overworldIndex = (int)toolType;
 
-            //Checks whether it has passed the last overworld
-            if (overworldIndex> 2)
+            //Checks if it has already reached the last overworld
+            if (overworldIndex > 2)
             {
                 Debug.Log("End of game");
                 return;
             }
 
+            // Gives an Error if the ToolType does not have a corresponding overworld scene
             SceneAsset scene = sceneController.OverworldSceneList[overworldIndex];
             if (!scene)
             {
-                // Give an Error if the ToolType does not have a corresponding overworld scene
                 Debug.LogError("Overworld scene not found for ToolType: " + toolType);
                 return;
             }

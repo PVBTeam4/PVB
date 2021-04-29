@@ -7,12 +7,12 @@ namespace Global
     {
         // Default type, dont use it
         NOONE,
-        // Indicates Water Cannon tool
-        WATER_CANNON,
         // Indicates Cannon tool
         CANNON,
         // Indicates Crane tool
-        CRANE
+        CRANE,
+        // Indicates Water Cannon tool
+        WATER_CANNON
     }
 }
 

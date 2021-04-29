@@ -1,5 +1,6 @@
 using Global;
 using UnityEngine;
+using System;
 
 namespace TaskSystem
 {
@@ -11,6 +12,9 @@ namespace TaskSystem
     {
         // Current active task
         private Task _activeTask;
+
+        // Fires once a task has been completed
+        public event Action<ToolType, bool> EndOfTask;
 
         public TaskController(ToolType toolType)
         {
@@ -56,8 +60,8 @@ namespace TaskSystem
                 return;
             }
 
-           //Switch back to overworld
-            SceneController.SwitchSceneToOverWorld(ToolType.CRANE); //still set to a constant for now
+            //The 'true' here means that right now, the task will always be completed succesfully. This needs to be changed later.
+            EndOfTask.Invoke(_activeTask.GetToolType(), true);
         }
     }
 }
