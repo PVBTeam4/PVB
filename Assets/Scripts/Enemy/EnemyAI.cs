@@ -87,8 +87,7 @@ public class EnemyAI : MonoBehaviour
     private void UpdateNavMeshDestination()
     {
         // Make sure the Y-Axis does not get affected
-        Vector3 nextPos = navMeshAgent.nextPosition;
-        Vector3 correctPos = nextPos;
+        Vector3 correctPos = navMeshAgent.nextPosition;
         correctPos.y = transform.position.y;
 
         // Update the position of this object to that of the 
