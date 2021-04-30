@@ -11,56 +11,87 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     // speed of Enemy 
     private float speed = 2f;
+
     [SerializeField]
     // damage when collide target
-    private float damage;
+    private float damage = 1;
 
     [SerializeField]
-    // Transform of the destination
-    private Transform _destination;
+    // The tag of the target. To get the Transform from
+    private string targetTag = "Player";
 
-    private NavMeshAgent _navMeshAgent;
+    // Transform component of the target
+    private Transform targetTransform;
 
-    private void Start()
+    // NavMeshAgent component of this object
+    private NavMeshAgent navMeshAgent;
+
+    // This is run befor the Start function
+    private void Awake()
     {
-        // Get the components used for the navigation
-        _navMeshAgent = GetComponent<NavMeshAgent>();
-
-        // Start the navigation logic
-        SetDestination();
+        CheckAndGetComponents();
     }
 
     /// <summary>
-    /// Starts the navigation logic. Will move towards the target the moment its called
+    /// Checks if the needed components exists. 
+    /// If so set set the targetTransform & call StartMovementTowardsTarget. 
+    /// If not log error
     /// </summary>
-    private void SetDestination()
+    private void CheckAndGetComponents()
     {
-        // Check if the navAgent exists, if not log error
-        if (_navMeshAgent == null)
+        // Check and Get the NavMeshAgent
+        navMeshAgent = GetComponent<NavMeshAgent>();
+
+        if (navMeshAgent == null)
         {
-            Debug.LogError("navAgent component not attached" + gameObject.name);
+            Debug.LogError("NavMeshAgent component not attached" + gameObject.name);
+            return;
         }
-        else// Run the function to move towards the destination
+
+        // Find the gameobject with the targetTag
+        GameObject _targetObject = GameObject.FindWithTag(targetTag);
+
+        // Check if the destinationObject exists, if not log error
+        if (_targetObject == null)
         {
-            BeginMovingTowardsDestination(_destination);
+            Debug.LogError("Target object: " + targetTag + ", has not been found");
+            return;
         }
+
+        // Set the target transform to that of the target transform component
+        targetTransform = _targetObject.transform;
+
+        // Start movement
+        StartMovementTowardsTarget();
     }
 
     /// <summary>
-    /// Will move this object towards the given destination using the NavMeshAgent
+    /// Start moving towards the target via the NavMeshAgent component
     /// </summary>
-    /// <param name="destinationVector">Transform Of the target the object needs to move towards</param>
-    private void BeginMovingTowardsDestination(Transform _destinationTransform)
+    private void StartMovementTowardsTarget()
     {
-        // Check if the destination exists, log error if not
-        if (_destinationTransform == null)
-        {
-            Debug.LogError("Destination Transform does not exist");
-        }
-        else// Run the destination logic
-        {
-            // Move via the NavMeshAgent towards the destinationVector
-            _navMeshAgent.SetDestination(_destinationTransform.position);
-        }
+        // Make sure the Y-Axis does not get affected
+        Vector3 _targetPosition = targetTransform.position;
+        _targetPosition.y = transform.position.y;
+
+        // Move via the NavMeshAgent towards the targetPosition
+        navMeshAgent.SetDestination(_targetPosition);
+
+        // Create a "FixedUpdate" like loop for the "UpdateNavMeshDestination" function
+        InvokeRepeating("UpdateNavMeshDestination", 0f, Time.fixedDeltaTime);
+    }
+
+    /// <summary>
+    /// This will make sure the Y-Axis does not get affected
+    /// </summary>
+    private void UpdateNavMeshDestination()
+    {
+        // Make sure the Y-Axis does not get affected
+        Vector3 nextPos = navMeshAgent.nextPosition;
+        Vector3 correctPos = nextPos;
+        correctPos.y = transform.position.y;
+
+        // Update the position of this object to that of the 
+        transform.position = correctPos;
     }
 }
