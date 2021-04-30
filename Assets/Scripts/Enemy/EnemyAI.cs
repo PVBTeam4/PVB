@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 /// <summary>
-/// this class causes the enemey to move forward to the target
-///  before it moves it rotate to the target
-/// it set the enemy as the same y position of the target
+/// This class causes the enemy to move towards the target using the NavMeshAgent
 /// </summary>
 public class EnemyAI : MonoBehaviour
 {
@@ -14,51 +14,53 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     // damage when collide target
     private float damage;
+
     [SerializeField]
-    //get transform of target
-    private Transform targetTransform;
+    // Transform of the destination
+    private Transform _destination;
 
-    // Start is called before the first frame update
-    /// <summary>
-    /// call this functions once
-    /// </summary>
-    private void Awake()
+    private NavMeshAgent _navMeshAgent;
+
+    private void Start()
     {
-        SetEnemyPosition();
-        RotateToTarget();
+        // Get the components used for the navigation
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+
+        // Start the navigation logic
+        SetDestination();
     }
 
     /// <summary>
-    /// set the enemy's current y position to be the same as the target
+    /// Starts the navigation logic. Will move towards the target the moment its called
     /// </summary>
-    private void SetEnemyPosition()
+    private void SetDestination()
     {
-        transform.position = new Vector3(transform.position.x, targetTransform.position.y, transform.position.z);
+        // Check if the navAgent exists, if not log error
+        if (_navMeshAgent == null)
+        {
+            Debug.LogError("navAgent component not attached" + gameObject.name);
+        }
+        else// Run the function to move towards the destination
+        {
+            BeginMovingTowardsDestination(_destination);
+        }
     }
 
     /// <summary>
-    /// Rotates to the target
+    /// Will move this object towards the given destination using the NavMeshAgent
     /// </summary>
-    private void RotateToTarget()
+    /// <param name="destinationVector">Transform Of the target the object needs to move towards</param>
+    private void BeginMovingTowardsDestination(Transform _destinationTransform)
     {
-        transform.LookAt(targetTransform);
+        // Check if the destination exists, log error if not
+        if (_destinationTransform == null)
+        {
+            Debug.LogError("Destination Transform does not exist");
+        }
+        else// Run the destination logic
+        {
+            // Move via the NavMeshAgent towards the destinationVector
+            _navMeshAgent.SetDestination(_destinationTransform.position);
+        }
     }
-
-    void FixedUpdate()
-    {
-        MoveToTarget();
-    }
-
-    /// <summary>
-    /// move forwards with speed * delta time
-    /// </summary>
-    private void MoveToTarget()
-    {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-    }
-
-
-
-
-
 }
