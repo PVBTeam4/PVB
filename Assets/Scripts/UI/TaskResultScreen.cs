@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace TaskSystem
+namespace UI
 {
     public class TaskResultScreen : MonoBehaviour
     {
@@ -36,9 +36,7 @@ namespace TaskSystem
         /// <param name="state"></param>
         void TaskEnded(ToolType nextOverworldIndex, bool state)
         {
-            print("Task ended");
-
-            if (state)// Success
+            if (isTaskSuccess)// Success
             {
                 EnableScreen(taskSuccessScreen);
             }

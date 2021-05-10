@@ -25,21 +25,12 @@ namespace TaskSystem
         }
 
         /// <summary>
-        /// Cancel the current Task
+        /// Cancel the current Task.
+        /// Will send FAIL event
         /// </summary>
         public void CancelActiveTask()
         {
-            if (_activeTask == null)
-            {
-                Debug.LogError("There is no active task, to cancel.");
-                return;
-            }
-
-            // Call the event that the player lost the Task
-            //TaskEndedAction?.Invoke(false);
-
-            _activeTask = null;
-            //Debug.Log("Active Task has been cancelled.");
+            HandleTaskResult(false);
         }
 
         /// <summary>
@@ -57,14 +48,21 @@ namespace TaskSystem
         /// Will be called when Task is completed
         /// </summary>
         /// <param name="completedTask">Task that is completed</param>
-        private void OnTaskCompletion(Task completedTask, bool won)
+        private void OnTaskCompletion(Task completedTask)
         {
-            //Debug.Log("Task completed");
             if (!completedTask.Equals(_activeTask))
             {
                 Debug.LogError("Other task got completed, instead of the active one!");
                 return;
             }
+            
+            HandleTaskResult(true);
+        }
+
+        private void HandleTaskResult(bool isTaskCompleted)
+        {
+            // Reset active task
+            _activeTask = null;
 
             // Call the event that the player completed the Task
             TaskEndedAction?.Invoke(completedTask.GetToolType(), won);
