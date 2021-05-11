@@ -207,6 +207,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969df54d792f2e542a9140ec86702b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 5
+  bulletTag: Bullet
+  targetTag: Player
   maxHealth: 100
   onDamage:
     m_PersistentCalls:
@@ -245,12 +248,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3045924653465763382}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b97f85cecdeace144b85ca7c1394884b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
   targetTag: Player
 --- !u!195 &473752839
 NavMeshAgent:

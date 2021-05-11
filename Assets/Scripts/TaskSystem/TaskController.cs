@@ -13,6 +13,14 @@ namespace TaskSystem
         // Current active task
         private Task _activeTask;
 
+        public Task ActiveTask
+        {
+            get
+            {
+                return _activeTask;
+            }
+        }
+
         // Action event that will be run when the Task is completed or failed
         public static event Action<ToolType, bool> TaskEndedAction;// True if completed, False if failed
 

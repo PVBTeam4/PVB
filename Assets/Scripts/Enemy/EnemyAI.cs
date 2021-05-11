@@ -1,4 +1,4 @@
-using Gun;
+using System;
 using Properties.Tags;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,9 +12,6 @@ namespace Enemy
     /// </summary>
     public class EnemyAI : MonoBehaviour
     {
-        [SerializeField]
-        private float damage;
-        
         [SerializeField, TagSelector]
         // The tag of the target. To get the Transform from
         private string targetTag = "Player";
@@ -30,6 +27,9 @@ namespace Enemy
         {
             CheckAndGetComponents();
             targetTransform = GameObject.FindWithTag(targetTag).transform;
+            
+            // Look at target on spawn
+            transform.LookAt(targetTransform.position);
         }
 
         /// <summary>
@@ -92,21 +92,6 @@ namespace Enemy
 
             // Update the position of this object to that of the 
             transform.position = correctPos;
-        }
-        
-        public void DestroyEnemy()
-        {
-            Destroy(gameObject);
-            // TODO Particle
-        }
-
-        private void OnTriggerEnter(Collider otherCollider)
-        {
-            if (!otherCollider.tag.Equals(targetTag)) return;
-            PlayerHealth playerHealth = otherCollider.gameObject.GetComponent<PlayerHealth>();
-            if (playerHealth == null) return;
-            playerHealth.DamageBy(damage);
-            DestroyEnemy();
         }
     }
 }

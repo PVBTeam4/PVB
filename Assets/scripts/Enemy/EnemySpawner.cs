@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+
 /// <summary>
 /// this class causes the enemies to spawn 
 /// before spawning it will get all spawn points and will pick one at random
@@ -12,8 +12,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     //Enemy prefab
     private GameObject EnemyPrefab;
-
-    [SerializeField]
+    
     //gameobject with spawningpoints
     private Transform[] SpawnPoints;
 
@@ -61,8 +60,16 @@ public class EnemySpawner : MonoBehaviour
         //a HashSet is a collection that contains no duplicate elements, and whose elements are in no particular order.
         //HashSet<T> class can be thought of as a Dictionary<TKey,TValue> collection without values.
         var transforms = new HashSet<Transform>(GetComponentsInChildren<Transform>(true));
+
         // remove the first transform with is the parent of these children
         transforms.Remove(transform);
+        
+        if (transforms.Count == 0)
+        {
+            Debug.LogError("Enemy Spawner doesn't hold any children for spawn points!");
+            return;
+        }
+        
         //create an array from this HashSet
         SpawnPoints = transforms.ToArray();
 

@@ -1,4 +1,5 @@
 using Gun;
+using Properties.Tags;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,8 +10,14 @@ namespace TaskSystem.Objectives
     /// </summary>
     public class KillObjective : Objective
     {
+        [SerializeField]
+        private float damage;
+        
         // Tag name of bullet
-        private const string BulletTag = "Bullet";
+        [SerializeField, TagSelector]
+        private string bulletTag;
+        [SerializeField, TagSelector]
+        private string targetTag;
 
         // Max health of objective
         [SerializeField]
@@ -66,12 +73,24 @@ namespace TaskSystem.Objectives
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.CompareTag(BulletTag))
+            if (other.gameObject.CompareTag(bulletTag))
             {
                 BulletMovement bulletMovement = other.gameObject.GetComponent<BulletMovement>();
                 if (bulletMovement == null) return;
                 DamageBy(bulletMovement.damage);
+            } else if (other.gameObject.CompareTag(targetTag))
+            {
+                PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+                if (playerHealth == null) return;
+                playerHealth.DamageBy(damage);
+                DestroyEnemy();
             }
+        }
+        
+        public void DestroyEnemy()
+        {
+            Destroy(gameObject);
+            // TODO Particle
         }
     }
 }
