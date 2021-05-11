@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     // damage when collide target
     private float damage;
-    [SerializeField]
+
     //get transform of target
     private Transform targetTransform;
 
@@ -24,6 +24,7 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     private void Awake()
     {
+        targetTransform = GameObject.FindWithTag("Target").transform;
         SetEnemyPosition();
         RotateToTarget();
     }
