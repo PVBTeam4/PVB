@@ -1,14 +1,21 @@
+using Gun;
+using Properties.Tags;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Enemy
 {
     /// <summary>
-    /// This class causes the enemy to move towards the target using the NavMeshAgent
+    /// this class causes the enemy to move forward to the target
+    ///  before it moves it rotate to the target
+    /// it set the enemy as the same y position of the target
     /// </summary>
     public class EnemyAI : MonoBehaviour
     {
         [SerializeField]
+        private float damage;
+        
+        [SerializeField, TagSelector]
         // The tag of the target. To get the Transform from
         private string targetTag = "Player";
 
@@ -22,7 +29,7 @@ namespace Enemy
         private void Awake()
         {
             CheckAndGetComponents();
-            targetTransform = GameObject.FindWithTag("Target").transform;
+            targetTransform = GameObject.FindWithTag(targetTag).transform;
         }
 
         /// <summary>
@@ -85,6 +92,21 @@ namespace Enemy
 
             // Update the position of this object to that of the 
             transform.position = correctPos;
+        }
+        
+        public void DestroyEnemy()
+        {
+            Destroy(gameObject);
+            // TODO Particle
+        }
+
+        private void OnTriggerEnter(Collider otherCollider)
+        {
+            if (!otherCollider.tag.Equals(targetTag)) return;
+            PlayerHealth playerHealth = otherCollider.gameObject.GetComponent<PlayerHealth>();
+            if (playerHealth == null) return;
+            playerHealth.DamageBy(damage);
+            DestroyEnemy();
         }
     }
 }

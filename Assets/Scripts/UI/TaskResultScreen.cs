@@ -1,10 +1,11 @@
 using Global;
 using SceneSystem;
 using System.Collections;
+using TaskSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace TaskSystem
+namespace UI
 {
     public class TaskResultScreen : MonoBehaviour
     {
@@ -24,21 +25,16 @@ namespace TaskSystem
 
             // Disable all screens
             DisableScreens();
-
-            // Subscrives the function for disabling the result screen on load
-            SceneManager.sceneLoaded += DisableScreensBySceneLoaded;
         }
 
         /// <summary>
         /// Is called when a task has ended so that it may enable the result screen
         /// </summary>
         /// <param name="nextOverworldIndex"></param>
-        /// <param name="state"></param>
-        void TaskEnded(ToolType nextOverworldIndex, bool state)
+        /// <param name="isTaskSuccess"></param>
+        void TaskEnded(ToolType nextOverworldIndex, bool isTaskSuccess)
         {
-            print("Task ended");
-
-            if (state)// Success
+            if (isTaskSuccess)// Success
             {
                 EnableScreen(taskSuccessScreen);
             }
