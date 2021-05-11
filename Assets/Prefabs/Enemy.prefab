@@ -250,9 +250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b97f85cecdeace144b85ca7c1394884b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  damage: 0
-  _destination: {fileID: 0}
+  damage: 50
+  targetTag: Player
 --- !u!195 &473752839
 NavMeshAgent:
   m_ObjectHideFlags: 0

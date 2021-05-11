@@ -1,5 +1,4 @@
 using System;
-using Properties.Tags;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,8 +6,6 @@ namespace Gun
 {
     public class PlayerHealth : MonoBehaviour
     {
-        [SerializeField, TagSelector] private string enemyTag = "";
-
         [SerializeField] private float maxHealth;
         private float _currentHealth;
 

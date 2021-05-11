@@ -1,3 +1,5 @@
+using Gun;
+using Properties.Tags;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,7 +15,7 @@ namespace Enemy
         [SerializeField]
         private float damage;
         
-        [SerializeField]
+        [SerializeField, TagSelector]
         // The tag of the target. To get the Transform from
         private string targetTag = "Player";
 
