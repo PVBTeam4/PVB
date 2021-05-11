@@ -1,42 +1,35 @@
 using System;
 using System.Linq;
-using System.Collections;
-using UnityEditor;
+using Global;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
-namespace Global
+namespace SceneSystem
 {
-
-    [Serializable]
-    public class SceneDictionary : SerializableDictionary<ToolType, SceneAsset> { }
 
     /// <summary>
     /// Holds functions to load scenes via the ToolType enum
     /// </summary>
     public class SceneController : MonoBehaviour
     {
-        
-
         // Instance of this class
         private static SceneController _instance;
 
         [SerializeField]
         // The main scene where the game plays
-        private SceneAsset overWorldScene;
+        private SceneAssetObject[] overworldSceneArray;
 
         [SerializeField]
         // Used to link a Scene to their respective Type 
-        private SceneDictionary sceneDictionary;
+        private SceneAssetObject[] taskSceneArray;
 
         // Fire this event when you want to switch to the Over World Scene
         [SerializeField] private UnityEvent OverWorldEnterAction;
 
         // Fire this event when you want to switch to a Tool Scene
         [SerializeField] private UnityEvent<ToolType> TaskModeEnterAction;
-
-        [SerializeField] private static float sceneTransitionTime = 3f;
 
         /// <summary>
         /// This runs before the Start method
@@ -72,9 +65,10 @@ namespace Global
         }
 
         /// <summary>
-        /// Loads the scene that is put on "overWorldScene" 
+        /// Loads a new overworld scene based on the tooltype of the last task
         /// </summary>
-        public static void SwitchSceneToOverWorld()
+        /// <param name="toolType"></param>
+        public static void SwitchSceneToOverWorld(ToolType toolType)
         {
             SceneController sceneController = _instance;
             if (sceneController == null)
@@ -82,16 +76,30 @@ namespace Global
                 Debug.LogError("SceneController is not yet loaded.");
                 return;
             }
-            // Check if the Scene exists
-            if (sceneController.overWorldScene)
+
+            switch(toolType)
             {
-                // Load the Scene using the Name of the SceneAsset
-                IEnumerator coroutine = sceneController.TimerToNextScene(sceneController.overWorldScene);
-                sceneController.StartCoroutine(coroutine);
-            }
-            else// Give an Error if the overWorldScene is not found
-            {
-                Debug.LogError("OverWorld Scene is not found");
+                case ToolType.CANNON:
+                    // Gives an Error if the ToolType does not have a corresponding overworld scene
+                    //SceneAssetObject scene = sceneController.overworldSceneArray[overworldIndex];
+                    if (!sceneController.overworldSceneArray[1])
+                    {
+                        Debug.LogError("Overworld scene not found for ToolType: " + ToolType.CANNON);
+                        return;
+                    }
+                    SceneManager.LoadScene(sceneController.overworldSceneArray[1].name);
+                    break;
+                case ToolType.CRANE:
+                    if (!sceneController.overworldSceneArray[2])
+                    {
+                        Debug.LogError("Overworld scene not found for ToolType: " + ToolType.CRANE);
+                        return;
+                    }
+                    SceneManager.LoadScene(sceneController.overworldSceneArray[2].name);
+                    break;
+                case ToolType.WATER_CANNON:
+                    Debug.Log("End of game");
+                    return;
             }
         }
 
@@ -107,18 +115,17 @@ namespace Global
                 Debug.LogError("SceneController is not yet loaded.");
                 return;
             }
-            
+
             // Try and get the right Scene from the SceneDictionary
-            if (!sceneController.sceneDictionary.TryGetValue(toolType, out SceneAsset scene))
+            if (!sceneController.TryGetSceneAssetByToolType(toolType, out SceneAssetObject scene))
             {
                 // Give an Error if the ToolType does not have a Scene
                 Debug.LogError("Scene not found for ToolType: " + toolType);
                 return;
             }
-
+            
             // Load the Scene using the Name of the SceneAsset
-            IEnumerator coroutine = sceneController.TimerToNextScene(scene);
-            sceneController.StartCoroutine(coroutine);
+            SceneManager.LoadScene(scene.SceneName);
         }
 
         /// <summary>
@@ -134,7 +141,7 @@ namespace Global
             // Check if the OverWorld needs to be loaded
             if (toolType == ToolType.NOONE)
             {
-                if (scene.name == overWorldScene.name)
+                if (overworldSceneArray[0])
                 {
                     // Fire the event that the player wants to enter the overworld
                     OverWorldEnterAction?.Invoke();
@@ -156,7 +163,7 @@ namespace Global
             // Try to compare the given Scene to the sceneDictionary what its ToolType is
             try
             {
-                return sceneDictionary.First(toolTypeScenePair => toolTypeScenePair.Value.name == scene.name).Key;
+                return taskSceneArray.First(sceneAssetObject => sceneAssetObject.SceneName == scene.name).ToolType;
             }
             catch (InvalidOperationException)// If not found. Just return the default value
             {
@@ -164,25 +171,11 @@ namespace Global
             }
         }
 
-        /// <summary>
-        /// Will load the next scene in after the given time
-        /// </summary>
-        /// <param name="nextSceneName">Secconds to wait</param>
-        /// <returns></returns>
-        private IEnumerator TimerToNextScene(SceneAsset nextSceneAsset)
+        private bool TryGetSceneAssetByToolType(ToolType toolType, out SceneAssetObject sceneAssetObject)
         {
-            // Check if the scene can be loaded
-            if (!Application.CanStreamedLevelBeLoaded(nextSceneAsset.name))
-            {
-                Debug.LogError("nextSceneAsset, does not exist. Cannot load next scene");
-                yield return null;
-            }
-
-            // Wait for the given amount of time
-            yield return new WaitForSeconds(sceneTransitionTime);
-
-            // Load the scene
-            SceneManager.LoadScene(nextSceneAsset.name);
+            sceneAssetObject = taskSceneArray.FirstOrDefault(scene => scene.ToolType == toolType);
+            Debug.Log(sceneAssetObject);
+            return sceneAssetObject != null;
         }
     }
 }
