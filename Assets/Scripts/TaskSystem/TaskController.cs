@@ -2,6 +2,7 @@ using Global;
 using SceneSystem;
 using UnityEngine;
 using System;
+using System.Collections;
 
 namespace TaskSystem
 {
@@ -16,7 +17,7 @@ namespace TaskSystem
 
         // Action event that will be run when the Task is completed or failed
         [SerializeField]
-        public static event Action<bool> TaskEndedAction;// True if completed, False if failed
+        public static event Action<ToolType, bool> TaskEndedAction;// True if completed, False if failed
 
         public TaskController(ToolType toolType)
         {
@@ -66,10 +67,10 @@ namespace TaskSystem
             }
 
             // Call the event that the player completed the Task
-            TaskEndedAction?.Invoke(won);
+            TaskEndedAction?.Invoke(completedTask.GetToolType(), won);
 
             // Switch back to overworld
-            SceneController.SwitchSceneToOverWorld();
+            //SceneController.SwitchSceneToOverWorld();
             //Debug.Log("Congrats, you completed the task!");
         }
     }
