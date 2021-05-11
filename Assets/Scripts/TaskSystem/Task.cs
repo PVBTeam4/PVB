@@ -1,9 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Global;
-using TaskSystem.Objectives;
-using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace TaskSystem
 {
@@ -16,23 +14,20 @@ namespace TaskSystem
         private readonly ToolType _toolType;
         
         // Action that will let TaskController know, Task is completed
-        private readonly Action<Task, bool> _taskCompleteAction;
+        private readonly Action<Task> _taskCompleteAction;
         
         // Array of all active Objectives (not yet completed)
-        private Objective[] _activeObjectives;
+        private readonly List<Objective> _activeObjectives = new List<Objective>();
 
         /// <summary>
         /// Constructor of Task
         /// </summary>
         /// <param name="toolType">ToolType used to complete Task</param>
         /// <param name="taskCompleteAction">Action for Task completion</param>
-        public Task(ToolType toolType, Action<Task, bool> taskCompleteAction)
+        public Task(ToolType toolType, Action<Task> taskCompleteAction)
         {
             _toolType = toolType;
             _taskCompleteAction = taskCompleteAction;
-            _activeObjectives = GetObjectivesInSceneByToolType(toolType);
-
-            InitializeObjectives();
         }
 
         /// <summary>
@@ -42,16 +37,16 @@ namespace TaskSystem
         /// Completing Task;
         /// </summary>
         /// <param name="completedObjective">Objective that is completed</param>
-        public void OnObjectiveCompletion(Objective completedObjective, bool won)
+        public void OnObjectiveCompletion(Objective completedObjective)
         {
             // Remove objective from array
-            _activeObjectives = _activeObjectives.Where(objective => !completedObjective.Equals(objective)).ToArray();
+            _activeObjectives.Remove(completedObjective);
 
             //Debug.Log("Objective complete");
             
-            if (_activeObjectives.Length == 0)
+            if (_activeObjectives.Count == 0)
             {
-                OnTaskCompletion(won);
+                OnTaskCompletion();
             }
         }
 
@@ -59,36 +54,24 @@ namespace TaskSystem
         /// Call TaskComplete action, to let TaskController know
         /// Task is completed.
         /// </summary>
-        private void OnTaskCompletion(bool won)
+        private void OnTaskCompletion()
         {
-            _taskCompleteAction?.Invoke(this, won);
+            _taskCompleteAction?.Invoke(this);
         }
 
         /// <summary>
-        /// Initializes all active objectives.
-        /// NEEDS TO BE CALLED ON TASK CREATION!
+        /// Returns this Task's tooltype
         /// </summary>
-        private void InitializeObjectives()
-        {
-            foreach (Objective activeObjective in _activeObjectives)
-            {
-                activeObjective.InitializeObjective(OnObjectiveCompletion);
-            }
-        }
-        
-        /// <summary>
-        /// Get all Objectives in scene, by their ToolType
-        /// </summary>
-        /// <param name="toolType">ToolType to specify Objective</param>
         /// <returns></returns>
-        private Objective[] GetObjectivesInSceneByToolType(ToolType toolType)
+        public ToolType GetToolType()
         {
-            switch (toolType)
-            {
-                case ToolType.CANNON:
-                    return Object.FindObjectsOfType<KillObjective>();
-            }
-            return null;
+            return _toolType;
+        }
+
+        public void RegisterObjective(Objective objective)
+        {
+            _activeObjectives.Add(objective);
+            objective.InitializeObjective(OnObjectiveCompletion);
         }
     }
 }

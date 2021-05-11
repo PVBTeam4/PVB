@@ -1,11 +1,11 @@
-using System;
+using Global;
+using SceneSystem;
 using System.Collections;
-using System.Collections.Generic;
+using TaskSystem;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace TaskSystem
+namespace UI
 {
     public class TaskResultScreen : MonoBehaviour
     {
@@ -15,6 +15,9 @@ namespace TaskSystem
         [SerializeField]
         private GameObject taskFailedScreen;
 
+        [SerializeField]
+        private float sceneTransitionTime = 10;
+
         void Awake()
         {
             // Subscribe the screen functions
@@ -22,16 +25,16 @@ namespace TaskSystem
 
             // Disable all screens
             DisableScreens();
-
-            // 
-            SceneManager.sceneLoaded += DisableScreensBySceneLoaded;
         }
 
-        void TaskEnded(bool state)
+        /// <summary>
+        /// Is called when a task has ended so that it may enable the result screen
+        /// </summary>
+        /// <param name="nextOverworldIndex"></param>
+        /// <param name="isTaskSuccess"></param>
+        void TaskEnded(ToolType nextOverworldIndex, bool isTaskSuccess)
         {
-            print("Task ended");
-
-            if (state)// Success
+            if (isTaskSuccess)// Success
             {
                 EnableScreen(taskSuccessScreen);
             }
@@ -39,6 +42,8 @@ namespace TaskSystem
             {
                 EnableScreen(taskFailedScreen);
             }
+
+            StartCoroutine("CountdownSwitchToOverworld", nextOverworldIndex);
         }
 
         /// <summary>
@@ -71,5 +76,18 @@ namespace TaskSystem
             print("Disabled Screens by loaded a new scene");
             DisableScreens();
         }
+
+        /// <summary>
+        /// Switches to the next overworld scene after a given amount of time
+        /// </summary>
+        /// <param name="nextOverworldIndex"></param>
+        /// <returns></returns>
+        IEnumerator CountdownSwitchToOverworld(ToolType nextOverworldIndex)
+        {
+            yield return new WaitForSeconds(sceneTransitionTime);
+            SceneController.SwitchSceneToOverWorld(nextOverworldIndex);
+        }
+
+
     }
 }

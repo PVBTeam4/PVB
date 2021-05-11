@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/OverWorld.unity
+    path: Assets/Scenes/OverWorld_Cannon.unity
     guid: 3066ba9e4e4b1cc4495e149565a2b2c7
   - enabled: 1
     path: Assets/Scenes/Tasks/ShootingScene.unity
@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Tasks/CraneOperatingScene.unity
     guid: 9664d8cea34270642bc248500c796e10
+  - enabled: 1
+    path: Assets/Scenes/Overworld_Crane.unity
+    guid: 7d22da9a355802f4f96f2ade8932f8b6
+  - enabled: 1
+    path: Assets/Scenes/Overworld_Water_Cannon.unity
+    guid: e0e0f02d2f39ca140ac8a5a26b9f4877
   m_configObjects: {}

@@ -1,4 +1,5 @@
 using System;
+using Global;
 using UnityEngine;
 
 namespace TaskSystem
@@ -9,13 +10,18 @@ namespace TaskSystem
     public abstract class Objective : MonoBehaviour
     {
         // Action that will let Task know, Objective is completed
-        private Action<Objective, bool> _completeObjectiveAction;
+        private Action<Objective> _completeObjectiveAction;
+
+        private void Awake()
+        {
+            RegisterObjectiveToActiveTask();
+        }
 
         /// <summary>
         /// Initializes Objective
         /// FIRST THING TO BE CALLED BY TASK
         /// </summary>
-        public void InitializeObjective(Action<Objective, bool> completeObjectiveAction)
+        public void InitializeObjective(Action<Objective> completeObjectiveAction)
         {
             _completeObjectiveAction = completeObjectiveAction;
         }
@@ -23,7 +29,7 @@ namespace TaskSystem
         /// <summary>
         /// Complete Objective
         /// </summary>
-        protected void CompleteObjective(bool won)
+        protected void CompleteObjective()
         {
             if (_completeObjectiveAction == null)
             {
@@ -31,7 +37,17 @@ namespace TaskSystem
                 return;
             }
             
-            _completeObjectiveAction.Invoke(this, won);
+            _completeObjectiveAction.Invoke(this);
+        }
+        
+        private void RegisterObjectiveToActiveTask()
+        {
+            if (GameManager.Instance == null || GameManager.Instance.TaskController == null)
+            {
+                Debug.LogError("No TaskController found! Load Task from OverWorld!");
+                return;
+            }
+            GameManager.Instance.TaskController.ActiveTask.RegisterObjective(this);
         }
     }
 }

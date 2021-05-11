@@ -1,64 +1,97 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using Properties.Tags;
 using UnityEngine;
-/// <summary>
-/// this class causes the enemey to move forward to the target
-///  before it moves it rotate to the target
-/// it set the enemy as the same y position of the target
-/// </summary>
-public class EnemyAI : MonoBehaviour
+using UnityEngine.AI;
+
+namespace Enemy
 {
-    [SerializeField]
-    // speed of Enemy 
-    private float speed = 2f;
-    [SerializeField]
-    // damage when collide target
-    private float damage;
-    [SerializeField]
-    //get transform of target
-    private Transform targetTransform;
-
-    // Start is called before the first frame update
     /// <summary>
-    /// call this functions once
+    /// this class causes the enemy to move forward to the target
+    ///  before it moves it rotate to the target
+    /// it set the enemy as the same y position of the target
     /// </summary>
-    private void Awake()
+    public class EnemyAI : MonoBehaviour
     {
-        SetEnemyPosition();
-        RotateToTarget();
+        [SerializeField, TagSelector]
+        // The tag of the target. To get the Transform from
+        private string targetTag = "Player";
+
+        // Transform component of the target
+        private Transform targetTransform;
+
+        // NavMeshAgent component of this object
+        private NavMeshAgent navMeshAgent;
+
+        // This is run befor the Start function
+        private void Awake()
+        {
+            CheckAndGetComponents();
+            targetTransform = GameObject.FindWithTag(targetTag).transform;
+            
+            // Look at target on spawn
+            transform.LookAt(targetTransform.position);
+        }
+
+        /// <summary>
+        /// Checks if the needed components exists. 
+        /// If so set set the targetTransform & call StartMovementTowardsTarget. 
+        /// If not log error
+        /// </summary>
+        private void CheckAndGetComponents()
+        {
+            // Check and Get the NavMeshAgent
+            navMeshAgent = GetComponent<NavMeshAgent>();
+
+            if (navMeshAgent == null)
+            {
+                Debug.LogError("NavMeshAgent component not attached" + gameObject.name);
+                return;
+            }
+
+            // Find the gameobject with the targetTag
+            GameObject _targetObject = GameObject.FindWithTag(targetTag);
+
+            // Check if the destinationObject exists, if not log error
+            if (_targetObject == null)
+            {
+                Debug.LogError("Target object: " + targetTag + ", has not been found");
+                return;
+            }
+
+            // Set the target transform to that of the target transform component
+            targetTransform = _targetObject.transform;
+
+            // Start movement
+            StartMovementTowardsTarget();
+        }
+
+        /// <summary>
+        /// Start moving towards the target via the NavMeshAgent component
+        /// </summary>
+        private void StartMovementTowardsTarget()
+        {
+            // Make sure the Y-Axis does not get affected
+            Vector3 _targetPosition = targetTransform.position;
+            _targetPosition.y = transform.position.y;
+
+            // Move via the NavMeshAgent towards the targetPosition
+            navMeshAgent.SetDestination(_targetPosition);
+
+            // Create a "FixedUpdate" like loop for the "UpdateNavMeshDestination" function
+            InvokeRepeating("UpdateNavMeshDestination", 0f, Time.fixedDeltaTime);
+        }
+
+        /// <summary>
+        /// This will make sure the Y-Axis does not get affected
+        /// </summary>
+        private void UpdateNavMeshDestination()
+        {
+            // Make sure the Y-Axis does not get affected
+            Vector3 correctPos = navMeshAgent.nextPosition;
+            correctPos.y = transform.position.y;
+
+            // Update the position of this object to that of the 
+            transform.position = correctPos;
+        }
     }
-
-    /// <summary>
-    /// set the enemy's current y position to be the same as the target
-    /// </summary>
-    private void SetEnemyPosition()
-    {
-        transform.position = new Vector3(transform.position.x, targetTransform.position.y, transform.position.z);
-    }
-
-    /// <summary>
-    /// Rotates to the target
-    /// </summary>
-    private void RotateToTarget()
-    {
-        transform.LookAt(targetTransform);
-    }
-
-    void FixedUpdate()
-    {
-        MoveToTarget();
-    }
-
-    /// <summary>
-    /// move forwards with speed * delta time
-    /// </summary>
-    private void MoveToTarget()
-    {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-    }
-
-
-
-
-
 }
