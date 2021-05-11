@@ -14,7 +14,7 @@ namespace TaskSystem
         private Task _activeTask;
 
         // Action event that will be run when the Task is completed or failed
-        public static event Action<bool> TaskEndedAction;// True if completed, False if failed
+        public static event Action<ToolType, bool> TaskEndedAction;// True if completed, False if failed
 
         public TaskController(ToolType toolType)
         {
@@ -58,14 +58,13 @@ namespace TaskSystem
 
         private void HandleTaskResult(bool isTaskCompleted)
         {
+            Task completedTask = _activeTask;
+            
             // Reset active task
             _activeTask = null;
 
             // Call the event that the player completed the Task
-            TaskEndedAction?.Invoke(isTaskCompleted);
-
-            // Switch back to overWorld
-            SceneController.SwitchSceneToOverWorld();
+            TaskEndedAction?.Invoke(completedTask.GetToolType(), isTaskCompleted);
         }
     }
 }

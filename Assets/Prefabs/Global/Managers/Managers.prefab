@@ -281,24 +281,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c13fb4c2c37284e951b94d5ba63065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overWorldScene: {fileID: 102900000, guid: 3066ba9e4e4b1cc4495e149565a2b2c7, type: 3}
-  sceneDictionary:
-    _Buckets: ffffffff000000000100000002000000ffffffffffffffffffffffff
-    _HashCodes: 010000000200000003000000ffffffff000000000000000000000000
-    _Next: ffffffffffffffffffffffffffffffff000000000000000000000000
-    _Count: 4
-    _Version: 32
-    _FreeList: 3
-    _FreeCount: 1
-    _Keys: 01000000020000000300000000000000000000000000000000000000
-    _Values:
-    - {fileID: 102900000, guid: 1ab795afb4976ce4480af55f0bffbf67, type: 3}
-    - {fileID: 102900000, guid: e349a7efefb927642819fec113dcf19d, type: 3}
-    - {fileID: 102900000, guid: 9664d8cea34270642bc248500c796e10, type: 3}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+  overworldSceneArray:
+  - {fileID: 11400000, guid: cf48043ffbd204343bf67a37a8b9de77, type: 2}
+  - {fileID: 11400000, guid: f9e91c2d8ca06dd4b8b01f000e46bb69, type: 2}
+  - {fileID: 11400000, guid: 191c25ece05f51042b1d5a74ef5f121c, type: 2}
+  taskSceneArray:
+  - {fileID: 11400000, guid: a6daebac531a8bc448a992c30cd29f24, type: 2}
+  - {fileID: 11400000, guid: ce8663dd4f85e5c4f9504621bbba9b61, type: 2}
+  - {fileID: 11400000, guid: d26787842ec00894da4e2d12501747ea, type: 2}
   OverWorldEnterAction:
     m_PersistentCalls:
       m_Calls:

@@ -1,3 +1,6 @@
+using Global;
+using SceneSystem;
+using System.Collections;
 using TaskSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,6 +15,9 @@ namespace UI
         [SerializeField]
         private GameObject taskFailedScreen;
 
+        [SerializeField]
+        private float sceneTransitionTime = 10;
+
         void Awake()
         {
             // Subscribe the screen functions
@@ -19,12 +25,14 @@ namespace UI
 
             // Disable all screens
             DisableScreens();
-
-            // 
-            // SceneManager.sceneLoaded += DisableScreensBySceneLoaded;
         }
 
-        void TaskEnded(bool isTaskSuccess)
+        /// <summary>
+        /// Is called when a task has ended so that it may enable the result screen
+        /// </summary>
+        /// <param name="nextOverworldIndex"></param>
+        /// <param name="isTaskSuccess"></param>
+        void TaskEnded(ToolType nextOverworldIndex, bool isTaskSuccess)
         {
             if (isTaskSuccess)// Success
             {
@@ -34,6 +42,8 @@ namespace UI
             {
                 EnableScreen(taskFailedScreen);
             }
+
+            StartCoroutine("CountdownSwitchToOverworld", nextOverworldIndex);
         }
 
         /// <summary>
@@ -66,5 +76,18 @@ namespace UI
             print("Disabled Screens by loaded a new scene");
             DisableScreens();
         }
+
+        /// <summary>
+        /// Switches to the next overworld scene after a given amount of time
+        /// </summary>
+        /// <param name="nextOverworldIndex"></param>
+        /// <returns></returns>
+        IEnumerator CountdownSwitchToOverworld(ToolType nextOverworldIndex)
+        {
+            yield return new WaitForSeconds(sceneTransitionTime);
+            SceneController.SwitchSceneToOverWorld(nextOverworldIndex);
+        }
+
+
     }
 }

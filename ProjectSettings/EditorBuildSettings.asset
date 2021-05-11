@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Tasks/CraneOperatingScene.unity
     guid: 9664d8cea34270642bc248500c796e10
   - enabled: 1
-    path: Assets/Scenes/Tasks/EE-290-ShootingScene.unity
-    guid: 9b4c1873deef2344781d2fc72a7463a0
+    path: Assets/Scenes/Overworld2.unity
+    guid: 7d22da9a355802f4f96f2ade8932f8b6
+  - enabled: 1
+    path: Assets/Scenes/Overworld3.unity
+    guid: e0e0f02d2f39ca140ac8a5a26b9f4877
   m_configObjects: {}

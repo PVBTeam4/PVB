@@ -90,5 +90,15 @@ namespace TaskSystem
             }
             return null;
         }
+
+        /// <summary>
+        /// Returns this Task's tooltype
+        /// </summary>
+        /// <returns></returns>
+        public ToolType GetToolType()
+        {
+            return _toolType;
+        }
+
     }
 }
