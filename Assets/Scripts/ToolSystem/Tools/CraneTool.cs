@@ -32,7 +32,11 @@ public class CraneTool : Tool
     private void HandleMovement(Vector3 position)
     {
         RaycastHit hit;
+        //position.y -= -Screen.height / 2;
+        //position.z = 5f;
         Ray ray = Camera.current.ScreenPointToRay(position);
+
+        // BUG: Look at canvas scale to solve it
 
         if (Physics.Raycast(ray, out hit))
         {
