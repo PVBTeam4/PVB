@@ -1,9 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Global;
-using TaskSystem.Objectives;
-using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace TaskSystem
 {
@@ -19,7 +17,7 @@ namespace TaskSystem
         private readonly Action<Task> _taskCompleteAction;
         
         // Array of all active Objectives (not yet completed)
-        private Objective[] _activeObjectives;
+        private readonly List<Objective> _activeObjectives = new List<Objective>();
 
         /// <summary>
         /// Constructor of Task
@@ -30,9 +28,6 @@ namespace TaskSystem
         {
             _toolType = toolType;
             _taskCompleteAction = taskCompleteAction;
-            _activeObjectives = GetObjectivesInSceneByToolType(toolType);
-
-            InitializeObjectives();
         }
 
         /// <summary>
@@ -45,11 +40,11 @@ namespace TaskSystem
         public void OnObjectiveCompletion(Objective completedObjective)
         {
             // Remove objective from array
-            _activeObjectives = _activeObjectives.Where(objective => !completedObjective.Equals(objective)).ToArray();
+            _activeObjectives.Remove(completedObjective);
 
             //Debug.Log("Objective complete");
             
-            if (_activeObjectives.Length == 0)
+            if (_activeObjectives.Count == 0)
             {
                 OnTaskCompletion();
             }
@@ -65,33 +60,6 @@ namespace TaskSystem
         }
 
         /// <summary>
-        /// Initializes all active objectives.
-        /// NEEDS TO BE CALLED ON TASK CREATION!
-        /// </summary>
-        private void InitializeObjectives()
-        {
-            foreach (Objective activeObjective in _activeObjectives)
-            {
-                activeObjective.InitializeObjective(OnObjectiveCompletion);
-            }
-        }
-        
-        /// <summary>
-        /// Get all Objectives in scene, by their ToolType
-        /// </summary>
-        /// <param name="toolType">ToolType to specify Objective</param>
-        /// <returns></returns>
-        private Objective[] GetObjectivesInSceneByToolType(ToolType toolType)
-        {
-            switch (toolType)
-            {
-                case ToolType.CANNON:
-                    return Object.FindObjectsOfType<KillObjective>();
-            }
-            return null;
-        }
-
-        /// <summary>
         /// Returns this Task's tooltype
         /// </summary>
         /// <returns></returns>
@@ -100,5 +68,10 @@ namespace TaskSystem
             return _toolType;
         }
 
+        public void RegisterObjective(Objective objective)
+        {
+            _activeObjectives.Add(objective);
+            objective.InitializeObjective(OnObjectiveCompletion);
+        }
     }
 }

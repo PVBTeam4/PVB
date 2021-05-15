@@ -1,8 +1,6 @@
 using Global;
-using SceneSystem;
 using UnityEngine;
 using System;
-using System.Collections;
 
 namespace TaskSystem
 {
@@ -15,8 +13,15 @@ namespace TaskSystem
         // Current active task
         private Task _activeTask;
 
+        public Task ActiveTask
+        {
+            get
+            {
+                return _activeTask;
+            }
+        }
+
         // Action event that will be run when the Task is completed or failed
-        [SerializeField]
         public static event Action<ToolType, bool> TaskEndedAction;// True if completed, False if failed
 
         public TaskController(ToolType toolType)
@@ -61,15 +66,13 @@ namespace TaskSystem
 
         private void HandleTaskResult(bool isTaskCompleted)
         {
+            Task completedTask = _activeTask;
+            
             // Reset active task
             _activeTask = null;
 
             // Call the event that the player completed the Task
-            TaskEndedAction?.Invoke(completedTask.GetToolType(), won);
-
-            // Switch back to overworld
-            //SceneController.SwitchSceneToOverWorld();
-            //Debug.Log("Congrats, you completed the task!");
+            TaskEndedAction?.Invoke(completedTask.GetToolType(), isTaskCompleted);
         }
     }
 }

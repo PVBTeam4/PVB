@@ -4,7 +4,6 @@ using Global;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 namespace SceneSystem
 {

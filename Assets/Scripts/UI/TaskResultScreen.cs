@@ -1,6 +1,7 @@
 using Global;
 using SceneSystem;
 using System.Collections;
+using TaskSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,17 +25,14 @@ namespace UI
 
             // Disable all screens
             DisableScreens();
-
-            // Subscrives the function for disabling the result screen on load
-            SceneManager.sceneLoaded += DisableScreensBySceneLoaded;
         }
 
         /// <summary>
         /// Is called when a task has ended so that it may enable the result screen
         /// </summary>
         /// <param name="nextOverworldIndex"></param>
-        /// <param name="state"></param>
-        void TaskEnded(ToolType nextOverworldIndex, bool state)
+        /// <param name="isTaskSuccess"></param>
+        void TaskEnded(ToolType nextOverworldIndex, bool isTaskSuccess)
         {
             if (isTaskSuccess)// Success
             {
