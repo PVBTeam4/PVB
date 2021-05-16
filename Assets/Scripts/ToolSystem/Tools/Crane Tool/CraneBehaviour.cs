@@ -4,23 +4,30 @@ using UnityEngine;
 
 public class CraneBehaviour : MonoBehaviour
 {
-    [SerializedField]
+    [SerializeField]
     private Transform craneMast;
 
-    [SerializedField]
+    [SerializeField]
     private Transform craneArm;
 
-    [SerializedField]
+    [SerializeField]
     private Transform craneHook;
 
-    [SerializedField]
-    private Transform mouseTarget;
+    [SerializeField]
+    private Transform targetTransform;
 
-    [SerializedField]
-    private float minRadius = 0.5;
+    [Header("Hook Variables")]
 
-    [SerializedField]
+    [SerializeField]
+    private float craneHookFollowSpeed = 0.5f;
+
+    [SerializeField]
+    private float minRadius = 0.5f;
+
+    [SerializeField]
     private float maxRadius = 3;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,18 +38,18 @@ public class CraneBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Get the mouseTargetPosition from the mouseTarget
-        Vector3 mouseTargetPosition = mouseTarget.position;
+        // Get the targetTransformPosition from the targetTransform
+        Vector3 targetTransformPosition = targetTransform.position;
 
-        // Rotate the craneMast transform towards the mouseTargetPosition using the RotateMastTowardsMouse function
-        RotateMastTowardsMouse(mouseTargetPosition);
+        // Rotate the craneMast transform towards the targetTransformPosition using the RotateMastTowardsMouse function
+        RotateMastTowardsMouse(targetTransformPosition);
 
-        // Move the craneHook transform towards the mouseTargetPosition along its Z axis using the MoveCraneHookAlongArm function
-        MoveCraneHookAlongArm(mouseTargetPosition);
+        // Move the craneHook transform towards the targetTransformPosition along its Z axis using the MoveCraneHookAlongArm function
+        MoveCraneHookAlongArm(targetTransformPosition);
     }
 
     // Rotates the crane towards the mouse position, ignoring the X rotation
-    RotateMastTowardsMouse(Vector3 mousePosition) 
+    private void RotateMastTowardsMouse(Vector3 mousePosition) 
     {
         // Get the relative position of the Mouse & Crane
         Vector3 relativePos = mousePosition - transform.position;
@@ -52,14 +59,22 @@ public class CraneBehaviour : MonoBehaviour
         
         // Ignore the X rotation
         rotationTowardsMouse.x = 0;
+        rotationTowardsMouse.z = 0;
 
         // Set the rotation of the Crane to that of the new one towards the mouse
         craneMast.rotation = rotationTowardsMouse;
     }
 
     // Moves crane hook towards the mouse position along the 
-    MoveCraneHookAlongArm(Vector3 mousePosition)
+    private void MoveCraneHookAlongArm(Vector3 mousePosition)
     {
+        // Lerp the given Transform towards the given target Transform
+        craneHook.position = Vector3.Lerp(craneHook.position, targetTransform.position, craneHookFollowSpeed * Time.deltaTime);
+
+        Vector3 localPosition = craneHook.localPosition;
+        craneHook.localPosition = new Vector3(0, 0, localPosition.z);
+
+
         // Clamp the Hook along the arm via between the min and max radius
         //z = clamp(z, minRadius, maxRadius);
     }

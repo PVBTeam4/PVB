@@ -35,7 +35,7 @@ public class CraneTool : Tool
         //position.y -= -Screen.height / 2;
         //position.z = 5f;
         Ray ray = Camera.current.ScreenPointToRay(position);
-
+        print(ray);
         // BUG: Look at canvas scale to solve it
 
         if (Physics.Raycast(ray, out hit))
