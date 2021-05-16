@@ -1,7 +1,6 @@
 using Global;
-using TaskSystem.Objectives;
 using UnityEngine;
-using Object = UnityEngine.Object;
+using System;
 
 namespace TaskSystem
 {
@@ -14,39 +13,29 @@ namespace TaskSystem
         // Current active task
         private Task _activeTask;
 
+        public Task ActiveTask
+        {
+            get
+            {
+                return _activeTask;
+            }
+        }
+
+        // Action event that will be run when the Task is completed or failed
+        public static event Action<ToolType, bool> TaskEndedAction;// True if completed, False if failed
+
         public TaskController(ToolType toolType)
         {
             _activeTask = CreateTaskForTool(toolType);
         }
 
         /// <summary>
-        /// Cancel the current Task
+        /// Cancel the current Task.
+        /// Will send FAIL event
         /// </summary>
         public void CancelActiveTask()
         {
-            if (_activeTask == null)
-            {
-                Debug.LogError("There is no active task, to cancel.");
-                return;
-            }
-
-            _activeTask = null;
-            Debug.Log("Active Task has been cancelled.");
-        }
-
-        /// <summary>
-        /// Get all Objectives in scene, by their ToolType
-        /// </summary>
-        /// <param name="toolType">ToolType to specify Objective</param>
-        /// <returns></returns>
-        private Objective[] GetObjectivesInSceneByToolType(ToolType toolType)
-        {
-            switch (toolType)
-            {
-                case ToolType.CANNON:
-                    return Object.FindObjectsOfType<KillObjective>();
-            }
-            return null;
+            HandleTaskResult(false);
         }
 
         /// <summary>
@@ -56,8 +45,7 @@ namespace TaskSystem
         /// <returns></returns>
         private Task CreateTaskForTool(ToolType toolType)
         {
-            Objective[] objectives = GetObjectivesInSceneByToolType(toolType);
-            Task task = new Task(toolType, OnTaskCompletion, objectives);
+            Task task = new Task(toolType, OnTaskCompletion);
             return task;
         }
         
@@ -67,16 +55,24 @@ namespace TaskSystem
         /// <param name="completedTask">Task that is completed</param>
         private void OnTaskCompletion(Task completedTask)
         {
-            Debug.Log("Task completed");
             if (!completedTask.Equals(_activeTask))
             {
                 Debug.LogError("Other task got completed, instead of the active one!");
                 return;
             }
             
-            // Switch back to overworld
-            SceneController.SwitchSceneToOverWorld();
-            Debug.Log("Congrats, you completed the task!");
+            HandleTaskResult(true);
+        }
+
+        private void HandleTaskResult(bool isTaskCompleted)
+        {
+            Task completedTask = _activeTask;
+            
+            // Reset active task
+            _activeTask = null;
+
+            // Call the event that the player completed the Task
+            TaskEndedAction?.Invoke(completedTask.GetToolType(), isTaskCompleted);
         }
     }
 }

@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Global;
-using UnityEngine;
 
 namespace TaskSystem
 {
@@ -17,21 +17,17 @@ namespace TaskSystem
         private readonly Action<Task> _taskCompleteAction;
         
         // Array of all active Objectives (not yet completed)
-        private Objective[] _activeObjectives;
+        private readonly List<Objective> _activeObjectives = new List<Objective>();
 
         /// <summary>
         /// Constructor of Task
         /// </summary>
         /// <param name="toolType">ToolType used to complete Task</param>
         /// <param name="taskCompleteAction">Action for Task completion</param>
-        /// <param name="activeObjectives">Array of active Objectives</param>
-        public Task(ToolType toolType, Action<Task> taskCompleteAction, Objective[] activeObjectives)
+        public Task(ToolType toolType, Action<Task> taskCompleteAction)
         {
             _toolType = toolType;
             _taskCompleteAction = taskCompleteAction;
-            _activeObjectives = activeObjectives;
-
-            InitializeObjectives();
         }
 
         /// <summary>
@@ -44,11 +40,11 @@ namespace TaskSystem
         public void OnObjectiveCompletion(Objective completedObjective)
         {
             // Remove objective from array
-            _activeObjectives = _activeObjectives.Where(objective => !completedObjective.Equals(objective)).ToArray();
+            _activeObjectives.Remove(completedObjective);
 
-            Debug.Log("Objective complete");
+            //Debug.Log("Objective complete");
             
-            if (_activeObjectives.Length == 0)
+            if (_activeObjectives.Count == 0)
             {
                 OnTaskCompletion();
             }
@@ -64,15 +60,18 @@ namespace TaskSystem
         }
 
         /// <summary>
-        /// Initializes all active objectives.
-        /// NEEDS TO BE CALLED ON TASK CREATION!
+        /// Returns this Task's tooltype
         /// </summary>
-        private void InitializeObjectives()
+        /// <returns></returns>
+        public ToolType GetToolType()
         {
-            foreach (Objective activeObjective in _activeObjectives)
-            {
-                activeObjective.InitializeObjective(OnObjectiveCompletion);
-            }
+            return _toolType;
+        }
+
+        public void RegisterObjective(Objective objective)
+        {
+            _activeObjectives.Add(objective);
+            objective.InitializeObjective(OnObjectiveCompletion);
         }
     }
 }

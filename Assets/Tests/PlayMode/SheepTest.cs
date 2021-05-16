@@ -14,7 +14,7 @@ namespace Tests.PlayMode
             var gameObject = new GameObject();
             var sheep = gameObject.AddComponent<Sheep>();
         
-            sheep.Move(Direction.NORTH);
+            sheep.Move(Vector3.forward);
         
             yield return new WaitForSeconds(Sheep.MoveDuration);
         
@@ -27,7 +27,7 @@ namespace Tests.PlayMode
             var gameObject = new GameObject();
             var sheep = gameObject.AddComponent<Sheep>();
         
-            sheep.Move(Direction.EAST);
+            sheep.Move(Vector3.down);
         
             yield return new WaitForSeconds(Sheep.MoveDuration);
         
@@ -40,7 +40,7 @@ namespace Tests.PlayMode
             var gameObject = new GameObject();
             var sheep = gameObject.AddComponent<Sheep>();
         
-            sheep.Move(Direction.SOUTH);
+            sheep.Move(Vector3.down);
         
             yield return new WaitForSeconds(Sheep.MoveDuration);
         
@@ -53,7 +53,7 @@ namespace Tests.PlayMode
             var gameObject = new GameObject();
             var sheep = gameObject.AddComponent<Sheep>();
         
-            sheep.Move(Direction.WEST);
+            sheep.Move(Vector3.down);
         
             yield return new WaitForSeconds(Sheep.MoveDuration);
         

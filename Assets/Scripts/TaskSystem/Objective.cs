@@ -1,4 +1,5 @@
 using System;
+using Global;
 using UnityEngine;
 
 namespace TaskSystem
@@ -10,6 +11,11 @@ namespace TaskSystem
     {
         // Action that will let Task know, Objective is completed
         private Action<Objective> _completeObjectiveAction;
+
+        private void Awake()
+        {
+            RegisterObjectiveToActiveTask();
+        }
 
         /// <summary>
         /// Initializes Objective
@@ -32,6 +38,16 @@ namespace TaskSystem
             }
             
             _completeObjectiveAction.Invoke(this);
+        }
+        
+        private void RegisterObjectiveToActiveTask()
+        {
+            if (GameManager.Instance == null || GameManager.Instance.TaskController == null)
+            {
+                Debug.LogError("No TaskController found! Load Task from OverWorld!");
+                return;
+            }
+            GameManager.Instance.TaskController.ActiveTask.RegisterObjective(this);
         }
     }
 }
