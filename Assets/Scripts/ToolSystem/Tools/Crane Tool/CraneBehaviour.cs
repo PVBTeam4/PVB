@@ -102,7 +102,7 @@ public class CraneBehaviour : MonoBehaviour
 
         float distance = Vector3.Distance(cableStartPosition, clawPosition);
 
-        print("distance: " + distance);
+        //print("distance: " + distance);
 
         craneCable.localScale = craneCable.localScale.ChangeY(distance);
 

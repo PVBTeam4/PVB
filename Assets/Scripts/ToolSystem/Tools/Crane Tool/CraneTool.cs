@@ -44,6 +44,8 @@ public class CraneTool : Tool
 
     private float isLiftingScale = 0;// 0 Is idle, 1 = moving down, -1 = moving up
 
+    private GameObject coupeledObject = null;
+
     [Header("Mast rotation")]
 
     [SerializeField]
@@ -137,7 +139,15 @@ public class CraneTool : Tool
 
     private void StopLiftingObject()
     {
-        isLiftingScale = -1;
+        isLiftingScale = 0;
+
+        if (coupeledObject != null)
+        {
+            Destroy(coupeledObject);
+
+            coupeledObject = null;
+        }
+
         print("stop");
     }
 
@@ -161,7 +171,7 @@ public class CraneTool : Tool
 
             if (craneClaw.position.y >= armPosition.y + hookLiftStart - margin)
             {
-                isLiftingScale = 0;
+                StopLiftingObject();
             }
             else if (craneClaw.position.y <= armPosition.y + hookLiftEnd + margin)
             {
@@ -188,7 +198,30 @@ public class CraneTool : Tool
     {
         bool _return = false;
 
-        Debug.LogWarning("coupeling object");
+        if (coupeledObject == null)
+        {
+            coupeledObject = _object;
+
+            _return = true;
+
+            // Set the parent of the object to that of the Claw
+            _object.transform.SetParent(craneClaw);
+
+            // reset the local position
+            _object.transform.localPosition = new Vector3();
+
+            // Stop the movement of the object
+            MoveInDirection _movingScript = _object.GetComponent<MoveInDirection>();
+
+            if (_movingScript)
+                _movingScript.canMove = false;
+
+            Debug.LogWarning("coupeling object");
+        }
+        else
+        {
+
+        }
 
         return _return;
     }
