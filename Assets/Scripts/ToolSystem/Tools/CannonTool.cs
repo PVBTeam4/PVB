@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 
 namespace ToolSystem.Tools
 {
@@ -8,10 +9,6 @@ namespace ToolSystem.Tools
     /// </summary>
     public class CannonTool : Tool
     {
-        // Prefab of the bullet projectile
-        [SerializeField]
-        private GameObject bullet;
-
         [SerializeField]
         //the bottom of the Gun 
         private Transform Gunfloor;
@@ -48,7 +45,16 @@ namespace ToolSystem.Tools
         private void FireProjectile()
         {
             HandleAccuracy();
-            Instantiate(bullet, bulletSpawnLocation.position, transform.rotation).transform.parent = _bulletHolderObject.transform;
+            
+            Vector3 bulletSpawnPosition = bulletSpawnLocation.position;
+            
+            // Muzzle flash spawn
+            ParticleUtil.SpawnParticle("MuzzleFlash", bulletSpawnPosition);
+            
+            // Bullet Spawn
+            GameObject bulletGameObject = ParticleUtil.SpawnParticle("BulletForShip", bulletSpawnPosition);
+            bulletGameObject.gameObject.transform.rotation = transform.rotation;
+            bulletGameObject.transform.parent = _bulletHolderObject.transform;
         }
 
         /// <summary>

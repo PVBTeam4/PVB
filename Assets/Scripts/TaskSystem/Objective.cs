@@ -47,6 +47,10 @@ namespace TaskSystem
                 Debug.LogError("No TaskController found! Load Task from OverWorld!");
                 return;
             }
+
+            if (GameManager.Instance.TaskController.ActiveTask == null) return;
+
+
             GameManager.Instance.TaskController.ActiveTask.RegisterObjective(this);
         }
     }

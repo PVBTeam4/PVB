@@ -2,6 +2,7 @@ using Gun;
 using Properties.Tags;
 using UnityEngine;
 using UnityEngine.Events;
+using Utils;
 
 namespace TaskSystem.Objectives
 {
@@ -78,19 +79,15 @@ namespace TaskSystem.Objectives
                 BulletMovement bulletMovement = other.gameObject.GetComponent<BulletMovement>();
                 if (bulletMovement == null) return;
                 DamageBy(bulletMovement.damage);
+
+                // Spawn Impact Particle
+                ParticleUtil.SpawnParticle("ImpactBoot", bulletMovement.transform.position);
             } else if (other.gameObject.CompareTag(targetTag))
             {
                 PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
                 if (playerHealth == null) return;
                 playerHealth.DamageBy(damage);
-                DestroyEnemy();
             }
-        }
-        
-        public void DestroyEnemy()
-        {
-            Destroy(gameObject);
-            // TODO Particle
         }
     }
 }
