@@ -7,6 +7,8 @@ using UnityEditor;
 
 public class CraneBehaviour : MonoBehaviour
 {
+    [Header("Crane Variables")]
+
     [SerializeField]
     private Transform craneMast;
 
@@ -65,13 +67,7 @@ public class CraneBehaviour : MonoBehaviour
         // Clamp the rotation
         //rotationTowardsMouse.y = Mathf.Clamp(rotationTowardsMouse.y, 0, 10);
 
-        Quaternion rotation = Quaternion.Lerp(craneMast.rotation, rotationTowardsMouse, craneRotationSpeed * Time.deltaTime);
-
-        //float _angle = Mathf.Lerp(craneMast.eulerAngles.y, rotationTowardsMouse.eulerAngles.y, craneRotationSpeed * Time.deltaTime);
-
-        //_angle = Mathf.Clamp(_angle, transform.rotation.eulerAngles.y - 90, transform.rotation.eulerAngles.y + 90);
-
-        //craneMast.eulerAngles = new Vector3(craneMast.eulerAngles.x, _angle, craneMast.eulerAngles.z);
+        Quaternion rotation = Quaternion.Slerp(craneMast.rotation, rotationTowardsMouse, craneRotationSpeed * Time.deltaTime);
 
         // Set the rotation of the Crane to that of the new one towards the mouse
         craneMast.rotation = rotation;
@@ -81,8 +77,8 @@ public class CraneBehaviour : MonoBehaviour
     private void MoveCraneHookAlongArm(Vector3 mousePosition)
     {
         // Lerp the given Transform towards the given target Transform
-        float step = craneHookFollowSpeed * Time.deltaTime; // calculate distance to move
-        craneHook.position = Vector3.MoveTowards(craneHook.position, targetTransform.position, step);
+        float step = craneHookFollowSpeed * Time.deltaTime;// Calculate distance to move
+        craneHook.position = Vector3.Lerp(craneHook.position, targetTransform.position, step);
 
         Vector3 localPosition = craneHook.localPosition;
         craneHook.localPosition = new Vector3(0, 0, localPosition.z);
