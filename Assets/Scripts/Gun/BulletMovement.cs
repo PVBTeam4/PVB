@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using Utils;
 
 namespace Gun
 {
@@ -42,16 +44,28 @@ namespace Gun
         /// </summary>
         private void OnTriggerEnter(Collider col)
         {   
-            //Destroy the bullet after collision
-            Destroy(gameObject);
+            // Pool the bullet after collision
+            PoolBullet();
         }
 
         /// <summary>
         /// Destroys the game object in the time of the lifeSpan
         /// </summary>
         private void SetLifeSpanTimer()
-        {  
-            Destroy(gameObject, lifeSpan);
+        {
+
+            StartCoroutine(LifeSpanTimer());
+        }
+
+        private IEnumerator LifeSpanTimer()
+        {
+            yield return new WaitForSeconds(lifeSpan);
+            PoolBullet();
+        }
+
+        private void PoolBullet()
+        {
+            ObjectPool.Instance.PoolObject(gameObject);
         }
     }
 }
