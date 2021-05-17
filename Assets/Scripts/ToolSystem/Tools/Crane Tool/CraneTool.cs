@@ -12,6 +12,9 @@ public class CraneTool : Tool
 
     private float liftingProcess;
 
+    [SerializeField]
+    private Vector3 offset;
+
     [Header("Mast rotation")]
 
     [Header("Transform limitations")]
@@ -86,7 +89,7 @@ public class CraneTool : Tool
                 Vector3 pos = hitPosition.ClampMagnitudeMinMax(maxRadius, minRadius);
                 pos.y = 0;
 
-                transform.position = pos;
+                transform.position = pos + offset;
             }
         }
         else
