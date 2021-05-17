@@ -39,6 +39,9 @@ public class CraneTool : Tool
     [SerializeField]
     private float hookLiftSpeed = 3;
 
+    [SerializeField]
+    private float clawLiftMargin = 0.08f;// How soon before it returns
+
     private float isLiftingScale = 0;// 0 Is idle, 1 = moving down, -1 = moving up
 
     [Header("Mast rotation")]
@@ -62,7 +65,7 @@ public class CraneTool : Tool
 
         // Reset the crane claw position
         Vector3 armPosition = craneArm.position;
-        craneClaw.position = craneClaw.position.ChangeY(armPosition.y + hookLiftStart);
+        craneClaw.position = craneClaw.position.ChangeY(armPosition.y + hookLiftStart - clawLiftMargin);
 
         // Subscribe the OnClawCollisionEvent to the Collision event on the claw
         craneClaw.GetComponent<CraneClaw>().CollisionEvent += OnClawCollisionEvent;
@@ -154,7 +157,7 @@ public class CraneTool : Tool
 
             craneClaw.position = Vector3.Lerp(pos, endPosition, (hookLiftSpeed * Mathf.Abs(isLiftingScale)) * Time.deltaTime);
 
-            float margin = 0.08f;
+            float margin = clawLiftMargin;
 
             if (craneClaw.position.y >= armPosition.y + hookLiftStart - margin)
             {
