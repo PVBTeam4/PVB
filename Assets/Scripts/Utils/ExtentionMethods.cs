@@ -136,6 +136,18 @@ public static class ExtentionMethods
     }
 
     /// <summary>
+    /// Clamps the Vector3 axis with given Min, Max Vector3's
+    /// </summary>
+    /// <param name="_vector3"></param>
+    /// <param name="_min">Dont let the axis be less than this</param>
+    /// <param name="_max">Dont let the axis be more than this</param>
+    /// <returns>Vector3</returns>
+    public static Vector3 ClampY(this Vector3 _vector3, float _min, float _max)
+    {
+        return new Vector3(_vector3.x, Mathf.Clamp(_vector3.y, _min, _max), _vector3.z);
+    }
+
+    /// <summary>
     /// Clamps the Vector3 magnitude with given Min, Max Vector3's
     /// </summary>
     /// <param name="_vector3"></param>

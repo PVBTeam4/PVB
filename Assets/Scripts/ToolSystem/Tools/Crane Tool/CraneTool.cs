@@ -36,6 +36,11 @@ public class CraneTool : Tool
     [SerializeField]
     private float hookLiftEnd = 10;
 
+    [SerializeField]
+    private float hookLiftSpeed = 3;
+
+    private float isLiftingScale = 0;// 0 Is idle, 1 = moving down, -1 = moving up
+
     [Header("Mast rotation")]
 
     [SerializeField]
@@ -52,6 +57,14 @@ public class CraneTool : Tool
     private void Start()
     {
         InputManager.MouseMovementAction += UpdateMousePosition;
+
+        InputManager.ButtonInputAction += LeftAction;
+
+        // Reset the crane claw position
+        craneClaw.localPosition = craneClaw.localPosition.ChangeY(hookLiftStart);
+
+        // Subscribe the OnClawCollisionEvent to the Collision event on the claw
+        craneClaw.GetComponent<CraneClaw>().CollisionEvent += OnClawCollisionEvent;
     }
 
     private void UpdateMousePosition(Vector3 position)
@@ -98,6 +111,108 @@ public class CraneTool : Tool
         }
     }
 
+    private void LeftAction(ButtonInputType type, float amount)
+    {
+        if (amount > 0)
+        {
+            if (type.Equals(ButtonInputType.LeftMouse))
+            {
+                if (isLiftingScale == 0)
+                    StartLiftingObject();
+            }       
+        }
+    }
+
+    
+
+    private void StartLiftingObject()
+    {
+        isLiftingScale = 1;
+        print("start");
+    }
+
+    private void StopLiftingObject()
+    {
+        isLiftingScale = -1;
+        print("stop");
+    }
+
+    private void UpdateLiftingProces()
+    {
+        if (isLiftingScale != 0)
+        {
+            //print("update");
+            Vector3 pos = craneClaw.localPosition;
+            Vector3 endPosition = new Vector3(pos.x, hookLiftStart, pos.z);
+
+            if (isLiftingScale == 1)
+            endPosition = new Vector3(pos.x, hookLiftEnd, pos.z);
+
+
+            craneClaw.localPosition = Vector3.Lerp(pos, endPosition, (hookLiftSpeed * Mathf.Abs(isLiftingScale)) * Time.deltaTime);
+
+            float margin = 0.1f;
+
+            if (craneClaw.localPosition.y >= hookLiftStart - margin)
+            {
+                isLiftingScale = 0;
+            }
+            else if (craneClaw.localPosition.y <= hookLiftEnd + margin)
+            {
+                isLiftingScale = -1;
+                print(endPosition);
+            }
+
+            //Debug.Log(craneClaw.localPosition.y);
+
+            //craneClaw.position = craneClaw.position.ClampY(craneArm.position.y + hookLiftStart, craneArm.position.y + hookLiftEnd);
+        }
+    }
+
+    private void Update()
+    {
+        UpdateLiftingProces();
+    }
+
+    private void OnClawCollisionEvent(GameObject _object)
+    {
+        CoupleObject(_object);
+    }
+
+    private bool CoupleObject(GameObject _object)
+    {
+        bool _return = false;
+
+
+
+        return _return;
+    }
+
+    private void CancelLifting()
+    {
+
+    }
+
+    private void GetLiftObjective()
+    {
+
+    }
+
+    public override void MoveTarget(Vector3 location)
+    {
+    }
+
+    public override void UseLeftAction(float pressedValue)
+    {
+        
+    }
+
+    public override void UseRightAction(float pressedValue)
+    {
+    }
+
+
+
     /// <summary>
     /// Visual debug
     /// </summary>
@@ -110,18 +225,23 @@ public class CraneTool : Tool
 
         Vector3 clawPosition = craneClaw.position;
 
-        Vector3 pos = new Vector3(clawPosition.x, armPosition.y - hookLiftStart, clawPosition.z);
+        Vector3 startPos = new Vector3(clawPosition.x, armPosition.y - hookLiftStart, clawPosition.z);
+        Vector3 endPos = new Vector3(clawPosition.x, armPosition.y + hookLiftEnd, clawPosition.z);
 
         float _radius = 0.5f;
 
         UnityEditor.Handles.color = Color.red;
-        UnityEditor.Handles.DrawWireDisc(pos, Vector3.up, _radius);
+        UnityEditor.Handles.DrawWireDisc(startPos, Vector3.up, _radius);
 
+        // Up down range line
         UnityEditor.Handles.color = Color.blue;
-        UnityEditor.Handles.DrawLine(pos, clawPosition);
+        UnityEditor.Handles.DrawLine(startPos, endPos);
+
+        UnityEditor.Handles.color = Color.yellow;
+        UnityEditor.Handles.DrawWireDisc(clawPosition, Vector3.up, _radius);
 
         UnityEditor.Handles.color = Color.green;
-        UnityEditor.Handles.DrawWireDisc(clawPosition, Vector3.up, _radius);
+        UnityEditor.Handles.DrawWireDisc(endPos, Vector3.up, _radius);
 
         Quaternion rotation;
         Vector3 addDistanceToDirection;
@@ -146,32 +266,5 @@ public class CraneTool : Tool
         // Draw maximum radius
         UnityEditor.Handles.color = Color.red;
         UnityEditor.Handles.DrawWireDisc(startPosition, Vector3.up, maxRadius);
-    }
-
-    private void CancelLifting()
-    {
-
-    }
-
-    private void StartLiftingObject()
-    {
-
-    }
-
-    private void GetLiftObjective()
-    {
-
-    }
-
-    public override void MoveTarget(Vector3 location)
-    {
-    }
-
-    public override void UseLeftAction(float pressedValue)
-    {
-    }
-
-    public override void UseRightAction(float pressedValue)
-    {
     }
 }
