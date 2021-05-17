@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class CraneBehaviour : MonoBehaviour
 {
@@ -16,24 +19,22 @@ public class CraneBehaviour : MonoBehaviour
     [SerializeField]
     private Transform targetTransform;
 
+    [SerializeField]
+    private float craneAngleMax = 45;
+
+    [SerializeField]
+    private float craneRotationSpeed = 5;
+
     [Header("Hook Variables")]
 
     [SerializeField]
-    private float craneHookFollowSpeed = 0.5f;
+    private float craneHookFollowSpeed = 0.75f;
 
     [SerializeField]
-    private float minRadius = 0.5f;
+    private float minRadius = 2.5f;
 
     [SerializeField]
-    private float maxRadius = 3;
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private float maxRadius = 7.5f;
 
     // Update is called once per frame
     void Update()
@@ -52,7 +53,7 @@ public class CraneBehaviour : MonoBehaviour
     private void RotateMastTowardsMouse(Vector3 mousePosition) 
     {
         // Get the relative position of the Mouse & Crane
-        Vector3 relativePos = mousePosition - transform.position;
+        Vector3 relativePos = mousePosition - craneMast.position;
 
         // the second argument, upwards, defaults to Vector3.up
         Quaternion rotationTowardsMouse = Quaternion.LookRotation(relativePos, Vector3.up);
@@ -61,21 +62,53 @@ public class CraneBehaviour : MonoBehaviour
         rotationTowardsMouse.x = 0;
         rotationTowardsMouse.z = 0;
 
+        // Clamp the rotation
+        //rotationTowardsMouse.y = Mathf.Clamp(rotationTowardsMouse.y, 0, 10);
+
+        Quaternion rotation = Quaternion.Lerp(craneMast.rotation, rotationTowardsMouse, craneRotationSpeed * Time.deltaTime);
+
+        //float _angle = Mathf.Lerp(craneMast.eulerAngles.y, rotationTowardsMouse.eulerAngles.y, craneRotationSpeed * Time.deltaTime);
+
+        //_angle = Mathf.Clamp(_angle, transform.rotation.eulerAngles.y - 90, transform.rotation.eulerAngles.y + 90);
+
+        //craneMast.eulerAngles = new Vector3(craneMast.eulerAngles.x, _angle, craneMast.eulerAngles.z);
+
         // Set the rotation of the Crane to that of the new one towards the mouse
-        craneMast.rotation = rotationTowardsMouse;
+        craneMast.rotation = rotation;
     }
 
     // Moves crane hook towards the mouse position along the 
     private void MoveCraneHookAlongArm(Vector3 mousePosition)
     {
         // Lerp the given Transform towards the given target Transform
-        craneHook.position = Vector3.Lerp(craneHook.position, targetTransform.position, craneHookFollowSpeed * Time.deltaTime);
+        float step = craneHookFollowSpeed * Time.deltaTime; // calculate distance to move
+        craneHook.position = Vector3.MoveTowards(craneHook.position, targetTransform.position, step);
 
         Vector3 localPosition = craneHook.localPosition;
         craneHook.localPosition = new Vector3(0, 0, localPosition.z);
+    }
 
+    /// <summary>
+    /// Visual debug
+    /// </summary>
+    void OnDrawGizmos()
+    {
+        // Start position to calculate from
+        Vector3 startPosition = craneMast.position;
 
-        // Clamp the Hook along the arm via between the min and max radius
-        //z = clamp(z, minRadius, maxRadius);
+        Quaternion rotation;
+        Vector3 addDistanceToDirection;
+
+        // Draw the max angle
+
+        // local coordinate rotation around the Y axis to the given angle
+        rotation = Quaternion.AngleAxis(craneAngleMax, Vector3.up);
+        // add the desired distance to the direction
+        addDistanceToDirection = rotation * craneMast.forward;
+
+        UnityEditor.Handles.color = Color.yellow;
+        UnityEditor.Handles.DrawLine(startPosition + (addDistanceToDirection * minRadius), startPosition + (addDistanceToDirection * maxRadius));
+        UnityEditor.Handles.DrawLine(startPosition + (addDistanceToDirection * -minRadius), startPosition + (addDistanceToDirection * -maxRadius));
     }
 }
+
