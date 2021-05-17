@@ -61,7 +61,8 @@ public class CraneTool : Tool
         InputManager.ButtonInputAction += LeftAction;
 
         // Reset the crane claw position
-        craneClaw.localPosition = craneClaw.localPosition.ChangeY(hookLiftStart);
+        Vector3 armPosition = craneArm.position;
+        craneClaw.position = craneClaw.position.ChangeY(armPosition.y + hookLiftStart);
 
         // Subscribe the OnClawCollisionEvent to the Collision event on the claw
         craneClaw.GetComponent<CraneClaw>().CollisionEvent += OnClawCollisionEvent;
@@ -99,7 +100,7 @@ public class CraneTool : Tool
                 Vector3 hitPosition = hit.point;
 
                 // Set the position to the detected raycastpoint and clamp it
-                Vector3 pos = hitPosition.ClampMagnitudeMinMax(maxRadius, minRadius);
+                Vector3 pos = hitPosition.ClampMagnitudeMinMax(minRadius, maxRadius);
                 pos.y = 0;
 
                 transform.position = pos + offset;
@@ -141,26 +142,27 @@ public class CraneTool : Tool
     {
         if (isLiftingScale != 0)
         {
+            Vector3 armPosition = craneArm.position;
+
             //print("update");
-            Vector3 pos = craneClaw.localPosition;
-            Vector3 endPosition = new Vector3(pos.x, hookLiftStart, pos.z);
+            Vector3 pos = craneClaw.position;
+            Vector3 endPosition = new Vector3(pos.x, armPosition.y + hookLiftStart, pos.z);
 
             if (isLiftingScale == 1)
-            endPosition = new Vector3(pos.x, hookLiftEnd, pos.z);
+            endPosition = new Vector3(pos.x, armPosition.y + hookLiftEnd, pos.z);
 
 
-            craneClaw.localPosition = Vector3.Lerp(pos, endPosition, (hookLiftSpeed * Mathf.Abs(isLiftingScale)) * Time.deltaTime);
+            craneClaw.position = Vector3.Lerp(pos, endPosition, (hookLiftSpeed * Mathf.Abs(isLiftingScale)) * Time.deltaTime);
 
-            float margin = 0.1f;
+            float margin = 0.08f;
 
-            if (craneClaw.localPosition.y >= hookLiftStart - margin)
+            if (craneClaw.position.y >= armPosition.y + hookLiftStart - margin)
             {
                 isLiftingScale = 0;
             }
-            else if (craneClaw.localPosition.y <= hookLiftEnd + margin)
+            else if (craneClaw.position.y <= armPosition.y + hookLiftEnd + margin)
             {
                 isLiftingScale = -1;
-                print(endPosition);
             }
 
             //Debug.Log(craneClaw.localPosition.y);
@@ -183,7 +185,7 @@ public class CraneTool : Tool
     {
         bool _return = false;
 
-
+        Debug.LogWarning("coupeling object");
 
         return _return;
     }
@@ -225,11 +227,12 @@ public class CraneTool : Tool
 
         Vector3 clawPosition = craneClaw.position;
 
-        Vector3 startPos = new Vector3(clawPosition.x, armPosition.y - hookLiftStart, clawPosition.z);
+        Vector3 startPos = new Vector3(clawPosition.x, armPosition.y + hookLiftStart, clawPosition.z);
         Vector3 endPos = new Vector3(clawPosition.x, armPosition.y + hookLiftEnd, clawPosition.z);
 
         float _radius = 0.5f;
 
+        // Start position
         UnityEditor.Handles.color = Color.red;
         UnityEditor.Handles.DrawWireDisc(startPos, Vector3.up, _radius);
 
@@ -237,9 +240,11 @@ public class CraneTool : Tool
         UnityEditor.Handles.color = Color.blue;
         UnityEditor.Handles.DrawLine(startPos, endPos);
 
+        // Claw position
         UnityEditor.Handles.color = Color.yellow;
         UnityEditor.Handles.DrawWireDisc(clawPosition, Vector3.up, _radius);
 
+        // End position
         UnityEditor.Handles.color = Color.green;
         UnityEditor.Handles.DrawWireDisc(endPos, Vector3.up, _radius);
 

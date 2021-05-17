@@ -154,7 +154,7 @@ public static class ExtentionMethods
     /// <param name="_min">Dont let the magnitude be less than this</param>
     /// <param name="_max">Dont let the magnitude be more than this</param>
     /// <returns>Vector3</returns>
-    public static Vector3 ClampMagnitudeMinMax(this Vector3 _vector3, float max, float min)
+    public static Vector3 ClampMagnitudeMinMax(this Vector3 _vector3, float min, float max)
     {
         double sm = _vector3.sqrMagnitude;
         if (sm > (double)max * (double)max) return _vector3.normalized * max;

@@ -7,7 +7,7 @@ using UnityEditor;
 
 public class CraneBehaviour : MonoBehaviour
 {
-    [Header("Crane Variables")]
+    [Header("Crane Transforms")]
 
     [SerializeField]
     private Transform craneMast;
@@ -17,6 +17,14 @@ public class CraneBehaviour : MonoBehaviour
 
     [SerializeField]
     private Transform craneHook;
+
+    [SerializeField]
+    private Transform craneCable;
+
+    [SerializeField]
+    private Transform craneClaw;
+
+    [Header("Crane Variables")]
 
     [SerializeField]
     private Transform targetTransform;
@@ -49,6 +57,8 @@ public class CraneBehaviour : MonoBehaviour
 
         // Move the craneHook transform towards the targetTransformPosition along its Z axis using the MoveCraneHookAlongArm function
         MoveCraneHookAlongArm(targetTransformPosition);
+
+        ScaleCableToClaw();
     }
 
     // Rotates the crane towards the mouse position, ignoring the X rotation
@@ -82,6 +92,20 @@ public class CraneBehaviour : MonoBehaviour
 
         Vector3 localPosition = craneHook.localPosition;
         craneHook.localPosition = new Vector3(0, 0, localPosition.z);
+    }
+
+    // Scales the given cable towards the given claw. Using the distance between their positions
+    private void ScaleCableToClaw()
+    {
+        Vector3 cableStartPosition = craneCable.position;
+        Vector3 clawPosition = craneClaw.position;
+
+        float distance = Vector3.Distance(cableStartPosition, clawPosition);
+
+        print("distance: " + distance);
+
+        craneCable.localScale = craneCable.localScale.ChangeY(distance);
+
     }
 
     /// <summary>
