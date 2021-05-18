@@ -283,7 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   overworldSceneArray:
   - {fileID: 11400000, guid: cf48043ffbd204343bf67a37a8b9de77, type: 2}
-  - {fileID: 11400000, guid: f9e91c2d8ca06dd4b8b01f000e46bb69, type: 2}
+  - {fileID: 11400000, guid: 84d69c27a0fbf504e97c34d8c0f9de6a, type: 2}
   - {fileID: 11400000, guid: 191c25ece05f51042b1d5a74ef5f121c, type: 2}
   taskSceneArray:
   - {fileID: 11400000, guid: a6daebac531a8bc448a992c30cd29f24, type: 2}
