@@ -1,6 +1,7 @@
 using Global;
 using UnityEngine;
 using System;
+using TaskSystem.Tasks;
 
 namespace TaskSystem
 {
@@ -45,8 +46,12 @@ namespace TaskSystem
         /// <returns></returns>
         private Task CreateTaskForTool(ToolType toolType)
         {
-            Task task = new Task(toolType, OnTaskCompletion);
-            return task;
+            switch (toolType)
+            {
+                case ToolType.CANNON:
+                    return new CannonTask(toolType, OnTaskCompletion);
+            }
+            return null;
         }
         
         /// <summary>

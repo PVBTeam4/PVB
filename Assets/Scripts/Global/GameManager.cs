@@ -1,3 +1,4 @@
+using Statistics;
 using UnityEngine;
 using TaskSystem;
 using ToolSystem;
@@ -10,6 +11,8 @@ namespace Global
     /// </summary>
     public class GameManager : MonoBehaviour
     {
+        public readonly StatisticsTracker StatisticsTracker = new StatisticsTracker();
+        
         // These
         public ToolController ToolController;
         public TaskController TaskController;
@@ -58,14 +61,6 @@ namespace Global
                 TaskController.CancelActiveTask();
                 TaskController = null;
             }
-        }
-
-        private void Update() {
-            Test();
-        }
-
-        public void Test() {
-            
         }
     }
 }

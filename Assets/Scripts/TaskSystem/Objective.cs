@@ -48,7 +48,11 @@ namespace TaskSystem
                 return;
             }
 
-            if (GameManager.Instance.TaskController.ActiveTask == null) return;
+            if (GameManager.Instance.TaskController.ActiveTask == null)
+            {
+                Debug.LogError("No active Task found!");
+                return;
+            }
 
 
             GameManager.Instance.TaskController.ActiveTask.RegisterObjective(this);
