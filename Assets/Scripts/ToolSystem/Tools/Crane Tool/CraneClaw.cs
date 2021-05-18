@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Properties.Tags;
 
 public class CraneClaw : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, TagSelector]
     private string liftObjectTag = "LiftObject";
 
     public bool canCheckCollision = false;

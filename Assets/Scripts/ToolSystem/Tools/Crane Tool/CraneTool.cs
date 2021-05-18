@@ -57,8 +57,6 @@ public class CraneTool : Tool
     [SerializeField]
     private Transform craneClaw;
 
-    
-
     private void Start()
     {
         InputManager.MouseMovementAction += UpdateMousePosition;
@@ -212,6 +210,9 @@ public class CraneTool : Tool
 
             // Stop the movement of the object
             MoveInDirection _movingScript = _object.GetComponent<MoveInDirection>();
+
+            // Disable the water script
+            //MoveInDirection
 
             if (_movingScript)
                 _movingScript.canMove = false;
