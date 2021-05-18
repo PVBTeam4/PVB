@@ -106,10 +106,6 @@ namespace Utils
         /// <returns></returns>
         public GameObject GetObject(string objectName, bool onlyPooled = false)
         {
-            foreach (var poolKey in _pool.Keys)
-            {
-                Debug.Log(poolKey);
-            }
 
             if (!_pool.ContainsKey(objectName))
             {

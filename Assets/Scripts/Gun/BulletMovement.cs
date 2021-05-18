@@ -65,6 +65,11 @@ namespace Gun
 
         private void PoolBullet()
         {
+            if (ObjectPool.Instance == null)
+            {
+                Destroy(gameObject);
+                return;
+            }
             ObjectPool.Instance.PoolObject(gameObject);
         }
     }
