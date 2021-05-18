@@ -204,6 +204,43 @@ public static class ExtentionMethods
     }
 
     #endregion
+    
+    #region Add
+
+    /// <summary>
+    /// Adds a given value to a single axis of the Quaternion (X)
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="change">float Amount to add to the axis</param>
+    /// <returns>Quaternion</returns>
+    public static Quaternion ChangeX(this Quaternion value, float change)
+    {
+        return Quaternion.Euler(change, value.y, value.z);
+    }
+
+    /// <summary>
+    /// Adds a given value to a single axis of the Quaternion (Y)
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="change">float Amount to add to the axis</param>
+    /// <returns>Quaternion</returns>
+    public static Quaternion ChangeY(this Quaternion value, float change)
+    {
+        return Quaternion.Euler(value.x + change, change, value.z);
+    }
+
+    /// <summary>
+    /// Adds a given value to a single axis of the Quaternion (Z)
+    /// </summary>
+    /// <param name="value"></param>
+    /// <param name="change">float Amount to add to the axis</param>
+    /// <returns>Quaternion</returns>
+    public static Quaternion ChangeZ(this Quaternion value, float change)
+    {
+        return Quaternion.Euler(value.x, value.y, change);
+    }
+
+    #endregion
 
     #region Functions
 

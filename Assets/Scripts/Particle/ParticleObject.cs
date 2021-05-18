@@ -19,7 +19,7 @@ namespace Particle
 
         private void HandleParticleFinished()
         {
-            if (_particleSystem.IsAlive()) return;
+            if (_particleSystem && _particleSystem.IsAlive()) return;
             ObjectPool.Instance.PoolObject(gameObject);
         }
 

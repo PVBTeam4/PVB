@@ -59,7 +59,7 @@ namespace ToolSystem.Tools
             // Muzzle flash spawn
             GameObject p = ParticleUtil.SpawnParticle("MuzzleFlash", bulletSpawnLocation);
 
-            //p.transform.rotation = p.transform.rotation.
+            p.transform.rotation = p.transform.rotation.ChangeX(90);
             
             
             // Bullet Spawn
