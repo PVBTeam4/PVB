@@ -7,7 +7,7 @@ namespace TaskSystem
     /// <summary>
     /// Class that will keep track of all Objectives within Task
     /// </summary>
-    public class Task
+    public abstract class Task
     {
         // ToolType used to complete task
         private readonly ToolType _toolType;
@@ -16,7 +16,7 @@ namespace TaskSystem
         private readonly Action<Task> _taskCompleteAction;
         
         // Array of all active Objectives (not yet completed)
-        private readonly List<Objective> _activeObjectives = new List<Objective>();
+        protected readonly List<Objective> ActiveObjectives = new List<Objective>();
 
         /// <summary>
         /// Constructor of Task
@@ -39,15 +39,15 @@ namespace TaskSystem
         public void OnObjectiveCompletion(Objective completedObjective)
         {
             // Remove objective from array
-            _activeObjectives.Remove(completedObjective);
+            ActiveObjectives.Remove(completedObjective);
 
-            //Debug.Log("Objective complete");
-            
-            if (_activeObjectives.Count == 0)
+            if (isTaskCompleted())
             {
                 OnTaskCompletion();
             }
         }
+
+        protected abstract bool isTaskCompleted();
 
         /// <summary>
         /// Call TaskComplete action, to let TaskController know
@@ -69,7 +69,7 @@ namespace TaskSystem
 
         public void RegisterObjective(Objective objective)
         {
-            _activeObjectives.Add(objective);
+            ActiveObjectives.Add(objective);
             objective.InitializeObjective(OnObjectiveCompletion);
         }
     }
