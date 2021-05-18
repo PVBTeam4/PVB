@@ -9,6 +9,8 @@ namespace ToolSystem.Tools
     /// </summary>
     public class CannonTool : Tool
     {
+        [Header("Transforms")]
+    
         [SerializeField]
         //the bottom of the Gun 
         private Transform Gunfloor;
@@ -16,6 +18,12 @@ namespace ToolSystem.Tools
         // Spawnlocation of the projectile
         [SerializeField]
         private Transform bulletSpawnLocation;
+        
+        [Header("Transforms")]
+        
+        // Spawnlocation of the projectile
+        [SerializeField]
+        private ParticleSystem[] shootParticleSystems;
 
         // A parent object is used to organize all the active projectiles in the scene
         private GameObject _bulletHolderObject;
@@ -49,10 +57,13 @@ namespace ToolSystem.Tools
             Vector3 bulletSpawnPosition = bulletSpawnLocation.position;
             
             // Muzzle flash spawn
-            ParticleUtil.SpawnParticle("MuzzleFlash", bulletSpawnPosition);
+            GameObject p = ParticleUtil.SpawnParticle("MuzzleFlash", bulletSpawnLocation);
+
+            //p.transform.rotation = p.transform.rotation.
+            
             
             // Bullet Spawn
-            GameObject bulletGameObject = ParticleUtil.SpawnParticle("BulletForShip", bulletSpawnPosition);
+            GameObject bulletGameObject = ParticleUtil.SpawnParticle("BulletForShip", bulletSpawnLocation);
             bulletGameObject.gameObject.transform.rotation = transform.rotation;
             bulletGameObject.transform.parent = _bulletHolderObject.transform;
         }

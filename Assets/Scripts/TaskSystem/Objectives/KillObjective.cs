@@ -86,7 +86,7 @@ namespace TaskSystem.Objectives
                 DamageBy(bulletMovement.damage, true);
 
                 // Spawn Impact Particle
-                ParticleUtil.SpawnParticle("ImpactBoot", bulletMovement.transform.position);
+                ParticleUtil.SpawnParticle("ImpactBoot", bulletMovement.transform);
             } else if (other.gameObject.CompareTag(targetTag))
             {
                 PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();

@@ -6,10 +6,14 @@ namespace Utils
     {
         private static ObjectPool ObjectPoolInstance => ObjectPool.Instance;
 
-        public static GameObject SpawnParticle(string particleName, Vector3 position)
+        public static GameObject SpawnParticle(string particleName, Transform transform)
         {
             GameObject particleGameObject = ObjectPoolInstance.GetObject(particleName);
-            particleGameObject.transform.position = position;
+            
+            particleGameObject.transform.position = transform.position;
+            particleGameObject.transform.rotation = transform.rotation;
+            particleGameObject.transform.localScale = transform.localScale;
+            
             particleGameObject.SetActive(true);
             return particleGameObject;
         }
