@@ -47,14 +47,18 @@ namespace ToolSystem.Tools
             HandleAccuracy();
             
             Vector3 bulletSpawnPosition = bulletSpawnLocation.position;
-            
+
             // Muzzle flash spawn
-            ParticleUtil.SpawnParticle("MuzzleFlash", bulletSpawnPosition);
-            
+            GameObject muzzleflash = ParticleUtil.SpawnParticle("MuzzleFlash", bulletSpawnPosition);
+            Transform onderkantGun = transform.parent;
+            muzzleflash.transform.rotation = Quaternion.Euler(90 + transform.eulerAngles.x, onderkantGun.eulerAngles.y, 0);
+            muzzleflash.transform.position += transform.forward.Multiply(0.43f);
+
             // Bullet Spawn
             GameObject bulletGameObject = ParticleUtil.SpawnParticle("BulletForShip", bulletSpawnPosition);
             bulletGameObject.gameObject.transform.rotation = transform.rotation;
             bulletGameObject.transform.parent = _bulletHolderObject.transform;
+            bulletGameObject.transform.position += transform.forward.Multiply(1.9f);
         }
 
         /// <summary>
