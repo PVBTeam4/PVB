@@ -43,13 +43,21 @@ namespace Gun
         ///if it interacts with an object, it will activate this function to destroy it itself
         /// </summary>
         private void OnTriggerEnter(Collider col)
-        {   
+        {
+            string tag = col.gameObject.tag;
+
+            if (tag == "WaterCollider" || tag == "Player") return;
+
             // Pool the bullet after collision
             PoolBullet();
         }
 
         private void OnCollisionEnter(Collision collision)
         {
+            string tag = collision.gameObject.tag;
+
+            if (tag == "WaterCollider" || tag == "Player") return;
+
             GameObject impact = ParticleUtil.SpawnParticle("ImpactBoot", collision.GetContact(0).point);
 
             // Pool the bullet after collision
