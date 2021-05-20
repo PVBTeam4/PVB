@@ -71,6 +71,8 @@ namespace TaskSystem
 
         private void HandleTaskResult(bool isTaskCompleted)
         {
+            if (_activeTask == null) return;
+            
             Task completedTask = _activeTask;
             
             // Reset active task
