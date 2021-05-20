@@ -50,7 +50,7 @@ namespace Gun
 
         private void OnCollisionEnter(Collision collision)
         {
-            GameObject impact = ParticleUtil.SpawnParticle("MuzzleFlash", collision.GetContact(0).point);
+            GameObject impact = ParticleUtil.SpawnParticle("ImpactBoot", collision.GetContact(0).point);
 
             // Pool the bullet after collision
             PoolBullet();
