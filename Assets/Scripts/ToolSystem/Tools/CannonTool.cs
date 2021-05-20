@@ -62,7 +62,7 @@ namespace ToolSystem.Tools
             GameObject bulletGameObject = ParticleUtil.SpawnParticle("BulletForShip", bulletSpawnPosition);
             bulletGameObject.gameObject.transform.rotation = transform.rotation;
             bulletGameObject.transform.parent = _bulletHolderObject.transform;
-            bulletGameObject.transform.position += transform.forward.Multiply(1.9f);
+            bulletGameObject.transform.position += transform.forward.Multiply(0.2f);
         }
 
         /// <summary>
