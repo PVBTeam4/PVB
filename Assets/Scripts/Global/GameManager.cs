@@ -1,3 +1,4 @@
+using System;
 using Statistics;
 using UnityEngine;
 using TaskSystem;
@@ -30,6 +31,11 @@ namespace Global
         {
             // Set the instance to this GameManager Class
             _instance = this;
+        }
+
+        private void Update()
+        {
+            TaskController?.Update();
         }
 
         /// <summary>

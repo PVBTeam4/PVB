@@ -4,6 +4,7 @@ using Global;
 using TaskSystem;
 using TaskSystem.Objectives;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Enemy
 {
@@ -15,26 +16,21 @@ namespace Enemy
     public class EnemySpawner : MonoBehaviour
     {
         [SerializeField]
-        //Enemy prefab
-        private GameObject EnemyPrefab;
+        // Enemy prefab
+        private GameObject enemyPrefab;
     
-        //gameobject with spawningpoints
-        private Transform[] SpawnPoints;
+        // GameObject with spawning points
+        private Transform[] _spawnPoints;
 
         //hold all enemies that are Instantiate
-        private GameObject EnemyHolderObject;
+        private GameObject _enemyHolderObject;
 
         //to prevent them from spawning in the same position
-        private int currentSpawnIndex,previousSpawnIndex;
-        //is a counter of enemies being spawned
-        private int enemyCount;
+        private int _currentSpawnIndex, _previousSpawnIndex;
 
         [SerializeField]
-        // amount of Enemy that can be spawned
-        private int MaxSpawn = 7;
-        [SerializeField]
         // the time that it wil be spawned
-        private int SpawnTime = 7;
+        private int spawnTimeInSeconds = 7;
 
         // Whether enemies should be spawning
         private bool _shouldSpawnEnemies = true;
@@ -50,14 +46,14 @@ namespace Enemy
         /// </summary>
         private void InitializeBulletHolder()
         {   //name the game object Enemy Holder
-            EnemyHolderObject = new GameObject { name = "Enemy Holder" };
+            _enemyHolderObject = new GameObject { name = "Enemy Holder" };
         }
 
         // Start is called before the first frame update
         void Start()
         {
             GetAllChildrenOfThisObject();
-            InvokeRepeating("SpawnEnemies", 1, SpawnTime);
+            InvokeRepeating("SpawnEnemies", 1, spawnTimeInSeconds);
 
         }
 
@@ -81,7 +77,7 @@ namespace Enemy
             }
         
             //create an array from this HashSet
-            SpawnPoints = transforms.ToArray();
+            _spawnPoints = transforms.ToArray();
 
         }
 
@@ -100,28 +96,21 @@ namespace Enemy
         {
             if (!_shouldSpawnEnemies) return;
             //get any index from range 0 to length of spawning points
-            currentSpawnIndex = Random.Range(0, SpawnPoints.Length);
+            _currentSpawnIndex = Random.Range(0, _spawnPoints.Length);
 
             //check if the currentSpawnIndex is the same as the previousSpawnIndex
-            if (currentSpawnIndex == previousSpawnIndex)
+            if (_currentSpawnIndex == _previousSpawnIndex)
             {   // call this function to get a different index
                 SpawnEnemies();
                 return;
             }
             //set the current index to the previous index
-            previousSpawnIndex = currentSpawnIndex;
-
-            //count the enemies that have been Spawned
-            enemyCount++;
+            _previousSpawnIndex = _currentSpawnIndex;
+            
 
             // Instantiate a new EnemyPrefab on the the current spawn point. 
             // And set the parent to that of the EnemyHolderObject
-            Instantiate(EnemyPrefab, SpawnPoints[currentSpawnIndex].position, EnemyPrefab.transform.rotation).transform.parent = EnemyHolderObject.transform;
-
-            //check if the number of enemies is greater than or equal to the maximum spawn
-            if (enemyCount >= MaxSpawn)
-                // cancel the function so that it is not called again
-                CancelInvoke(nameof(SpawnEnemies));
+            Instantiate(enemyPrefab, _spawnPoints[_currentSpawnIndex].position, enemyPrefab.transform.rotation).transform.parent = _enemyHolderObject.transform;
         }
 
         private void OnTaskEnd(ToolType toolType, bool isCompleted)
