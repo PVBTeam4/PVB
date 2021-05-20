@@ -1,6 +1,5 @@
 using UnityEngine;
 using Utils;
-using System;
 using System.Collections;
 
 namespace ToolSystem.Tools
@@ -13,7 +12,7 @@ namespace ToolSystem.Tools
     {
         [SerializeField]
         //the bottom of the Gun 
-        private Transform Gunfloor;
+        private Transform verticalAxisTransform, horizontalAxisTransform;
 
         // Spawnlocation of the projectile
         [SerializeField]
@@ -54,15 +53,15 @@ namespace ToolSystem.Tools
 
             // Muzzle flash spawn
             GameObject muzzleflash = ParticleUtil.SpawnParticle("MuzzleFlash", bulletSpawnPosition);
-            Transform onderkantGun = transform.parent;
-            muzzleflash.transform.rotation = Quaternion.Euler(90 + transform.eulerAngles.x, onderkantGun.eulerAngles.y, 0);
-            muzzleflash.transform.position += transform.forward.Multiply(0.43f);
+            Transform onderkantGun = verticalAxisTransform.parent;
+            muzzleflash.transform.rotation = Quaternion.Euler(90 + verticalAxisTransform.eulerAngles.x, onderkantGun.eulerAngles.y, 0);
+            muzzleflash.transform.position += verticalAxisTransform.forward.Multiply(0.43f);
 
             // Bullet Spawn
             GameObject bulletGameObject = ParticleUtil.SpawnParticle("BulletForShip", bulletSpawnPosition);
-            bulletGameObject.gameObject.transform.rotation = transform.rotation;
+            bulletGameObject.gameObject.transform.rotation = verticalAxisTransform.rotation;
             bulletGameObject.transform.parent = _bulletHolderObject.transform;
-            bulletGameObject.transform.position += transform.forward.Multiply(0.2f);
+            bulletGameObject.transform.position += verticalAxisTransform.forward.Multiply(0.2f);
         }
 
         /// <summary>
@@ -117,8 +116,8 @@ namespace ToolSystem.Tools
             // caculate angleVertical between z and y ass
             float angleVertical = Mathf.Atan(difference.y / difference.z) * Mathf.Rad2Deg;
             //rotate the gameobject based on the angleHorizon and angleVertical
-            transform.rotation = Quaternion.Euler(-angleVertical, angleHorizon, 0f);
-            Gunfloor.rotation = Quaternion.Euler(0f, angleHorizon, 0f);
+            verticalAxisTransform.rotation = Quaternion.Euler(-angleVertical, angleHorizon, 0f);
+            horizontalAxisTransform.rotation = Quaternion.Euler(0f, angleHorizon, 0f);
         }
         
         /// <summary>
