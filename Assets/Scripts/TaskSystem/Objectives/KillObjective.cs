@@ -21,8 +21,7 @@ namespace TaskSystem.Objectives
         private string targetTag;
 
         // Max health of objective
-        [SerializeField]
-        private float maxHealth;
+        public float maxHealth;
         
         // Current health of objective
         private float _currentHealth;
@@ -56,7 +55,7 @@ namespace TaskSystem.Objectives
         /// </summary>
         /// <param name="damageTaken"></param>
         /// <param name="handleTaskCompletion"></param>
-        private void DamageBy(float damageTaken, bool handleTaskCompletion)
+        public void DamageBy(float damageTaken, bool handleTaskCompletion)
         {
             // Remove health, by damage amount
             _currentHealth -= damageTaken;

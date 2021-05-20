@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using Global;
+using TaskSystem;
+using TaskSystem.Objectives;
 using UnityEngine;
 
 namespace Enemy
@@ -33,9 +36,14 @@ namespace Enemy
         // the time that it wil be spawned
         private int SpawnTime = 7;
 
+        // Whether enemies should be spawning
+        private bool _shouldSpawnEnemies = true;
+
         private void Awake()
         {
             InitializeBulletHolder();
+
+            TaskController.TaskEndedAction += OnTaskEnd;
         }
         /// <summary>
         /// Creates Enemy holder, that holds all Instantiated Enemies
@@ -90,6 +98,7 @@ namespace Enemy
         /// </summary>
         private void SpawnEnemies()
         {
+            if (!_shouldSpawnEnemies) return;
             //get any index from range 0 to length of spawning points
             currentSpawnIndex = Random.Range(0, SpawnPoints.Length);
 
@@ -112,7 +121,30 @@ namespace Enemy
             //check if the number of enemies is greater than or equal to the maximum spawn
             if (enemyCount >= MaxSpawn)
                 // cancel the function so that it is not called again
-                CancelInvoke("SpawnEnemies");
+                CancelInvoke(nameof(SpawnEnemies));
+        }
+
+        private void OnTaskEnd(ToolType toolType, bool isCompleted)
+        {
+            if (toolType != ToolType.CANNON) return;
+
+            DestroyAllEnemies();
+            
+            _shouldSpawnEnemies = false;
+            CancelInvoke(nameof(SpawnEnemies));
+        }
+
+        private void DestroyAllEnemies()
+        {
+            foreach (KillObjective killObjective in GetAllEnemies())
+            {
+                killObjective.DamageBy(killObjective.maxHealth, false);
+            }
+        }
+
+        private KillObjective[] GetAllEnemies()
+        {
+            return FindObjectsOfType<KillObjective>();
         }
     }
 }
