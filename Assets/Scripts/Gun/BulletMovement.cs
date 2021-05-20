@@ -38,13 +38,12 @@ namespace Gun
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
-
+ 
         /// <summary>
         ///if it interacts with an object, it will activate this function to destroy it itself
         /// </summary>
         private void OnTriggerEnter(Collider col)
-        {   
-            Debug.Log("Test Pool Bullet");
+        {
             // Pool the bullet after collision
             PoolBullet();
         }
