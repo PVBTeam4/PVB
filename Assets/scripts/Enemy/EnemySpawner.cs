@@ -17,8 +17,8 @@ namespace Enemy
     {
         [SerializeField]
         // Enemy prefab
-        private GameObject enemyPrefab;
-    
+        private GameObject[] Prefab;
+
         // GameObject with spawning points
         private Transform[] _spawnPoints;
 
@@ -26,7 +26,7 @@ namespace Enemy
         private GameObject _enemyHolderObject;
 
         //to prevent them from spawning in the same position
-        private int _currentSpawnIndex, _previousSpawnIndex;
+        private int _currentSpawnIndex, _previousSpawnIndex, _SpawnIndex;
 
         [SerializeField]
         // the time that it wil be spawned
@@ -69,13 +69,13 @@ namespace Enemy
 
             // remove the first transform with is the parent of these children
             transforms.Remove(transform);
-        
+
             if (transforms.Count == 0)
             {
                 Debug.LogError("Enemy Spawner doesn't hold any children for spawn points!");
                 return;
             }
-        
+
             //create an array from this HashSet
             _spawnPoints = transforms.ToArray();
 
@@ -106,11 +106,12 @@ namespace Enemy
             }
             //set the current index to the previous index
             _previousSpawnIndex = _currentSpawnIndex;
-            
 
+            _SpawnIndex = Random.Range(0, Prefab.Length);
+            print(_SpawnIndex);
             // Instantiate a new EnemyPrefab on the the current spawn point. 
             // And set the parent to that of the EnemyHolderObject
-            Instantiate(enemyPrefab, _spawnPoints[_currentSpawnIndex].position, enemyPrefab.transform.rotation).transform.parent = _enemyHolderObject.transform;
+            Instantiate(Prefab[_SpawnIndex], _spawnPoints[_currentSpawnIndex].position, Prefab[_SpawnIndex].transform.rotation).transform.parent = _enemyHolderObject.transform;
         }
 
         private void OnTaskEnd(ToolType toolType, bool isCompleted)
@@ -118,7 +119,7 @@ namespace Enemy
             if (toolType != ToolType.CANNON) return;
 
             DestroyAllEnemies();
-            
+
             _shouldSpawnEnemies = false;
             CancelInvoke(nameof(SpawnEnemies));
         }
