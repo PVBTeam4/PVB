@@ -9,6 +9,11 @@ namespace Utils
         public static GameObject SpawnParticle(string particleName, Vector3 position)
         {
             GameObject particleGameObject = ObjectPoolInstance.GetObject(particleName);
+            if (particleGameObject == null)
+            {
+                Debug.LogError("Particle is null!");
+                return null;
+            }
             particleGameObject.transform.position = position;
             particleGameObject.SetActive(true);
             return particleGameObject;

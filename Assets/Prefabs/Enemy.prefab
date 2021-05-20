@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969df54d792f2e542a9140ec86702b39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 10
   bulletTag: Bullet
   targetTag: Player
   maxHealth: 100
