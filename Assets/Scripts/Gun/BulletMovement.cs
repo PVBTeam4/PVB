@@ -48,6 +48,14 @@ namespace Gun
             PoolBullet();
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            GameObject impact = ParticleUtil.SpawnParticle("MuzzleFlash", collision.GetContact(0).point);
+
+            // Pool the bullet after collision
+            PoolBullet();
+        }
+
         /// <summary>
         /// Destroys the game object in the time of the lifeSpan
         /// </summary>
