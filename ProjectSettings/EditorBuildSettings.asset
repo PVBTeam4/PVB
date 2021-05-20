@@ -9,21 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/OverWorld/OverWorld_Cannon.unity
     guid: 3066ba9e4e4b1cc4495e149565a2b2c7
   - enabled: 1
-    path: Assets/Scenes/Tasks/ShootingScene.unity
-    guid: e349a7efefb927642819fec113dcf19d
-  - enabled: 0
-    path: Assets/Scenes/Testing/OverWorld Movement Tweaks.unity
-    guid: 3d2431242ab43c642aa51f007541355e
-  - enabled: 0
-    path: Assets/Scenes/Tasks/ExtinguishingScene.unity
-    guid: 1ab795afb4976ce4480af55f0bffbf67
-  - enabled: 0
-    path: Assets/Scenes/Tasks/CraneOperatingScene.unity
-    guid: 9664d8cea34270642bc248500c796e10
-  - enabled: 1
     path: Assets/Scenes/OverWorld/Overworld_Crane.unity
     guid: 7d22da9a355802f4f96f2ade8932f8b6
   - enabled: 1
     path: Assets/Scenes/OverWorld/Overworld_Water_Cannon.unity
     guid: e0e0f02d2f39ca140ac8a5a26b9f4877
+  - enabled: 1
+    path: Assets/Scenes/End_Scene.unity
+    guid: f722418660238da42bbb0e4bd193204b
+  - enabled: 1
+    path: Assets/Scenes/Tasks/ShootingScene.unity
+    guid: b442f53323476bc4398d479df07a615c
   m_configObjects: {}

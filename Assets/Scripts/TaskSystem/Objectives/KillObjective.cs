@@ -54,11 +54,12 @@ namespace TaskSystem.Objectives
         /// subtract health;
         /// complete objective, if health is zero;
         /// </summary>
-        /// <param name="damage"></param>
-        public void DamageBy(float damage)
+        /// <param name="damageTaken"></param>
+        /// <param name="handleTaskCompletion"></param>
+        private void DamageBy(float damageTaken, bool handleTaskCompletion)
         {
             // Remove health, by damage amount
-            _currentHealth -= damage;
+            _currentHealth -= damageTaken;
             // Max currentHealth to 0, so we don't have negative health
             _currentHealth = Mathf.Max(_currentHealth, 0);
 
@@ -68,7 +69,11 @@ namespace TaskSystem.Objectives
             if (_currentHealth == 0)
             {
                 onDeath?.Invoke();
-                CompleteObjective();
+                
+                if (handleTaskCompletion)
+                {
+                    CompleteObjective();
+                }
             }
         }
 
@@ -78,7 +83,7 @@ namespace TaskSystem.Objectives
             {
                 BulletMovement bulletMovement = other.gameObject.GetComponent<BulletMovement>();
                 if (bulletMovement == null) return;
-                DamageBy(bulletMovement.damage);
+                DamageBy(bulletMovement.damage, true);
 
                 // Spawn Impact Particle
                 ParticleUtil.SpawnParticle("ImpactBoot", bulletMovement.transform.position);
@@ -87,6 +92,9 @@ namespace TaskSystem.Objectives
                 PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
                 if (playerHealth == null) return;
                 playerHealth.DamageBy(damage);
+                
+                // Kill boat
+                DamageBy(_currentHealth, false);
             }
         }
     }
