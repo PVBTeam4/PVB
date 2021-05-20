@@ -44,6 +44,7 @@ namespace Gun
         /// </summary>
         private void OnTriggerEnter(Collider col)
         {   
+            Debug.Log("Test Pool Bullet");
             // Pool the bullet after collision
             PoolBullet();
         }
