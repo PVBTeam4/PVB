@@ -34,7 +34,6 @@ namespace UI
         /// <param name="isTaskSuccess"></param>
         private void TaskEnded(ToolType nextOverWorldIndex, bool isTaskSuccess)
         {
-            Debug.Log("Task Ended Test");
             if (isTaskSuccess)// Success
             {
                 EnableScreen(taskSuccessScreen);
