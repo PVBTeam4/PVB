@@ -29,6 +29,12 @@ namespace TaskSystem
         {
             _activeTask = CreateTaskForTool(toolType);
         }
+        
+        
+        public void Update()
+        {
+            _activeTask?.Update();
+        }
 
         /// <summary>
         /// Cancel the current Task.
@@ -65,7 +71,6 @@ namespace TaskSystem
                 Debug.LogError("Other task got completed, instead of the active one!");
                 return;
             }
-            
             HandleTaskResult(true);
         }
 
