@@ -45,7 +45,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_1b8ce0a551af4854a34d0a2993bc77b9: {r: 20.518587, g: 9.694162, b: 5.129647, a: 1}
+    - Color_1b8ce0a551af4854a34d0a2993bc77b9: {r: 20.933092, g: 6.294566, b: 0, a: 1}
     - Color_c4342ad4bbc94b51ae0bf23c63167433: {r: 0.000015318628, g: 0.000015318628, b: 0.000015318628, a: 1}
     - Vector2_02342f020b814f3c8e3b7d5d860f68cb: {r: 0.3, g: 1, b: 0, a: 0}
     - Vector2_1: {r: 0, g: 0, b: 0, a: 0}
