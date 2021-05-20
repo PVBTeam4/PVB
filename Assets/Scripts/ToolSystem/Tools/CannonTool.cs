@@ -1,5 +1,7 @@
 using UnityEngine;
 using Utils;
+using System;
+using System.Collections;
 
 namespace ToolSystem.Tools
 {
@@ -22,11 +24,13 @@ namespace ToolSystem.Tools
 
         //Configuration options regarding the difficulty of handling the gun
         [SerializeField]
-        private float rateOfFire, bulletAccuracy;
+        private float waitToFire = 0.75f, bulletAccuracy;
 
         //Configuration options regarding the ammunition of the gun
         [SerializeField]
         private int currentAmmo, maxAmmo;
+
+        private bool canShoot = true;
 
         private void Awake()
         {
@@ -58,7 +62,7 @@ namespace ToolSystem.Tools
             GameObject bulletGameObject = ParticleUtil.SpawnParticle("BulletForShip", bulletSpawnPosition);
             bulletGameObject.gameObject.transform.rotation = transform.rotation;
             bulletGameObject.transform.parent = _bulletHolderObject.transform;
-            bulletGameObject.transform.position += transform.forward.Multiply(1.9f);
+            bulletGameObject.transform.position += transform.forward.Multiply(0.2f);
         }
 
         /// <summary>
@@ -68,6 +72,15 @@ namespace ToolSystem.Tools
         {
             // Only fire when key is pressed
             if (pressedValue == 0) return;
+
+            if (!canShoot) return;
+
+            // Disable shooting
+            canShoot = false;
+
+            IEnumerator coroutine = EnableShooting(waitToFire);
+            StartCoroutine(coroutine);
+
             FireProjectile();
         }
 
@@ -76,6 +89,18 @@ namespace ToolSystem.Tools
         /// </summary>
         public override void UseRightAction(float pressedValue)
         {}
+
+        /// <summary>
+        /// Wait the given amount of time to enable the shooting
+        /// </summary>
+        /// <param name="waitTime">float how long we need to wait to shoot again</param>
+        /// <returns></returns>
+        private IEnumerator EnableShooting(float waitTime)
+        {
+            yield return new WaitForSeconds(waitTime);
+
+            canShoot = true;
+        }
 
         /// <summary>
         /// Rotate the weapon based on the mouse position
