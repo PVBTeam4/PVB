@@ -3,7 +3,6 @@ using SceneSystem;
 using System.Collections;
 using TaskSystem;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace UI
 {
@@ -64,17 +63,6 @@ namespace UI
         {
             taskSuccessScreen.SetActive(false);
             taskFailedScreen.SetActive(false);
-        }
-
-        /// <summary>
-        /// Disables all screens when "SceneManager.sceneLoaded" is called (Parameters not important)
-        /// </summary>
-        /// <param name="scene">Not important</param>
-        /// <param name="mode">Not important</param>
-        private void DisableScreensBySceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            print("Disabled Screens by loaded a new scene");
-            DisableScreens();
         }
 
         /// <summary>
