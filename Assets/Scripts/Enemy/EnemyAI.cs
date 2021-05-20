@@ -19,8 +19,7 @@ namespace Enemy
         private string targetTag = "Player";
 
         // Transform component of the target
-        private Transform targetTransform;
-
+        private Transform _targetTransform;
         
         // Speed values
         [Header("Speed Values"), SerializeField]
@@ -36,10 +35,10 @@ namespace Enemy
         private void Awake()
         {
             CheckAndGetComponents();
-            targetTransform = GameObject.FindWithTag(targetTag).transform;
+            _targetTransform = GameObject.FindWithTag(targetTag).transform;
             
             // Look at target on spawn
-            transform.LookAt(targetTransform.position);
+            transform.LookAt(_targetTransform.position);
         }
 
         /// <summary>
@@ -59,8 +58,6 @@ namespace Enemy
             }
 
             _navMeshAgent.speed = CalculateSpeed();
-            
-            Debug.Log("Speed: " + _navMeshAgent.speed);
 
             // Find the gameobject with the targetTag
             GameObject _targetObject = GameObject.FindWithTag(targetTag);
@@ -73,7 +70,7 @@ namespace Enemy
             }
 
             // Set the target transform to that of the target transform component
-            targetTransform = _targetObject.transform;
+            _targetTransform = _targetObject.transform;
 
             // Start movement
             StartMovementTowardsTarget();
@@ -85,7 +82,7 @@ namespace Enemy
         private void StartMovementTowardsTarget()
         {
             // Make sure the Y-Axis does not get affected
-            Vector3 _targetPosition = targetTransform.position;
+            Vector3 _targetPosition = _targetTransform.position;
             _targetPosition.y = transform.position.y;
 
             // Move via the NavMeshAgent towards the targetPosition
@@ -112,8 +109,6 @@ namespace Enemy
         {
             float secondsActive = GameManager.Instance.TaskController.ActiveTask.SecondsActive;
             float percentage = Math.Min(secondsActive * percentageIncreasePerSecond, 1);
-            
-            Debug.Log("Percentage: " + percentage);
 
             float min = minSpeed;
             float max = Mathf.Lerp(minSpeed, maxSpeed, percentage);

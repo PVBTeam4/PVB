@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Global;
@@ -35,12 +34,6 @@ namespace Enemy
 
         // Whether enemies should be spawning
         private bool _shouldSpawnEnemies = true;
-        
-        // Speed values
-        [Header("Spawn Delay Values"), SerializeField]
-        private float minDelay, maxDelay;
-        [SerializeField, Range(0, .1f)]
-        private float percentageIncreasePerSecond;
 
         private void Awake()
         {
@@ -141,13 +134,6 @@ namespace Enemy
         private KillObjective[] GetAllEnemies()
         {
             return FindObjectsOfType<KillObjective>();
-        }
-
-        private float CalculateSpawnDelayInSeconds()
-        {
-            float secondsActive = GameManager.Instance.TaskController.ActiveTask.SecondsActive;
-            float percentage = Math.Min(secondsActive * percentageIncreasePerSecond, 1);
-            return 0;
         }
     }
 }
