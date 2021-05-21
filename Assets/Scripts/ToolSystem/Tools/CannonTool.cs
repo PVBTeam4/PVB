@@ -55,7 +55,7 @@ namespace ToolSystem.Tools
             // Muzzle flash spawn
             GameObject muzzleflash = ParticleUtil.SpawnParticle("MuzzleFlash", bulletSpawnPosition);
             Transform onderkantGun = transform.parent;
-            muzzleflash.transform.rotation = Quaternion.Euler(90 + transform.eulerAngles.x, transform.eulerAngles.y, 0);
+            muzzleflash.transform.rotation = Quaternion.Euler(90 + transform.eulerAngles.x, onderkantGun.eulerAngles.y, 0);
             muzzleflash.transform.position += transform.forward.Multiply(0.43f);
 
             // Bullet Spawn
@@ -108,10 +108,17 @@ namespace ToolSystem.Tools
         /// <param name="location">the mouse location</param>
         public override void MoveTarget(Vector3 location)
         {
-            Vector3 mouseToWorld = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition -  Camera.main.transform.position);
+            Vector3 mouseToWorld = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition - new Vector3(0, 0, Camera.main.transform.position.z));
             //subtract the distance between the current gameObject and the camera to the initial mouse position:
             Debug.DrawLine(bulletSpawnLocation.position, mouseToWorld, Color.red);
-            transform.LookAt(mouseToWorld);
+            Vector3 difference = mouseToWorld - bulletSpawnLocation.position;
+            // caculate angleHorizon between z and x ass
+            float angleHorizon = Mathf.Atan(difference.x / difference.z) * Mathf.Rad2Deg;
+            // caculate angleVertical between z and y ass
+            float angleVertical = Mathf.Atan(difference.y / difference.z) * Mathf.Rad2Deg;
+            //rotate the gameobject based on the angleHorizon and angleVertical
+            transform.rotation = Quaternion.Euler(-angleVertical, angleHorizon, 0f);
+            Gunfloor.rotation = Quaternion.Euler(0f, angleHorizon, 0f);
         }
         
         /// <summary>
