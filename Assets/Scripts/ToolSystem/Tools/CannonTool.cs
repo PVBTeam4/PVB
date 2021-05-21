@@ -1,4 +1,7 @@
 using UnityEngine;
+using Utils;
+using System.Collections;
+using Gun;
 
 namespace ToolSystem.Tools
 {
@@ -8,10 +11,6 @@ namespace ToolSystem.Tools
     /// </summary>
     public class CannonTool : Tool
     {
-        // Prefab of the bullet projectile
-        [SerializeField]
-        private GameObject bullet;
-
         [SerializeField]
         //the bottom of the Gun 
         private Transform Gunfloor;
@@ -25,14 +24,19 @@ namespace ToolSystem.Tools
 
         //Configuration options regarding the difficulty of handling the gun
         [SerializeField]
-        private float rateOfFire, bulletAccuracy;
+        private float waitToFire = 0.75f, bulletAccuracy;
 
         //Configuration options regarding the ammunition of the gun
         [SerializeField]
         private int currentAmmo, maxAmmo;
 
+        private bool canShoot = true;
+
+        private ZoomGun _zoomGun;
+
         private void Awake()
         {
+            _zoomGun = GetComponent<ZoomGun>();
             InitializeBulletHolder();
         }
 
@@ -48,7 +52,20 @@ namespace ToolSystem.Tools
         private void FireProjectile()
         {
             HandleAccuracy();
-            Instantiate(bullet, bulletSpawnLocation.position, transform.rotation).transform.parent = _bulletHolderObject.transform;
+            
+            Vector3 bulletSpawnPosition = bulletSpawnLocation.position;
+
+            // Muzzle flash spawn
+            GameObject muzzleflash = ParticleUtil.SpawnParticle("MuzzleFlash", bulletSpawnPosition);
+            Transform onderkantGun = transform.parent;
+            muzzleflash.transform.rotation = Quaternion.Euler(90 + transform.eulerAngles.x, onderkantGun.eulerAngles.y, 0);
+            muzzleflash.transform.position += transform.forward.Multiply(0.43f);
+
+            // Bullet Spawn
+            GameObject bulletGameObject = ParticleUtil.SpawnParticle("BulletForShip", bulletSpawnPosition);
+            bulletGameObject.gameObject.transform.rotation = transform.rotation;
+            bulletGameObject.transform.parent = _bulletHolderObject.transform;
+            bulletGameObject.transform.position += transform.forward.Multiply(0.2f);
         }
 
         /// <summary>
@@ -58,6 +75,15 @@ namespace ToolSystem.Tools
         {
             // Only fire when key is pressed
             if (pressedValue == 0) return;
+
+            if (!canShoot) return;
+
+            // Disable shooting
+            canShoot = false;
+
+            IEnumerator coroutine = EnableShooting(waitToFire);
+            StartCoroutine(coroutine);
+
             FireProjectile();
         }
 
@@ -65,7 +91,21 @@ namespace ToolSystem.Tools
         /// Called by 'ToolController'.Unused as of yet, but could potentially be used to reload the gun.
         /// </summary>
         public override void UseRightAction(float pressedValue)
-        {}
+        {
+            HandleZoom(pressedValue > 0);
+        }
+
+        /// <summary>
+        /// Wait the given amount of time to enable the shooting
+        /// </summary>
+        /// <param name="waitTime">float how long we need to wait to shoot again</param>
+        /// <returns></returns>
+        private IEnumerator EnableShooting(float waitTime)
+        {
+            yield return new WaitForSeconds(waitTime);
+
+            canShoot = true;
+        }
 
         /// <summary>
         /// Rotate the weapon based on the mouse position
@@ -92,6 +132,24 @@ namespace ToolSystem.Tools
         private void InitializeBulletHolder()
         {
             _bulletHolderObject = new GameObject {name = "Bullet Holder"};
+        }
+
+        private void HandleZoom(bool pressed)
+        {
+            if (_zoomGun == null)
+            {
+                Debug.LogError("ZoomGun component could not be found!");
+                return;
+            }
+
+            if (pressed)
+            {
+                _zoomGun.ZoomIn();
+            }
+            else
+            {
+                _zoomGun.ZoomOut();
+            }
         }
     }
 }

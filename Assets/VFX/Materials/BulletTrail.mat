@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BulletTrail
-  m_Shader: {fileID: -6465566751694194690, guid: 5ced2364457ea304e9dfedbf29788396, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: b262b8b83f4a3014e8243bef77f39fef, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

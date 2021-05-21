@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using Utils;
 
 namespace Gun
 {
@@ -36,22 +38,39 @@ namespace Gun
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
-
+ 
         /// <summary>
         ///if it interacts with an object, it will activate this function to destroy it itself
         /// </summary>
         private void OnTriggerEnter(Collider col)
-        {   
-            //Destroy the bullet after collision
-            Destroy(gameObject);
+        {
+            // Pool the bullet after collision
+            PoolBullet();
         }
 
         /// <summary>
         /// Destroys the game object in the time of the lifeSpan
         /// </summary>
         private void SetLifeSpanTimer()
-        {  
-            Destroy(gameObject, lifeSpan);
+        {
+
+            StartCoroutine(LifeSpanTimer());
+        }
+
+        private IEnumerator LifeSpanTimer()
+        {
+            yield return new WaitForSeconds(lifeSpan);
+            PoolBullet();
+        }
+
+        private void PoolBullet()
+        {
+            if (ObjectPool.Instance == null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            ObjectPool.Instance.PoolObject(gameObject);
         }
     }
 }

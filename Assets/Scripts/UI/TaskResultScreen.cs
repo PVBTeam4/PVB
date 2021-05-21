@@ -3,7 +3,6 @@ using SceneSystem;
 using System.Collections;
 using TaskSystem;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace UI
 {
@@ -18,7 +17,7 @@ namespace UI
         [SerializeField]
         private float sceneTransitionTime = 10;
 
-        void Awake()
+        private void Awake()
         {
             // Subscribe the screen functions
             TaskController.TaskEndedAction += TaskEnded;
@@ -30,9 +29,9 @@ namespace UI
         /// <summary>
         /// Is called when a task has ended so that it may enable the result screen
         /// </summary>
-        /// <param name="nextOverworldIndex"></param>
+        /// <param name="nextOverWorldIndex"></param>
         /// <param name="isTaskSuccess"></param>
-        void TaskEnded(ToolType nextOverworldIndex, bool isTaskSuccess)
+        private void TaskEnded(ToolType nextOverWorldIndex, bool isTaskSuccess)
         {
             if (isTaskSuccess)// Success
             {
@@ -43,13 +42,13 @@ namespace UI
                 EnableScreen(taskFailedScreen);
             }
 
-            StartCoroutine("CountdownSwitchToOverworld", nextOverworldIndex);
+            StartCoroutine("CountdownSwitchToOverworld", nextOverWorldIndex);
         }
 
         /// <summary>
         /// Enables the given gameobject
         /// </summary>
-        void EnableScreen(GameObject screenObject)
+        private void EnableScreen(GameObject screenObject)
         {
             if (screenObject == null)
                 return;
@@ -60,21 +59,10 @@ namespace UI
         /// <summary>
         /// Disables all screens
         /// </summary>
-        void DisableScreens()
+        private void DisableScreens()
         {
             taskSuccessScreen.SetActive(false);
             taskFailedScreen.SetActive(false);
-        }
-
-        /// <summary>
-        /// Disables all screens when "SceneManager.sceneLoaded" is called (Parameters not important)
-        /// </summary>
-        /// <param name="scene">Not important</param>
-        /// <param name="mode">Not important</param>
-        void DisableScreensBySceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            print("Disabled Screens by loaded a new scene");
-            DisableScreens();
         }
 
         /// <summary>
@@ -82,7 +70,7 @@ namespace UI
         /// </summary>
         /// <param name="nextOverworldIndex"></param>
         /// <returns></returns>
-        IEnumerator CountdownSwitchToOverworld(ToolType nextOverworldIndex)
+        private IEnumerator CountdownSwitchToOverworld(ToolType nextOverworldIndex)
         {
             yield return new WaitForSeconds(sceneTransitionTime);
             SceneController.SwitchSceneToOverWorld(nextOverworldIndex);

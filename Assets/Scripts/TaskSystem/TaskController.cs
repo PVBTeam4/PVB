@@ -1,6 +1,7 @@
 using Global;
 using UnityEngine;
 using System;
+using TaskSystem.Tasks;
 
 namespace TaskSystem
 {
@@ -28,6 +29,12 @@ namespace TaskSystem
         {
             _activeTask = CreateTaskForTool(toolType);
         }
+        
+        
+        public void Update()
+        {
+            _activeTask?.Update();
+        }
 
         /// <summary>
         /// Cancel the current Task.
@@ -45,8 +52,12 @@ namespace TaskSystem
         /// <returns></returns>
         private Task CreateTaskForTool(ToolType toolType)
         {
-            Task task = new Task(toolType, OnTaskCompletion);
-            return task;
+            switch (toolType)
+            {
+                case ToolType.CANNON:
+                    return new CannonTask(toolType, OnTaskCompletion);
+            }
+            return null;
         }
         
         /// <summary>
@@ -60,12 +71,13 @@ namespace TaskSystem
                 Debug.LogError("Other task got completed, instead of the active one!");
                 return;
             }
-            
             HandleTaskResult(true);
         }
 
         private void HandleTaskResult(bool isTaskCompleted)
         {
+            if (_activeTask == null) return;
+            
             Task completedTask = _activeTask;
             
             // Reset active task

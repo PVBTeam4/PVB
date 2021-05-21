@@ -1,7 +1,9 @@
 using System;
+using Global;
 using Properties.Tags;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace Enemy
 {
@@ -17,19 +19,26 @@ namespace Enemy
         private string targetTag = "Player";
 
         // Transform component of the target
-        private Transform targetTransform;
+        private Transform _targetTransform;
+        
+        // Speed values
+        [Header("Speed Values"), SerializeField]
+        private float minSpeed, maxSpeed;
+        // Percentage: 0 - 1
+        [SerializeField, Range(0, .1f)]
+        private float percentageIncreasePerSecond;
 
         // NavMeshAgent component of this object
-        private NavMeshAgent navMeshAgent;
+        private NavMeshAgent _navMeshAgent;
 
         // This is run befor the Start function
         private void Awake()
         {
             CheckAndGetComponents();
-            targetTransform = GameObject.FindWithTag(targetTag).transform;
+            _targetTransform = GameObject.FindWithTag(targetTag).transform;
             
             // Look at target on spawn
-            transform.LookAt(targetTransform.position);
+            transform.LookAt(_targetTransform.position);
         }
 
         /// <summary>
@@ -40,13 +49,15 @@ namespace Enemy
         private void CheckAndGetComponents()
         {
             // Check and Get the NavMeshAgent
-            navMeshAgent = GetComponent<NavMeshAgent>();
+            _navMeshAgent = GetComponent<NavMeshAgent>();
 
-            if (navMeshAgent == null)
+            if (_navMeshAgent == null)
             {
                 Debug.LogError("NavMeshAgent component not attached" + gameObject.name);
                 return;
             }
+
+            _navMeshAgent.speed = CalculateSpeed();
 
             // Find the gameobject with the targetTag
             GameObject _targetObject = GameObject.FindWithTag(targetTag);
@@ -59,7 +70,7 @@ namespace Enemy
             }
 
             // Set the target transform to that of the target transform component
-            targetTransform = _targetObject.transform;
+            _targetTransform = _targetObject.transform;
 
             // Start movement
             StartMovementTowardsTarget();
@@ -71,11 +82,11 @@ namespace Enemy
         private void StartMovementTowardsTarget()
         {
             // Make sure the Y-Axis does not get affected
-            Vector3 _targetPosition = targetTransform.position;
+            Vector3 _targetPosition = _targetTransform.position;
             _targetPosition.y = transform.position.y;
 
             // Move via the NavMeshAgent towards the targetPosition
-            navMeshAgent.SetDestination(_targetPosition);
+            _navMeshAgent.SetDestination(_targetPosition);
 
             // Create a "FixedUpdate" like loop for the "UpdateNavMeshDestination" function
             InvokeRepeating("UpdateNavMeshDestination", 0f, Time.fixedDeltaTime);
@@ -87,11 +98,22 @@ namespace Enemy
         private void UpdateNavMeshDestination()
         {
             // Make sure the Y-Axis does not get affected
-            Vector3 correctPos = navMeshAgent.nextPosition;
+            Vector3 correctPos = _navMeshAgent.nextPosition;
             correctPos.y = transform.position.y;
 
             // Update the position of this object to that of the 
             transform.position = correctPos;
+        }
+
+        private float CalculateSpeed()
+        {
+            float secondsActive = GameManager.Instance.TaskController.ActiveTask.SecondsActive;
+            float percentage = Math.Min(secondsActive * percentageIncreasePerSecond, 1);
+
+            float min = minSpeed;
+            float max = Mathf.Lerp(minSpeed, maxSpeed, percentage);
+
+            return Random.Range(min, max);
         }
     }
 }
