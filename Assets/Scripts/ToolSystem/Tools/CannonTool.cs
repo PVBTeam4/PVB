@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utils;
-using System;
 using System.Collections;
+using Gun;
 
 namespace ToolSystem.Tools
 {
@@ -32,8 +32,11 @@ namespace ToolSystem.Tools
 
         private bool canShoot = true;
 
+        private ZoomGun _zoomGun;
+
         private void Awake()
         {
+            _zoomGun = GetComponent<ZoomGun>();
             InitializeBulletHolder();
         }
 
@@ -88,7 +91,9 @@ namespace ToolSystem.Tools
         /// Called by 'ToolController'.Unused as of yet, but could potentially be used to reload the gun.
         /// </summary>
         public override void UseRightAction(float pressedValue)
-        {}
+        {
+            HandleZoom(pressedValue > 0);
+        }
 
         /// <summary>
         /// Wait the given amount of time to enable the shooting
@@ -127,6 +132,24 @@ namespace ToolSystem.Tools
         private void InitializeBulletHolder()
         {
             _bulletHolderObject = new GameObject {name = "Bullet Holder"};
+        }
+
+        private void HandleZoom(bool pressed)
+        {
+            if (_zoomGun == null)
+            {
+                Debug.LogError("ZoomGun component could not be found!");
+                return;
+            }
+
+            if (pressed)
+            {
+                _zoomGun.ZoomIn();
+            }
+            else
+            {
+                _zoomGun.ZoomOut();
+            }
         }
     }
 }
