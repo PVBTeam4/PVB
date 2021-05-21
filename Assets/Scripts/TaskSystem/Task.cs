@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Global;
+using UnityEngine;
 
 namespace TaskSystem
 {
@@ -9,6 +10,10 @@ namespace TaskSystem
     /// </summary>
     public abstract class Task
     {
+        private float _secondsActive;
+        
+        public float SecondsActive => _secondsActive;
+
         // ToolType used to complete task
         private readonly ToolType _toolType;
         
@@ -27,6 +32,11 @@ namespace TaskSystem
         {
             _toolType = toolType;
             _taskCompleteAction = taskCompleteAction;
+        }
+
+        public void Update()
+        {
+            _secondsActive += Time.deltaTime;
         }
 
         /// <summary>
