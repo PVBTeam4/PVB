@@ -43,7 +43,7 @@ namespace Input
         {
             // Button input
             ButtonInputAction?.Invoke(ButtonInputType.LeftMouse, UnityEngine.Input.GetMouseButtonDown(0) ? 1f : 0f);
-            ButtonInputAction?.Invoke(ButtonInputType.RightMouse, UnityEngine.Input.GetMouseButtonDown(1) ? 1f : 0f);
+            ButtonInputAction?.Invoke(ButtonInputType.RightMouse, UnityEngine.Input.GetMouseButton(1) ? 1f : 0f);
             
             // Mouse movement
             MouseMovementAction?.Invoke(UnityEngine.Input.mousePosition);

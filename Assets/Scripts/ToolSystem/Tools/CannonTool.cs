@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 using Utils;
-using System;
 using System.Collections;
+using Gun;
+using UnityEngine.Serialization;
 
 namespace ToolSystem.Tools
 {
@@ -19,6 +21,8 @@ namespace ToolSystem.Tools
         [SerializeField]
         private Transform bulletSpawnLocation;
 
+        [SerializeField] private Transform debugRay;
+
         // A parent object is used to organize all the active projectiles in the scene
         private GameObject _bulletHolderObject;
 
@@ -32,8 +36,21 @@ namespace ToolSystem.Tools
 
         private bool canShoot = true;
 
+        private ZoomGun _zoomGun;
+
+        private Vector3 _intersectionPoint;
+
+        [Header("Gun Movement"), SerializeField, Range(0, 1)]
+        private float lerpValue;
+        
+        [SerializeField, Header("Gun Movement Constraints")]
+        private float minimalTargetDistanceFromGun;
+        [SerializeField, Range(0, 1)]
+        private float minimalForwardDirection;
+
         private void Awake()
         {
+            _zoomGun = GetComponent<ZoomGun>();
             InitializeBulletHolder();
         }
 
@@ -88,7 +105,9 @@ namespace ToolSystem.Tools
         /// Called by 'ToolController'.Unused as of yet, but could potentially be used to reload the gun.
         /// </summary>
         public override void UseRightAction(float pressedValue)
-        {}
+        {
+            HandleZoom(pressedValue > 0);
+        }
 
         /// <summary>
         /// Wait the given amount of time to enable the shooting
@@ -108,25 +127,94 @@ namespace ToolSystem.Tools
         /// <param name="location">the mouse location</param>
         public override void MoveTarget(Vector3 location)
         {
-            Vector3 mouseToWorld = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition - new Vector3(0, 0, Camera.main.transform.position.z));
+            _intersectionPoint = Vector3.Lerp(_intersectionPoint, GetTargetPointWithConstraints(), lerpValue);
+            debugRay.transform.position = _intersectionPoint;
             //subtract the distance between the current gameObject and the camera to the initial mouse position:
-            Debug.DrawLine(bulletSpawnLocation.position, mouseToWorld, Color.red);
-            Vector3 difference = mouseToWorld - bulletSpawnLocation.position;
+            Vector3 bulletSpawnPosition = bulletSpawnLocation.position;
+            Debug.DrawLine(bulletSpawnPosition, _intersectionPoint, Color.red);
+            
+            // Direction gun should look towards
+            Vector3 direction = _intersectionPoint - bulletSpawnPosition;
+            direction.Normalize();
+
             // caculate angleHorizon between z and x ass
-            float angleHorizon = Mathf.Atan(difference.x / difference.z) * Mathf.Rad2Deg;
+            float angleHorizon = Mathf.Atan(direction.x / direction.z) * Mathf.Rad2Deg;
             // caculate angleVertical between z and y ass
-            float angleVertical = Mathf.Atan(difference.y / difference.z) * Mathf.Rad2Deg;
+            float angleVertical = Mathf.Atan(direction.y / direction.z) * Mathf.Rad2Deg;
             //rotate the gameobject based on the angleHorizon and angleVertical
             transform.rotation = Quaternion.Euler(-angleVertical, angleHorizon, 0f);
             Gunfloor.rotation = Quaternion.Euler(0f, angleHorizon, 0f);
         }
-        
+
         /// <summary>
         /// Creates bullet holder, that holds all Instantiated bullets
         /// </summary>
         private void InitializeBulletHolder()
         {
             _bulletHolderObject = new GameObject {name = "Bullet Holder"};
+        }
+
+        /// <summary>
+        /// Handles zoom of gun
+        /// </summary>
+        /// <param name="pressed">Whether right click is pressed or not</param>
+        private void HandleZoom(bool pressed)
+        {
+            if (_zoomGun == null)
+            {
+                Debug.LogError("ZoomGun component could not be found!");
+                return;
+            }
+
+            if (pressed)
+            {
+                _zoomGun.ZoomIn();
+            }
+            else
+            {
+                _zoomGun.ZoomOut();
+            }
+        }
+
+        /// <summary>
+        /// Calculate position gun should shoot at
+        /// </summary>
+        /// <returns>Position to shoot at</returns>
+        private Vector3 GetTargetPointWithConstraints()
+        {
+            // Point mouse raycast hit
+            Vector3 intersectionPoint = GetRayIntersectionPoint();
+            // Gun origin position
+            Vector3 gunOrigin = Gunfloor.transform.position;
+            gunOrigin.y = intersectionPoint.y;
+
+            // If intersection point is within minimalTargetDistance from gunOrigin
+            if (Vector3.Distance(gunOrigin, intersectionPoint) < minimalTargetDistanceFromGun)
+            {
+                Vector3 direction = intersectionPoint - gunOrigin;
+                
+                // Prevents target point from getting behind gun
+                direction.z = Math.Max(minimalForwardDirection, direction.z);
+                
+                direction.Normalize();
+                
+                // Calculate offset and add this offset to gunOrigin
+                Vector3 offset = direction * minimalTargetDistanceFromGun;
+                return gunOrigin + offset;
+            }
+            
+            return intersectionPoint;
+        }
+
+        /// <summary>
+        /// Calculate position mouse is aiming at, with a raycast
+        /// </summary>
+        /// <returns>Position mouse is aiming at</returns>
+        private Vector3 GetRayIntersectionPoint()
+        {
+            // Shoot raycast & return intersection point
+            Ray ray = Camera.main.ScreenPointToRay (UnityEngine.Input.mousePosition);
+            return Physics.Raycast(ray, out var hit, 10000, ~LayerMask.GetMask($"Player", $"Bullet", $"Ignore Raycast")) ? hit.point : Vector3.zero;
         }
     }
 }
