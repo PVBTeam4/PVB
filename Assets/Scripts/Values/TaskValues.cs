@@ -2,6 +2,6 @@ namespace Values
 {
     public static class TaskValues
     {
-        public static readonly int EnemiesToKill = 10;
+        public static readonly int RefugeeShipsToSave = 3;
     }
 }

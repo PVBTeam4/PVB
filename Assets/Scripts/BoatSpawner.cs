@@ -129,20 +129,6 @@ namespace Boat
                 Instantiate(PrefabList[0], _spawnPoints[_currentSpawnIndex].position, PrefabList[0].transform.rotation).transform.parent = _boatHolderObject.transform;
                 _enemiesLeftToSpawn = _enemiesLeftToSpawn == 0 ? enemiesPerRefugeeShip : _enemiesLeftToSpawn - 1;
             }
-            /*
-
-            if (_enemiesSpawnedCounter == enemiesPerRefugeeShip)
-            {
-                Instantiate(PrefabList[1], _spawnPoints[_currentSpawnIndex].position, PrefabList[1].transform.rotation).transform.parent = _boatHolderObject.transform;
-                _enemiesSpawnedCounter = 0;
-            }
-            else if(_totalEnemiesSpawned < (refugeeBoatAmount * (enemiesPerRefugeeShip + 1)))
-            {
-                Instantiate(PrefabList[0], _spawnPoints[_currentSpawnIndex].position, PrefabList[0].transform.rotation).transform.parent = _boatHolderObject.transform;
-                _enemiesSpawnedCounter += 1;
-                _totalEnemiesSpawned += 1;
-            }
-            */
         }
 
         private void OnTaskEnd(ToolType toolType, bool isCompleted)

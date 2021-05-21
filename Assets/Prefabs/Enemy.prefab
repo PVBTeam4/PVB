@@ -126,7 +126,8 @@ GameObject:
   - component: {fileID: 3045924653465763384}
   - component: {fileID: 3045924653465763383}
   - component: {fileID: 3234662182629392354}
-  - component: {fileID: 473752831}
+  - component: {fileID: -7574854299644897429}
+  - component: {fileID: 4343556874637294200}
   - component: {fileID: 473752839}
   - component: {fileID: 8723422384470058243}
   - component: {fileID: 1684571923093138702}
@@ -242,7 +243,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &473752831
+--- !u!114 &-7574854299644897429
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,7 +252,53 @@ MonoBehaviour:
   m_GameObject: {fileID: 3045924653465763382}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b97f85cecdeace144b85ca7c1394884b, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f51cd4f238bb68428350176ee497772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  bulletTag: Bullet
+  targetTag: Player
+  maxHealth: 100
+  onDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3045924653465763383}
+        m_TargetAssemblyTypeName: UI.ProgressBar, Scripts
+        m_MethodName: UpdateProgressBar
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1684571923093138702}
+        m_TargetAssemblyTypeName: Enemy.EnemyDestroy, Scripts
+        m_MethodName: DestroyEnemy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4343556874637294200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3045924653465763382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14bc5ad5e46eaa94f8e7f39bce33087b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
@@ -453,7 +500,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
