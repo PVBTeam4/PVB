@@ -8,7 +8,7 @@ using UnityEngine;
 public class CraneTool : Tool
 {
     [SerializeField]
-    private Camera camera;
+    private Camera usedCamera;
 
     private float liftingProcess;
 
@@ -83,12 +83,12 @@ public class CraneTool : Tool
 
     private void HandleMovement(Vector3 position)
     {
-        if (camera)
+        if (usedCamera)
         {
             RaycastHit hit;
             //position.y -= -Screen.height / 2;
             //position.z = 5f;
-            Ray ray = camera.ScreenPointToRay(position);
+            Ray ray = usedCamera.ScreenPointToRay(position);
             // BUG: Look at canvas scale to solve it
 
             if (Physics.Raycast(ray, out hit))
