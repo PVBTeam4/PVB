@@ -54,7 +54,6 @@ namespace Enemy
         {
             GetAllChildrenOfThisObject();
             InvokeRepeating("SpawnEnemies", 1, spawnTimeInSeconds);
-
         }
 
         /// <summary>
