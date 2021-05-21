@@ -52,13 +52,17 @@ namespace Gun
             PoolBullet();
         }
 
-        private void OnCollisionEnter(Collision collision)
+        /// <summary>
+        /// Collision with the environment (Watch out for random colliders. In ShootingScene objects: Floor, rr, NavMeshFloor. You can test it with: print(col.gameObject.name);)
+        /// </summary>
+        /// <param name="col"></param>
+        private void OnCollisionEnter(Collision col)
         {
-            string tag = collision.gameObject.tag;
+            string tag = col.gameObject.tag;
 
             if (tag == "WaterCollider" || tag == "Player") return;
 
-            GameObject impact = ParticleUtil.SpawnParticle("ImpactStone", collision.GetContact(0).point);
+            GameObject impact = ParticleUtil.SpawnParticle("ImpactStone", col.GetContact(0).point);
 
             // Pool the bullet after collision
             PoolBullet();
