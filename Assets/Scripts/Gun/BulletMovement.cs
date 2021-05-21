@@ -58,7 +58,7 @@ namespace Gun
 
             if (tag == "WaterCollider" || tag == "Player") return;
 
-            GameObject impact = ParticleUtil.SpawnParticle("ImpactBoot", collision.GetContact(0).point);
+            GameObject impact = ParticleUtil.SpawnParticle("ImpactStone", collision.GetContact(0).point);
 
             // Pool the bullet after collision
             PoolBullet();
