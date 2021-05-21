@@ -108,6 +108,9 @@ public class CraneBehaviour : MonoBehaviour
 
     }
 
+    #if UNITY_EDITOR
+
+
     /// <summary>
     /// Visual debug
     /// </summary>
@@ -129,6 +132,8 @@ public class CraneBehaviour : MonoBehaviour
         UnityEditor.Handles.color = Color.yellow;
         UnityEditor.Handles.DrawLine(startPosition + (addDistanceToDirection * minRadius), startPosition + (addDistanceToDirection * maxRadius));
         UnityEditor.Handles.DrawLine(startPosition + (addDistanceToDirection * -minRadius), startPosition + (addDistanceToDirection * -maxRadius));
-    }
+}
+
+    #endif
 }
 

@@ -89,7 +89,6 @@ public class CraneTool : Tool
             //position.y -= -Screen.height / 2;
             //position.z = 5f;
             Ray ray = usedCamera.ScreenPointToRay(position);
-            // BUG: Look at canvas scale to solve it
 
             if (Physics.Raycast(ray, out hit))
             {
@@ -106,7 +105,7 @@ public class CraneTool : Tool
                 Vector3 pos = hitPosition.ClampMagnitudeMinMax(minRadius, maxRadius);
                 pos.y = 0;
 
-                transform.position = pos + offset;
+                transform.position = originPos + pos;
             }
         }
         else

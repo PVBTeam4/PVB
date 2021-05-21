@@ -418,7 +418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31cebaa87359ced489b1782dd3c57088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 0}
+  usedCamera: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
   maxAngle: 3
   minRadius: 1.6
