@@ -11,7 +11,7 @@ namespace Utils
             GameObject particleGameObject = ObjectPoolInstance.GetObject(particleName);
             if (particleGameObject == null)
             {
-                Debug.LogError("Particle is null!");
+                Debug.LogError("Particle is " + particleName);
                 return null;
             }
             particleGameObject.transform.position = position;

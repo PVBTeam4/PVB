@@ -38,32 +38,13 @@ namespace Gun
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
- 
-        /// <summary>
-        ///if it interacts with an object, it will activate this function to destroy it itself
-        /// </summary>
-        private void OnTriggerEnter(Collider col)
-        {
-            string tag = col.gameObject.tag;
-
-            if (tag == "WaterCollider" || tag == "Player") return;
-
-            // Pool the bullet after collision
-            PoolBullet();
-        }
 
         /// <summary>
         /// Collision with the environment (Watch out for random colliders. In ShootingScene objects: Floor, rr, NavMeshFloor. You can test it with: print(col.gameObject.name);)
         /// </summary>
-        /// <param name="col"></param>
-        private void OnCollisionEnter(Collision col)
+        /// <param name="collision"></param>
+        private void OnCollisionEnter(Collision collision)
         {
-            string tag = col.gameObject.tag;
-
-            if (tag == "WaterCollider" || tag == "Player") return;
-
-            GameObject impact = ParticleUtil.SpawnParticle("ImpactStone", col.GetContact(0).point);
-
             // Pool the bullet after collision
             PoolBullet();
         }
