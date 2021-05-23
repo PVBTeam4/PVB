@@ -7,9 +7,9 @@ using Utils;
 namespace TaskSystem.Objectives
 {
     /// <summary>
-    /// Component that will handle the damage done by Cannon Tool
+    /// Monobehaviour component meant for boats that need to be destroyable by the player
     /// </summary>
-    public class SaveObjective : Objective
+    public class KillableObject : MonoBehaviour
     {
         [SerializeField]
         private float damage;
@@ -54,7 +54,8 @@ namespace TaskSystem.Objectives
         /// complete objective, if health is zero;
         /// </summary>
         /// <param name="damageTaken"></param>
-        public void DamageBy(float damageTaken)
+        /// <param name="handleTaskCompletion"></param>
+        public void DamageBy(float damageTaken, bool handleTaskCompletion)
         {
             // Remove health, by damage amount
             _currentHealth -= damageTaken;
@@ -70,30 +71,25 @@ namespace TaskSystem.Objectives
             }
         }
 
-        /// <summary>
-        /// The objective is completed once the object reaches the end target
-        /// </summary>
-        public void ReachEndTarget()
-        {
-            Debug.Log("completed an objective");
-            CompleteObjective();
-        }
-
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(other.name);
             if (other.gameObject.CompareTag(bulletTag))
             {
                 BulletMovement bulletMovement = other.gameObject.GetComponent<BulletMovement>();
                 if (bulletMovement == null) return;
-                DamageBy(bulletMovement.damage);
+                DamageBy(bulletMovement.damage, true);
 
                 // Spawn Impact Particle
                 ParticleUtil.SpawnParticle("ImpactBoot", bulletMovement.transform.position);
             }
             else if (other.gameObject.CompareTag(targetTag))
             {
-                ReachEndTarget();
+                PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+                if (playerHealth == null) return;
+                playerHealth.DamageBy(damage);
+
+                // Kill boat
+                DamageBy(_currentHealth, false);
             }
         }
     }

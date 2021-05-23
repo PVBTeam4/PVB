@@ -205,7 +205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6719868273410343348
 RectTransform:
   m_ObjectHideFlags: 0
@@ -358,9 +358,10 @@ GameObject:
   - component: {fileID: 3163865286389178470}
   - component: {fileID: -218140959683294701}
   - component: {fileID: -7025895239276126373}
+  - component: {fileID: 1534760756371633749}
   m_Layer: 0
   m_Name: Ally
-  m_TagString: Untagged
+  m_TagString: Respawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -478,7 +479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTag: RefugeeShipTarget
   minSpeed: 2
-  maxSpeed: 8
+  maxSpeed: 2
   percentageIncreasePerSecond: 0.02
 --- !u!114 &-5219000155999150019
 MonoBehaviour:
@@ -538,7 +539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61872f75e9623a643b0b6ebe06e30ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  progressImage: {fileID: 3045924654538999588, guid: 8788d3d9764e06541896941a949f0968, type: 3}
+  progressImage: {fileID: 6839812201817421956}
   hideWhenFull: 1
 --- !u!114 &-218140959683294701
 MonoBehaviour:
@@ -568,3 +569,49 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1534760756371633749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9028295993862979201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f51cd4f238bb68428350176ee497772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  bulletTag: Bullet
+  targetTag: RefugeeShipTarget
+  maxHealth: 100
+  onDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3163865286389178470}
+        m_TargetAssemblyTypeName: UI.ProgressBar, Scripts
+        m_MethodName: UpdateProgressBar
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -218140959683294701}
+        m_TargetAssemblyTypeName: Enemy.EnemyDestroy, Scripts
+        m_MethodName: DestroyEnemy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

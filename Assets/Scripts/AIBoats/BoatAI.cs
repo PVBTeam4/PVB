@@ -8,9 +8,9 @@ using Random = UnityEngine.Random;
 namespace Enemy
 {
     /// <summary>
-    /// this class causes the enemy to move forward to the target
+    /// this class causes the assigned boat object to move towards the target
     ///  before it moves it rotate to the target
-    /// it set the enemy as the same y position of the target
+    /// it set the boat as the same y position of the target
     /// </summary>
     public class BoatAI : MonoBehaviour
     {
