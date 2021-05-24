@@ -110,9 +110,6 @@
         },
         {
             "m_Id": "95cf656e2ff74106a7d6096c481a3e1e"
-        },
-        {
-            "m_Id": "42e6b0a046bd4d9a8f2d07409c8e51b1"
         }
     ],
     "m_GroupDatas": [],
@@ -458,9 +455,6 @@
             },
             {
                 "m_Id": "2558d9d2c1584f85bde15d92d67c3b4d"
-            },
-            {
-                "m_Id": "42e6b0a046bd4d9a8f2d07409c8e51b1"
             }
         ]
     },
@@ -558,21 +552,6 @@
     "m_StageCapability": 2,
     "m_Value": 1.0,
     "m_DefaultValue": 1.0,
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "08750eafd15542b4b2f1aec56ad87bff",
-    "m_Id": 0,
-    "m_DisplayName": "Alpha Clip Threshold",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "AlphaClipThreshold",
-    "m_StageCapability": 2,
-    "m_Value": 0.5,
-    "m_DefaultValue": 0.5,
     "m_Labels": []
 }
 
@@ -1456,39 +1435,6 @@
         "y": 0.0
     },
     "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
-    "m_ObjectId": "42e6b0a046bd4d9a8f2d07409c8e51b1",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "SurfaceDescription.AlphaClipThreshold",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "08750eafd15542b4b2f1aec56ad87bff"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_SerializedDescriptor": "SurfaceDescription.AlphaClipThreshold"
 }
 
 {
@@ -3465,8 +3411,8 @@
     },
     "m_SurfaceType": 1,
     "m_AlphaMode": 2,
-    "m_TwoSided": false,
-    "m_AlphaClip": true,
+    "m_TwoSided": true,
+    "m_AlphaClip": false,
     "m_CustomEditorGUI": ""
 }
 
