@@ -40,7 +40,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3363411753775661400}
   serializedVersion: 7
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -55,7 +55,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 3
-    scalar: 10
+    scalar: 5
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -115,7 +115,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 3
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -221,8 +221,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.5176471, g: 0.5176471, b: 0.5176471, a: 1}
-      maxColor: {r: 0.22745098, g: 0.22745098, b: 0.22745098, a: 1}
+      minColor: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 1}
+      maxColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -865,7 +865,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 4
+      scalar: 3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1026,8 +1026,8 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
       cycleCount: 1
-      repeatInterval: 0.5
-      probability: 0.33
+      repeatInterval: 0.25
+      probability: 0.66
   SizeModule:
     enabled: 0
     curve:
@@ -1371,7 +1371,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 0, g: 0, b: 0, a: 0}
-        key1: {r: 0.11053756, g: 0.7620533, b: 0.8679245, a: 0.38039216}
+        key1: {r: 0.18560876, g: 0.8135202, b: 0.9150943, a: 0.47058824}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 1, g: 1, b: 1, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -4834,7 +4834,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d338070504465dd4ab4a3207fe92c0e8, type: 2}
+  - {fileID: 2100000, guid: 193a6a1e2fd0d9f4fb7d39129dbcff4c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4891,7 +4891,7 @@ GameObject:
   - component: {fileID: 7952249709838802960}
   - component: {fileID: 5307700260777122484}
   m_Layer: 0
-  m_Name: Wind
+  m_Name: WindV1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
