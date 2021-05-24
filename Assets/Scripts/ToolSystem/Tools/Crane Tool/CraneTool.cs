@@ -57,6 +57,8 @@ public class CraneTool : Tool
     [SerializeField]
     private Transform craneClaw;
 
+    private Vector3 mousePosition;
+
     private void Start()
     {
         InputManager.MouseMovementAction += UpdateMousePosition;
@@ -95,16 +97,19 @@ public class CraneTool : Tool
                 if (originPositionTransform == null)
                     return;
 
+                mousePosition = hit.point;
+
                 Vector3 originPos = originPositionTransform.position;
                 originPos.y = 0;
 
-                // Get the position of the hit poing
-                Vector3 hitPosition = hit.point;
+                // Get the position of the hit poing (Remove the originPos for clamping the magnitude)
+                Vector3 hitPosition = mousePosition - originPos;
 
                 // Set the position to the detected raycastpoint and clamp it
                 Vector3 pos = hitPosition.ClampMagnitudeMinMax(minRadius, maxRadius);
                 pos.y = 0;
 
+                // Set the position to that of the hit position with the added origin position
                 transform.position = originPos + pos;
             }
         }
@@ -181,7 +186,7 @@ public class CraneTool : Tool
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         UpdateLiftingProces();
     }
@@ -267,6 +272,11 @@ public class CraneTool : Tool
         Vector3 endPos = new Vector3(clawPosition.x, armPosition.y + hookLiftEnd, clawPosition.z);
 
         float _radius = 0.5f;
+
+        
+            // Start position
+        UnityEditor.Handles.color = Color.red;
+        UnityEditor.Handles.DrawWireDisc(mousePosition, Vector3.up, 0.1f);
 
         // Start position
         UnityEditor.Handles.color = Color.red;
