@@ -1,3 +1,4 @@
+using Global;
 using Gun;
 using Properties.Tags;
 using UnityEngine;
@@ -16,12 +17,31 @@ namespace TaskSystem.Objectives
         [SerializeField, TagSelector]
         private string targetTag;
 
+        private void Start()
+        {
+            TaskController.TaskEndedAction += OnTaskEnd;
+        }
+
         /// <summary>
         /// The objective is completed once the object reaches the end target
+        /// Unsubscribes OnTaskEnd so that the object won't be destroyed twice
         /// </summary>
         public void ReachEndTarget()
         {
             CompleteObjective();
+            TaskController.TaskEndedAction -= OnTaskEnd;
+
+            Destroy(gameObject);
+        }
+
+        /// <summary>
+        /// Cleans up refugee ships that may still be active after the task has already ended
+        /// </summary>
+        /// <param name="toolType"></param>
+        /// <param name="isCompleted"></param>
+        private void OnTaskEnd(ToolType toolType, bool isCompleted)
+        {
+            if (toolType != ToolType.CANNON) return;
             Destroy(gameObject);
         }
 

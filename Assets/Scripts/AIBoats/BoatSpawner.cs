@@ -36,14 +36,14 @@ namespace Boat
         [SerializeField]
         private int enemiesPerRefugeeShip = 4;
 
-        [SerializeField]
-        private int refugeeBoatAmount = 3;
+        //[SerializeField]
+        private int refugeeBoatAmount;// = 3;
 
         // Whether boats should be spawning
         private bool _shouldSpawnBoats = true;
 
         //Keeps track of the amount of spawned enemies
-        private int _enemiesSpawnedCounter = 0, _totalEnemiesSpawned = 0, _enemiesLeftToSpawn, refugeeBoatsSpawned = 0;
+        private int _enemiesLeftToSpawn, refugeeBoatsSpawned = 0;
 
 
         private void Awake()
@@ -51,6 +51,9 @@ namespace Boat
             InitializeBoatHolder();
 
             TaskController.TaskEndedAction += OnTaskEnd;
+
+            //change this later perhaps
+            refugeeBoatAmount = Values.TaskValues.RefugeeShipsToSave;
         }
         /// <summary>
         /// Creates Enemy holder, that holds all Instantiated Enemies
@@ -90,19 +93,11 @@ namespace Boat
 
             //create an array from this HashSet
             _spawnPoints = transforms.ToArray();
-
         }
 
 
         /// <summary>
-        /// this function first gets a random index
-        /// and check if the currentSpawnIndex is the same as the previousSpawnIndex, 
-        /// if it is it should call itself to recalculate
-        /// if not, set the currentSpawnIndex to the previousSpawnIndex one 
-        /// add a nummber to the enemycount
-        /// Instances of a new enemy with this current SpawnPoints using the currentSpawnIndex
-        /// then set the EnemyHolderObject as the parent for this enemy
-        /// cancel this function if enemies are greater than or equal to the maximum spawn
+        /// This function spawns either an enemy ship or a refugee ship onto a random spawning point
         /// </summary>
         private void SpawnBoats()
         {
@@ -143,15 +138,18 @@ namespace Boat
 
         private void DestroyAllEnemies()
         {
-            foreach (KillObjective killObjective in GetAllEnemies())
+            foreach (KillableObject killableObject in GetAllBoats())
             {
-                killObjective.DamageBy(killObjective.maxHealth, false);
+                if(killableObject.CompareTag("Enemy"))
+                {
+                    killableObject.DamageBy(killableObject.maxHealth, false);
+                }
             }
         }
 
-        private KillObjective[] GetAllEnemies()
+        private KillableObject[] GetAllBoats()
         {
-            return FindObjectsOfType<KillObjective>();
+            return FindObjectsOfType<KillableObject>();
         }
     }
 }
