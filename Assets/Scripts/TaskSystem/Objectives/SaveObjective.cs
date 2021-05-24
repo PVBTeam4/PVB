@@ -17,11 +17,6 @@ namespace TaskSystem.Objectives
         [SerializeField, TagSelector]
         private string targetTag;
 
-        private void Start()
-        {
-            TaskController.TaskEndedAction += OnTaskEnd;
-        }
-
         /// <summary>
         /// The objective is completed once the object reaches the end target
         /// Unsubscribes OnTaskEnd so that the object won't be destroyed twice
@@ -29,20 +24,21 @@ namespace TaskSystem.Objectives
         public void ReachEndTarget()
         {
             CompleteObjective();
-            TaskController.TaskEndedAction -= OnTaskEnd;
-
             Destroy(gameObject);
         }
 
         /// <summary>
-        /// Cleans up refugee ships that may still be active after the task has already ended
+        /// If a refugeeship is killed by the player, its death will be counted. If the player has killed as many refugeeships as he is supposed to save, he loses
+        /// the game.
         /// </summary>
-        /// <param name="toolType"></param>
-        /// <param name="isCompleted"></param>
-        private void OnTaskEnd(ToolType toolType, bool isCompleted)
+        public void OnDeath()
         {
-            if (toolType != ToolType.CANNON) return;
-            Destroy(gameObject);
+            Values.TaskValues.RefugeeShipsKilled++;
+            if(Values.TaskValues.RefugeeShipsKilled >= Values.TaskValues.RefugeeShipsToSave)
+            {
+                gameObject.GetComponent<TaskFail>().FailTask();
+                Values.TaskValues.RefugeeShipsKilled = 0;
+            }
         }
 
         private void OnTriggerEnter(Collider other)

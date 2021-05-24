@@ -114,7 +114,7 @@ namespace Boat
             //set the current index to the previous index
             _previousSpawnIndex = _currentSpawnIndex;
 
-            if(_enemiesLeftToSpawn == enemiesPerRefugeeShip && refugeeBoatsSpawned < refugeeBoatAmount)
+            if(_enemiesLeftToSpawn == enemiesPerRefugeeShip/* && refugeeBoatsSpawned < refugeeBoatAmount*/)
             {
                 Instantiate(PrefabList[1], _spawnPoints[_currentSpawnIndex].position, PrefabList[1].transform.rotation).transform.parent = _boatHolderObject.transform;
                 _enemiesLeftToSpawn--;
@@ -143,6 +143,10 @@ namespace Boat
                 if(killableObject.CompareTag("Enemy"))
                 {
                     killableObject.DamageBy(killableObject.maxHealth, false);
+                }
+                else
+                {
+                    Destroy(killableObject);
                 }
             }
         }
