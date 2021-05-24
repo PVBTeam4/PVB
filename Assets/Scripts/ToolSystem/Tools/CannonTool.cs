@@ -13,10 +13,7 @@ namespace ToolSystem.Tools
     /// </summary>
     public class CannonTool : Tool
     {
-        [SerializeField]
-        //the bottom of the Gun 
-        private Transform Gunfloor;
-
+    
         // Spawnlocation of the projectile
         [SerializeField]
         private Transform bulletSpawnLocation;
@@ -129,10 +126,9 @@ namespace ToolSystem.Tools
         {
             _intersectionPoint = Vector3.Lerp(_intersectionPoint, GetTargetPointWithConstraints(), lerpValue);
             debugRay.transform.position = _intersectionPoint;
-            //subtract the distance between the current gameObject and the camera to the initial mouse position:
-            Vector3 bulletSpawnPosition = bulletSpawnLocation.position;
-            Debug.DrawLine(bulletSpawnPosition, _intersectionPoint, Color.red);
-
+            //draw line from bulletSpawnLocation.position to _intersectionPoint position
+            Debug.DrawLine(bulletSpawnLocation.position, _intersectionPoint, Color.red);
+            // rotate gun to _intersectionPoint
             transform.LookAt(_intersectionPoint);
         }
 
@@ -175,7 +171,7 @@ namespace ToolSystem.Tools
             // Point mouse raycast hit
             Vector3 intersectionPoint = GetRayIntersectionPoint();
             // Gun origin position
-            Vector3 gunOrigin = Gunfloor.transform.position;
+            Vector3 gunOrigin = transform.position;
             gunOrigin.y = intersectionPoint.y;
 
             // If intersection point is within minimalTargetDistance from gunOrigin
