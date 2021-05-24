@@ -310,7 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpawnLocation: {fileID: 4341354917386264479}
-  debugRay: {fileID: 0}
+  debugRay: {fileID: 6912504470439430579}
   waitToFire: 0.2
   bulletAccuracy: 0
   currentAmmo: 0
