@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - WaterCollider
   - StoneCollider
+  - RefugeeShipTarget
   layers:
   - Default
   - TransparentFX
