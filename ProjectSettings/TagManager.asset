@@ -9,6 +9,7 @@ TagManager:
   - LiftObject
   - WaterCollider
   - StoneCollider
+  - RefugeeShipTarget
   layers:
   - Default
   - TransparentFX
