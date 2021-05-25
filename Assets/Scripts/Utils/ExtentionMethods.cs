@@ -89,7 +89,7 @@ public static class ExtentionMethods
 
     #endregion
 
-    #region Add
+    #region Functions
 
     /// <summary>
     /// Rounds all the axis of the Vector3
@@ -133,6 +133,33 @@ public static class ExtentionMethods
     public static Vector3 Clamp(this Vector3 _vector3, Vector3 _min, Vector3 _max)
     {
         return new Vector3(Mathf.Clamp(_vector3.x, _min.x, _max.x), Mathf.Clamp(_vector3.y, _min.y, _max.y), Mathf.Clamp(_vector3.z, _min.z, _max.z));
+    }
+
+    /// <summary>
+    /// Clamps the Vector3 axis with given Min, Max Vector3's
+    /// </summary>
+    /// <param name="_vector3"></param>
+    /// <param name="_min">Dont let the axis be less than this</param>
+    /// <param name="_max">Dont let the axis be more than this</param>
+    /// <returns>Vector3</returns>
+    public static Vector3 ClampY(this Vector3 _vector3, float _min, float _max)
+    {
+        return new Vector3(_vector3.x, Mathf.Clamp(_vector3.y, _min, _max), _vector3.z);
+    }
+
+    /// <summary>
+    /// Clamps the Vector3 magnitude with given Min, Max Vector3's
+    /// </summary>
+    /// <param name="_vector3"></param>
+    /// <param name="_min">Dont let the magnitude be less than this</param>
+    /// <param name="_max">Dont let the magnitude be more than this</param>
+    /// <returns>Vector3</returns>
+    public static Vector3 ClampMagnitudeMinMax(this Vector3 _vector3, float min, float max)
+    {
+        double sm = _vector3.sqrMagnitude;
+        if (sm > (double)max * (double)max) return _vector3.normalized * max;
+        else if (sm < (double)min * (double)min) return _vector3.normalized * min;
+        return _vector3;
     }
 
     #endregion
