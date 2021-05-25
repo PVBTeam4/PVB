@@ -13,7 +13,12 @@ namespace TaskSystem.Objectives
     {
         [SerializeField]
         private float damage;
-        
+
+        public float Damage
+        {
+            get => damage;
+        }
+
         // Tag name of bullet
         [SerializeField, TagSelector]
         private string bulletTag;
@@ -76,19 +81,19 @@ namespace TaskSystem.Objectives
             }
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnCollisionEnter(Collision collision)
         {
-            if (other.gameObject.CompareTag(bulletTag))
+            if (collision.collider.gameObject.CompareTag(bulletTag))
             {
-                BulletMovement bulletMovement = other.gameObject.GetComponent<BulletMovement>();
+                BulletMovement bulletMovement = collision.collider.gameObject.GetComponent<BulletMovement>();
                 if (bulletMovement == null) return;
                 DamageBy(bulletMovement.damage, true);
 
                 // Spawn Impact Particle
                 ParticleUtil.SpawnParticle("ImpactBoot", bulletMovement.transform.position);
-            } else if (other.gameObject.CompareTag(targetTag))
+            } else if (collision.collider.gameObject.CompareTag(targetTag))
             {
-                PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
+                PlayerHealth playerHealth = collision.collider.gameObject.GetComponent<PlayerHealth>();
                 if (playerHealth == null) return;
                 playerHealth.DamageBy(damage);
                 

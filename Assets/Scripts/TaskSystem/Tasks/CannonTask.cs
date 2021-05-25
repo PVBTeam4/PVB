@@ -6,21 +6,21 @@ namespace TaskSystem.Tasks
 {
     public class CannonTask : Task
     {
-        private int _enemiesToKill;
+        private int _refugeeShipsToSave;
 
         public CannonTask(ToolType toolType, Action<Task> taskCompleteAction) : base(toolType, taskCompleteAction)
         {
-            _enemiesToKill = TaskValues.EnemiesToKill;
+            _refugeeShipsToSave = TaskValues.RefugeeShipsToSave;
         }
 
         protected override bool isTaskCompleted()
         {
-            _enemiesToKill--;
+            _refugeeShipsToSave--;
 
             // Clamp to zero
-            _enemiesToKill = Math.Max(_enemiesToKill, 0);
+            _refugeeShipsToSave = Math.Max(_refugeeShipsToSave, 0);
 
-            return _enemiesToKill == 0;
+            return _refugeeShipsToSave == 0;
         }
     }
 }

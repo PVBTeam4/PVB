@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Bullet
   - Enemy
+  - WaterCollider
+  - StoneCollider
+  - RefugeeShipTarget
   layers:
   - Default
   - TransparentFX
