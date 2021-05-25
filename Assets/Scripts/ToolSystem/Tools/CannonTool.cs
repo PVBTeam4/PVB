@@ -3,7 +3,6 @@ using UnityEngine;
 using Utils;
 using System.Collections;
 using Gun;
-using UnityEngine.Serialization;
 
 namespace ToolSystem.Tools
 {
@@ -14,7 +13,7 @@ namespace ToolSystem.Tools
     public class CannonTool : Tool
     {
     
-        // Spawnlocation of the projectile
+        // Spawn location of the projectile
         [SerializeField]
         private Transform bulletSpawnLocation;
 
@@ -26,10 +25,6 @@ namespace ToolSystem.Tools
         //Configuration options regarding the difficulty of handling the gun
         [SerializeField]
         private float waitToFire = 0.75f, bulletAccuracy;
-
-        //Configuration options regarding the ammunition of the gun
-        [SerializeField]
-        private int currentAmmo, maxAmmo;
 
         private bool canShoot = true;
 
