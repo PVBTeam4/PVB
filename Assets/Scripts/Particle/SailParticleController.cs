@@ -1,4 +1,5 @@
 using System;
+using Ship;
 using UnityEngine;
 
 namespace Particle
@@ -40,6 +41,9 @@ namespace Particle
     }
     public class SailParticleController : MonoBehaviour
     {
+
+        private PlayerMovement _playerMovement;
+        
         [SerializeField]
         private SailParticleObject[] waterEngineParticles;
 
@@ -50,6 +54,7 @@ namespace Particle
 
         private void Awake()
         {
+            _playerMovement = GetComponent<PlayerMovement>();
             _rigidbody = GetComponent<Rigidbody>();
         }
 
@@ -87,7 +92,7 @@ namespace Particle
             
             if (!velocityParticleActivation.enabled) return;
             
-            float forwardDirection = _rigidbody.velocity.z;
+            float forwardDirection = _playerMovement.ForwardSpeed;
 
             if (velocityParticleActivation.enableReversed)
             {
@@ -110,7 +115,7 @@ namespace Particle
             VelocityParticleScaler velocityParticleScaler = sailParticleObject.velocityParticleScaler;
             if (!sailParticleObject.velocityParticleScaler.enabled) return;
             
-            float forwardDirection = _rigidbody.velocity.z;
+            float forwardDirection = _playerMovement.ForwardSpeed;
 
             if (forwardDirection < 0 && !velocityParticleScaler.enableReversed) return;
 
