@@ -13,10 +13,7 @@ namespace ToolSystem.Tools
     /// </summary>
     public class CannonTool : Tool
     {
-        [SerializeField]
-        //the bottom of the Gun 
-        private Transform Gunfloor;
-
+    
         // Spawnlocation of the projectile
         [SerializeField]
         private Transform bulletSpawnLocation;
@@ -72,7 +69,7 @@ namespace ToolSystem.Tools
             // Muzzle flash spawn
             GameObject muzzleflash = ParticleUtil.SpawnParticle("MuzzleFlash", bulletSpawnPosition);
             Transform onderkantGun = transform.parent;
-            muzzleflash.transform.rotation = Quaternion.Euler(90 + transform.eulerAngles.x, onderkantGun.eulerAngles.y, 0);
+            muzzleflash.transform.rotation = Quaternion.Euler(90 + transform.eulerAngles.x, transform.eulerAngles.y, 0);
             muzzleflash.transform.position += transform.forward.Multiply(0.43f);
 
             // Bullet Spawn
@@ -129,21 +126,10 @@ namespace ToolSystem.Tools
         {
             _intersectionPoint = Vector3.Lerp(_intersectionPoint, GetTargetPointWithConstraints(), lerpValue);
             debugRay.transform.position = _intersectionPoint;
-            //subtract the distance between the current gameObject and the camera to the initial mouse position:
-            Vector3 bulletSpawnPosition = bulletSpawnLocation.position;
-            Debug.DrawLine(bulletSpawnPosition, _intersectionPoint, Color.red);
-            
-            // Direction gun should look towards
-            Vector3 direction = _intersectionPoint - bulletSpawnPosition;
-            direction.Normalize();
-
-            // caculate angleHorizon between z and x ass
-            float angleHorizon = Mathf.Atan(direction.x / direction.z) * Mathf.Rad2Deg;
-            // caculate angleVertical between z and y ass
-            float angleVertical = Mathf.Atan(direction.y / direction.z) * Mathf.Rad2Deg;
-            //rotate the gameobject based on the angleHorizon and angleVertical
-            transform.rotation = Quaternion.Euler(-angleVertical, angleHorizon, 0f);
-            Gunfloor.rotation = Quaternion.Euler(0f, angleHorizon, 0f);
+            //draw line from bulletSpawnLocation.position to _intersectionPoint position
+            Debug.DrawLine(bulletSpawnLocation.position, _intersectionPoint, Color.red);
+            // rotate gun to _intersectionPoint
+            transform.LookAt(_intersectionPoint);
         }
 
         /// <summary>
@@ -185,7 +171,7 @@ namespace ToolSystem.Tools
             // Point mouse raycast hit
             Vector3 intersectionPoint = GetRayIntersectionPoint();
             // Gun origin position
-            Vector3 gunOrigin = Gunfloor.transform.position;
+            Vector3 gunOrigin = transform.position;
             gunOrigin.y = intersectionPoint.y;
 
             // If intersection point is within minimalTargetDistance from gunOrigin
