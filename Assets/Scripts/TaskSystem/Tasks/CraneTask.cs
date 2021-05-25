@@ -40,7 +40,6 @@ public class CraneTask : MonoBehaviour
 
         // Subscribe functions to events
         onIntelCollected += CollectIntel;
-
         onTaskCompleted += TaskCompleted;
     }
 

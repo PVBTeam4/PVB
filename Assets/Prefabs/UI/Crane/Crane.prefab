@@ -288,7 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2469313678260279327}
   - component: {fileID: 2469313678260279326}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: ui_crane_crosshair_ph
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +328,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6fc30a00b5ebdbc4fb6877a6443a62df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -346,8 +346,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1161964233
+  m_SortingLayer: 1
   m_SortingOrder: 101
   m_Sprite: {fileID: 21300000, guid: 1bf69c6e7c51bab41a9fdf84c6fede22, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 2469313678285698628}
   - component: {fileID: 2469313678285698631}
   - component: {fileID: 2469313678285698624}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CraneHookObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -844,7 +844,7 @@ Transform:
   m_GameObject: {fileID: 2469313679892291903}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.66515, y: 0.66515, z: 0.66515}
+  m_LocalScale: {x: 0.6651499, y: 0.66515, z: 0.6651499}
   m_Children:
   - {fileID: 2469313678285698628}
   - {fileID: 2469313678745564797}

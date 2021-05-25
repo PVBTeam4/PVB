@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intelTagName: LiftObject
-  objectsToEnable: []
+  objectsToEnable:
+  - {fileID: 0}
   objectsToDisable: []

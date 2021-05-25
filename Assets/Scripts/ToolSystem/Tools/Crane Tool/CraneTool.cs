@@ -40,9 +40,11 @@ public class CraneTool : Tool
     private float hookLiftSpeed = 3;
 
     [SerializeField]
-    private float clawLiftMargin = 0.08f;// How soon before it returns
+    // How soon before it returns
+    private float clawLiftMargin = 0.08f;
 
-    private float isLiftingScale = 0;// 0 Is idle, 1 = moving down, -1 = moving up
+    // 0 Is idle, 1 = moving down, -1 = moving up
+    private float isLiftingScale = 0;
 
     private GameObject coupeledObject = null;
 
@@ -86,11 +88,10 @@ public class CraneTool : Tool
         HandleMovement(position);
     }
 
-    private void HandleLifting()
-    {
-
-    }
-
+    /// <summary>
+    /// Moves this object by mouse & raycast. And is clamped within a min/max radius
+    /// </summary>
+    /// <param name="position"></param>
     private void HandleMovement(Vector3 position)
     {
         if (usedCamera)
@@ -139,12 +140,17 @@ public class CraneTool : Tool
         }
     }
 
+    /// <summary>
+    /// Sets the isLiftingScale so it can drop down to the water
+    /// </summary>
     private void StartLiftingObject()
     {
         isLiftingScale = 1;
-        print("start");
     }
 
+    /// <summary>
+    /// When the claw reaches its start point
+    /// </summary>
     private void StopLiftingObject()
     {
         isLiftingScale = 0;
@@ -158,10 +164,11 @@ public class CraneTool : Tool
             // Call the collect event
             craneTask.onIntelCollected.Invoke(1);
         }
-
-        print("stop");
     }
 
+    /// <summary>
+    /// Moves the crane claw using the isLiftingScale
+    /// </summary>
     private void UpdateLiftingProces()
     {
         if (isLiftingScale != 0)
@@ -180,18 +187,16 @@ public class CraneTool : Tool
 
             float margin = clawLiftMargin;
 
+            // When the claw reaches the start point when going up
             if (craneClaw.position.y >= armPosition.y + hookLiftStart - margin)
             {
                 StopLiftingObject();
             }
+            // When the claw reaches the end point when going down
             else if (craneClaw.position.y <= armPosition.y + hookLiftEnd + margin)
             {
                 isLiftingScale = -1;
             }
-
-            //Debug.Log(craneClaw.localPosition.y);
-
-            //craneClaw.position = craneClaw.position.ClampY(craneArm.position.y + hookLiftStart, craneArm.position.y + hookLiftEnd);
         }
     }
 
@@ -200,11 +205,20 @@ public class CraneTool : Tool
         UpdateLiftingProces();
     }
 
+    /// <summary>
+    /// This event is called when the CollisionEvent of the craneClaw is called
+    /// </summary>
+    /// <param name="_object"></param>
     private void OnClawCollisionEvent(GameObject _object)
     {
         CoupleObject(_object);
     }
 
+    /// <summary>
+    /// Sets the parent of the given object to that of the craneClaw transform
+    /// </summary>
+    /// <param name="_object"></param>
+    /// <returns></returns>
     private bool CoupleObject(GameObject _object)
     {
         bool _return = false;
@@ -224,30 +238,11 @@ public class CraneTool : Tool
             // Stop the movement of the object
             MoveInDirection _movingScript = _object.GetComponent<MoveInDirection>();
 
-            // Disable the water script
-            //MoveInDirection
-
             if (_movingScript)
                 _movingScript.canMove = false;
-
-            Debug.LogWarning("coupeling object");
-        }
-        else
-        {
-
         }
 
         return _return;
-    }
-
-    private void CancelLifting()
-    {
-
-    }
-
-    private void GetLiftObjective()
-    {
-
     }
 
     public override void MoveTarget(Vector3 location)
@@ -263,7 +258,7 @@ public class CraneTool : Tool
     {
     }
 
-
+    #if UNITY_EDITOR
 
     /// <summary>
     /// Visual debug
@@ -327,4 +322,6 @@ public class CraneTool : Tool
         UnityEditor.Handles.color = Color.red;
         UnityEditor.Handles.DrawWireDisc(startPosition, Vector3.up, maxRadius);
     }
+
+    #endif
 }
