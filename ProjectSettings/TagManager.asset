@@ -6,14 +6,20 @@ TagManager:
   tags:
   - Bullet
   - Enemy
+  - LiftObject
+  - WaterCollider
+  - StoneCollider
+  - RefugeeShipTarget
+  - ShipsKilledUI
+  - ShipsSavedUI
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - Bullet
   - 
   - 
   - 

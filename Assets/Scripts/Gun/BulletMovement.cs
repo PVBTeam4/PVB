@@ -38,11 +38,12 @@ namespace Gun
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
- 
+
         /// <summary>
-        ///if it interacts with an object, it will activate this function to destroy it itself
+        /// Collision with the environment (Watch out for random colliders. In ShootingScene objects: Floor, rr, NavMeshFloor. You can test it with: print(col.gameObject.name);)
         /// </summary>
-        private void OnTriggerEnter(Collider col)
+        /// <param name="collision"></param>
+        private void OnCollisionEnter(Collision collision)
         {
             // Pool the bullet after collision
             PoolBullet();
