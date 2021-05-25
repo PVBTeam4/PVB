@@ -7,14 +7,16 @@ TagManager:
   - Bullet
   - Enemy
   - LiftObject
+  - WaterCollider
+  - StoneCollider
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - Bullet
   - 
   - 
   - 

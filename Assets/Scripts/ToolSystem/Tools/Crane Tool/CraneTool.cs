@@ -59,6 +59,8 @@ public class CraneTool : Tool
 
     private Vector3 mousePosition;
 
+    private CraneTask craneTask;
+
     private void Start()
     {
         InputManager.MouseMovementAction += UpdateMousePosition;
@@ -71,6 +73,12 @@ public class CraneTool : Tool
 
         // Subscribe the OnClawCollisionEvent to the Collision event on the claw
         craneClaw.GetComponent<CraneClaw>().CollisionEvent += OnClawCollisionEvent;
+
+        // Get the crane task
+        craneTask = FindObjectOfType<CraneTask>();
+
+        if (!craneTask)
+            Debug.Log("No object found with the CraneTask script. Try adding the 'CraneTaskManager' prefab");
     }
 
     private void UpdateMousePosition(Vector3 position)
@@ -131,8 +139,6 @@ public class CraneTool : Tool
         }
     }
 
-    
-
     private void StartLiftingObject()
     {
         isLiftingScale = 1;
@@ -148,6 +154,9 @@ public class CraneTool : Tool
             Destroy(coupeledObject);
 
             coupeledObject = null;
+
+            // Call the collect event
+            craneTask.onIntelCollected.Invoke(1);
         }
 
         print("stop");

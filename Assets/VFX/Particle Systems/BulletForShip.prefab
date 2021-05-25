@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 37242233}
   - component: {fileID: 37242235}
   - component: {fileID: 37242234}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ExtraBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4882,7 +4882,7 @@ GameObject:
   - component: {fileID: 369531888}
   - component: {fileID: 369531890}
   - component: {fileID: 369531889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Embers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9675,7 +9675,7 @@ GameObject:
   - component: {fileID: 501858626}
   - component: {fileID: 501858628}
   - component: {fileID: 501858627}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MainBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14551,7 +14551,7 @@ GameObject:
   - component: {fileID: 744704030}
   - component: {fileID: 744704032}
   - component: {fileID: 744704031}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19440,7 +19440,7 @@ GameObject:
   - component: {fileID: 2021023440}
   - component: {fileID: 2021023442}
   - component: {fileID: 2021023441}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DarkGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24333,7 +24333,9 @@ GameObject:
   - component: {fileID: 6781988697053612231}
   - component: {fileID: 202299359158447343}
   - component: {fileID: -6239584165331465135}
-  m_Layer: 0
+  - component: {fileID: 1622505557478893980}
+  - component: {fileID: 5610189202150618473}
+  m_Layer: 6
   m_Name: BulletForShip
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -24460,6 +24462,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!114 &1622505557478893980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3930058028259719244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f33ad8d7b62faf41a98f4da2b24c16b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterColliderTag: WaterCollider
+--- !u!114 &5610189202150618473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3930058028259719244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9021fb772a24ac42826cbee9452b1f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stoneColliderTag: StoneCollider
 --- !u!1 &4070278861709357163
 GameObject:
   m_ObjectHideFlags: 0
@@ -24470,7 +24498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 470815205740560956}
   - component: {fileID: 4137694676345786572}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
