@@ -10,6 +10,8 @@ TagManager:
   - WaterCollider
   - StoneCollider
   - RefugeeShipTarget
+  - ShipsKilledUI
+  - ShipsSavedUI
   layers:
   - Default
   - TransparentFX
