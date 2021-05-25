@@ -45,6 +45,14 @@ namespace Ship
         // How much the ship will tilt sidewards when the ship rotates in that opposite direction
         private float modelTiltScaleSide = 4f;
 
+        // Forward speed (And backwards is in the minus) (Max forward speed is about 7. At the moment)
+        private float forwardSpeed = 0f;
+        public float ForwardSpeed { get => forwardSpeed; }
+
+        // Sidewards Speed
+        private float sidewardsSpeed = 0f;
+        public float SidewardsSpeed { get => sidewardsSpeed; }
+
         // Start is called before the first frame update
         void Start()
         {
@@ -143,9 +151,14 @@ namespace Ship
         {
             float _scale = -modelTiltScaleSide;
             float _angulatVelocity = Mathf.Abs(_rigidbody.angularVelocity.y);
-            float _sideVelocity = _boatModelTransform.InverseTransformDirection(_rigidbody.velocity).x * _scale;
 
-            _boatModelTransform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, _sideVelocity);
+            // Get the X velocity of the rigidbody from World to Local space
+            sidewardsSpeed = _boatModelTransform.InverseTransformDirection(_rigidbody.velocity).x;
+
+            // Scale the velocity
+            float _sideVelocityScaled = sidewardsSpeed * _scale;
+
+            _boatModelTransform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, _sideVelocityScaled);
         }
 
         /// <summary>
@@ -154,9 +167,14 @@ namespace Ship
         private void TileShipForward()
         {
             float _scale = modelTiltScaleForward;
-            float _forwardVelocity = -_boatModelTransform.InverseTransformDirection(_rigidbody.velocity).z * _scale;
 
-            _boatModelTransform.rotation = Quaternion.Euler(_forwardVelocity, transform.eulerAngles.y, _boatModelTransform.eulerAngles.z);
+            // Get the Z velocity of the rigidbody from World to Local space
+            forwardSpeed = _boatModelTransform.InverseTransformDirection(_rigidbody.velocity).z;
+
+            // Scale the velocity
+            float _forwardVelocityScaled = -forwardSpeed * _scale;
+
+            _boatModelTransform.rotation = Quaternion.Euler(_forwardVelocityScaled, transform.eulerAngles.y, _boatModelTransform.eulerAngles.z);
         }
     }
 }
