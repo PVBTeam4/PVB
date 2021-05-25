@@ -6,7 +6,7 @@ namespace TaskSystem.Tasks
 {
     public class CannonTask : Task
     {
-        private int _refugeeShipsToSave;
+        public int _refugeeShipsToSave;
 
         public CannonTask(ToolType toolType, Action<Task> taskCompleteAction) : base(toolType, taskCompleteAction)
         {
@@ -16,6 +16,7 @@ namespace TaskSystem.Tasks
         protected override bool isTaskCompleted()
         {
             _refugeeShipsToSave--;
+            TaskValues.RefugeeShipsSaved = 3 - _refugeeShipsToSave;
 
             // Clamp to zero
             _refugeeShipsToSave = Math.Max(_refugeeShipsToSave, 0);

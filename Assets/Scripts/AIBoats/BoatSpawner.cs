@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Global;
@@ -45,6 +46,8 @@ namespace Boat
         //Keeps track of the amount of spawned enemies
         private int _enemiesLeftToSpawn, refugeeBoatsSpawned = 0;
 
+        //Event
+        public Action onRefugeeShipDeath;
 
         private void Awake()
         {
@@ -54,6 +57,9 @@ namespace Boat
 
             //change this later perhaps
             refugeeBoatAmount = Values.TaskValues.RefugeeShipsToSave;
+
+            Values.TaskValues.RefugeeShipsKilled = 0;
+            Values.TaskValues.RefugeeShipsSaved = 0;
         }
         /// <summary>
         /// Creates Enemy holder, that holds all Instantiated Enemies
@@ -119,6 +125,9 @@ namespace Boat
                 Instantiate(PrefabList[1], _spawnPoints[_currentSpawnIndex].position, PrefabList[1].transform.rotation).transform.parent = _boatHolderObject.transform;
                 _enemiesLeftToSpawn--;
                 refugeeBoatsSpawned++;
+
+
+
             }else
             {
                 Instantiate(PrefabList[0], _spawnPoints[_currentSpawnIndex].position, PrefabList[0].transform.rotation).transform.parent = _boatHolderObject.transform;

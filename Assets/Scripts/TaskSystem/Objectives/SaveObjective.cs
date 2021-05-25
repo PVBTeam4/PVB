@@ -1,3 +1,4 @@
+using Boat;
 using Global;
 using Gun;
 using Properties.Tags;
@@ -17,6 +18,33 @@ namespace TaskSystem.Objectives
         [SerializeField, TagSelector]
         private string targetTag;
 
+        //This 'boatManager' is basically whatever object takes care of the boats
+        //It is needed in this script to notify the game that a refugeeship has died
+
+        private GameObject _boatsKilledUIObject;
+        private GameObject _boatsSavedUIObject;
+
+        [SerializeField, TagSelector]
+        private string shipsKilledUIObject;
+
+        [SerializeField, TagSelector]
+        private string shipsSavedUIObject;
+
+        //[SerializeField] private UnityEvent<int> onDeath;
+        public UnityAction<int, int> onDeath;
+
+        public UnityAction<int, int> onTargetReached;
+
+        private void Start()
+        {
+            _boatsKilledUIObject = GameObject.FindGameObjectWithTag(shipsKilledUIObject);
+            onDeath += _boatsKilledUIObject.GetComponent<UpdateUICounter>().updateCounter;
+
+            _boatsSavedUIObject = GameObject.FindGameObjectWithTag(shipsSavedUIObject);
+            onTargetReached += _boatsSavedUIObject.GetComponent<UpdateUICounter>().updateCounter;
+        }
+
+
         /// <summary>
         /// The objective is completed once the object reaches the end target
         /// Unsubscribes OnTaskEnd so that the object won't be destroyed twice
@@ -24,6 +52,9 @@ namespace TaskSystem.Objectives
         public void ReachEndTarget()
         {
             CompleteObjective();
+
+            onTargetReached(Values.TaskValues.RefugeeShipsSaved, Values.TaskValues.RefugeeShipsToSave);
+
             Destroy(gameObject);
         }
 
@@ -37,8 +68,11 @@ namespace TaskSystem.Objectives
             if(Values.TaskValues.RefugeeShipsKilled >= Values.TaskValues.RefugeeShipsToSave)
             {
                 gameObject.GetComponent<TaskFail>().FailTask();
-                Values.TaskValues.RefugeeShipsKilled = 0;
             }
+
+            onDeath(Values.TaskValues.RefugeeShipsKilled, Values.TaskValues.RefugeeShipsToSave);
+
+            //boatManager.GetComponent<BoatSpawner>().onRefugeeShipDeath.Invoke();
         }
 
         private void OnTriggerEnter(Collider other)

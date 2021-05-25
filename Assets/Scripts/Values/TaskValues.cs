@@ -4,5 +4,6 @@ namespace Values
     {
         public static readonly int RefugeeShipsToSave = 3;
         public static int RefugeeShipsKilled = 0;
+        public static int RefugeeShipsSaved = 0;
     }
 }
