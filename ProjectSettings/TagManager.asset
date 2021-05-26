@@ -12,6 +12,7 @@ TagManager:
   - RefugeeShipTarget
   - ShipsKilledUI
   - ShipsSavedUI
+  - BounceBack
   layers:
   - Default
   - TransparentFX
