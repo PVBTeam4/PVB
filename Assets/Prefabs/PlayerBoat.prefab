@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 535171377}
   - component: {fileID: 8082780529057403454}
   - component: {fileID: 7467800332238224931}
+  - component: {fileID: 1998637861}
   m_Layer: 0
   m_Name: Gun Rotation Origin
   m_TagString: Untagged
@@ -82,6 +83,81 @@ MonoBehaviour:
   zoomSpeed: 200
   zoomedFov: 30
   scopeAnimation: {fileID: 0}
+  zoomingInEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1998637861}
+        m_TargetAssemblyTypeName: Gun.GunCameraMovement, Scripts
+        m_MethodName: OnZoomingInEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  zoomInStartEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1998637861}
+        m_TargetAssemblyTypeName: Gun.GunCameraMovement, Scripts
+        m_MethodName: OnZoomInStartEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  zoomingOutEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1998637861}
+        m_TargetAssemblyTypeName: Gun.GunCameraMovement, Scripts
+        m_MethodName: OnZoomingOutEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  zoomOutStartEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1998637861}
+        m_TargetAssemblyTypeName: Gun.GunCameraMovement, Scripts
+        m_MethodName: OnZoomOutStartEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  zoomOutEndEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1998637861}
+        m_TargetAssemblyTypeName: Gun.GunCameraMovement, Scripts
+        m_MethodName: OnZoomOutEndEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7467800332238224931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +171,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 919132148904622776}
+--- !u!114 &1998637861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535171375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128b2a3eb0331c04d922ab6937442cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationPointDistance: 3
+  maxLength: 1000
+  lerpSpeed: 100
 --- !u!1818360609 &690914756
 RotationConstraint:
   m_ObjectHideFlags: 0

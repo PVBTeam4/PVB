@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Utils;
 using System.Collections;
-using Gun;
+using Gun.Zoom;
 using UnityEngine.Events;
 
 namespace ToolSystem.Tools
@@ -166,7 +166,7 @@ namespace ToolSystem.Tools
         /// Calculate position gun should shoot at
         /// </summary>
         /// <returns>Position to shoot at</returns>
-        private Vector3 GetTargetPointWithConstraints()
+        public Vector3 GetTargetPointWithConstraints()
         {
             // Point mouse raycast hit
             Vector3 intersectionPoint = GetRayIntersectionPoint();
