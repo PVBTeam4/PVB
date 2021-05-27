@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BulletTrail
+  m_Name: WaterTrail
   m_Shader: {fileID: -6465566751694194690, guid: b262b8b83f4a3014e8243bef77f39fef, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -28,7 +28,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_e6af497502dc420f9cc5faf74a281bf7:
-        m_Texture: {fileID: 2800000, guid: 2163d5583fd71ca4da1e86a519efc574, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2756a4ba6ac331341b9610e16facd8da, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -45,11 +45,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats: []
     m_Colors:
-    - Color_1b8ce0a551af4854a34d0a2993bc77b9: {r: 10.768554, g: 2.464353, b: 0, a: 1}
+    - Color_1b8ce0a551af4854a34d0a2993bc77b9: {r: 3.3973193, g: 9.573257, b: 13.589277, a: 1}
     - Color_c4342ad4bbc94b51ae0bf23c63167433: {r: 0.2509804, g: 0.2509804, b: 0.2509804, a: 1}
-    - Vector2_02342f020b814f3c8e3b7d5d860f68cb: {r: -4, g: 0, b: 0, a: 0}
+    - Vector2_02342f020b814f3c8e3b7d5d860f68cb: {r: -2, g: 0, b: 0, a: 0}
     - Vector2_1: {r: 0, g: 0, b: 0, a: 0}
-    - Vector2_1072b4a20d13408084622eea9b5465b2: {r: 1, g: 1, b: 0, a: 0}
+    - Vector2_1072b4a20d13408084622eea9b5465b2: {r: 2, g: 1, b: 0, a: 0}
     - Vector2_2: {r: -1, g: -1, b: 0, a: 0}
     - Vector2_5c3bb62d60414dc5bd25686a2d293573: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
