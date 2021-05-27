@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 535171376}
   - component: {fileID: 535171377}
   - component: {fileID: 8082780529057403454}
+  - component: {fileID: 7467800332238224931}
   m_Layer: 0
   m_Name: Gun Rotation Origin
   m_TagString: Untagged
@@ -51,6 +52,21 @@ MonoBehaviour:
   lerpValue: 0.05
   minimalTargetDistanceFromGun: 1
   minimalForwardDirection: 0.2
+  shootEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7467800332238224931}
+        m_TargetAssemblyTypeName: Gun.GunAnimationController, Scripts
+        m_MethodName: PlayShootAnimation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8082780529057403454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +82,19 @@ MonoBehaviour:
   zoomSpeed: 200
   zoomedFov: 30
   scopeAnimation: {fileID: 0}
+--- !u!114 &7467800332238224931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535171375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8423dcb00ce54cd488da6c08e48d638c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 919132148904622776}
 --- !u!1818360609 &690914756
 RotationConstraint:
   m_ObjectHideFlags: 0
