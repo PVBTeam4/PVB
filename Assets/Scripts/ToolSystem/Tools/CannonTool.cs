@@ -3,6 +3,7 @@ using UnityEngine;
 using Utils;
 using System.Collections;
 using Gun;
+using UnityEngine.Events;
 
 namespace ToolSystem.Tools
 {
@@ -40,6 +41,8 @@ namespace ToolSystem.Tools
         [SerializeField, Range(0, 1)]
         private float minimalForwardDirection;
 
+        [SerializeField] private UnityEvent shootEvent;
+
         private void Awake()
         {
             _zoomGun = GetComponent<ZoomGun>();
@@ -72,6 +75,8 @@ namespace ToolSystem.Tools
             bulletGameObject.gameObject.transform.rotation = transform.rotation;
             bulletGameObject.transform.parent = _bulletHolderObject.transform;
             bulletGameObject.transform.position += transform.forward.Multiply(0.2f);
+            
+            shootEvent?.Invoke();
         }
 
         /// <summary>
