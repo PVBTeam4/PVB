@@ -13,6 +13,7 @@ TagManager:
   - ShipsKilledUI
   - ShipsSavedUI
   - BounceBack
+  - IntelCollectedUI
   layers:
   - Default
   - TransparentFX

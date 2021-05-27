@@ -1,7 +1,19 @@
 fileFormatVersion: 2
 guid: e1ea1c868173dc442ba1db1d73f83300
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -336848096011629478
+    second: ui_overworld_tasks_0
+  - first:
+      213: -7593458122839489224
+    second: ui_overworld_tasks_1
+  - first:
+      213: -8781937277900830112
+    second: ui_overworld_tasks_2
+  - first:
+      213: -8910960375426787250
+    second: ui_overworld_tasks_3
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -89,7 +101,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: ui_overworld_tasks_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 280
+        width: 473
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 43, y: 0, z: 31, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5cc5fdf076435bf0800000000000000
+      internalID: -336848096011629478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_overworld_tasks_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 187
+        width: 473
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8350953b11e9e9690800000000000000
+      internalID: -7593458122839489224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_overworld_tasks_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 98
+        width: 473
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06ac5fe039a402680800000000000000
+      internalID: -8781937277900830112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_overworld_tasks_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 473
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e48da1730c8e55480800000000000000
+      internalID: -8910960375426787250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

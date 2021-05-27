@@ -7,16 +7,11 @@ using Properties.Tags;
 
 public class CraneTask : MonoBehaviour
 {
-    private int _intelAmountToCollect = 0;
-
-    private int _intelAmountCurrent = 0;
-
-    public Action<int> onTaskCompleted;
-
-    public Action<int> onIntelCollected;
-
     [SerializeField, TagSelector]
     private string intelTagName;
+
+    [SerializeField, TagSelector]
+    private string inteltagNameUI;
 
     [Header("On Task Completion")]
 
@@ -25,6 +20,17 @@ public class CraneTask : MonoBehaviour
 
     [SerializeField]
     public GameObject[] objectsToDisable;
+
+    // Private
+    private int _intelAmountToCollect = 0;
+
+    private int _intelAmountCurrent = 0;
+
+    public Action<int> onTaskCompleted;
+
+    public Action<int> onIntelCollected;
+
+    public Action<int, int> updateIntelUI;
 
     public void Start()
     {
@@ -41,6 +47,18 @@ public class CraneTask : MonoBehaviour
         // Subscribe functions to events
         onIntelCollected += CollectIntel;
         onTaskCompleted += TaskCompleted;
+
+        GameObject _intelCollectedUI = GameObject.FindGameObjectWithTag(inteltagNameUI);
+
+        if (_intelCollectedUI)
+        {
+            updateIntelUI += _intelCollectedUI.GetComponent<UpdateUICounter>().updateCounter;
+
+            // Update the UI
+            updateIntelUI.Invoke(_intelAmountCurrent, _intelAmountToCollect);
+        }
+        else
+            Debug.LogError("No IntelUI object found with tag: " + inteltagNameUI);
     }
 
     /// <summary>
@@ -50,6 +68,9 @@ public class CraneTask : MonoBehaviour
     private void CollectIntel(int value)
     {
         _intelAmountCurrent++;
+
+        // Update the UI
+        updateIntelUI.Invoke(_intelAmountCurrent, _intelAmountToCollect);
 
         Debug.Log("Intel collected");
 
@@ -64,6 +85,10 @@ public class CraneTask : MonoBehaviour
     private void TaskCompleted(int value)
     {
         Debug.Log("TASK COMPLETED");
+
+        // Call the intel task completed event
+        OverworldTasks overworldTasks = FindObjectOfType<OverworldTasks>();
+        if (overworldTasks) overworldTasks.CompleteTaskEvent.Invoke(1);
 
         // Disable / Enable objects
         ToggleObjects(objectsToEnable, true);
