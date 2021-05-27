@@ -24432,7 +24432,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 34
-  speed: 40
+  speed: 20
   lifeSpan: 2
 --- !u!114 &202299359158447343
 MonoBehaviour:
