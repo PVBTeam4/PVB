@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 using Utils;
 using System.Collections;
-using Gun;
-using UnityEngine.Serialization;
+using Gun.Zoom;
+using UnityEngine.Events;
 
 namespace ToolSystem.Tools
 {
@@ -14,7 +14,7 @@ namespace ToolSystem.Tools
     public class CannonTool : Tool
     {
     
-        // Spawnlocation of the projectile
+        // Spawn location of the projectile
         [SerializeField]
         private Transform bulletSpawnLocation;
 
@@ -26,10 +26,6 @@ namespace ToolSystem.Tools
         //Configuration options regarding the difficulty of handling the gun
         [SerializeField]
         private float waitToFire = 0.75f, bulletAccuracy;
-
-        //Configuration options regarding the ammunition of the gun
-        [SerializeField]
-        private int currentAmmo, maxAmmo;
 
         private bool canShoot = true;
 
@@ -44,6 +40,8 @@ namespace ToolSystem.Tools
         private float minimalTargetDistanceFromGun;
         [SerializeField, Range(0, 1)]
         private float minimalForwardDirection;
+
+        [SerializeField] private UnityEvent shootEvent;
 
         private void Awake()
         {
@@ -77,6 +75,8 @@ namespace ToolSystem.Tools
             bulletGameObject.gameObject.transform.rotation = transform.rotation;
             bulletGameObject.transform.parent = _bulletHolderObject.transform;
             bulletGameObject.transform.position += transform.forward.Multiply(0.2f);
+            
+            shootEvent?.Invoke();
         }
 
         /// <summary>
@@ -166,7 +166,7 @@ namespace ToolSystem.Tools
         /// Calculate position gun should shoot at
         /// </summary>
         /// <returns>Position to shoot at</returns>
-        private Vector3 GetTargetPointWithConstraints()
+        public Vector3 GetTargetPointWithConstraints()
         {
             // Point mouse raycast hit
             Vector3 intersectionPoint = GetRayIntersectionPoint();

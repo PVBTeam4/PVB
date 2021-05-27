@@ -48,7 +48,14 @@ namespace Gun
             // Pool the bullet after collision
             PoolBullet();
         }
-
+        /// <summary>
+        /// fix for enemy/refugee bullet set to false
+        /// </summary>
+        /// <param name="other"></param>
+        private void OnTriggerEnter(Collider other)
+        {
+            gameObject.SetActive(false);
+        }
         /// <summary>
         /// Destroys the game object in the time of the lifeSpan
         /// </summary>
