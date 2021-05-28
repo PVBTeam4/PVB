@@ -98,32 +98,35 @@ namespace ToolSystem.Tools.Crane_Tool
                 //position.y -= -Screen.height / 2;
                 //position.z = 5f;
                 Ray ray = usedCamera.ScreenPointToRay(position);
-
+                
                 if (Physics.Raycast(ray, out hit))
                 {
-                    if (originPositionTransform == null)
-                        return;
-
-                    mousePosition = hit.point;
-
-                    Vector3 originPos = originPositionTransform.position;
-                    originPos.y = 0;
-
-                    // Get the position of the hit poing (Remove the originPos for clamping the magnitude)
-                    Vector3 hitPosition = mousePosition - originPos;
-
-                    // Set the position to the detected raycastpoint and clamp it
-                    Vector3 pos = hitPosition.ClampMagnitudeMinMax(minRadius, maxRadius);
-                    pos.y = 0;
-
-                    // Set the position to that of the hit position with the added origin position
-                    transform.position = originPos + pos;
+                    UpdatePosition(hit.point);
                 }
             }
             else
             {
                 Debug.LogError("No Camera found");
             }
+        }
+
+        private void UpdatePosition(Vector3 mousePosition)
+        {
+            if (originPositionTransform == null)
+                return;
+
+            Vector3 originPos = originPositionTransform.position;
+            originPos.y = 0;
+
+            // Get the position of the hit poing (Remove the originPos for clamping the magnitude)
+            Vector3 hitPosition = mousePosition - originPos;
+
+            // Set the position to the detected raycastpoint and clamp it
+            Vector3 pos = hitPosition.ClampMagnitudeMinMax(minRadius, maxRadius);
+            pos.y = 0;
+
+            // Set the position to that of the hit position with the added origin position
+            transform.position = originPos + pos;
         }
 
         private void LeftAction(ButtonInputType type, float amount)
