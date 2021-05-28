@@ -1,3 +1,4 @@
+using System;
 using Global;
 using SceneSystem;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace OverWorld
         // Name of player gameObject's tag
         private const string PlayerTag = "Player";
 
+        public Action<ToolType> SceneSwitchEvent;
+
         //ToolType, to load correct scene
         [SerializeField]
         private ToolType toolType;
@@ -24,7 +27,10 @@ namespace OverWorld
             {
                 Debug.LogError(gameObject.name + " does not have a trigger.");
             }
-        
+
+            // Subscribe the overworldTasks.CompleteTaskEvent to the SceneSwitchEvent
+            OverworldTasks overworldTasks = FindObjectOfType<OverworldTasks>();
+            if (overworldTasks) SceneSwitchEvent += (ToolType _type) => { overworldTasks.CompleteTaskEvent(2); };
         }
 
         /// <summary>
@@ -35,6 +41,9 @@ namespace OverWorld
             if (other.gameObject.CompareTag(PlayerTag))
             {
                 SceneController.SwitchSceneByToolType(toolType);
+
+                SceneSwitchEvent(toolType);
+
                 gameObject.SetActive(false);
             }
         }
