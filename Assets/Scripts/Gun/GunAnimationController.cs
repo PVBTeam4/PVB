@@ -10,16 +10,20 @@ namespace Gun
         [SerializeField]
         private RotationConstraint Rc;
 
-
+        
         public void PlayShootAnimation()
-        {
+        {   //set constrain to false
+            Rc.constraintActive = false;
+            //play animation
             animator.Play("Shoot");
+            //invoke if animation is done
+            Invoke("ConstrainObject", animator.GetCurrentAnimatorStateInfo(0).length);
+
 
         }
-
-        private void Update()
-        {
-            Rc.constraintActive = !animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot");
+        private void ConstrainObject()
+        {   //set constrain to true
+            Rc.constraintActive = true;
         }
     }
 }
