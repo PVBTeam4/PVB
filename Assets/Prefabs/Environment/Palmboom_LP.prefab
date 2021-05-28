@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3998453333143538428}
   - component: {fileID: 3382407198657805091}
   - component: {fileID: 8260255405008451495}
+  - component: {fileID: 1038114308603118454}
   m_Layer: 0
   m_Name: Leaves
-  m_TagString: Untagged
+  m_TagString: StoneCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1038114308603118454
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427204909239900320}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 766207002214816160, guid: f9b8092a00884c1488c731a36747fe65, type: 3}
 --- !u!1 &3359709892029149923
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,9 +107,10 @@ GameObject:
   - component: {fileID: 5342198064741432548}
   - component: {fileID: 7662814077454460994}
   - component: {fileID: 9210180752923486302}
+  - component: {fileID: 8064611966983887861}
   m_Layer: 0
   m_Name: Palmstam
-  m_TagString: Untagged
+  m_TagString: StoneCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,6 +178,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8064611966983887861
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3359709892029149923}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7791407279247010453, guid: f9b8092a00884c1488c731a36747fe65, type: 3}
 --- !u!1 &7545023524772572938
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +203,7 @@ GameObject:
   - component: {fileID: 7205370482470204848}
   m_Layer: 0
   m_Name: Palmboom_LP
-  m_TagString: Untagged
+  m_TagString: StoneCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

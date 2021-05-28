@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7052531340419336011}
   - component: {fileID: 2317016899785231078}
   m_Layer: 0
-  m_Name: Rock_03_LP (6)
-  m_TagString: Untagged
+  m_Name: Rock_03_LP
+  m_TagString: StoneCollider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
