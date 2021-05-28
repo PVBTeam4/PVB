@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Ship
@@ -32,35 +33,48 @@ namespace Ship
         // Rigidbody of the player
         private Rigidbody _rigidbody;
 
-        [Header("Visual Model")]
+        //[Header("Visual Model")]
 
-        // Transform of the boat model that we will tilt 
-        private Transform _boatModelTransform;
+        // // Transform of the boat model that we will tilt 
+        // private Transform _boatModelTransform;
+        //
+        // [SerializeField]
+        // // How much the ship will tilt forward or backwards when the ship moves in that opposite direction
+        // private float modelTiltScaleForward = 1.3f;
+        //
+        // [SerializeField]
+        // // How much the ship will tilt sidewards when the ship rotates in that opposite direction
+        // private float modelTiltScaleSide = 4f;
 
-        [SerializeField]
-        // How much the ship will tilt forward or backwards when the ship moves in that opposite direction
-        private float modelTiltScaleForward = 1.3f;
-
-        [SerializeField]
-        // How much the ship will tilt sidewards when the ship rotates in that opposite direction
-        private float modelTiltScaleSide = 4f;
-
+        
         // Forward speed (And backwards is in the minus) (Max forward speed is about 7. At the moment)
         private float forwardSpeed = 0f;
-        public float ForwardSpeed { get => forwardSpeed; }
-
+        public float ForwardSpeed { get => forwardSpeed; set => forwardSpeed = value; }
+    
         // Sidewards Speed
         private float sidewardsSpeed = 0f;
-        public float SidewardsSpeed { get => sidewardsSpeed; }
+        public float SidewardsSpeed { get => sidewardsSpeed; set => sidewardsSpeed = value; }
+
+        private void OnCollisionEnter(Collision other)
+        {
+            print(other.gameObject.name);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            print(other.name);
+        }
 
         // Start is called before the first frame update
         void Start()
         {
+            print(GetComponent<Collider>());
+            
             // Get the components we need
             _rigidbody = GetComponent<Rigidbody>();
 
             // Get the transform of the boat model
-            _boatModelTransform = gameObject.transform.GetComponentInChildren<Transform>();
+            //_boatModelTransform = gameObject.transform.GetComponentInChildren<Transform>();
         }
 
         // FixedUpdate to calculate physics
@@ -80,10 +94,7 @@ namespace Ship
 
             SetDragByInput(UnityEngine.Input.GetAxis("Vertical"));
 
-            // Tilting effects
-            TileShipSidewards();
-
-            TileShipForward();
+            
         }
 
         /// <summary>
@@ -144,37 +155,6 @@ namespace Ship
             }
         }
 
-        /// <summary>
-        /// Tilts the ship sidewards by the sidewards (X axis) velocity
-        /// </summary>
-        private void TileShipSidewards()
-        {
-            float _scale = -modelTiltScaleSide;
-            float _angulatVelocity = Mathf.Abs(_rigidbody.angularVelocity.y);
-
-            // Get the X velocity of the rigidbody from World to Local space
-            sidewardsSpeed = _boatModelTransform.InverseTransformDirection(_rigidbody.velocity).x;
-
-            // Scale the velocity
-            float _sideVelocityScaled = sidewardsSpeed * _scale;
-
-            _boatModelTransform.rotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, _sideVelocityScaled);
-        }
-
-        /// <summary>
-        /// Tilts the ship forward by the forward (Z axis) velocity
-        /// </summary>
-        private void TileShipForward()
-        {
-            float _scale = modelTiltScaleForward;
-
-            // Get the Z velocity of the rigidbody from World to Local space
-            forwardSpeed = _boatModelTransform.InverseTransformDirection(_rigidbody.velocity).z;
-
-            // Scale the velocity
-            float _forwardVelocityScaled = -forwardSpeed * _scale;
-
-            _boatModelTransform.rotation = Quaternion.Euler(_forwardVelocityScaled, transform.eulerAngles.y, _boatModelTransform.eulerAngles.z);
-        }
+        
     }
 }
