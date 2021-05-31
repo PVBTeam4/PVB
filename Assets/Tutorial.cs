@@ -8,11 +8,8 @@ using UnityEngine;
 public class Tutorial : MonoBehaviour
 {
     [SerializeField]
-    //object that need to be Disabled
-    private GameObject ShowGame;
-    [SerializeField]
-    //object that need to be Enabled
-    private GameObject ShowHelp; 
+    //object that can be be Disabled or Enabled
+    private GameObject ShowGame,ShowHelp; 
 
     private void Start()
     {
