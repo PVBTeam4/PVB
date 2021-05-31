@@ -129,7 +129,8 @@ GameObject:
   - component: {fileID: 4343556874637294200}
   - component: {fileID: 473752839}
   - component: {fileID: 8723422384470058243}
-  - component: {fileID: 1684571923093138702}
+  - component: {fileID: -7807325927183850364}
+  - component: {fileID: -4911831342093001188}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -213,37 +214,6 @@ MonoBehaviour:
   damage: 20
   bulletTag: Bullet
   targetTag: Player
-  maxHealth: 100
-  onDamage:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3045924653465763383}
-        m_TargetAssemblyTypeName: UI.ProgressBar, Scripts
-        m_MethodName: UpdateProgressBar
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1684571923093138702}
-        m_TargetAssemblyTypeName: Enemy.EnemyDestroy, Scripts
-        m_MethodName: DestroyEnemy
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &4343556874637294200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,7 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yOffSet: 0.62
   WaterVolumeHelper: {fileID: 0}
---- !u!114 &1684571923093138702
+--- !u!114 &-7807325927183850364
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -305,9 +275,42 @@ MonoBehaviour:
   m_GameObject: {fileID: 3045924653465763382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e18d59568070e3429a5103b609401c1, type: 3}
+  m_Script: {fileID: 11500000, guid: 6101f5991df5cea49ba8b041372452a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionRange: 3
+  explosionDamage: 100
+--- !u!114 &-4911831342093001188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3045924653465763382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8356806bdcbed45aac6c67a6734082, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  onDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3045924653465763383}
+        m_TargetAssemblyTypeName: UI.ProgressBar, Scripts
+        m_MethodName: UpdateProgressBar
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3045924653751824038
 GameObject:
   m_ObjectHideFlags: 0
