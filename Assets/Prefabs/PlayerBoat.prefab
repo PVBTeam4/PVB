@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 535171376}
   - component: {fileID: 535171377}
+  - component: {fileID: 3270877703198791181}
   - component: {fileID: 8082780529057403454}
   - component: {fileID: 7467800332238224931}
   - component: {fileID: 1998637861}
@@ -48,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpawnLocation: {fileID: 8354174234748347399}
   debugRay: {fileID: 2248194654605514666}
-  waitToFire: 0.2
+  waitToFire: 0.5
   bulletAccuracy: 0
   lerpValue: 0.05
   minimalTargetDistanceFromGun: 1
@@ -68,6 +69,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3270877703198791181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535171375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6ebd9099617b1746ba36b00de2a58d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heatPerShot: 30
+  cooldownPerSecond: 25
+  overheatingTemperature: 100
+  cooldownFinished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8082780529057403454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationPointDistance: 3
-  maxLength: 1000
+  maxLength: 800
   lerpSpeed: 100
 --- !u!1818360609 &690914756
 RotationConstraint:
