@@ -1,10 +1,6 @@
-using Boat;
-using Global;
-using Gun;
 using Properties.Tags;
 using UnityEngine;
 using UnityEngine.Events;
-using Utils;
 
 namespace TaskSystem.Objectives
 {

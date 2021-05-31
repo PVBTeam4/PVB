@@ -13,7 +13,7 @@ namespace Gun.VFX
         {
             if (collision.collider.gameObject.CompareTag(stoneColliderTag))
             {
-                ParticleUtil.SpawnParticle("ImpactStone", collision.contacts[0].point);
+                ParticleUtil.SpawnParticle(ParticleType.ImpactStone, collision.contacts[0].point);
             }
         }
     }
