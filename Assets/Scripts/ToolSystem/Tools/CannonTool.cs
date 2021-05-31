@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using Utils;
 using System.Collections;
+using Gun;
+using Gun.Overheating;
 using Gun.Zoom;
 using UnityEngine.Events;
 
@@ -30,6 +32,7 @@ namespace ToolSystem.Tools
         private bool canShoot = true;
 
         private ZoomGun _zoomGun;
+        private GunOverheating _gunOverheating;
 
         private Vector3 _intersectionPoint;
 
@@ -46,6 +49,7 @@ namespace ToolSystem.Tools
         private void Awake()
         {
             _zoomGun = GetComponent<ZoomGun>();
+            _gunOverheating = GetComponent<GunOverheating>();
             InitializeBulletHolder();
         }
 
@@ -88,6 +92,9 @@ namespace ToolSystem.Tools
             if (pressedValue == 0) return;
 
             if (!canShoot) return;
+            
+            if (_gunOverheating.HasCooldown()) return;
+            _gunOverheating.HeatGun();
 
             // Disable shooting
             canShoot = false;
@@ -124,6 +131,8 @@ namespace ToolSystem.Tools
         /// <param name="location">the mouse location</param>
         public override void MoveTarget(Vector3 location)
         {
+            if (_gunOverheating.HasCooldown()) return;
+            
             _intersectionPoint = Vector3.Lerp(_intersectionPoint, GetTargetPointWithConstraints(), lerpValue);
             debugRay.transform.position = _intersectionPoint;
             //draw line from bulletSpawnLocation.position to _intersectionPoint position
