@@ -17,7 +17,7 @@ public class BounceBackBumper : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.transform.tag == "BounceBack")
+        if(collision.transform.tag == "StoneCollider")
         {   
 
             PlayerRigidbody.AddExplosionForce(bounceForce, collision.contacts[0].point, 0);
