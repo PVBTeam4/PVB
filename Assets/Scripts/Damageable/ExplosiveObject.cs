@@ -12,8 +12,13 @@ namespace Damageable
         [SerializeField]
         private float explosionDamage;
 
-        private bool _exploded = false;
+        private bool _exploded;
 
+        private void OnEnable()
+        {
+            ResetExplosionState();
+        }
+        
         /// <summary>
         /// Detonate GameObject
         /// </summary>
@@ -41,6 +46,14 @@ namespace Damageable
                     explosiveObject.Detonate();
                 }
             }
+        }
+        
+        /// <summary>
+        /// Reset explosion state
+        /// </summary>
+        private void ResetExplosionState()
+        {
+            _exploded = false;
         }
     }
 }
