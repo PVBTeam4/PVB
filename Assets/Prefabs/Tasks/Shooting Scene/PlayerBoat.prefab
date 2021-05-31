@@ -217,6 +217,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 919132148904622776}
+  gunSkinnedMeshRenderer: {fileID: 1686960441372221569}
+  gunMaterials:
+    defaultMaterial: {fileID: 2100000, guid: 8b1866d0199acac4d9118291289f05f9, type: 2}
+    cooldownMaterial: {fileID: 2100000, guid: e9c813ec2291a754c90a034f8a9afbe3, type: 2}
+  materialLerpSpeed: 1
 --- !u!114 &1998637861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -640,6 +645,11 @@ GameObject:
 --- !u!4 &5140769279472311859 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d8b61ff20e2e1334ea8a84c95775b20f, type: 3}
+  m_PrefabInstance: {fileID: 4673917351296334296}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &1686960441372221569 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6319780098869156185, guid: d8b61ff20e2e1334ea8a84c95775b20f, type: 3}
   m_PrefabInstance: {fileID: 4673917351296334296}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1643631230684789213 stripped
