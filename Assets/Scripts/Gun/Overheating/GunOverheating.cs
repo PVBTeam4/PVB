@@ -22,8 +22,8 @@ namespace Gun.Overheating
         private bool _activeCooldown;
 
         [SerializeField]
-        private UnityEvent cooldownFinished;
-        
+        private UnityEvent cooldownFinished, cooldownStarted;
+
         private void Update()
         {
             CooldownTemperature();
@@ -41,6 +41,7 @@ namespace Gun.Overheating
             if (_currentTemperature == overheatingTemperature)
             {
                 _activeCooldown = true;
+                cooldownStarted?.Invoke();
             }
         }
 

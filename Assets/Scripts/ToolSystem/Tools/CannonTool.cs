@@ -93,11 +93,8 @@ namespace ToolSystem.Tools
 
             if (!canShoot) return;
             
-            if (_gunOverheating != null)
-            {
-                if (_gunOverheating.HasCooldown()) return;
-                _gunOverheating.HeatGun();
-            }
+            if (_gunOverheating.HasCooldown()) return;
+            _gunOverheating.HeatGun();
 
             // Disable shooting
             canShoot = false;
@@ -134,6 +131,8 @@ namespace ToolSystem.Tools
         /// <param name="location">the mouse location</param>
         public override void MoveTarget(Vector3 location)
         {
+            if (_gunOverheating.HasCooldown()) return;
+            
             _intersectionPoint = Vector3.Lerp(_intersectionPoint, GetTargetPointWithConstraints(), lerpValue);
             debugRay.transform.position = _intersectionPoint;
             //draw line from bulletSpawnLocation.position to _intersectionPoint position
