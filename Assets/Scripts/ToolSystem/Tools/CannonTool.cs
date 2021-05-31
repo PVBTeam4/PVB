@@ -131,7 +131,7 @@ namespace ToolSystem.Tools
         /// <param name="location">the mouse location</param>
         public override void MoveTarget(Vector3 location)
         {
-            if (_gunOverheating.HasCooldown()) return;
+            if (_gunOverheating.HasCooldown() || !gameObject.activeInHierarchy) return;
             
             _intersectionPoint = Vector3.Lerp(_intersectionPoint, GetTargetPointWithConstraints(), lerpValue);
             debugRay.transform.position = _intersectionPoint;
