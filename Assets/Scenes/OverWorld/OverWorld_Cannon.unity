@@ -8053,6 +8053,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7952249709838802960, guid: 8976609c7c0da184facb636365aa48f3, type: 3}
   m_PrefabInstance: {fileID: 528102723}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &538644801 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6019783927296783066, guid: f68449b742a7705458b4818e55bc321d, type: 3}
+  m_PrefabInstance: {fileID: 5059186264491401933}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &539157020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29453,34 +29458,6 @@ PrefabInstance:
       propertyPath: WaterVolumeHelper
       value: 
       objectReference: {fileID: 168103833}
-    - target: {fileID: 1676990981, guid: f68449b742a7705458b4818e55bc321d, type: 3}
-      propertyPath: m_Size.x
-      value: 3.2209044
-      objectReference: {fileID: 0}
-    - target: {fileID: 1676990981, guid: f68449b742a7705458b4818e55bc321d, type: 3}
-      propertyPath: m_Size.y
-      value: 4.0098467
-      objectReference: {fileID: 0}
-    - target: {fileID: 1676990981, guid: f68449b742a7705458b4818e55bc321d, type: 3}
-      propertyPath: m_Size.z
-      value: 8.131461
-      objectReference: {fileID: 0}
-    - target: {fileID: 1676990981, guid: f68449b742a7705458b4818e55bc321d, type: 3}
-      propertyPath: m_Center.x
-      value: 0.07967234
-      objectReference: {fileID: 0}
-    - target: {fileID: 1676990981, guid: f68449b742a7705458b4818e55bc321d, type: 3}
-      propertyPath: m_Center.y
-      value: 1.9701986
-      objectReference: {fileID: 0}
-    - target: {fileID: 1676990981, guid: f68449b742a7705458b4818e55bc321d, type: 3}
-      propertyPath: m_Center.z
-      value: 1.4179459
-      objectReference: {fileID: 0}
-    - target: {fileID: 3921554827403281551, guid: f68449b742a7705458b4818e55bc321d, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f5f0e6010e722a34a82b10a3647fd7a3, type: 2}
     - target: {fileID: 4707205865743342590, guid: f68449b742a7705458b4818e55bc321d, type: 3}
       propertyPath: m_Name
       value: Player_Overworld
@@ -29533,30 +29510,12 @@ PrefabInstance:
       propertyPath: usedCamera
       value: 
       objectReference: {fileID: 1317770448}
-    - target: {fileID: 8038238143976511368, guid: f68449b742a7705458b4818e55bc321d, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+    - target: {fileID: 7237588820159924127, guid: f68449b742a7705458b4818e55bc321d, type: 3}
+      propertyPath: craneCarrier
       value: 
-      objectReference: {fileID: 2100000, guid: 24753a27e3bfcb345a8fe821bbaab14b, type: 2}
+      objectReference: {fileID: 538644801}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f68449b742a7705458b4818e55bc321d, type: 3}
---- !u!1 &5059186264491401934 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4707205865743342590, guid: f68449b742a7705458b4818e55bc321d, type: 3}
-  m_PrefabInstance: {fileID: 5059186264491401933}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5059186264491401935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5059186264491401934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 079dfe948c62d384e80e28ee5ef3bccb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bounceForce: 10000
 --- !u!1001 &7238453631389210099
 PrefabInstance:
   m_ObjectHideFlags: 0

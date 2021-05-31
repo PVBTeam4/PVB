@@ -12,6 +12,8 @@ namespace Input
         // Left mouse button
         LeftMouse,
         // Right mouse button
-        RightMouse
+        RightMouse,
+        // Interaction button
+        Interaction
     }
 }
