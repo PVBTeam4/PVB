@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1210571895061516932
 RectTransform:
   m_ObjectHideFlags: 0
@@ -547,6 +547,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20cee940b8ed5844a95aef2eba0b808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DisableObject: {fileID: 1210571896764935830}
-  EnableObject: {fileID: 0}
-  PressAnyKey: 1
+  ShowGame: {fileID: 0}
+  ShowHelp: {fileID: 1210571895061516935}

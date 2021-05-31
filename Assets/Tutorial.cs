@@ -9,23 +9,23 @@ public class Tutorial : MonoBehaviour
 {
     [SerializeField]
     //object that need to be Disabled
-    private GameObject DisableObject;
+    private GameObject ShowGame;
     [SerializeField]
     //object that need to be Enabled
-    private GameObject EnableObject;
-    [SerializeField]
-    //PressAnyKey default is false but if enabled it wil allow any key to be pressed
-    private bool PressAnyKey = false;
+    private GameObject ShowHelp; 
 
- 
+    private void Start()
+    {
+        EnableDisableObject(true);
+    }
     void Update()
     {
-        //check if PressAnyKey is true
-        if (PressAnyKey)
+        //check if ShowTutorial is true
+        if (ShowHelp.activeSelf)
         {
             if (UnityEngine.Input.anyKeyDown)
             {   
-                EnableDisableObject();
+                EnableDisableObject(false);
                 Time.timeScale = 1; 
             }
         }
@@ -33,7 +33,7 @@ public class Tutorial : MonoBehaviour
         {
             if (UnityEngine.Input.GetKeyDown(KeyCode.H))
             {
-                EnableDisableObject();
+                EnableDisableObject(true);
                 Time.timeScale = 0;
             }
 
@@ -43,9 +43,9 @@ public class Tutorial : MonoBehaviour
     /// <summary>
     /// SetActive to enable/disable object
     /// </summary>
-    private void EnableDisableObject()
+    private void EnableDisableObject(bool active)
     {
-        EnableObject.SetActive(true);
-        DisableObject.SetActive(false);
+        ShowGame.SetActive(!active);
+        ShowHelp.SetActive(active);
     }
 }
