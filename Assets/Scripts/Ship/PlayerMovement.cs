@@ -15,7 +15,7 @@ namespace Ship
         private float forceScale = 1000;
 
         [SerializeField]
-        // 
+        // The amount of forward trust
         private float trust = 60;
 
         [SerializeField]
@@ -32,20 +32,6 @@ namespace Ship
 
         // Rigidbody of the player
         private Rigidbody _rigidbody;
-
-        //[Header("Visual Model")]
-
-        // // Transform of the boat model that we will tilt 
-        // private Transform _boatModelTransform;
-        //
-        // [SerializeField]
-        // // How much the ship will tilt forward or backwards when the ship moves in that opposite direction
-        // private float modelTiltScaleForward = 1.3f;
-        //
-        // [SerializeField]
-        // // How much the ship will tilt sidewards when the ship rotates in that opposite direction
-        // private float modelTiltScaleSide = 4f;
-
         
         // Forward speed (And backwards is in the minus) (Max forward speed is about 7. At the moment)
         private float forwardSpeed = 0f;
@@ -55,26 +41,11 @@ namespace Ship
         private float sidewardsSpeed = 0f;
         public float SidewardsSpeed { get => sidewardsSpeed; set => sidewardsSpeed = value; }
 
-        private void OnCollisionEnter(Collision other)
-        {
-            print(other.gameObject.name);
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            print(other.name);
-        }
-
         // Start is called before the first frame update
         void Start()
-        {
-            print(GetComponent<Collider>());
-            
+        {            
             // Get the components we need
             _rigidbody = GetComponent<Rigidbody>();
-
-            // Get the transform of the boat model
-            //_boatModelTransform = gameObject.transform.GetComponentInChildren<Transform>();
         }
 
         // FixedUpdate to calculate physics

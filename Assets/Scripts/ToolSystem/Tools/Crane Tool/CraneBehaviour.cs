@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,6 @@ using Input;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-
 
 public class CraneBehaviour : MonoBehaviour
 {
@@ -33,7 +33,6 @@ public class CraneBehaviour : MonoBehaviour
     private GameObject[] craneUIObjects;
 
     [Header("Crane Variables")]
-
     [SerializeField]
     private Transform targetTransform;
 
@@ -64,8 +63,14 @@ public class CraneBehaviour : MonoBehaviour
             craneActive = value;
 
             ToggleObjects(craneUIObjects, craneActive);
+
+            CraneActivationEvent.Invoke(value);
         }
     }
+
+    // Event for when the crane activates
+    private Action<bool> craneActivationEvent;
+    public Action<bool> CraneActivationEvent { get => craneActivationEvent; set => craneActivationEvent = value; }
 
     // The distance the crane needs to be from the mainCraneObject when its not active
     [SerializeField]
@@ -151,10 +156,7 @@ public class CraneBehaviour : MonoBehaviour
 
         float distance = Vector3.Distance(cableStartPosition, clawPosition);
 
-        //print("distance: " + distance);
-
         craneCable.localScale = craneCable.localScale.ChangeY(distance);
-
     }
 
     /// <summary>
@@ -175,7 +177,6 @@ public class CraneBehaviour : MonoBehaviour
             }
         }
     }
-
 
     /// <summary>
     /// Toggles the crane

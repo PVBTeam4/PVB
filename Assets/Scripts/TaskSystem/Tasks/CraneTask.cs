@@ -72,7 +72,7 @@ public class CraneTask : MonoBehaviour
         // Update the UI
         updateIntelUI.Invoke(_intelAmountCurrent, _intelAmountToCollect);
 
-        Debug.Log("Intel collected");
+        Debug.LogWarning("Intel collected");
 
         if (_intelAmountCurrent == _intelAmountToCollect)
             onTaskCompleted.Invoke(0);
@@ -84,7 +84,7 @@ public class CraneTask : MonoBehaviour
     /// <param name="value"></param>
     private void TaskCompleted(int value)
     {
-        Debug.Log("TASK COMPLETED");
+        Debug.LogWarning("TASK COMPLETED");
 
         // Call the intel task completed event
         OverworldTasks overworldTasks = FindObjectOfType<OverworldTasks>();
