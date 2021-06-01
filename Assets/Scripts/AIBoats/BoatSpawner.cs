@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Global;
 using TaskSystem;
-using TaskSystem.Objectives;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Boat
+namespace AIBoats
 {
     /// <summary>
     /// this class causes all boats to spawn 
@@ -151,7 +150,7 @@ namespace Boat
             {
                 if(killableObject.CompareTag("Enemy"))
                 {
-                    killableObject.DamageBy(killableObject.maxHealth, false);
+                    killableObject.DamageBy(killableObject.DamageableObject.MaxHealth);
                 }
                 else
                 {
