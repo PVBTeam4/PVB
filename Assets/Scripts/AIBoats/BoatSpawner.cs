@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Global;
@@ -28,9 +29,11 @@ namespace AIBoats
         //to prevent them from spawning in the same position
         private int _currentSpawnIndex, _previousSpawnIndex;
 
-        [SerializeField]
+        [SerializeField, Header("Random [Min, Max] range of spawn time")]
         // the time that it wil be spawned
-        private int spawnTimeInSeconds = 7;
+        private Vector2 spawnTimeRangeInSeconds = new Vector2(7, 12);
+
+        private bool canSpawn = true;
 
         //Amount of enemies that spawn before every refugee ship
         [SerializeField]
@@ -72,9 +75,35 @@ namespace AIBoats
         void Start()
         {
             GetAllChildrenOfThisObject();
-            InvokeRepeating("SpawnBoats", 1, spawnTimeInSeconds);
+
+            //InvokeRepeating("SpawnBoats", 1, spawnTimeInSeconds);
 
             _enemiesLeftToSpawn = enemiesPerRefugeeShip;
+        }
+
+        private void Update()
+        {
+            if (canSpawn)
+            {
+                canSpawn = false;
+
+                StartCoroutine(SpawnBoats(Random.Range(spawnTimeRangeInSeconds.x, spawnTimeRangeInSeconds.y)));
+            }
+        }
+
+        /// <summary>
+        /// Will spawn a boat with the SpawnBoat function and sets canSpawn true
+        /// </summary>
+        /// <param name="_spawnTimeInSeconds"></param>
+        /// <returns></returns>
+        private IEnumerator SpawnBoats(float _spawnTimeInSeconds)
+        {
+            print("Spawn Boat");
+            SpawnBoat();
+
+            yield return new WaitForSeconds(_spawnTimeInSeconds);
+
+            canSpawn = true;
         }
 
         /// <summary>
@@ -104,7 +133,7 @@ namespace AIBoats
         /// <summary>
         /// This function spawns either an enemy ship or a refugee ship onto a random spawning point
         /// </summary>
-        private void SpawnBoats()
+        private void SpawnBoat()
         {
             if (!_shouldSpawnBoats) return;
             //get any index from range 0 to length of spawning points
@@ -113,7 +142,7 @@ namespace AIBoats
             //check if the currentSpawnIndex is the same as the previousSpawnIndex
             if (_currentSpawnIndex == _previousSpawnIndex)
             {   // call this function to get a different index
-                SpawnBoats();
+                SpawnBoat();
                 return;
             }
             //set the current index to the previous index
@@ -124,10 +153,8 @@ namespace AIBoats
                 Instantiate(PrefabList[1], _spawnPoints[_currentSpawnIndex].position, PrefabList[1].transform.rotation).transform.parent = _boatHolderObject.transform;
                 _enemiesLeftToSpawn--;
                 refugeeBoatsSpawned++;
-
-
-
-            }else
+            }
+            else
             {
                 Instantiate(PrefabList[0], _spawnPoints[_currentSpawnIndex].position, PrefabList[0].transform.rotation).transform.parent = _boatHolderObject.transform;
                 _enemiesLeftToSpawn = _enemiesLeftToSpawn == 0 ? enemiesPerRefugeeShip : _enemiesLeftToSpawn - 1;
@@ -141,7 +168,7 @@ namespace AIBoats
             DestroyAllEnemies();
 
             _shouldSpawnBoats = false;
-            CancelInvoke(nameof(SpawnBoats));
+            CancelInvoke(nameof(SpawnBoat));
         }
 
         private void DestroyAllEnemies()
