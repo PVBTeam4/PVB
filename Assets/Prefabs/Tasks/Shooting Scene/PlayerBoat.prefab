@@ -220,7 +220,7 @@ MonoBehaviour:
   gunSkinnedMeshRenderer: {fileID: 1686960441372221569}
   gunMaterials:
     defaultMaterial: {fileID: 2100000, guid: 8b1866d0199acac4d9118291289f05f9, type: 2}
-    cooldownMaterial: {fileID: 2100000, guid: e9c813ec2291a754c90a034f8a9afbe3, type: 2}
+    cooldownMaterial: {fileID: 2100000, guid: 5103dec1f94ea034f9cee62224471fc6, type: 2}
   materialLerpSpeed: 1
 --- !u!114 &1998637861
 MonoBehaviour:
@@ -627,6 +627,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1563419239401733530, guid: d8b61ff20e2e1334ea8a84c95775b20f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: d8b61ff20e2e1334ea8a84c95775b20f, type: 3}
       propertyPath: m_Name
       value: Gun_Anims
@@ -635,6 +639,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8b1866d0199acac4d9118291289f05f9, type: 2}
+    - target: {fileID: 8612385873011718764, guid: d8b61ff20e2e1334ea8a84c95775b20f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8b61ff20e2e1334ea8a84c95775b20f, type: 3}
 --- !u!1 &5484397812240106633 stripped

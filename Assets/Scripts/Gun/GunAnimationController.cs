@@ -62,7 +62,11 @@ namespace Gun
         private void LerpGunMaterials(float lerpValue)
         {
             _materialLerpValue = Mathf.Clamp(lerpValue, 0, 1);
-            gunSkinnedMeshRenderer.material.Lerp(gunMaterials.DefaultMaterial, gunMaterials.CooldownMaterial, _materialLerpValue);
+            Debug.Log(_materialLerpValue);
+            Material material = gunSkinnedMeshRenderer.materials[0];
+            Color color = material.color;
+            color.a = _materialLerpValue;
+            material.color = color;
         }
 
         public void PlayShootAnimation()
