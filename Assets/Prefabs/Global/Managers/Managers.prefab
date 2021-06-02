@@ -235,6 +235,7 @@ GameObject:
   - component: {fileID: 5661437618901056559}
   - component: {fileID: 5661437618901056558}
   - component: {fileID: 5661437618901056546}
+  - component: {fileID: 3872469073351735325}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -345,3 +346,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalInputName: Horizontal
   verticalInputName: Vertical
+--- !u!114 &3872469073351735325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5661437618901056553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 501bac51f07ae814bb4a3852b2c9ad33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AFKLimit: 60
+  mainMenuName: Main Menu
