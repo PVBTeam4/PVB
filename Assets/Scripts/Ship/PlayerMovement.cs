@@ -80,6 +80,10 @@ namespace Ship
 
             // The boat will turn faster by the magnitude of the velocity 
             float _turningSpeedDelta = _turningSpeed * (_rigidbody.velocity.magnitude * turningSpeedScaleByVelocity);
+
+            // Invert the invertion for when the boat goes backwards
+            _directionScale *= Mathf.Round(Mathf.Sign(ForwardSpeed));
+
             float angle = (_turningSpeedDelta * _directionScale) * Time.fixedDeltaTime;
 
             Vector3 rotationVector = new Vector3(0, angle, 0);
