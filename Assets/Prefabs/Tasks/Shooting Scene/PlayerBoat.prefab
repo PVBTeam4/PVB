@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageableTag: Enemy
-  maxHealth: 1
+  maxHealth: 100
   onDamage:
     m_PersistentCalls:
       m_Calls:
