@@ -52,6 +52,7 @@ namespace AIBoats
         {
             InitializeBoatHolder();
 
+            // Register OnTaskEnd function to action
             TaskController.TaskEndedAction += OnTaskEnd;
 
             //change this later perhaps
@@ -75,6 +76,12 @@ namespace AIBoats
             InvokeRepeating("SpawnBoats", 1, spawnTimeInSeconds);
 
             _enemiesLeftToSpawn = enemiesPerRefugeeShip;
+        }
+
+        void OnDestroy()
+        {
+            // Unregister OnTaskEnd function to action
+            TaskController.TaskEndedAction -= OnTaskEnd;
         }
 
         /// <summary>

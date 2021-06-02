@@ -287,7 +287,6 @@ GameObject:
   - component: {fileID: 8998896132067093339}
   - component: {fileID: 8998896132067093334}
   - component: {fileID: 8667833169768870021}
-  - component: {fileID: 8998896133637741625}
   m_Layer: 0
   m_Name: PlayerBoat
   m_TagString: Player
@@ -339,7 +338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageableTag: Enemy
-  maxHealth: 100
+  maxHealth: 1
   onDamage:
     m_PersistentCalls:
       m_Calls:
@@ -382,19 +381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e60326430347a4c9c0df152a8e46ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &8998896133637741625
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7010762314505651916}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1674453, y: 0.31519657, z: 0.46009547}
-  m_Center: {x: -0.0011284262, y: 0.14920285, z: 0.09109981}
 --- !u!1 &8080558941484374951
 GameObject:
   m_ObjectHideFlags: 0
