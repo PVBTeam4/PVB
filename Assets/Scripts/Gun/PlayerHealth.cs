@@ -3,6 +3,7 @@ using Properties.Tags;
 using TaskSystem.Objectives;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Gun
 {
@@ -27,7 +28,10 @@ namespace Gun
             _currentHealth = Math.Max(0, _currentHealth);
             
             onDamage?.Invoke(_currentHealth, maxHealth);
-            
+
+            if (_currentHealth <= 50)
+                GameObject.FindGameObjectWithTag("Vignet").GetComponent<Image>().enabled = true;
+
             if (_currentHealth == 0)
                 onDeath?.Invoke();
         }
