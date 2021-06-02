@@ -1,4 +1,5 @@
 using Input;
+using Utils;
 using UnityEngine;
 
 namespace ToolSystem.Tools.Crane_Tool
@@ -165,8 +166,11 @@ namespace ToolSystem.Tools.Crane_Tool
 
             if (coupeledObject != null)
             {
-                Destroy(coupeledObject);
+                // Play the particle effect
+                GameObject effectObject = ParticleUtil.SpawnParticle(ParticleType.CranePoof, coupeledObject.transform.position);
 
+                // Remove the coupeled object
+                Destroy(coupeledObject);
                 coupeledObject = null;
 
                 // Call the collect event
