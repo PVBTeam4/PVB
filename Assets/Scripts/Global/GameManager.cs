@@ -45,6 +45,10 @@ namespace Global
         /// <param name="toolType"></param>
         public void OnEnterTaskMode(ToolType toolType)
         {
+            // First deconstruct previous controller
+            DeconstructControllers();
+            
+            // Construct new controllers
             ToolController = new ToolController(toolType);
             TaskController = new TaskController(toolType);
         }
@@ -54,6 +58,14 @@ namespace Global
         /// The method will be run when the OverWorldEnterAction event in fired
         /// </summary>
         public void OnEnterOverWorld()
+        {
+            DeconstructControllers();
+        }
+
+        /// <summary>
+        /// Deconstruct all controllers
+        /// </summary>
+        private void DeconstructControllers()
         {
             // Deactivate controllers
             if (ToolController != null)
