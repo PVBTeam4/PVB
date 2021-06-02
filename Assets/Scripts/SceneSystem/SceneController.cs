@@ -50,7 +50,7 @@ namespace SceneSystem
         /// Switches to the given scene
         /// </summary>
         /// <param name="sceneName">Name of the scene that needs to be loaded in</param>
-        public void SwitchScene(string sceneName)
+        public static void SwitchScene(string sceneName)
         {
             // Check if the Scene exists
             if (SceneManager.GetSceneByName(sceneName) != null)

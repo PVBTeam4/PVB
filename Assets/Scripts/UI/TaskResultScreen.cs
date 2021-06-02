@@ -36,13 +36,15 @@ namespace UI
             if (isTaskSuccess)// Success
             {
                 EnableScreen(taskSuccessScreen);
+                StartCoroutine("CountdownSwitchToMain");
+
             }
             else// Failed
             {
                 EnableScreen(taskFailedScreen);
             }
+           // StartCoroutine("CountdownSwitchToOverworld", nextOverWorldIndex);
 
-            StartCoroutine("CountdownSwitchToOverworld", nextOverWorldIndex);
         }
 
         /// <summary>
@@ -76,6 +78,11 @@ namespace UI
             SceneController.SwitchSceneToOverWorld(nextOverworldIndex);
         }
 
+        private IEnumerator CountdownSwitchToMain()
+        {
+            yield return new WaitForSeconds(sceneTransitionTime);
+            SceneController.SwitchScene("Main Menu");
+        }
 
     }
 }
