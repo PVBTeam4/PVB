@@ -7,8 +7,11 @@ namespace Damageable
 {
     public class ExplosiveObject : MonoBehaviour
     {
+        private ParticleType particleType = ParticleType.Explosion;
+
         [SerializeField]
         private float explosionRange;
+
         [SerializeField]
         private float explosionDamage;
 
@@ -27,7 +30,7 @@ namespace Damageable
             if (_exploded) return;
             _exploded = true;
             
-            ParticleUtil.SpawnParticle(ParticleType.Explosion, transform.position);
+            ParticleUtil.SpawnParticle(particleType, transform.position);
             Destroy(gameObject);
 
             if (!(explosionDamage > 0)) return;

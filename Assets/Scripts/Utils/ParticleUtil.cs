@@ -4,6 +4,7 @@ namespace Utils
 {
     public class ParticleType
     {
+        public static ParticleType ExplosionBarrels => new ParticleType("ExplosionBarrels");
         public static ParticleType Explosion => new ParticleType("Explosion");
         public static ParticleType ImpactStone => new ParticleType("ImpactStone");
         public static ParticleType BulletForShip => new ParticleType("BulletForShip");
