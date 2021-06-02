@@ -10,7 +10,6 @@ namespace Utils
         public static ParticleType ImpactWater => new ParticleType("ImpactWater");
         public static ParticleType ImpactBoot => new ParticleType("ImpactBoot");
         public static ParticleType MuzzleFlash => new ParticleType("MuzzleFlash");
-        public static ParticleType CranePoof => new ParticleType("CranePoof");
 
         public string Name { get; }
 

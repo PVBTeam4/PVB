@@ -25,6 +25,8 @@ namespace Input
         {
             HandleAxisInput();
             HandleMouseInput();
+
+            HandleButtonInput();
         }
 
         /// <summary>
@@ -44,9 +46,23 @@ namespace Input
             // Button input
             ButtonInputAction?.Invoke(ButtonInputType.LeftMouse, UnityEngine.Input.GetMouseButtonDown(0) ? 1f : 0f);
             ButtonInputAction?.Invoke(ButtonInputType.RightMouse, UnityEngine.Input.GetMouseButton(1) ? 1f : 0f);
-            
+
+            // Interaction
+            ButtonInputAction?.Invoke(ButtonInputType.RightMouse, UnityEngine.Input.GetMouseButton(1) ? 1f : 0f);
+
             // Mouse movement
             MouseMovementAction?.Invoke(UnityEngine.Input.mousePosition);
+        }
+
+        /// <summary>
+        /// Handles button button & mouse movement input
+        /// </summary>
+        private void HandleButtonInput()
+        {
+            // Button input
+
+            // Interaction
+            ButtonInputAction?.Invoke(ButtonInputType.Interaction, UnityEngine.Input.GetKeyUp(KeyCode.E) ? 1f : 0f);
         }
     }
 }

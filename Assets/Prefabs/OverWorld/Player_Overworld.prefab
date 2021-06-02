@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 1378399427}
   - component: {fileID: 1730252374966532815}
   - component: {fileID: 447281251}
+  - component: {fileID: 5059186264491401935}
   m_Layer: 0
   m_Name: Player_Overworld
   m_TagString: Player
@@ -231,6 +232,19 @@ CapsuleCollider:
   m_Height: 8.1
   m_Direction: 2
   m_Center: {x: 0, y: 2.34, z: -1.68}
+--- !u!114 &5059186264491401935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4707205865743342590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 079dfe948c62d384e80e28ee5ef3bccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bounceForce: 10000
 --- !u!1001 &5059186263207618210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -246,6 +260,26 @@ PrefabInstance:
       propertyPath: usedCamera
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2469313679892291901, guid: cebc2f90f7022f349b5cce75ab7c225f, type: 3}
+      propertyPath: mainCraneObject
+      value: 
+      objectReference: {fileID: 3456613027610646149}
+    - target: {fileID: 2469313679892291901, guid: cebc2f90f7022f349b5cce75ab7c225f, type: 3}
+      propertyPath: craneNonActiveDistance
+      value: 2.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469313679892291901, guid: cebc2f90f7022f349b5cce75ab7c225f, type: 3}
+      propertyPath: craneUIObjects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2469313679892291901, guid: cebc2f90f7022f349b5cce75ab7c225f, type: 3}
+      propertyPath: craneUIObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 7237588818292981434}
+    - target: {fileID: 2469313679892291901, guid: cebc2f90f7022f349b5cce75ab7c225f, type: 3}
+      propertyPath: craneUIObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 7237588818952692346}
     - target: {fileID: 2469313679892291902, guid: cebc2f90f7022f349b5cce75ab7c225f, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -300,7 +334,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2469313679892291903, guid: cebc2f90f7022f349b5cce75ab7c225f, type: 3}
       propertyPath: m_Name
-      value: Crane
+      value: CraneHolder
       objectReference: {fileID: 0}
     - target: {fileID: 8690214622250277860, guid: cebc2f90f7022f349b5cce75ab7c225f, type: 3}
       propertyPath: m_Layer
@@ -313,6 +347,21 @@ PrefabInstance:
 --- !u!4 &7237588820159924124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2469313679892291902, guid: cebc2f90f7022f349b5cce75ab7c225f, type: 3}
+  m_PrefabInstance: {fileID: 5059186263207618210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3456613027610646149 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7623903839376044071, guid: cebc2f90f7022f349b5cce75ab7c225f, type: 3}
+  m_PrefabInstance: {fileID: 5059186263207618210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7237588818292981434 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2469313678260279320, guid: cebc2f90f7022f349b5cce75ab7c225f, type: 3}
+  m_PrefabInstance: {fileID: 5059186263207618210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7237588818952692346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2469313678919664856, guid: cebc2f90f7022f349b5cce75ab7c225f, type: 3}
   m_PrefabInstance: {fileID: 5059186263207618210}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5059186263622547152

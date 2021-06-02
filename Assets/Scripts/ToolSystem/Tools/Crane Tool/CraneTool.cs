@@ -1,11 +1,14 @@
 using Input;
-using Utils;
 using UnityEngine;
 
 namespace ToolSystem.Tools.Crane_Tool
 {
     public class CraneTool : Tool
     {
+        private bool canInteract;
+        public bool CanInteract { get => canInteract; set => canInteract = value; }
+
+
         [SerializeField]
         private Camera usedCamera;
 
@@ -75,8 +78,11 @@ namespace ToolSystem.Tools.Crane_Tool
             // Subscribe the OnClawCollisionEvent to the Collision event on the claw
             craneClaw.GetComponent<CraneClaw>().CollisionEvent += OnClawCollisionEvent;
 
-            // Get the crane task
-            craneTask = FindObjectOfType<CraneTask>();
+            CraneBehaviour craneBehaviour = FindObjectOfType<CraneBehaviour>();
+            if (craneBehaviour) craneBehaviour.CraneActivationEvent += (bool value) => { CanInteract = value; };
+
+                // Get the crane task
+                craneTask = FindObjectOfType<CraneTask>();
 
             if (!craneTask)
                 Debug.Log("No object found with the CraneTask script. Try adding the 'CraneTaskManager' prefab");
@@ -134,7 +140,7 @@ namespace ToolSystem.Tools.Crane_Tool
         {
             if (amount > 0)
             {
-                if (type.Equals(ButtonInputType.LeftMouse))
+                if (type.Equals(ButtonInputType.LeftMouse) && CanInteract)
                 {
                     if (isLiftingScale == 0)
                         StartLiftingObject();
@@ -159,14 +165,9 @@ namespace ToolSystem.Tools.Crane_Tool
 
             if (coupeledObject != null)
             {
-                // Play the particle effect
-                GameObject effectObject = ParticleUtil.SpawnParticle(ParticleType.CranePoof, coupeledObject.transform.position);
-
-                // Remove the coupeled object
                 Destroy(coupeledObject);
-                coupeledObject = null;
 
-                
+                coupeledObject = null;
 
                 // Call the collect event
                 craneTask.onIntelCollected.Invoke(1);

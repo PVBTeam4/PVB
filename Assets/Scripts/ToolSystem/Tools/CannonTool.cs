@@ -15,7 +15,6 @@ namespace ToolSystem.Tools
     /// </summary>
     public class CannonTool : Tool
     {
-    
         // Spawn location of the projectile
         [SerializeField]
         private Transform bulletSpawnLocation;
