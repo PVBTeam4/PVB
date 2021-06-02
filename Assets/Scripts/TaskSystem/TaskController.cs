@@ -43,6 +43,9 @@ namespace TaskSystem
         public void CancelActiveTask()
         {
             HandleTaskResult(false);
+            
+            // Clear TaskEndedActions
+            TaskEndedAction = null;
         }
 
         /// <summary>

@@ -78,12 +78,6 @@ namespace AIBoats
             _enemiesLeftToSpawn = enemiesPerRefugeeShip;
         }
 
-        void OnDestroy()
-        {
-            // Unregister OnTaskEnd function to action
-            TaskController.TaskEndedAction -= OnTaskEnd;
-        }
-
         /// <summary>
         /// Creates a HashSet with the transform component from these children and removes the parent
         /// then change the hash set into an array
