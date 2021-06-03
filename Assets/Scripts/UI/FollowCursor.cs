@@ -7,9 +7,14 @@ namespace UI
     {
         private bool cursorVisible = false;
 
-        private void Awake()
+        private void OnEnable()
         {
             TaskSystem.TaskController.TaskEndedAction += TaskEnded;
+        }
+
+        private void OnDisable()
+        {
+            TaskSystem.TaskController.TaskEndedAction -= TaskEnded;
         }
 
         /**

@@ -4,15 +4,20 @@ using TaskSystem;
 
 namespace Statistics
 {
-    public class StatisticsTracker
+    public class StatisticsController
     {
         public bool CompletedCannonTask = false;
 
         private readonly List<ToolType> _completedTasks = new List<ToolType>();
 
-        public StatisticsTracker()
+        public void ConstructController()
         {
             TaskController.TaskEndedAction += OnTaskCompleted;
+        }
+
+        public void DeconstructController()
+        {
+            TaskController.TaskEndedAction -= OnTaskCompleted;
         }
 
         private void OnTaskCompleted(ToolType toolType, bool isTaskCompleted)
