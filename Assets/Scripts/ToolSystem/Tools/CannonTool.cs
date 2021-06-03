@@ -6,6 +6,7 @@ using Gun;
 using Gun.Overheating;
 using Gun.Zoom;
 using UnityEngine.Events;
+using EZCameraShake;
 
 namespace ToolSystem.Tools
 {
@@ -44,7 +45,7 @@ namespace ToolSystem.Tools
         private float minimalForwardDirection;
 
         [SerializeField] private UnityEvent shootEvent;
-
+        
         private void Awake()
         {
             _zoomGun = GetComponent<ZoomGun>();
@@ -80,6 +81,9 @@ namespace ToolSystem.Tools
             bulletGameObject.transform.position += transform.forward.Multiply(0.2f);
             
             shootEvent?.Invoke();
+
+            CameraShaker.Instance.ShakeOnce(0.75f, 4,0.1f,1f);
+
         }
 
         /// <summary>

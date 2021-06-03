@@ -1,4 +1,5 @@
 using System;
+using EZCameraShake;
 using Properties.Tags;
 using TaskSystem.Objectives;
 using UnityEngine;
@@ -17,6 +18,8 @@ namespace Gun
         [SerializeField] private UnityEvent<float, float> onDamage;
         [SerializeField] private UnityEvent onDeath;
 
+        [SerializeField] private float cameraShakeIntensity = 4;
+
         void OnEnable()
         {
             SetCurrentHealth();
@@ -28,6 +31,8 @@ namespace Gun
             _currentHealth = Math.Max(0, _currentHealth);
             
             onDamage?.Invoke(_currentHealth, maxHealth);
+
+            CameraShaker.Instance.ShakeOnce(cameraShakeIntensity, 4, 0.1f, 1f);
 
             if (_currentHealth <= 50)
                 GameObject.FindGameObjectWithTag("Vignet").GetComponent<Image>().enabled = true;
@@ -47,7 +52,7 @@ namespace Gun
             KillObjective killObjective = collider.gameObject.GetComponent<KillObjective>();
             if (killObjective == null) return;
             DamageBy(killObjective.Damage);
-            
+        
             // Kill boat
             killObjective.DamageBy(killObjective.maxHealth, false);
         }
