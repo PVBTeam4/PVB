@@ -85,7 +85,7 @@ namespace ToolSystem.Tools
         /// <summary>
         /// Called by 'ToolController'. Will indirectly fire a bullet projectile.
         /// </summary>
-        public override void UseLeftAction(float pressedValue)
+        public override void UseLeftActionHold(float pressedValue)
         {
             // Only fire when key is pressed
             if (pressedValue == 0) return;
@@ -209,6 +209,11 @@ namespace ToolSystem.Tools
             // Shoot raycast & return intersection point
             Ray ray = Camera.main.ScreenPointToRay (UnityEngine.Input.mousePosition);
             return Physics.Raycast(ray, out var hit, 10000, ~LayerMask.GetMask($"Player", $"Bullet", $"Ignore Raycast")) ? hit.point : Vector3.zero;
+        }
+
+        public override void UseLeftAction(float pressedValue)
+        {
+            //throw new NotImplementedException();
         }
     }
 }

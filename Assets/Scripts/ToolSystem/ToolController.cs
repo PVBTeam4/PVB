@@ -36,6 +36,9 @@ namespace ToolSystem
                 case ButtonInputType.LeftMouse:
                     UseToolLeftAction(value);
                     break;
+                case ButtonInputType.LeftMouseHold:
+                    UseToolLeftActionHold(value);
+                    break;
                 case ButtonInputType.RightMouse:
                     UseToolRightAction(value);
                     break;
@@ -57,6 +60,15 @@ namespace ToolSystem
         /// </summary>
         private void UseToolLeftAction(float pressedValue){
             _activeTool.UseLeftAction(pressedValue);
+        }
+
+        /// <summary>
+        /// Carries out the action assigned to the left mouse button
+        /// <param name="pressedValue">Value which the user interacts with the button.</param>
+        /// </summary>
+        private void UseToolLeftActionHold(float pressedValue)
+        {
+            _activeTool.UseLeftActionHold(pressedValue);
         }
 
         /// <summary>

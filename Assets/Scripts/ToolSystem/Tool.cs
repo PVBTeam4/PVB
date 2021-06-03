@@ -17,6 +17,11 @@ namespace ToolSystem
         public abstract void UseLeftAction(float pressedValue);
 
         /// <summary>
+        /// Abstract method to describe what happens when the left mouse button is pressed
+        /// </summary>
+        public abstract void UseLeftActionHold(float pressedValue);
+
+        /// <summary>
         /// Abstract method to describe what happens when the right mouse button is pressed
         /// </summary>
         public abstract void UseRightAction(float pressedValue);

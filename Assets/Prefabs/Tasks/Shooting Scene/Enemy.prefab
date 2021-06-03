@@ -227,8 +227,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
-  minSpeed: 2
-  maxSpeed: 6
+  minSpeed: 3
+  maxSpeed: 5
   percentageIncreasePerSecond: 0.02
 --- !u!195 &473752839
 NavMeshAgent:
