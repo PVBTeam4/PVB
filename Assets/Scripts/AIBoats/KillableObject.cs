@@ -1,6 +1,9 @@
+using System;
 using Damageable;
+using Global;
 using Gun;
 using Properties.Tags;
+using TaskSystem;
 using UnityEngine;
 using Utils;
 
@@ -22,15 +25,24 @@ namespace AIBoats
 
         private DamageableObject _damageableObject;
         public DamageableObject DamageableObject => _damageableObject;
-        
+
         private void OnEnable()
         {
+            // Subscribe task-end action
+            TaskController.TaskEndedAction += OnTaskEndListener;
+            
             if (!gameObject.TryGetComponent(out DamageableObject damageableObject))
             {
                 Debug.LogError("DamageableObject component is missing!");
                 return;
             }
             _damageableObject = damageableObject;
+        }
+
+        private void OnDisable()
+        {
+            // Unsubscribe task-end action
+            TaskController.TaskEndedAction -= OnTaskEndListener;
         }
 
         /// <summary>
@@ -70,6 +82,20 @@ namespace AIBoats
                 // Kill boat
                 DamageBy(_damageableObject.MaxHealth);
             }
+        }
+
+        private void OnTaskEndListener(ToolType toolType, bool win)
+        {
+            ExplosiveObject explosiveObject = GetComponent<ExplosiveObject>();
+
+            if (explosiveObject == null)
+            {
+                Debug.LogError("ExplosiveObject missing, destroy instead.");
+                Destroy(gameObject);
+                return;
+            }
+            
+            explosiveObject.Detonate();
         }
     }
 }

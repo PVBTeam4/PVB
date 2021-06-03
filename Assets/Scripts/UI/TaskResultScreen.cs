@@ -1,3 +1,4 @@
+using System;
 using Global;
 using SceneSystem;
 using System.Collections;
@@ -17,11 +18,20 @@ namespace UI
         [SerializeField]
         private float sceneTransitionTime = 10;
 
-        private void Awake()
+        private void OnEnable()
         {
             // Subscribe the screen functions
             TaskController.TaskEndedAction += TaskEnded;
+        }
 
+        private void OnDisable()
+        {
+            // Unsubscribe the screen functions
+            TaskController.TaskEndedAction -= TaskEnded;
+        }
+
+        private void Awake()
+        {
             // Disable all screens
             DisableScreens();
         }

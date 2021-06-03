@@ -12,7 +12,7 @@ namespace Global
     /// </summary>
     public class GameManager : MonoBehaviour
     {
-        public readonly StatisticsTracker StatisticsTracker = new StatisticsTracker();
+        public readonly StatisticsController StatisticsController = new StatisticsController();
         
         // These
         public ToolController ToolController;
@@ -51,6 +51,7 @@ namespace Global
             // Construct new controllers
             ToolController = new ToolController(toolType);
             TaskController = new TaskController(toolType);
+            StatisticsController.ConstructController();
         }
 
         /// <summary>
@@ -79,6 +80,8 @@ namespace Global
                 TaskController.CancelActiveTask();
                 TaskController = null;
             }
+            
+            StatisticsController.DeconstructController();
         }
     }
 }
