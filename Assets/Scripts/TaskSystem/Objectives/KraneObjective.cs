@@ -90,7 +90,7 @@ namespace TaskSystem.Objectives
                 DamageBy(bulletMovement.damage, true);
 
                 // Spawn Impact Particle
-                ParticleUtil.SpawnParticle(ParticleType.ImpactBoot, bulletMovement.transform.position);
+                ParticleUtil.ImpactBoot.SpawnParticle(bulletMovement.transform.position);
             } else if (collision.collider.gameObject.CompareTag(targetTag))
             {
                 PlayerHealth playerHealth = collision.collider.gameObject.GetComponent<PlayerHealth>();
