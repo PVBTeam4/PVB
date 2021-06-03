@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Utils;
 
 namespace Gun
 {
@@ -19,7 +20,10 @@ namespace Gun
         private Animator animator;
         [SerializeField]
         private SkinnedMeshRenderer gunSkinnedMeshRenderer;
-        
+
+        [SerializeField]
+        private Transform bulletSpawnLocation;
+
         // Gun Materials
         [SerializeField]
         private GunMaterials gunMaterials;
@@ -73,6 +77,9 @@ namespace Gun
         public void StartOverheatAnimation()
         {
             animator.SetBool(OverheatingStateName, true);
+            
+            // Spawn overheat particle
+            ParticleUtil.Overheat.SpawnParticle(bulletSpawnLocation.position);
         }
 
         public void StopOverheatAnimation()
