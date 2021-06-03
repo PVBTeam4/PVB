@@ -41,12 +41,14 @@ namespace Damageable
                 // If GameObject has DamageableObject component, do damage
                 if (damageableGameObject.TryGetComponent(out DamageableObject damageableObject))
                 {
+                    if (!damageableObject.CompareTag("ShipsKilledUI"))
                     damageableObject.Damage(explosionDamage);
                 }
                 // If GameObject has ExplosiveObject component, detonate
                 else if (damageableGameObject.TryGetComponent(out ExplosiveObject explosiveObject))
                 {
-                    explosiveObject.Detonate();
+                    if (!explosiveObject.CompareTag("Explosive"))
+                        explosiveObject.Detonate();
                 }
             }
         }
