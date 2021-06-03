@@ -44,5 +44,6 @@ namespace Utils
         public static readonly ParticleType ImpactBoot = new ParticleType("ImpactBoot");
         public static readonly ParticleType MuzzleFlash = new ParticleType("MuzzleFlash");
         public static readonly ParticleType CranePoof = new ParticleType("CranePoof");
+        public static readonly ParticleType Overheat = new ParticleType("Overheat");
     }
 }
