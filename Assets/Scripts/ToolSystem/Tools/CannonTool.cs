@@ -80,6 +80,8 @@ namespace ToolSystem.Tools
             bulletGameObject.transform.position += transform.forward.Multiply(0.2f);
             
             shootEvent?.Invoke();
+
+            EZCameraShake.CameraShaker.Instance.ShakeOnce(0.75f, 4, 0.1f, 0.1f);
         }
 
         /// <summary>
