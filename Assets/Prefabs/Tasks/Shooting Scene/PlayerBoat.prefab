@@ -218,6 +218,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 919132148904622776}
   gunSkinnedMeshRenderer: {fileID: 1686960441372221569}
+  bulletSpawnLocation: {fileID: 8354174234748347399}
+  overheatParticleSpawnDelayInSeconds: 0.5
   gunMaterials:
     defaultMaterial: {fileID: 2100000, guid: 8b1866d0199acac4d9118291289f05f9, type: 2}
     cooldownMaterial: {fileID: 2100000, guid: e9c813ec2291a754c90a034f8a9afbe3, type: 2}
@@ -393,6 +395,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  cameraShakeIntensity: 4
 --- !u!114 &8667833169768870021
 MonoBehaviour:
   m_ObjectHideFlags: 0
