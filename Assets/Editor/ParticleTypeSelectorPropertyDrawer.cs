@@ -29,7 +29,7 @@ namespace Editor
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
 
-            if (property.propertyType == SerializedPropertyType.Generic)
+            if (property.propertyType == SerializedPropertyType.ObjectReference)
             {
                 EditorGUI.BeginProperty(position, label, property);
                 
@@ -120,7 +120,7 @@ namespace Editor
                     info =>
                     {
                         object value = info.GetValue(null);
-                        Debug.Log(value);
+                        Debug.Log(info.Name + ":" + info.FieldType + " | " + value);
                         return (ParticleType) value;
                     });
     }
