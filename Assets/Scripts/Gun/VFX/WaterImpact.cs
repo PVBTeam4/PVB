@@ -13,7 +13,7 @@ namespace Gun.VFX
         {
             if (collision.collider.gameObject.CompareTag(waterColliderTag))
             {
-                ParticleUtil.SpawnParticle(ParticleType.ImpactWater, collision.contacts[0].point);
+                ParticleUtil.ImpactWater.SpawnParticle(collision.contacts[0].point);
             }
         }
     }

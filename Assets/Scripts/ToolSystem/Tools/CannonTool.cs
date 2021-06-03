@@ -68,13 +68,13 @@ namespace ToolSystem.Tools
             Vector3 bulletSpawnPosition = bulletSpawnLocation.position;
 
             // Muzzle flash spawn
-            GameObject muzzleflash = ParticleUtil.SpawnParticle(ParticleType.MuzzleFlash, bulletSpawnPosition);
+            GameObject muzzleflash = ParticleUtil.MuzzleFlash.SpawnParticle(bulletSpawnPosition);
             Transform onderkantGun = transform.parent;
             muzzleflash.transform.rotation = Quaternion.Euler(90 + transform.eulerAngles.x, transform.eulerAngles.y, 0);
             muzzleflash.transform.position += transform.forward.Multiply(0.43f);
 
             // Bullet Spawn
-            GameObject bulletGameObject = ParticleUtil.SpawnParticle(ParticleType.BulletForShip, bulletSpawnPosition);
+            GameObject bulletGameObject = ParticleUtil.BulletForShip.SpawnParticle(bulletSpawnPosition);
             bulletGameObject.gameObject.transform.rotation = transform.rotation;
             bulletGameObject.transform.parent = _bulletHolderObject.transform;
             bulletGameObject.transform.position += transform.forward.Multiply(0.2f);

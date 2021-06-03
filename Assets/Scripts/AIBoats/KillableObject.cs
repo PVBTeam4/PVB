@@ -59,7 +59,7 @@ namespace AIBoats
                 DamageBy(bulletMovement.damage);
 
                 // Spawn Impact Particle
-                ParticleUtil.SpawnParticle(ParticleType.ImpactBoot, bulletMovement.transform.position);
+                ParticleUtil.ImpactBoot.SpawnParticle(bulletMovement.transform.position);
             }
             else if (other.gameObject.CompareTag(targetTag))
             {

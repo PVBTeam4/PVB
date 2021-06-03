@@ -34,90 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6362698673910142314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5025603948315503862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 519214ea751a645408bc1927c4fe5c30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionRange: 3
-  explosionDamage: 100
---- !u!114 &6362698673910142317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5025603948829755870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 519214ea751a645408bc1927c4fe5c30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionRange: 3
-  explosionDamage: 100
---- !u!114 &6362698673910142318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5025603948946360171}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 519214ea751a645408bc1927c4fe5c30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionRange: 3
-  explosionDamage: 100
---- !u!114 &6362698673910142315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5025603949892245835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 519214ea751a645408bc1927c4fe5c30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionRange: 3
-  explosionDamage: 100
---- !u!114 &6362698673910142313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5025603950052987204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 519214ea751a645408bc1927c4fe5c30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionRange: 3
-  explosionDamage: 100
---- !u!114 &6362698673910142316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5025603950184459204}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 519214ea751a645408bc1927c4fe5c30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionRange: 3
-  explosionDamage: 100
 --- !u!64 &6362698675318798573
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -160,20 +76,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -3618773553840216160, guid: 58947dcfe69e0bc43877a1b9ef2d99e3, type: 3}
---- !u!114 &6362698673910142319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6092720940806191118}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 519214ea751a645408bc1927c4fe5c30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionRange: 3
-  explosionDamage: 100
 --- !u!64 &6362698673948321082
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -539,14 +441,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosive Barrel
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5911860866997122088, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
---- !u!1 &6092720940806191118 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2157875758084100074, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
-  m_PrefabInstance: {fileID: 5296200158962366436}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6901310985695814324 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
@@ -562,14 +458,6 @@ PrefabInstance:
     - target: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 5.0802
-      objectReference: {fileID: 0}
-    - target: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5.0802
       objectReference: {fileID: 0}
     - target: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -615,14 +503,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosive Barrel
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5911860866997122088, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
---- !u!1 &5025603948946360171 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2157875758084100074, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
-  m_PrefabInstance: {fileID: 6362698673397696641}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5689551039822290385 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
@@ -1010,14 +892,6 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 5.0802
-      objectReference: {fileID: 0}
-    - target: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5.0802
-      objectReference: {fileID: 0}
-    - target: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.916
       objectReference: {fileID: 0}
@@ -1061,17 +935,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosive Barrel (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5911860866997122088, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
 --- !u!4 &5689551039980376932 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
-  m_PrefabInstance: {fileID: 6362698673549985332}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5025603948829755870 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2157875758084100074, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
   m_PrefabInstance: {fileID: 6362698673549985332}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6362698673627640296
@@ -1881,14 +1749,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58947dcfe69e0bc43877a1b9ef2d99e3, type: 3}
---- !u!4 &6901310985768043218 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 58947dcfe69e0bc43877a1b9ef2d99e3, type: 3}
-  m_PrefabInstance: {fileID: 6362698673948321081}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6092720940893132904 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 58947dcfe69e0bc43877a1b9ef2d99e3, type: 3}
+  m_PrefabInstance: {fileID: 6362698673948321081}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6901310985768043218 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 58947dcfe69e0bc43877a1b9ef2d99e3, type: 3}
   m_PrefabInstance: {fileID: 6362698673948321081}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6362698674042233628
@@ -1901,14 +1769,6 @@ PrefabInstance:
     - target: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
       propertyPath: m_RootOrder
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 5.0801997
-      objectReference: {fileID: 0}
-    - target: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5.0802
       objectReference: {fileID: 0}
     - target: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1954,17 +1814,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosive Barrel (4)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5911860866997122088, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
 --- !u!4 &5689551039277381196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
-  m_PrefabInstance: {fileID: 6362698674042233628}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5025603948315503862 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2157875758084100074, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
   m_PrefabInstance: {fileID: 6362698674042233628}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6362698674053369815
@@ -3339,10 +3193,6 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5.0802
-      objectReference: {fileID: 0}
-    - target: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.535
       objectReference: {fileID: 0}
@@ -3386,14 +3236,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosive Barrel (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5911860866997122088, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
---- !u!1 &5025603949892245835 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2157875758084100074, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
-  m_PrefabInstance: {fileID: 6362698674612934305}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5689551041055474673 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
@@ -4106,14 +3950,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosive Barrel (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5911860866997122088, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
---- !u!1 &5025603950184459204 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2157875758084100074, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
-  m_PrefabInstance: {fileID: 6362698674837709870}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5689551040596881790 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
@@ -4715,17 +4553,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explosive Barrel (5)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5911860866997122088, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
 --- !u!4 &5689551040727550974 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1637480939891709264, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
-  m_PrefabInstance: {fileID: 6362698674974416558}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5025603950052987204 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2157875758084100074, guid: f17c51aee12bdb541bde1c2d57dfd3a9, type: 3}
   m_PrefabInstance: {fileID: 6362698674974416558}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6362698674993168946
@@ -5878,14 +5710,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58947dcfe69e0bc43877a1b9ef2d99e3, type: 3}
---- !u!4 &6901310984397577987 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 58947dcfe69e0bc43877a1b9ef2d99e3, type: 3}
-  m_PrefabInstance: {fileID: 6362698675318798568}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6092720940116116921 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 58947dcfe69e0bc43877a1b9ef2d99e3, type: 3}
+  m_PrefabInstance: {fileID: 6362698675318798568}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6901310984397577987 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 58947dcfe69e0bc43877a1b9ef2d99e3, type: 3}
   m_PrefabInstance: {fileID: 6362698675318798568}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6362698675343011363

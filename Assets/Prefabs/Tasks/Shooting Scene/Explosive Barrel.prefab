@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6101f5991df5cea49ba8b041372452a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useBarrelExplosionParticle: 1
   explosionRange: 3
   explosionDamage: 100
 --- !u!1 &2838504887483839307
