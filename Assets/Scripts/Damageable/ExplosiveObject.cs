@@ -1,5 +1,4 @@
 using System.Linq;
-using Properties.Tags;
 using UnityEngine;
 using Utils;
 using Utils.ShootScene;
@@ -8,8 +7,11 @@ namespace Damageable
 {
     public class ExplosiveObject : MonoBehaviour
     {
-        [SerializeField, ParticleTypeSelector] private ParticleType particleType;
+        // [SerializeField, ParticleTypeSelector] private ParticleType particleType;
 
+        [SerializeField]
+        private bool useBarrelExplosionParticle;
+        
         [SerializeField]
         private float explosionRange;
 
@@ -31,6 +33,8 @@ namespace Damageable
             if (_exploded) return;
             _exploded = true;
 
+            ParticleType particleType = useBarrelExplosionParticle ? ParticleUtil.ExplosionBarrels : ParticleUtil.Explosion;
+            
             particleType.SpawnParticle(transform.position);
             
             Destroy(gameObject);
