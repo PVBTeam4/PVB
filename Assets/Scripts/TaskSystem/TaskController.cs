@@ -23,7 +23,8 @@ namespace TaskSystem
         }
 
         // Action event that will be run when the Task is completed or failed
-        public static event Action<ToolType, bool> TaskEndedAction;// True if completed, False if failed
+        // Bool: 'True' if completed, 'False' if failed
+        public static event Action<ToolType, bool> TaskEndedAction;
 
         public TaskController(ToolType toolType)
         {

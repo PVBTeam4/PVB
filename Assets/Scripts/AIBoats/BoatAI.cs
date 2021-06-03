@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
-namespace Enemy
+namespace AIBoats
 {
     /// <summary>
     /// this class causes the assigned boat object to move towards the target

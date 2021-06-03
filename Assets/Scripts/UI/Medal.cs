@@ -45,15 +45,15 @@ namespace UI
                 return;
             }
 
-            if (GameManager.Instance.StatisticsTracker == null)
+            if (GameManager.Instance.StatisticsController == null)
             {
                 Debug.LogError("StatisticsTracker not initialized!");
                 return;
             }
 
-            StatisticsTracker statisticsTracker = GameManager.Instance.StatisticsTracker;
+            StatisticsController statisticsController = GameManager.Instance.StatisticsController;
 
-            if (statisticsTracker.isTaskCompleted(toolType))
+            if (statisticsController.isTaskCompleted(toolType))
             {
                 medalImage.SetActive(true);
             }
