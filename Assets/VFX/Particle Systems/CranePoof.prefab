@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5173942401746265037}
   - component: {fileID: 9168453590335591152}
   m_Layer: 0
-  m_Name: KraanPoof
+  m_Name: CranePoof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10743,7 +10743,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 5
+        scalar: 10
         minScalar: 0
         maxCurve:
           serializedVersion: 2
@@ -11130,7 +11130,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 0}
-        key1: {r: 0.735849, g: 0.53601354, b: 0.5171769, a: 0.654902}
+        key1: {r: 1, g: 1, b: 1, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -14614,7 +14614,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 72d8d0b30817812418821931a55c572c, type: 2}
+  - {fileID: 2100000, guid: 89ac91cd87982be4a8bd77c5f1c2371a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
