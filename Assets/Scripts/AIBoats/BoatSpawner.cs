@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Global;
@@ -28,9 +29,11 @@ namespace AIBoats
         //to prevent them from spawning in the same position
         private int _currentSpawnIndex, _previousSpawnIndex;
 
-        [SerializeField]
+        [SerializeField, Header("Random [Min, Max] range of spawn time")]
         // the time that it wil be spawned
-        private int spawnTimeInSeconds = 7;
+        private Vector2 spawnTimeRangeInSeconds = new Vector2(7, 12);
+
+        private bool canSpawn = true;
 
         private float _timeToSpawn;
         
@@ -82,13 +85,27 @@ namespace AIBoats
 
         private void Update()
         {
-            _timeToSpawn += Time.deltaTime;
+            if (canSpawn)
+            {
+                canSpawn = false;
 
-            if (_timeToSpawn < spawnTimeInSeconds) return;
-            // Reset timer
-            _timeToSpawn = 0;
+                StartCoroutine(SpawnBoats(Random.Range(spawnTimeRangeInSeconds.x, spawnTimeRangeInSeconds.y)));
+            }
+        }
 
+        /// <summary>
+        /// Will spawn a boat with the SpawnBoat function and sets canSpawn true
+        /// </summary>
+        /// <param name="_spawnTimeInSeconds"></param>
+        /// <returns></returns>
+        private IEnumerator SpawnBoats(float _spawnTimeInSeconds)
+        {
+            print("Spawn Boat");
             SpawnBoat();
+
+            yield return new WaitForSeconds(_spawnTimeInSeconds);
+
+            canSpawn = true;
         }
 
         /// <summary>
@@ -137,10 +154,8 @@ namespace AIBoats
                 Instantiate(PrefabList[1], _spawnPoints[_currentSpawnIndex].position, PrefabList[1].transform.rotation).transform.parent = _boatHolderObject.transform;
                 _enemiesLeftToSpawn--;
                 refugeeBoatsSpawned++;
-
-
-
-            }else
+            }
+            else
             {
                 Instantiate(PrefabList[0], _spawnPoints[_currentSpawnIndex].position, PrefabList[0].transform.rotation).transform.parent = _boatHolderObject.transform;
                 _enemiesLeftToSpawn = _enemiesLeftToSpawn == 0 ? enemiesPerRefugeeShip : _enemiesLeftToSpawn - 1;
@@ -149,7 +164,6 @@ namespace AIBoats
 
         private void OnTaskEnd(ToolType toolType, bool isCompleted)
         {
-            Debug.Log("End task :)");
             Destroy(gameObject);
         }
     }
