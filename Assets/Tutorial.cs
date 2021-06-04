@@ -42,7 +42,7 @@ public class Tutorial : MonoBehaviour
     /// </summary>
     private void EnableDisableObject(bool active)
     {
-        ShowGame.SetActive(!active);
+        ShowGame.GetComponent<Canvas>().enabled = !active;
         ShowHelp.SetActive(active);
     }
 }
