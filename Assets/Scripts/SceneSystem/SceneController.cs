@@ -87,7 +87,7 @@ namespace SceneSystem
                         Debug.LogError("Overworld scene not found for ToolType: " + ToolType.CANNON);
                         return;
                     }
-                    SceneManager.LoadScene(sceneController.overworldSceneArray[1].name);
+                    _instance.StartCoroutine("loadNewLevel", sceneController.overworldSceneArray[1].name);
                     break;
                 case ToolType.CRANE:
                     if (!sceneController.overworldSceneArray[2])
@@ -95,7 +95,7 @@ namespace SceneSystem
                         Debug.LogError("Overworld scene not found for ToolType: " + ToolType.CRANE);
                         return;
                     }
-                    SceneManager.LoadScene(sceneController.overworldSceneArray[2].name);
+                    _instance.StartCoroutine("loadNewLevel", sceneController.overworldSceneArray[2].name);
                     break;
                 case ToolType.WATER_CANNON:
                     Debug.Log("End of game");
