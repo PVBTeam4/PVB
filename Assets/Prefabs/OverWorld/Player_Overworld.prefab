@@ -727,6 +727,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerBoot_02
       objectReference: {fileID: 0}
+    - target: {fileID: 5573823118800447949, guid: 2f93b90e9ccd25f4ba56fb1242155348, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9997169
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573823118800447949, guid: 2f93b90e9ccd25f4ba56fb1242155348, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573823118800447949, guid: 2f93b90e9ccd25f4ba56fb1242155348, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573823118800447949, guid: 2f93b90e9ccd25f4ba56fb1242155348, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.02379571
+      objectReference: {fileID: 0}
+    - target: {fileID: 5573823118800447949, guid: 2f93b90e9ccd25f4ba56fb1242155348, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 2.727
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f93b90e9ccd25f4ba56fb1242155348, type: 3}
 --- !u!4 &7180299215369297495 stripped
