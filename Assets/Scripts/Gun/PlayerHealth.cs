@@ -26,6 +26,9 @@ namespace Gun
 
         public void DamageBy(float damage)
         {
+            //Play the sound
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Events/Botsing", transform.position);
+
             _currentHealth -= damage;
             _currentHealth = Math.Max(0, _currentHealth);
             
@@ -38,6 +41,8 @@ namespace Gun
 
             if (_currentHealth == 0)
                 onDeath?.Invoke();
+
+            
         }
 
         private void SetCurrentHealth()

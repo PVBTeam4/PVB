@@ -33,6 +33,9 @@ namespace Damageable
             if (_exploded) return;
             _exploded = true;
 
+            //Play the sound
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Events/Explosie", transform.position);
+
             ParticleType particleType = useBarrelExplosionParticle ? ParticleUtil.ExplosionBarrels : ParticleUtil.Explosion;
             
             particleType.SpawnParticle(transform.position);
