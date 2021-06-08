@@ -9,13 +9,11 @@ public class Tutorial : MonoBehaviour
 {
     [SerializeField]
     //object that can be be Disabled or Enabled
-    private GameObject ShowGame, ShowHelp;
-
-    [SerializeField]
-    private bool enabledCanvas = true;
+    private GameObject ShowGame, ShowHelp, TaskResultScreens;
 
     private void Start()
-    {
+    {   
+        TaskResultScreens = GameObject.Find("Task Result Screens");
         EnableDisableObject(true);
     }
     void Update()
@@ -45,16 +43,10 @@ public class Tutorial : MonoBehaviour
     /// </summary>
     private void EnableDisableObject(bool active)
     {
-        if (enabledCanvas)
-        {
-            ShowGame.GetComponent<Canvas>().enabled = !active;
-
-        }
-        else
-        {
-            ShowGame.SetActive(!active);
-        }
-
+        ShowGame.GetComponent<Canvas>().enabled = !active;
         ShowHelp.SetActive(active);
+
+        if(TaskResultScreens != null)
+            TaskResultScreens.SetActive(!active);
     }
 }
