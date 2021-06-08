@@ -9,7 +9,10 @@ public class Tutorial : MonoBehaviour
 {
     [SerializeField]
     //object that can be be Disabled or Enabled
-    private GameObject ShowGame,ShowHelp; 
+    private GameObject ShowGame, ShowHelp;
+
+    [SerializeField]
+    private bool enabledCanvas = true;
 
     private void Start()
     {
@@ -21,9 +24,9 @@ public class Tutorial : MonoBehaviour
         if (ShowHelp.activeSelf)
         {
             if (UnityEngine.Input.anyKeyDown)
-            {   
+            {
                 EnableDisableObject(false);
-                Time.timeScale = 1; 
+                Time.timeScale = 1;
             }
         }
         else
@@ -35,14 +38,23 @@ public class Tutorial : MonoBehaviour
             }
 
         }
-     
+
     }
     /// <summary>
     /// SetActive to enable/disable object
     /// </summary>
     private void EnableDisableObject(bool active)
     {
-        ShowGame.GetComponent<Canvas>().enabled = !active;
+        if (enabledCanvas)
+        {
+            ShowGame.GetComponent<Canvas>().enabled = !active;
+
+        }
+        else
+        {
+            ShowGame.SetActive(!active);
+        }
+
         ShowHelp.SetActive(active);
     }
 }
