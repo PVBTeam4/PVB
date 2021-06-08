@@ -72,7 +72,8 @@ namespace ToolSystem.Tools
 
             // Muzzle flash spawn
             GameObject muzzleflash = ParticleUtil.MuzzleFlash.SpawnParticle(bulletSpawnPosition);
-            Transform onderkantGun = transform.parent;
+            //set the muzzle flash parent to bulletSpawnLocation so that it will move with the animation
+            muzzleflash.transform.parent = bulletSpawnLocation;
             muzzleflash.transform.rotation = Quaternion.Euler(90 + transform.eulerAngles.x, transform.eulerAngles.y, 0);
             muzzleflash.transform.position += transform.forward.Multiply(0.43f);
 

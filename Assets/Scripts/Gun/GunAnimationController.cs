@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Animations;
 using Utils;
 
 namespace Gun
@@ -31,6 +32,12 @@ namespace Gun
         private float materialLerpSpeed;
         private float _materialLerpValue;
         private bool _hadCooldown;
+        private RotationConstraint Hinge_Mid_RotationConstrain;
+
+        private void Start()
+        {   //find the object and get the RotationConstraint
+            Hinge_Mid_RotationConstrain = GameObject.Find("Hinge_Mid").GetComponent<RotationConstraint>();
+        }
 
         private void Update()
         {
@@ -70,10 +77,18 @@ namespace Gun
         }
 
         public void PlayShootAnimation()
-        {
+        {   // set constraint Active to false so that it cannot interrupt the animation
+            Hinge_Mid_RotationConstrain.constraintActive = false;
             animator.Play("Shoot");
+            Invoke("ConstrainObject", 0.4f);
         }
-
+        /// <summary>
+        /// call this after the animation is done
+        /// </summary>
+        private void ConstrainObject()
+        {   //set constraint Active to true so that you can move the object based on the mouse
+            Hinge_Mid_RotationConstrain.constraintActive = true;
+        }
         public void StartOverheatAnimation()
         {
             animator.SetBool(OverheatingStateName, true);
