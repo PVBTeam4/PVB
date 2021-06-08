@@ -13,7 +13,12 @@ namespace Gun.VFX
         {
             if (collision.collider.gameObject.CompareTag(waterColliderTag))
             {
-                ParticleUtil.ImpactWater.SpawnParticle(collision.contacts[0].point);
+                Vector3 collisionPoint = collision.contacts[0].point;
+
+                ParticleUtil.ImpactWater.SpawnParticle(collisionPoint);
+
+                //Play the sound
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Events/Kogel_Water", collisionPoint);
             }
         }
     }

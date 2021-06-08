@@ -10,9 +10,14 @@ namespace Ship
         public float maxRPM = 5.5f;
         PlayerMovement script;
 
+        FMODUnity.StudioEventEmitter soundEventEmitter;
+
         void Awake()
         {
             script = GetComponentInParent<PlayerMovement>();
+
+            // Get the FMOD sound emitter
+            soundEventEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
         }
 
         void Update()
@@ -21,14 +26,17 @@ namespace Ship
 
             float speed = script != null ? script.ForwardSpeed : 0;
 
+            speed = Mathf.Abs(speed);
+
             float amount = Mathf.Lerp(minRPM, maxRPM, speed / maxRPM);
 
             print(script.ForwardSpeed);
 
             // set RPM value for the FMOD event
             float effectiveRPM = amount;
-            var emitter = GetComponent<FMODUnity.StudioEventEmitter>();
-            emitter.SetParameter("Speed", effectiveRPM);
+
+            // Update the emitter
+            soundEventEmitter.SetParameter("Speed", effectiveRPM);
         }
     }
 }

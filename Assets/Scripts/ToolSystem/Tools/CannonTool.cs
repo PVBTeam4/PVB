@@ -63,6 +63,9 @@ namespace ToolSystem.Tools
         /// </summary>
         private void FireProjectile()
         {
+            //Play the sound
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Events/Kanon", transform.position);
+
             HandleAccuracy();
             
             Vector3 bulletSpawnPosition = bulletSpawnLocation.position;
