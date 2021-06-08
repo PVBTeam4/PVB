@@ -16,7 +16,7 @@ MonoBehaviour:
     game 4/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637587501791788095
+  lastModified: 637587508401177146
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -139,11 +139,11 @@ MonoBehaviour:
     game 4/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637587501791838067
+  lastModified: 637587508401217128
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1312
+    Value: 1372
   Exists: 1
 --- !u!114 &-4581881739156006002
 MonoBehaviour:
@@ -211,6 +211,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2266
+--- !u!114 &-3168293997587904982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Speler/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 5.5
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-2625732084717846944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +251,29 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-2236231678481069384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Events/Crane/Crane_Lift
+  m_EditorClassIdentifier: 
+  Path: event:/Events/Crane/Crane_Lift
+  guid: fc30c7e3731dc446b104c220b8ffa1f6
+  Banks:
+  - {fileID: -8867471460402306277}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4000
 --- !u!114 &-1835196159399150917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,13 +564,13 @@ MonoBehaviour:
   - {fileID: -4409251676606246968}
   - {fileID: 317283380390905512}
   - {fileID: 451085489739204114}
-  - {fileID: 6536350330104985591}
+  - {fileID: -2236231678481069384}
   EditorParameters: []
   MasterBanks:
   - {fileID: -8867471460402306277}
   StringsBanks:
   - {fileID: -4789174243642249544}
-  stringsBankWriteTime: 637587501791838067
+  stringsBankWriteTime: 637587508401217128
   cacheVersion: 6
 --- !u!114 &180841226051334830
 MonoBehaviour:
@@ -678,6 +721,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 6007
+--- !u!114 &1727445073797068442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Enemy/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 5.5
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &2029637023255263370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -861,7 +924,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -1835196159399150917}
+  - {fileID: 1727445073797068442}
   MinDistance: 1
   MaxDistance: 20
   Length: 12000
@@ -885,7 +948,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 2657848375708162298}
+  - {fileID: -3168293997587904982}
   MinDistance: 1
   MaxDistance: 20
   Length: 13124
