@@ -40,6 +40,27 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &-8418945622432454812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD Build Files/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637587552081075336
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 1372
+  Exists: 1
 --- !u!114 &-7823443916527657053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,7 +96,7 @@ MonoBehaviour:
   Path: event:/Events/Botsing
   guid: 72482b51f3a69d458120a67c78feeda1
   Banks:
-  - {fileID: -8867471460402306277}
+  - {fileID: 5580253640156650461}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -123,6 +144,46 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &-5805144582995353665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Enemy/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 5.5
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
+--- !u!114 &-5173155204693450687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Speler/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 5.5
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-4789174243642249544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,12 +200,12 @@ MonoBehaviour:
     game 4/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637587508401217128
+  lastModified: 637587551034632989
   LoadResult: 0
   FileSizes:
   - Name: Desktop
     Value: 1372
-  Exists: 1
+  Exists: 0
 --- !u!114 &-4581881739156006002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +241,7 @@ MonoBehaviour:
   Path: event:/Static/Ambience
   guid: 885be7a8c892584ea0db3a505a46984c
   Banks:
-  - {fileID: -8867471460402306277}
+  - {fileID: 5580253640156650461}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -203,7 +264,7 @@ MonoBehaviour:
   Path: event:/Events/Explosie
   guid: 45c96f99b03bf140b3510041283d2616
   Banks:
-  - {fileID: -8867471460402306277}
+  - {fileID: 5580253640156650461}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -266,7 +327,7 @@ MonoBehaviour:
   Path: event:/Events/Crane/Crane_Lift
   guid: fc30c7e3731dc446b104c220b8ffa1f6
   Banks:
-  - {fileID: -8867471460402306277}
+  - {fileID: 5580253640156650461}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -349,7 +410,7 @@ MonoBehaviour:
   Path: event:/Events/Kogel_Rots
   guid: 7de15d5e9a621841b85c76326ee2121d
   Banks:
-  - {fileID: -8867471460402306277}
+  - {fileID: 5580253640156650461}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -550,8 +611,8 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -4789174243642249544}
-  - {fileID: -8867471460402306277}
+  - {fileID: -8418945622432454812}
+  - {fileID: 5580253640156650461}
   EditorEvents:
   - {fileID: 2852679177059061325}
   - {fileID: 5428626121791224004}
@@ -567,10 +628,10 @@ MonoBehaviour:
   - {fileID: -2236231678481069384}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -8867471460402306277}
+  - {fileID: 5580253640156650461}
   StringsBanks:
-  - {fileID: -4789174243642249544}
-  stringsBankWriteTime: 637587508401217128
+  - {fileID: -8418945622432454812}
+  stringsBankWriteTime: 637587552081075336
   cacheVersion: 6
 --- !u!114 &180841226051334830
 MonoBehaviour:
@@ -607,7 +668,7 @@ MonoBehaviour:
   Path: event:/Static/Music
   guid: 8c891a3afacb5d49baa34638d1c226d1
   Banks:
-  - {fileID: -8867471460402306277}
+  - {fileID: 5580253640156650461}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -650,7 +711,7 @@ MonoBehaviour:
   Path: event:/Events/Kogel_Water
   guid: a6be938ba4555649887133cd24a2f4a8
   Banks:
-  - {fileID: -8867471460402306277}
+  - {fileID: 5580253640156650461}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -713,7 +774,7 @@ MonoBehaviour:
   Path: event:/Events/Oververhitting
   guid: 51ded20b0305cb418f0da31c5b26bf51
   Banks:
-  - {fileID: -8867471460402306277}
+  - {fileID: 5580253640156650461}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -721,6 +782,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 6007
+--- !u!114 &1681760412223785414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Speler/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 5.5
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 0
 --- !u!114 &1727445073797068442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -796,7 +877,7 @@ MonoBehaviour:
   Path: event:/Events/Kogel_Metaal
   guid: 18340a0d105ddc47b198b935fdf52a2a
   Banks:
-  - {fileID: -8867471460402306277}
+  - {fileID: 5580253640156650461}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -919,12 +1000,12 @@ MonoBehaviour:
   Path: event:/Events/Varen_Enemy
   guid: 566506107cb36245841bdd81ea615e44
   Banks:
-  - {fileID: -8867471460402306277}
+  - {fileID: 5580253640156650461}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 1727445073797068442}
+  - {fileID: 7877406995917348415}
   MinDistance: 1
   MaxDistance: 20
   Length: 12000
@@ -943,15 +1024,34 @@ MonoBehaviour:
   Path: event:/Events/Varen_Speler
   guid: 3f0439c0d8a6824faf973680bb17a1aa
   Banks:
-  - {fileID: -8867471460402306277}
+  - {fileID: 5580253640156650461}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -3168293997587904982}
+  - {fileID: -5173155204693450687}
   MinDistance: 1
   MaxDistance: 20
   Length: 13124
+--- !u!114 &5580253640156650461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD Build Files/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637587552081035360
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &6405939102430533085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -967,7 +1067,7 @@ MonoBehaviour:
   Path: event:/Events/Kanon
   guid: 53d5c3b01b027643b38b7357c046f3c5
   Banks:
-  - {fileID: -8867471460402306277}
+  - {fileID: 5580253640156650461}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1078,6 +1178,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &7877406995917348415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Enemy/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 5.5
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &8078984762359211269
 MonoBehaviour:
   m_ObjectHideFlags: 0

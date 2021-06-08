@@ -406,12 +406,11 @@ MonoBehaviour:
   m_Name: FMODStudioSettings
   m_EditorClassIdentifier: 
   SwitchSettingsMigration: 1
-  HasSourceProject: 1
-  HasPlatforms: 1
+  HasSourceProject: 0
+  HasPlatforms: 0
   sourceProjectPath: ../../../../Users/Peter/OneDrive/Documenten/ma_development/_EXAMEN/_EIND/geluid/sounds
     game 4/sounds game 4.fspro
-  sourceBankPath: ../../../../Users/Peter/OneDrive/Documenten/ma_development/_EXAMEN/_EIND/geluid/sounds
-    game 4/Build
+  sourceBankPath: FMOD Build Files/Desktop
   SourceBankPathUnformatted: 
   BankRefreshCooldown: 1
   ShowBankRefreshWindow: 1
