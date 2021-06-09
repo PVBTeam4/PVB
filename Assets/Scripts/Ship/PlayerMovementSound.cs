@@ -28,9 +28,9 @@ namespace Ship
 
             speed = Mathf.Abs(speed);
 
-            float amount = Mathf.Lerp(minRPM, maxRPM, speed / maxRPM);
+            //speed = Mathf.Clamp(0.)
 
-            print(script.ForwardSpeed);
+            float amount = Mathf.Lerp(minRPM, maxRPM, speed / maxRPM);
 
             // set RPM value for the FMOD event
             float effectiveRPM = amount;

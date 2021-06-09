@@ -67,6 +67,12 @@ namespace ToolSystem.Tools.Crane_Tool
 
         private CraneTask craneTask;
 
+        FMODUnity.StudioEventEmitter soundEventEmitter;
+
+        private Vector3 armPosition;
+        private Vector3 clawPos;
+        private Vector3 clawEndPosition;
+
         private void Start()
         {
             InputManager.MouseMovementAction += UpdateMousePosition;
@@ -88,6 +94,9 @@ namespace ToolSystem.Tools.Crane_Tool
 
             if (!craneTask)
                 Debug.Log("No object found with the CraneTask script. Try adding the 'CraneTaskManager' prefab");
+
+            // Get the FMOD sound emitter
+            soundEventEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
         }
 
         private void UpdateMousePosition(Vector3 position)
@@ -176,6 +185,9 @@ namespace ToolSystem.Tools.Crane_Tool
 
                 // Call the collect event
                 craneTask.onIntelCollected.Invoke(1);
+
+                //Play the sound
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Events/Crane/Crane_Pickup", transform.position);
             }
         }
 
@@ -186,17 +198,19 @@ namespace ToolSystem.Tools.Crane_Tool
         {
             if (isLiftingScale != 0)
             {
-                Vector3 armPosition = craneArm.position;
+                armPosition = craneArm.position;
 
                 //print("update");
-                Vector3 pos = craneClaw.position;
-                Vector3 endPosition = new Vector3(pos.x, armPosition.y + hookLiftStart, pos.z);
+                clawPos = craneClaw.position;
+                clawEndPosition = new Vector3(clawPos.x, armPosition.y + hookLiftStart, clawPos.z);
 
                 if (isLiftingScale == 1)
-                    endPosition = new Vector3(pos.x, armPosition.y + hookLiftEnd, pos.z);
+                    clawEndPosition = new Vector3(clawPos.x, armPosition.y + hookLiftEnd, clawPos.z);
 
 
-                craneClaw.position = Vector3.Lerp(pos, endPosition, (hookLiftSpeed * Mathf.Abs(isLiftingScale)) * Time.deltaTime);
+                craneClaw.position = Vector3.Lerp(clawPos, clawEndPosition, (hookLiftSpeed * Mathf.Abs(isLiftingScale)) * Time.deltaTime);
+
+                
 
                 float margin = clawLiftMargin;
 
@@ -216,6 +230,16 @@ namespace ToolSystem.Tools.Crane_Tool
         private void FixedUpdate()
         {
             UpdateLiftingProces();
+        }
+
+        private void Update()
+        {
+            if (clawPos == null || clawEndPosition == null) return;
+
+            float amount = Mathf.Lerp(0, 1, clawPos.y / armPosition.y + hookLiftStart - clawLiftMargin);
+
+            // Update the emitter
+            soundEventEmitter.SetParameter("CraneRotationSpeed", amount);
         }
 
         /// <summary>
