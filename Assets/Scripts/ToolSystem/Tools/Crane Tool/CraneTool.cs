@@ -360,6 +360,11 @@ namespace ToolSystem.Tools.Crane_Tool
             UnityEditor.Handles.DrawWireDisc(startPosition, Vector3.up, maxRadius);
         }
 
+        public override void UseLeftActionHold(float pressedValue)
+        {
+            throw new System.NotImplementedException();
+        }
+
 #endif
     }
 }
