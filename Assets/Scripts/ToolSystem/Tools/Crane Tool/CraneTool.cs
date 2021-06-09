@@ -1,4 +1,5 @@
 using Input;
+using TaskSystem.Tasks;
 using Utils;
 using UnityEngine;
 
@@ -167,7 +168,7 @@ namespace ToolSystem.Tools.Crane_Tool
             if (coupeledObject != null)
             {
                 // Play the particle effect
-                GameObject effectObject = ParticleUtil.SpawnParticle(ParticleType.CranePoof, coupeledObject.transform.position);
+                GameObject effectObject = ParticleUtil.CranePoof.SpawnParticle(coupeledObject.transform.position);
 
                 // Remove the coupeled object
                 Destroy(coupeledObject);

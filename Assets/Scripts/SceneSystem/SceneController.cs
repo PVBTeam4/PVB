@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using Global;
 using UnityEngine;
@@ -86,7 +87,7 @@ namespace SceneSystem
                         Debug.LogError("Overworld scene not found for ToolType: " + ToolType.CANNON);
                         return;
                     }
-                    SceneManager.LoadScene(sceneController.overworldSceneArray[1].name);
+                    _instance.StartCoroutine("loadNewLevel", sceneController.overworldSceneArray[1].name);
                     break;
                 case ToolType.CRANE:
                     if (!sceneController.overworldSceneArray[2])
@@ -94,7 +95,7 @@ namespace SceneSystem
                         Debug.LogError("Overworld scene not found for ToolType: " + ToolType.CRANE);
                         return;
                     }
-                    SceneManager.LoadScene(sceneController.overworldSceneArray[2].name);
+                    _instance.StartCoroutine("loadNewLevel", sceneController.overworldSceneArray[2].name);
                     break;
                 case ToolType.WATER_CANNON:
                     Debug.Log("End of game");
@@ -122,9 +123,35 @@ namespace SceneSystem
                 Debug.LogError("Scene not found for ToolType: " + toolType);
                 return;
             }
-            
+
             // Load the Scene using the Name of the SceneAsset
-            SceneManager.LoadScene(scene.SceneName);
+            _instance.StartCoroutine("loadNewLevel", scene.SceneName);
+        }
+
+        IEnumerator loadNewLevel(string sceneName)
+        {
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+            operation.allowSceneActivation = false;
+
+            float fadeSpeed = 0.01f;
+
+            GameObject.Find("Overworld User Interface").SetActive(false);
+            for (float ft = 0f; ft <= 1; ft += fadeSpeed)
+            {
+                Color col = GameObject.Find("FadeScreen").GetComponent<UnityEngine.UI.Image>().color;
+                GameObject.Find("FadeScreen").GetComponent<UnityEngine.UI.Image>().color = new Color(col.r, col.g, col.b, ft);
+                yield return null;
+            }
+            operation.allowSceneActivation = true;
+
+            while(SceneManager.GetActiveScene().name != sceneName) { yield return null; }
+
+            for (float ft = 1f; ft >= 0; ft -= fadeSpeed)
+            {
+                Color col = GameObject.Find("FadeScreen").GetComponent<UnityEngine.UI.Image>().color;
+                GameObject.Find("FadeScreen").GetComponent<UnityEngine.UI.Image>().color = new Color(col.r, col.g, col.b, ft);
+                yield return null;
+            }
         }
 
         /// <summary>

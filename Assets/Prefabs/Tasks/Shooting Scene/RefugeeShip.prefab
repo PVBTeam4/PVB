@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 840161634982182764}
   - component: {fileID: 3105201178922780919}
   - component: {fileID: 5021946361171228628}
+  - component: {fileID: 1999355294336732265}
   m_Layer: 0
   m_Name: RefugeeShip
   m_TagString: ShipsKilledUI
@@ -563,8 +564,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6101f5991df5cea49ba8b041372452a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useBarrelExplosionParticle: 0
   explosionRange: 3
   explosionDamage: 100
+--- !u!114 &1999355294336732265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9028295993862979201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/Events/Varen_Enemy
+  PlayEvent: 1
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &867021745495957913
 PrefabInstance:
   m_ObjectHideFlags: 0

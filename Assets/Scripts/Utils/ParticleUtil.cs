@@ -1,35 +1,27 @@
+using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Utils
 {
-    public class ParticleType
+    [Serializable]
+    public class ParticleType : Object
     {
-        public static ParticleType ExplosionBarrels => new ParticleType("ExplosionBarrels");
-        public static ParticleType Explosion => new ParticleType("Explosion");
-        public static ParticleType ImpactStone => new ParticleType("ImpactStone");
-        public static ParticleType BulletForShip => new ParticleType("BulletForShip");
-        public static ParticleType ImpactWater => new ParticleType("ImpactWater");
-        public static ParticleType ImpactBoot => new ParticleType("ImpactBoot");
-        public static ParticleType MuzzleFlash => new ParticleType("MuzzleFlash");
-        public static ParticleType CranePoof => new ParticleType("CranePoof");
+        public string ParticleName { get; }
 
-        public string Name { get; }
-
-        private ParticleType(string particleName)
+        public ParticleType(string particleName)
         {
-            Name = particleName;
-        }
-    }
-    public static class ParticleUtil
-    {
-        private static ObjectPool ObjectPoolInstance => ObjectPool.Instance;
-
-        public static GameObject SpawnParticle(ParticleType particleType, Vector3 position)
-        {
-            return SpawnParticle(particleType.Name, position);
+            ParticleName = particleName;
         }
         
-        private static GameObject SpawnParticle(string particleName, Vector3 position)
+        private ObjectPool ObjectPoolInstance => ObjectPool.Instance;
+
+        public GameObject SpawnParticle(Vector3 position)
+        {
+            return SpawnParticle(ParticleName, position);
+        }
+        
+        private GameObject SpawnParticle(string particleName, Vector3 position)
         {
             GameObject particleGameObject = ObjectPoolInstance.GetObject(particleName);
             if (particleGameObject == null)
@@ -41,6 +33,17 @@ namespace Utils
             particleGameObject.SetActive(true);
             return particleGameObject;
         }
-        
+    }
+    public static class ParticleUtil
+    {
+        public static readonly ParticleType ExplosionBarrels = new ParticleType("ExplosionBarrels");
+        public static readonly ParticleType Explosion = new ParticleType("Explosion");
+        public static readonly ParticleType ImpactStone = new ParticleType("ImpactStone");
+        public static readonly ParticleType BulletForShip = new ParticleType("BulletForShip");
+        public static readonly ParticleType ImpactWater = new ParticleType("ImpactWater");
+        public static readonly ParticleType ImpactBoot = new ParticleType("ImpactBoot");
+        public static readonly ParticleType MuzzleFlash = new ParticleType("MuzzleFlash");
+        public static readonly ParticleType CranePoof = new ParticleType("CranePoof");
+        public static readonly ParticleType Overheat = new ParticleType("Overheat");
     }
 }

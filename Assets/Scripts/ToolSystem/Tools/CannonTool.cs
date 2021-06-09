@@ -63,23 +63,29 @@ namespace ToolSystem.Tools
         /// </summary>
         private void FireProjectile()
         {
+            //Play the sound
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Events/Kanon", transform.position);
+
             HandleAccuracy();
             
             Vector3 bulletSpawnPosition = bulletSpawnLocation.position;
 
             // Muzzle flash spawn
-            GameObject muzzleflash = ParticleUtil.SpawnParticle(ParticleType.MuzzleFlash, bulletSpawnPosition);
-            Transform onderkantGun = transform.parent;
+            GameObject muzzleflash = ParticleUtil.MuzzleFlash.SpawnParticle(bulletSpawnPosition);
+            //set the muzzle flash parent to bulletSpawnLocation so that it will move with the animation
+            muzzleflash.transform.parent = bulletSpawnLocation;
             muzzleflash.transform.rotation = Quaternion.Euler(90 + transform.eulerAngles.x, transform.eulerAngles.y, 0);
             muzzleflash.transform.position += transform.forward.Multiply(0.43f);
 
             // Bullet Spawn
-            GameObject bulletGameObject = ParticleUtil.SpawnParticle(ParticleType.BulletForShip, bulletSpawnPosition);
+            GameObject bulletGameObject = ParticleUtil.BulletForShip.SpawnParticle(bulletSpawnPosition);
             bulletGameObject.gameObject.transform.rotation = transform.rotation;
             bulletGameObject.transform.parent = _bulletHolderObject.transform;
             bulletGameObject.transform.position += transform.forward.Multiply(0.2f);
             
             shootEvent?.Invoke();
+
+            EZCameraShake.CameraShaker.Instance.ShakeOnce(0.75f, 4, 0.1f, 0.1f);
         }
 
         /// <summary>

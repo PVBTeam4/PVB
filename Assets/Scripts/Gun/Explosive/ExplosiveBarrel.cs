@@ -16,7 +16,7 @@ namespace Gun.Explosive
             if (gameObject.TryGetComponent(out ExplosiveObject explosiveObject))
             {
                 // Spawn Impact Particle
-                ParticleUtil.SpawnParticle(ParticleType.ImpactBoot, other.contacts[0].point);
+                ParticleUtil.ImpactBoot.SpawnParticle(other.contacts[0].point);
                 // Pool bullet
                 ObjectPool.Instance.PoolObject(other.collider.gameObject);
                 // Detonate barrel

@@ -57,6 +57,8 @@ public class CraneBehaviour : MonoBehaviour
 
     private bool craneActive;
 
+    private float savedCraneCableScale;
+
     public bool CraneActive { get => craneActive;
         set
         {
@@ -155,6 +157,13 @@ public class CraneBehaviour : MonoBehaviour
         Vector3 clawPosition = craneClaw.position;
 
         float distance = Vector3.Distance(cableStartPosition, clawPosition);
+
+        if (savedCraneCableScale != distance)
+        {
+            savedCraneCableScale = distance;
+
+
+        }
 
         craneCable.localScale = craneCable.localScale.ChangeY(distance);
     }

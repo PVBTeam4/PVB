@@ -17,6 +17,8 @@ namespace Gun
         [SerializeField] private UnityEvent<float, float> onDamage;
         [SerializeField] private UnityEvent onDeath;
 
+        [SerializeField] private float cameraShakeIntensity = 4;
+
         void OnEnable()
         {
             SetCurrentHealth();
@@ -24,16 +26,23 @@ namespace Gun
 
         public void DamageBy(float damage)
         {
+            //Play the sound
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Events/Botsing", transform.position);
+
             _currentHealth -= damage;
             _currentHealth = Math.Max(0, _currentHealth);
             
             onDamage?.Invoke(_currentHealth, maxHealth);
+
+            EZCameraShake.CameraShaker.Instance.ShakeOnce(cameraShakeIntensity, 4, 0.2f, 0.2f);
 
             if (_currentHealth <= 50)
                 GameObject.FindGameObjectWithTag("Vignet").GetComponent<Image>().enabled = true;
 
             if (_currentHealth == 0)
                 onDeath?.Invoke();
+
+            
         }
 
         private void SetCurrentHealth()
