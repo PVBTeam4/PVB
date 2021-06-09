@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpawnLocation: {fileID: 8354174234748347399}
   debugRay: {fileID: 2248194654605514666}
-  waitToFire: 0.5
+  waitToFire: 0.25
   bulletAccuracy: 0
   lerpValue: 0.05
   minimalTargetDistanceFromGun: 1
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6ebd9099617b1746ba36b00de2a58d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heatPerShot: 30
+  heatPerShot: 15
   cooldownPerSecond: 25
   overheatingTemperature: 100
   cooldownFinished:
@@ -219,7 +219,6 @@ MonoBehaviour:
   animator: {fileID: 919132148904622776}
   gunSkinnedMeshRenderer: {fileID: 1686960441372221569}
   bulletSpawnLocation: {fileID: 8354174234748347399}
-  overheatParticleSpawnDelayInSeconds: 0.5
   gunMaterials:
     defaultMaterial: {fileID: 2100000, guid: 8b1866d0199acac4d9118291289f05f9, type: 2}
     cooldownMaterial: {fileID: 2100000, guid: e9c813ec2291a754c90a034f8a9afbe3, type: 2}
