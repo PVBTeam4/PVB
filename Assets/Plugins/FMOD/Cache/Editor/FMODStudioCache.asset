@@ -75,7 +75,7 @@ MonoBehaviour:
   Path: FMOD Build Files/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637588412377032686
+  lastModified: 637588713145524339
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -632,6 +632,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-2502619983888172765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Speler/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 5.5
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-2236231678481069384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1053,7 +1073,7 @@ MonoBehaviour:
   - {fileID: 5580253640156650461}
   StringsBanks:
   - {fileID: -8418945622432454812}
-  stringsBankWriteTime: 637588412377032686
+  stringsBankWriteTime: 637588713145524339
   cacheVersion: 6
 --- !u!114 &180841226051334830
 MonoBehaviour:
@@ -1222,6 +1242,26 @@ MonoBehaviour:
     data2: 0
   Exists: 1
 --- !u!114 &1247628155487600052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Enemy/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 5.5
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &1311213740839737966
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1570,7 +1610,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 8573236808079801860}
+  - {fileID: 1311213740839737966}
   MinDistance: 1
   MaxDistance: 20
   Length: 12000
@@ -1594,7 +1634,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -1142547034176581719}
+  - {fileID: -2502619983888172765}
   MinDistance: 1
   MaxDistance: 20
   Length: 13124
@@ -1613,7 +1653,7 @@ MonoBehaviour:
   Path: FMOD Build Files/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637588412377032686
+  lastModified: 637588713145514343
   LoadResult: 0
   FileSizes: []
   Exists: 1

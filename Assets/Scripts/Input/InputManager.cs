@@ -15,6 +15,7 @@ namespace Input
     
         // Button input action
         public static Action<ButtonInputType, float> ButtonInputAction;
+
         // Mouse movement input action
         public static Action<Vector3> MouseMovementAction;
 
@@ -45,10 +46,12 @@ namespace Input
         {
             // Button input
             ButtonInputAction?.Invoke(ButtonInputType.LeftMouse, UnityEngine.Input.GetMouseButtonDown(0) ? 1f : 0f);
+            ButtonInputAction?.Invoke(ButtonInputType.LeftMouseHold, UnityEngine.Input.GetMouseButton(0) ? 1f : 0f);
+
             ButtonInputAction?.Invoke(ButtonInputType.RightMouse, UnityEngine.Input.GetMouseButton(1) ? 1f : 0f);
 
             // Interaction
-            ButtonInputAction?.Invoke(ButtonInputType.RightMouse, UnityEngine.Input.GetMouseButton(1) ? 1f : 0f);
+            //ButtonInputAction?.Invoke(ButtonInputType.RightMouse, UnityEngine.Input.GetMouseButton(1) ? 1f : 0f);
 
             // Mouse movement
             MouseMovementAction?.Invoke(UnityEngine.Input.mousePosition);
