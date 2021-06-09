@@ -115,7 +115,7 @@ MonoBehaviour:
   Path: FMOD Build Files/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637588768960055809
+  lastModified: 637588788010463579
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -484,6 +484,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &-5615789025077496832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crane_Lift/CraneRotationSpeed
+  m_EditorClassIdentifier: 
+  Name: CraneRotationSpeed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-5462306314549502069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,6 +792,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &-3522033045886640446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crane_Rotate/CraneRotationSpeed
+  m_EditorClassIdentifier: 
+  Name: CraneRotationSpeed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-3384976812111096237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -952,7 +992,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 4910475134704544208}
+  - {fileID: -5615789025077496832}
   MinDistance: 1
   MaxDistance: 20
   Length: 4000
@@ -1036,7 +1076,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 3125939287145068773}
+  - {fileID: -3522033045886640446}
   MinDistance: 1
   MaxDistance: 20
   Length: 1237
@@ -1463,7 +1503,7 @@ MonoBehaviour:
   - {fileID: 5580253640156650461}
   StringsBanks:
   - {fileID: -8418945622432454812}
-  stringsBankWriteTime: 637588768960055809
+  stringsBankWriteTime: 637588788010463579
   cacheVersion: 6
 --- !u!114 &180841226051334830
 MonoBehaviour:
@@ -1814,6 +1854,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &2233869566334218133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Speler/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &2341303795090702012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2160,7 +2220,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -931342313606861631}
+  - {fileID: 7493898790497154523}
   MinDistance: 1
   MaxDistance: 20
   Length: 12000
@@ -2184,7 +2244,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 8416379337767617879}
+  - {fileID: 2233869566334218133}
   MinDistance: 1
   MaxDistance: 20
   Length: 13124
@@ -2203,7 +2263,7 @@ MonoBehaviour:
   Path: FMOD Build Files/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637588768960015833
+  lastModified: 637588788010453606
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -2492,6 +2552,26 @@ MonoBehaviour:
   Min: 0
   Max: 5.5
   Default: 5.5
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &7493898790497154523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Enemy/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 0
   ID:
     data1: 0
     data2: 0
