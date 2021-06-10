@@ -115,7 +115,7 @@ MonoBehaviour:
   Path: FMOD Build Files/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637588788010463579
+  lastModified: 637589156269725203
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -524,6 +524,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &-5461341198820014084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Enemy/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-5173155204693450687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,6 +792,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2266
+--- !u!114 &-3697519621157159409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crane_Lift/CraneRotationSpeed
+  m_EditorClassIdentifier: 
+  Name: CraneRotationSpeed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-3643655371707387743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -992,7 +1032,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -5615789025077496832}
+  - {fileID: -3697519621157159409}
   MinDistance: 1
   MaxDistance: 20
   Length: 4000
@@ -1076,7 +1116,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -3522033045886640446}
+  - {fileID: 5970744853208479354}
   MinDistance: 1
   MaxDistance: 20
   Length: 1237
@@ -1503,7 +1543,7 @@ MonoBehaviour:
   - {fileID: 5580253640156650461}
   StringsBanks:
   - {fileID: -8418945622432454812}
-  stringsBankWriteTime: 637588788010463579
+  stringsBankWriteTime: 637589156269725203
   cacheVersion: 6
 --- !u!114 &180841226051334830
 MonoBehaviour:
@@ -1854,6 +1894,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &2212193743508200728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Speler/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &2233869566334218133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2220,7 +2280,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 7493898790497154523}
+  - {fileID: -5461341198820014084}
   MinDistance: 1
   MaxDistance: 20
   Length: 12000
@@ -2244,7 +2304,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 2233869566334218133}
+  - {fileID: 2212193743508200728}
   MinDistance: 1
   MaxDistance: 20
   Length: 13124
@@ -2263,9 +2323,29 @@ MonoBehaviour:
   Path: FMOD Build Files/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637588788010453606
+  lastModified: 637589156269704932
   LoadResult: 0
   FileSizes: []
+  Exists: 1
+--- !u!114 &5970744853208479354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crane_Rotate/CraneRotationSpeed
+  m_EditorClassIdentifier: 
+  Name: CraneRotationSpeed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
   Exists: 1
 --- !u!114 &6069146457065464423
 MonoBehaviour:
