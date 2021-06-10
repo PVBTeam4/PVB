@@ -115,7 +115,7 @@ MonoBehaviour:
   Path: FMOD Build Files/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637589156269725203
+  lastModified: 637589402875075068
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -197,6 +197,26 @@ MonoBehaviour:
   Min: 0
   Max: 5.5
   Default: 5.5
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-7755038484414475848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Enemy/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 0
   ID:
     data1: 0
     data2: 0
@@ -480,6 +500,26 @@ MonoBehaviour:
   Min: 0
   Max: 5.5
   Default: 5.5
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
+--- !u!114 &-5667499742899871877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Speler/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 0
   ID:
     data1: 0
     data2: 0
@@ -1032,7 +1072,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -3697519621157159409}
+  - {fileID: 2503143421196321455}
   MinDistance: 1
   MaxDistance: 20
   Length: 4000
@@ -1116,7 +1156,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 5970744853208479354}
+  - {fileID: 4916229063626926234}
   MinDistance: 1
   MaxDistance: 20
   Length: 1237
@@ -1543,7 +1583,7 @@ MonoBehaviour:
   - {fileID: 5580253640156650461}
   StringsBanks:
   - {fileID: -8418945622432454812}
-  stringsBankWriteTime: 637589156269725203
+  stringsBankWriteTime: 637589402875075068
   cacheVersion: 6
 --- !u!114 &180841226051334830
 MonoBehaviour:
@@ -1954,6 +1994,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &2503143421196321455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crane_Lift/CraneRotationSpeed
+  m_EditorClassIdentifier: 
+  Name: CraneRotationSpeed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &2657848375708162298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2260,6 +2320,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 1
+--- !u!114 &4916229063626926234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crane_Rotate/CraneRotationSpeed
+  m_EditorClassIdentifier: 
+  Name: CraneRotationSpeed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &5317666723659068711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2280,7 +2360,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -5461341198820014084}
+  - {fileID: -7755038484414475848}
   MinDistance: 1
   MaxDistance: 20
   Length: 12000
@@ -2304,7 +2384,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 2212193743508200728}
+  - {fileID: -5667499742899871877}
   MinDistance: 1
   MaxDistance: 20
   Length: 13124
@@ -2323,7 +2403,7 @@ MonoBehaviour:
   Path: FMOD Build Files/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637589156269704932
+  lastModified: 637589402875055115
   LoadResult: 0
   FileSizes: []
   Exists: 1
