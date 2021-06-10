@@ -59,6 +59,9 @@ namespace AIBoats
                 return;
             }
 
+            //Play the sound
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Events/Kogel_Metaal", transform.position);
+
             _damageableObject.Damage(damageTaken);
         }
 

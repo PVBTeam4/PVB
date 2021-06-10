@@ -11,6 +11,8 @@ namespace Input
         VerticalMovement,
         // Left mouse button
         LeftMouse,
+        // Left mouse button hold
+        LeftMouseHold,
         // Right mouse button
         RightMouse,
         // Interaction button

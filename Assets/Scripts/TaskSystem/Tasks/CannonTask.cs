@@ -16,7 +16,7 @@ namespace TaskSystem.Tasks
         protected override bool isTaskCompleted()
         {
             _refugeeShipsToSave--;
-            TaskValues.RefugeeShipsSaved = 3 - _refugeeShipsToSave;
+            TaskValues.RefugeeShipsSaved = TaskValues.RefugeeShipsToSave - _refugeeShipsToSave;
 
             // Clamp to zero
             _refugeeShipsToSave = Math.Max(_refugeeShipsToSave, 0);

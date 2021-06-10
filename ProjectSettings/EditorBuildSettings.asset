@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Intro.unity
+    guid: d3a66f37ce0d10a42a0c23e231d5592e
+  - enabled: 1
     path: Assets/Scenes/Main Menu.unity
     guid: edc1af8ec5af6804291089c5722034e1
   - enabled: 1
@@ -18,11 +21,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Testing/EE-339 Crane Overworld/CraneTest.unity
     guid: b442f53323476bc4398d479df07a615c
   - enabled: 0
-    path: Assets/Scenes/OverWorld/Overworld_Crane.unity
-    guid: 7d22da9a355802f4f96f2ade8932f8b6
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/OverWorld/Overworld_Water_Cannon.unity
-    guid: e0e0f02d2f39ca140ac8a5a26b9f4877
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/End_Scene.unity
     guid: 45f812f8c7ee123408ddab22fa876765

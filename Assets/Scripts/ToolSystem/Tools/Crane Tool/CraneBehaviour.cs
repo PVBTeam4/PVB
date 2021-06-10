@@ -57,6 +57,10 @@ public class CraneBehaviour : MonoBehaviour
 
     private bool craneActive;
 
+    private float savedCraneCableScale;
+
+    FMODUnity.StudioEventEmitter soundEventEmitter;
+
     public bool CraneActive { get => craneActive;
         set
         {
@@ -80,6 +84,9 @@ public class CraneBehaviour : MonoBehaviour
     {
         // Deactivate Crane
         CraneActive = false;
+
+        // Get the FMOD sound emitter
+        soundEventEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
     }
 
     // Update is called once per frame
@@ -121,6 +128,11 @@ public class CraneBehaviour : MonoBehaviour
         // Get the relative position of the Point & Crane
         Vector3 relativePos = pointPosition - craneMast.position;
 
+        //float amount = Mathf.Lerp(0, 1, speed / maxRPM);
+
+        // Update the emitter
+        //soundEventEmitter.SetParameter("Speed", effectiveRPM);
+
         // the second argument, upwards, defaults to Vector3.up
         Quaternion rotationTowardsPoint = Quaternion.LookRotation(relativePos, Vector3.up);
 
@@ -155,6 +167,13 @@ public class CraneBehaviour : MonoBehaviour
         Vector3 clawPosition = craneClaw.position;
 
         float distance = Vector3.Distance(cableStartPosition, clawPosition);
+
+        if (savedCraneCableScale != distance)
+        {
+            savedCraneCableScale = distance;
+
+
+        }
 
         craneCable.localScale = craneCable.localScale.ChangeY(distance);
     }

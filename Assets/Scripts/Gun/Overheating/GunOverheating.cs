@@ -42,6 +42,9 @@ namespace Gun.Overheating
             {
                 _activeCooldown = true;
                 cooldownStarted?.Invoke();
+
+                //Play the sound
+                FMODUnity.RuntimeManager.PlayOneShot("event:/Events/Oververhitting", transform.position);
             }
         }
 

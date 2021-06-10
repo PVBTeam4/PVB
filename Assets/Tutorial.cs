@@ -9,10 +9,11 @@ public class Tutorial : MonoBehaviour
 {
     [SerializeField]
     //object that can be be Disabled or Enabled
-    private GameObject ShowGame,ShowHelp; 
+    private GameObject ShowGame, ShowHelp, TaskResultScreens;
 
     private void Start()
-    {
+    {   
+        TaskResultScreens = GameObject.Find("Task Result Screens");
         EnableDisableObject(true);
     }
     void Update()
@@ -21,9 +22,9 @@ public class Tutorial : MonoBehaviour
         if (ShowHelp.activeSelf)
         {
             if (UnityEngine.Input.anyKeyDown)
-            {   
+            {
                 EnableDisableObject(false);
-                Time.timeScale = 1; 
+                Time.timeScale = 1;
             }
         }
         else
@@ -35,7 +36,7 @@ public class Tutorial : MonoBehaviour
             }
 
         }
-     
+
     }
     /// <summary>
     /// SetActive to enable/disable object
@@ -44,5 +45,8 @@ public class Tutorial : MonoBehaviour
     {
         ShowGame.GetComponent<Canvas>().enabled = !active;
         ShowHelp.SetActive(active);
+
+        if(TaskResultScreens != null)
+            TaskResultScreens.SetActive(!active);
     }
 }
