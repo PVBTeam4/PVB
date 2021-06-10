@@ -115,7 +115,7 @@ MonoBehaviour:
   Path: FMOD Build Files/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637589402875075068
+  lastModified: 637588788010463579
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -341,6 +341,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &-6713379496263647312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Enemy/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &-6458345750226625611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,7 +1092,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 2503143421196321455}
+  - {fileID: 8661831935811852516}
   MinDistance: 1
   MaxDistance: 20
   Length: 4000
@@ -1156,7 +1176,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 4916229063626926234}
+  - {fileID: 2906089283347489024}
   MinDistance: 1
   MaxDistance: 20
   Length: 1237
@@ -1583,7 +1603,7 @@ MonoBehaviour:
   - {fileID: 5580253640156650461}
   StringsBanks:
   - {fileID: -8418945622432454812}
-  stringsBankWriteTime: 637589402875075068
+  stringsBankWriteTime: 637588788010463579
   cacheVersion: 6
 --- !u!114 &180841226051334830
 MonoBehaviour:
@@ -2097,6 +2117,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 613
+--- !u!114 &2906089283347489024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crane_Rotate/CraneRotationSpeed
+  m_EditorClassIdentifier: 
+  Name: CraneRotationSpeed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &2953337527979187020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2360,7 +2400,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -7755038484414475848}
+  - {fileID: -6713379496263647312}
   MinDistance: 1
   MaxDistance: 20
   Length: 12000
@@ -2384,7 +2424,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -5667499742899871877}
+  - {fileID: 7653055006321717624}
   MinDistance: 1
   MaxDistance: 20
   Length: 13124
@@ -2403,7 +2443,7 @@ MonoBehaviour:
   Path: FMOD Build Files/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637589402875055115
+  lastModified: 637588788010453606
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -2776,6 +2816,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &7653055006321717624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Varen_Speler/Speed
+  m_EditorClassIdentifier: 
+  Name: Speed
+  Min: 0
+  Max: 5.5
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &7792109214402024839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2996,6 +3056,26 @@ MonoBehaviour:
     data1: 0
     data2: 0
   Exists: 0
+--- !u!114 &8661831935811852516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Crane_Lift/CraneRotationSpeed
+  m_EditorClassIdentifier: 
+  Name: CraneRotationSpeed
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 0
+    data2: 0
+  Exists: 1
 --- !u!114 &8685511176068284602
 MonoBehaviour:
   m_ObjectHideFlags: 0
