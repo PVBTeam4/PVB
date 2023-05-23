@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ToolSystem.Tools.Crane_Tool
 {
-    public class CraneTool : Tool
+    public class CraneTool : MonoBehaviour
     {
         private bool canInteract;
         public bool CanInteract { get => canInteract; set => canInteract = value; }
@@ -282,19 +282,6 @@ namespace ToolSystem.Tools.Crane_Tool
             return _return;
         }
 
-        public override void MoveTarget(Vector3 location)
-        {
-        }
-
-        public override void UseLeftAction(float pressedValue)
-        {
-        
-        }
-
-        public override void UseRightAction(float pressedValue)
-        {
-        }
-
 #if UNITY_EDITOR
 
         /// <summary>
@@ -358,13 +345,6 @@ namespace ToolSystem.Tools.Crane_Tool
             // Draw maximum radius
             UnityEditor.Handles.color = Color.red;
             UnityEditor.Handles.DrawWireDisc(startPosition, Vector3.up, maxRadius);
-        }
-
-        
-
-public override void UseLeftActionHold(float pressedValue)
-        {
-            //throw new System.NotImplementedException();
         }
 
 #endif
